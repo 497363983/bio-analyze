@@ -1,0 +1,22 @@
+services:
+  bio-analyze:
+    build: .
+    image: bio-analyze:latest
+    container_name: bio-analyze-container
+    volumes:
+      # 挂载当前目录的数据文件夹到容器内的 /data
+      - ./data:/data
+      # 挂载输出目录
+      - ./output:/output
+      # 挂载配置（可选）
+      # - ./config.toml:/app/config.toml
+    working_dir: /data
+    environment:
+      # 设置默认配置文件路径（如果在容器内）
+      # - BIO_ANALYSE_CONFIG=/app/config.toml
+      # 确保容器内使用 UTF-8
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8
+    # 保持容器运行以便进入调试，或者作为服务运行
+    # entrypoint: ["tail", "-f", "/dev/null"] 
+    # 默认使用 Dockerfile 的 ENTRYPOINT (bio-cli)

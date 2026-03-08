@@ -1,0 +1,17 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bio-analyze-core"
+version = "0.1.0"
+description = "Shared core utilities for the bio-analyze toolbox."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "qww" }]
+dependencies = []
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bio_analyze_core"]
+

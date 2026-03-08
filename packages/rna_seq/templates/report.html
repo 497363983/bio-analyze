@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RNA-Seq Analysis Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { padding-top: 20px; }
+        .section { margin-bottom: 40px; }
+        .plot-container { text-align: center; margin: 20px 0; }
+        img { max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-5">RNA-Seq Analysis Report</h1>
+        
+        <div class="section" id="summary">
+            <h2>1. Summary</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Sample</th>
+                        <th>Total Reads</th>
+                        <th>Clean Reads</th>
+                        <th>Q30 (%)</th>
+                        <th>Mapping Rate (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sample, stats in qc_stats.items() %}
+                    <tr>
+                        <td>{{ sample }}</td>
+                        <td>{{ stats.total_reads }}</td>
+                        <td>{{ stats.clean_reads }}</td>
+                        <td>{{ stats.q30_rate }}</td>
+                        <td>{{ stats.mapping_rate }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" id="qc">
+            <h2>2. Quality Control</h2>
+            <p>Please refer to the detailed MultiQC or fastp reports in the output directory.</p>
+        </div>
+
+        <div class="section" id="pca">
+            <h2>3. PCA Analysis</h2>
+            <div class="plot-container">
+                <img src="{{ pca_plot }}" alt="PCA Plot">
+            </div>
+        </div>
+
+        <div class="section" id="de">
+            <h2>4. Differential Expression</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Volcano Plot</h3>
+                    <div class="plot-container">
+                        <img src="{{ volcano_plot }}" alt="Volcano Plot">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Heatmap (Top 50 DE Genes)</h3>
+                    <div class="plot-container">
+                        <img src="{{ heatmap_plot }}" alt="Heatmap">
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Top Significant Genes</h3>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Gene</th>
+                        <th>Log2FoldChange</th>
+                        <th>P-value</th>
+                        <th>Padj</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gene in top_genes %}
+                    <tr>
+                        <td>{{ gene.name }}</td>
+                        <td>{{ "%.2f"|format(gene.log2FoldChange) }}</td>
+                        <td>{{ "%.2e"|format(gene.pvalue) }}</td>
+                        <td>{{ "%.2e"|format(gene.padj) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" id="enrichment">
+            <h2>5. Enrichment Analysis</h2>
+            {% for lib, results in enrichment_results.items() %}
+            <h3>{{ lib }}</h3>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Term</th>
+                        <th>P-value</th>
+                        <th>Adjusted P-value</th>
+                        <th>Combined Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in results %}
+                    <tr>
+                        <td>{{ row.Term }}</td>
+                        <td>{{ "%.2e"|format(row.P_value) }}</td>
+                        <td>{{ "%.2e"|format(row.Adjusted_P_value) }}</td>
+                        <td>{{ "%.2f"|format(row.Combined_Score) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

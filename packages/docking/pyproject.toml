@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bio-analyze-docking"
+version = "0.1.0"
+description = "Molecular docking module for bio-analyze."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "qww" }]
+dependencies = ["bio-analyze-core>=0.1.0"]
+
+[project.entry-points."bio_analyze.cli"]
+docking = "docking.cli:get_app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/docking"]
+
