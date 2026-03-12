@@ -9,14 +9,49 @@ bio-analyze-docking = { workspace = true }
 bio-analyze-plot = { workspace = true }
 
 [tool.ruff]
-line-length = 100
+line-length = 120
 target-version = "py311"
 src = ["packages"]
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # Pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+    "N",  # pep8-naming
+    "SIM", # flake8-simplify
+    "RUF", # Ruff-specific rules
+]
+ignore = ["RUF003", "RUF002", "B008"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["bio_analyze_core", "bio_analyze_cli", "bio_analyze_rna_seq", "docking", "bio_plot"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
 
 [tool.pytest.ini_options]
 minversion = "7.0"
 testpaths = ["packages"]
 addopts = "-q"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.5",
+    "pre-commit",
+    "commitizen",
+    "pytest",
+    "pytest-cov",
+]
+
+[tool.commitizen]
+name = "cz_conventional"
+version = "0.1.0"
+tag_format = "v$version"

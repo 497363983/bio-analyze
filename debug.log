@@ -1,6 +1,6 @@
 [24348:34772:0307/174532.508:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
-[24348:34772:0307/174532.508:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed: 
-[24348:34772:0307/174532.567:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。  
+[24348:34772:0307/174532.508:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[24348:34772:0307/174532.567:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
 打开Filemap失败: Local\sgime_skin.v5.filemap.sogouime3026863fd27
 [24348:34772:0307/174532.567:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
 [24348:34772:0307/174532.567:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
@@ -8,8 +8,8 @@
 [24348:34772:0307/174532.630:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:5
 [24348:34772:0307/174532.630:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
 [42104:22824:0307/175012.179:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
-[42104:22824:0307/175012.179:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed: 
-[42104:22824:0307/175012.215:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。  
+[42104:22824:0307/175012.179:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[42104:22824:0307/175012.215:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
 打开Filemap失败: Local\sgime_skin.v5.filemap.sogouime3026863fd27
 [42104:22824:0307/175012.215:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
 [42104:22824:0307/175012.215:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
@@ -17,8 +17,8 @@
 [42104:22824:0307/175012.275:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:5
 [42104:22824:0307/175012.275:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
 [38620:29916:0307/175406.379:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
-[38620:29916:0307/175406.379:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed: 
-[38620:29916:0307/175406.408:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。  
+[38620:29916:0307/175406.379:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[38620:29916:0307/175406.408:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
 打开Filemap失败: Local\sgime_skin.v5.filemap.sogouime3026863fd27
 [38620:29916:0307/175406.408:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
 [38620:29916:0307/175406.408:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
@@ -26,8 +26,8 @@
 [38620:29916:0307/175406.476:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:5
 [38620:29916:0307/175406.476:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
 [38620:30076:0307/182624.084:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
-[38620:30076:0307/182624.084:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed: 
-[38620:30076:0307/182624.135:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。  
+[38620:30076:0307/182624.084:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[38620:30076:0307/182624.135:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
 打开Filemap失败: Local\sgime_skin.v5.filemap.sogouime3026863fd27
 [38620:30076:0307/182624.135:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
 [38620:30076:0307/182624.135:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
@@ -35,8 +35,8 @@
 [38620:30076:0307/182624.206:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:5
 [38620:30076:0307/182624.207:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
 [35864:46824:0307/211617.393:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
-[35864:46824:0307/211617.393:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed: 
-[35864:46824:0307/211617.437:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。  
+[35864:46824:0307/211617.393:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[35864:46824:0307/211617.437:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
 打开Filemap失败: Local\sgime_skin.v5.filemap.sogouime3026863fd27
 [35864:46824:0307/211617.437:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
 [35864:46824:0307/211617.437:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
@@ -44,11 +44,65 @@
 [35864:46824:0307/211617.512:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:5
 [35864:46824:0307/211617.512:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
 [46688:46916:0307/214741.746:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
-[46688:46916:0307/214741.746:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed: 
-[46688:46916:0307/214741.783:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。  
+[46688:46916:0307/214741.746:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[46688:46916:0307/214741.783:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v5.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
 打开Filemap失败: Local\sgime_skin.v5.filemap.sogouime3026863fd27
 [46688:46916:0307/214741.783:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
 [46688:46916:0307/214741.783:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
 [46688:46916:0307/214741.856:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.Dpi192.v5.filemap.sogouime
 [46688:46916:0307/214741.856:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:5
 [46688:46916:0307/214741.856:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:5
+[22656:26364:0309/110527.615:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
+[22656:26364:0309/110527.617:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[22656:26364:0309/110527.693:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v6.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
+打开Filemap失败: Local\sgime_skin.v6.filemap.sogouime3026863fd27
+[22656:26364:0309/110527.693:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
+[22656:26364:0309/110527.693:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6
+[22656:26364:0309/110527.774:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.Dpi192.v6.filemap.sogouime
+[22656:26364:0309/110527.774:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:6
+[22656:26364:0309/110527.774:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6
+[65456:72892:0309/110603.641:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
+[65456:72892:0309/110603.641:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[65456:72892:0309/110603.683:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v6.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
+打开Filemap失败: Local\sgime_skin.v6.filemap.sogouime3026863fd27
+[65456:72892:0309/110603.683:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
+[65456:72892:0309/110603.685:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6
+[65456:72892:0309/110603.745:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.Dpi192.v6.filemap.sogouime
+[65456:72892:0309/110603.745:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:6
+[65456:72892:0309/110603.745:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6
+[58072:32000:0309/110913.110:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
+[58072:32000:0309/110913.110:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[58072:32000:0309/110913.174:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v6.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
+打开Filemap失败: Local\sgime_skin.v6.filemap.sogouime3026863fd27
+[58072:32000:0309/110913.174:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
+[58072:32000:0309/110913.174:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6
+[58072:32000:0309/110913.245:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.Dpi192.v6.filemap.sogouime
+[58072:32000:0309/110913.245:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:6
+[58072:32000:0309/110913.245:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6
+[71888:70108:0309/111058.791:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
+[71888:70108:0309/111058.791:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[71888:70108:0309/111058.860:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v6.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
+打开Filemap失败: Local\sgime_skin.v6.filemap.sogouime3026863fd27
+[71888:70108:0309/111058.860:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
+[71888:70108:0309/111058.860:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6
+[71888:70108:0309/111058.921:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.Dpi192.v6.filemap.sogouime
+[71888:70108:0309/111058.921:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:6
+[71888:70108:0309/111058.921:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6
+[74476:652:0309/113313.573:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
+[74476:652:0309/113313.573:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[74476:652:0309/113313.655:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v6.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
+打开Filemap失败: Local\sgime_skin.v6.filemap.sogouime3026863fd27
+[74476:652:0309/113313.655:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
+[74476:652:0309/113313.655:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6
+[74476:652:0309/113313.726:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.Dpi192.v6.filemap.sogouime
+[74476:652:0309/113313.726:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:6
+[74476:652:0309/113313.726:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6
+[81260:81032:0309/183943.278:ERROR:rarecc_manager.cpp(923)] UserJsonFile::Load failed
+[81260:81032:0309/183943.279:ERROR:rarecc_manager.cpp(674)] Load rarecc.dat failed:
+[81260:81032:0309/183943.350:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v6.filemap.sogouime err:系统错误2: 系统找不到指定的文件。
+打开Filemap失败: Local\sgime_skin.v6.filemap.sogouime3026863fd27
+[81260:81032:0309/183943.350:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
+[81260:81032:0309/183943.350:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6
+[81260:81032:0309/183943.421:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.Dpi192.v6.filemap.sogouime
+[81260:81032:0309/183943.421:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:6
+[81260:81032:0309/183943.421:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:6

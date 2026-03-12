@@ -1,0 +1,10 @@
+services:
+  bio-analyze-test:
+    build:
+      context: .
+    volumes:
+      - ./packages:/app/packages
+      - ./data:/data
+      - ./output:/output
+    entrypoint: ["pytest"]
+    # command: ["packages"]  <-- Removed default command to allow overriding

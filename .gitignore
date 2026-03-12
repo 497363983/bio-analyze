@@ -21,3 +21,5 @@ dist/
 uv.lock
 
 *.log
+output
+.trae/

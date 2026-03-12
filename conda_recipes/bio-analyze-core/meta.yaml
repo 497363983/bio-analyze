@@ -1,0 +1,28 @@
+{% set name = "bio-analyze-core" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ../../packages/core
+
+build:
+  number: 0
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.11
+    - hatchling
+    - pip
+  run:
+    - python >=3.11
+    - rich >=14.3.3
+    - loguru >=0.7.2
+
+test:
+  imports:
+    - bio_analyze_core

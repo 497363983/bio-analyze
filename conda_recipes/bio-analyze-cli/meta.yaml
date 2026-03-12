@@ -1,0 +1,32 @@
+{% set name = "bio-analyze-cli" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ../../packages/cli
+
+build:
+  number: 0
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  entry_points:
+    - bioanalyze = bio_analyze_cli.main:main
+
+requirements:
+  host:
+    - python >=3.11
+    - hatchling
+    - pip
+  run:
+    - python >=3.11
+    - bio-analyze-core >=0.1.0
+    - typer >=0.12.0
+
+test:
+  imports:
+    - bio_analyze_cli
+  commands:
+    - bioanalyze --help

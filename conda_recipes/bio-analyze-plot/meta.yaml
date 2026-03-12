@@ -1,0 +1,35 @@
+{% set name = "bio-analyze-plot" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ../../packages/plot
+
+build:
+  number: 0
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.11
+    - hatchling
+    - pip
+  run:
+    - python >=3.11
+    - bio-analyze-core >=0.1.0
+    - matplotlib-base >=3.8.0
+    - seaborn >=0.13.0
+    - pandas >=2.0.0
+    - numpy >=1.20.0
+    - scipy >=1.10.0
+    - openpyxl >=3.1.0
+    - scikit-learn >=1.3.0
+    - statannotations >=0.6.0
+
+test:
+  imports:
+    - bio_analyze_plot

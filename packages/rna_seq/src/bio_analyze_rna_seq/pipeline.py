@@ -1,22 +1,27 @@
 from pathlib import Path
-import pandas as pd
-import shutil
 
 from bio_analyze_core.logging import get_logger, setup_logging
+from bio_analyze_core.pipeline import Pipeline
 
-from .genome import GenomeManager
-from .qc import QCManager
-from .quant import QuantManager
-from .de import DEManager
-from .enrichment import EnrichmentManager
-from .report import ReportGenerator
+from .nodes import (
+    CheckDependenciesNode,
+    DENode,
+    EnrichmentNode,
+    GenomePrepNode,
+    QCNode,
+    QuantNode,
+    ReportNode,
+    SRADownloadNode,
+    StarAlignNode,
+)
 
 logger = get_logger("bio_analyze.rna_seq")
+
 
 class RNASeqPipeline:
     def __init__(
         self,
-        input_dir: Path,
+        input_dir: Path | None,
         output_dir: Path,
         design_file: Path,
         species: str | None = None,
@@ -24,9 +29,14 @@ class RNASeqPipeline:
         genome_gtf: Path | None = None,
         threads: int = 4,
         skip_qc: bool = False,
-        skip_trim: bool = False
+        skip_trim: bool = False,
+        sra_ids: list[str] | None = None,
+        step: str | None = None,
+        qc_params: dict | None = None,
+        star_align: bool = False,
+        theme: str = "default",
     ):
-        self.input_dir = Path(input_dir)
+        self.input_dir = Path(input_dir) if input_dir else None
         self.output_dir = Path(output_dir)
         self.design_file = Path(design_file)
         self.species = species
@@ -35,105 +45,70 @@ class RNASeqPipeline:
         self.threads = threads
         self.skip_qc = skip_qc
         self.skip_trim = skip_trim
-        
+        self.sra_ids = sra_ids
+        self.step = step
+        self.qc_params = qc_params or {}
+        self.star_align = star_align
+        self.theme = theme
+
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        
+
+        if not self.input_dir and not self.sra_ids and not self.step:
+            raise ValueError("Either input_dir or sra_ids must be provided.")
+
         # 设置日志
         setup_logging()
 
-    def _check_dependencies(self):
-        """检查所需的外部工具。"""
-        required_tools = ["fastp", "salmon"]
-        missing_tools = []
-        
-        for tool in required_tools:
-            if not shutil.which(tool):
-                missing_tools.append(tool)
-        
-        if missing_tools:
-            msg = f"Missing required external tools: {', '.join(missing_tools)}. Please install them and ensure they are in your PATH."
-            logger.error(msg)
-            raise RuntimeError(msg)
-        
-        # 检查可选工具
-        if not shutil.which("fastqc"):
-            logger.warning("FastQC not found. QC report generation will be skipped, but analysis will proceed using fastp.")
-        
-        logger.info("External dependencies check completed.")
-
     def run(self):
         logger.info("Starting RNA-Seq Analysis Pipeline...")
-        
-        # 0. 检查外部工具
-        self._check_dependencies()
-        
-        # 1. 基因组准备
-        logger.info("Step 1: Genome Preparation")
-        genome_mgr = GenomeManager(
-            species=self.species,
-            fasta=self.genome_fasta,
-            gtf=self.genome_gtf,
-            output_dir=self.output_dir / "reference"
-        )
-        ref_info = genome_mgr.prepare()
-        
-        # 2. 质量控制和修剪
-        logger.info("Step 2: Quality Control & Trimming")
-        qc_mgr = QCManager(
-            input_dir=self.input_dir,
-            output_dir=self.output_dir / "qc",
-            threads=self.threads,
-            skip_qc=self.skip_qc,
-            skip_trim=self.skip_trim
-        )
-        clean_reads = qc_mgr.run()
-        
-        # 3. 定量
-        logger.info("Step 3: Quantification")
-        quant_mgr = QuantManager(
-            reads=clean_reads,
-            reference=ref_info,
-            output_dir=self.output_dir / "quant",
-            threads=self.threads
-        )
-        counts_matrix = quant_mgr.run()
-        
-        # 4. 差异表达分析
-        logger.info("Step 4: Differential Expression Analysis")
-        de_mgr = DEManager(
-            counts=counts_matrix,
-            design_file=self.design_file,
-            output_dir=self.output_dir / "de"
-        )
-        de_results = de_mgr.run()
-        
-        # 5. 富集分析
-        logger.info("Step 5: Enrichment Analysis")
-        enrich_mgr = EnrichmentManager(
-            de_results=de_results,
-            species=self.species, # 富集分析需要物种信息
-            output_dir=self.output_dir / "enrichment"
-        )
-        enrich_results = enrich_mgr.run()
-        
-        # 6. 生成报告
-        logger.info("Step 6: Generating Report")
-        
-        # 合并统计信息
-        qc_stats = qc_mgr.get_stats()
-        quant_stats = quant_mgr.get_stats()
-        
-        for sample, stat in qc_stats.items():
-            if sample in quant_stats:
-                stat["mapping_rate"] = f"{quant_stats[sample]:.2f}"
-        
-        reporter = ReportGenerator(
-            output_dir=self.output_dir / "report",
-            qc_stats=qc_stats,
-            counts=counts_matrix,
-            de_results=de_results,
-            enrich_results=enrich_results
-        )
-        reporter.generate()
-        
+
+        state_file = self.output_dir / "pipeline_state.json"
+        pipeline = Pipeline("RNASeqPipeline", str(state_file))
+
+        # 填充上下文
+        pipeline.context.input_dir = self.input_dir
+        pipeline.context.output_dir = self.output_dir
+        pipeline.context.design_file = self.design_file
+        pipeline.context.species = self.species
+        pipeline.context.genome_fasta = self.genome_fasta
+        pipeline.context.genome_gtf = self.genome_gtf
+        pipeline.context.threads = self.threads
+        pipeline.context.skip_qc = self.skip_qc
+        pipeline.context.skip_trim = self.skip_trim
+        pipeline.context.sra_ids = self.sra_ids
+        pipeline.context.step = self.step
+        pipeline.context.qc_params = self.qc_params
+        pipeline.context.star_align = self.star_align
+        pipeline.context.theme = self.theme
+
+        # 添加节点
+        pipeline.add_node(CheckDependenciesNode("check_dependencies"))
+
+        if not self.step or self.step == "download":
+            pipeline.add_node(SRADownloadNode("sra_download"))
+
+        if not self.step or self.step == "reference":
+            pipeline.add_node(GenomePrepNode("genome_prep"))
+
+        if not self.step or self.step == "qc":
+            pipeline.add_node(QCNode("qc"))
+
+        # 如果显式请求 STAR 比对，或者未指定步骤且 star_align 为 True，则运行 STAR 比对
+        if self.step == "align" or (not self.step and self.star_align):
+            pipeline.add_node(StarAlignNode("star_align"))
+
+        if not self.step or self.step == "quant":
+            pipeline.add_node(QuantNode("quant"))
+
+        if not self.step or self.step == "de":
+            pipeline.add_node(DENode("de"))
+
+        if not self.step or self.step == "enrichment":
+            pipeline.add_node(EnrichmentNode("enrichment"))
+
+        if not self.step or self.step == "report":
+            pipeline.add_node(ReportNode("report"))
+
+        pipeline.run()
+
         logger.info("Pipeline completed successfully!")

@@ -1,11 +1,11 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
 from importlib.metadata import EntryPoint, entry_points
-from typing import Callable, Iterable, Any
+from typing import Any
 
 import typer
-
 
 ENTRYPOINT_GROUP = "bio_analyze.cli"
 
@@ -13,6 +13,7 @@ ENTRYPOINT_GROUP = "bio_analyze.cli"
 @dataclass(frozen=True, slots=True)
 class CliPlugin:
     """CLI 插件数据类。"""
+
     name: str
     app: typer.Typer
 
@@ -48,4 +49,3 @@ def attach_plugins(root: typer.Typer) -> None:
     """将插件挂载到根命令。"""
     for plugin in load_plugins():
         root.add_typer(plugin.app, name=plugin.name)
-

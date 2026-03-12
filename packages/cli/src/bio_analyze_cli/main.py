@@ -5,6 +5,8 @@ from pathlib import Path
 import typer
 
 from bio_analyze_core import load_settings, setup_logging
+
+from .commands.create import create_command
 from .plugins import attach_plugins, load_plugins
 
 
@@ -29,6 +31,8 @@ def create_app() -> typer.Typer:
         # 列出所有已加载的插件
         for p in load_plugins():
             typer.echo(p.name)
+
+    app.command("create")(create_command)
 
     # 挂载插件到主命令
     attach_plugins(app)

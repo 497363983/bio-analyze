@@ -1,6 +1,6 @@
-import pytest
-from bio_plot.theme import THEMES
+from bio_analyze_plot.theme import THEMES
+
 
 def test_themes():
-    assert 'nature' in THEMES
-    assert 'science' in THEMES
+    assert "nature" in THEMES
+    assert "science" in THEMES

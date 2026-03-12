@@ -1,0 +1,10 @@
+import typer
+
+def get_app() -> typer.Typer:
+    app = typer.Typer(help="My new bio-analyze tool.")
+
+    @app.command("hello")
+    def hello(name: str = "World"):
+        typer.echo(f"Hello {name} from bio-analyze-{{name}}!")
+
+    return app

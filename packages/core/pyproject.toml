@@ -10,8 +10,10 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "qww" }]
-dependencies = []
+dependencies = [
+    "rich>=14.3.3",
+    "loguru>=0.7.2",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/bio_analyze_core"]
-

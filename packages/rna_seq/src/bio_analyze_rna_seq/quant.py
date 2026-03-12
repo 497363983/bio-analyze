@@ -1,12 +1,14 @@
-import shutil
 import json
+import shutil
 from pathlib import Path
+
 import pandas as pd
 
 from bio_analyze_core.logging import get_logger
 from bio_analyze_core.subprocess import run as run_command
 
 logger = get_logger(__name__)
+
 
 class QuantManager:
     def __init__(self, reads: dict, reference: dict, output_dir: Path, threads: int = 4):
@@ -16,7 +18,7 @@ class QuantManager:
         self.threads = threads
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.index_dir = self.output_dir / "salmon_index"
-        
+
     def run(self) -> pd.DataFrame:
         # 1. 检查 salmon
         if not shutil.which("salmon"):
@@ -24,14 +26,14 @@ class QuantManager:
 
         # 2. 构建索引
         self._build_index()
-        
+
         # 3. 定量每个样本
         quant_files = {}
         for sample, files in self.reads.items():
             out_path = self.output_dir / sample
             self._quantify_sample(sample, files, out_path)
             quant_files[sample] = out_path / "quant.sf"
-            
+
         # 4. 合并计数
         return self._merge_counts(quant_files)
 
@@ -42,9 +44,9 @@ class QuantManager:
 
         fasta = self.reference.get("fasta")
         gtf = self.reference.get("gtf")
-        
+
         transcript_fasta = self.output_dir / "transcripts.fa"
-        
+
         if shutil.which("gffread") and gtf:
             logger.info("Extracting transcripts with gffread...")
             cmd = ["gffread", "-w", str(transcript_fasta), "-g", str(fasta), str(gtf)]
@@ -55,10 +57,14 @@ class QuantManager:
 
         logger.info("Building Salmon index...")
         cmd = [
-            "salmon", "index",
-            "-t", str(transcript_fasta),
-            "-i", str(self.index_dir),
-            "-p", str(self.threads)
+            "salmon",
+            "index",
+            "-t",
+            str(transcript_fasta),
+            "-i",
+            str(self.index_dir),
+            "-p",
+            str(self.threads),
         ]
         run_command(cmd, check=True)
 
@@ -68,19 +74,24 @@ class QuantManager:
             return
 
         cmd = [
-            "salmon", "quant",
-            "-i", str(self.index_dir),
-            "-l", "A", # 自动检测文库类型
-            "-o", str(out_dir),
-            "-p", str(self.threads),
-            "--validateMappings"
+            "salmon",
+            "quant",
+            "-i",
+            str(self.index_dir),
+            "-l",
+            "A",  # 自动检测文库类型
+            "-o",
+            str(out_dir),
+            "-p",
+            str(self.threads),
+            "--validateMappings",
         ]
-        
+
         if "R2" in files:
             cmd.extend(["-1", str(files["R1"]), "-2", str(files["R2"])])
         else:
             cmd.extend(["-r", str(files["R1"])])
-            
+
         run_command(cmd, check=True)
 
     def _merge_counts(self, quant_files: dict) -> pd.DataFrame:
@@ -88,11 +99,11 @@ class QuantManager:
         counts = {}
         for sample, path in quant_files.items():
             df = pd.read_csv(path, sep="\t", index_col=0)
-            counts[sample] = df["NumReads"] # 使用原始计数进行 DE 分析
-        
+            counts[sample] = df["NumReads"]  # 使用原始计数进行 DE 分析
+
         count_matrix = pd.DataFrame(counts)
         count_matrix = count_matrix.fillna(0).astype(int)
-        
+
         # 保存矩阵
         count_matrix.to_csv(self.output_dir / "counts.csv")
         return count_matrix

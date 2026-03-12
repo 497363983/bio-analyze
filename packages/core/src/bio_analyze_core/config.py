@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import os
-from pathlib import Path
 import tomllib
+from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
-
 
 DEFAULT_CONFIG_PATH = Path.home() / ".config" / "bio-analyze" / "config.toml"
 
@@ -20,6 +19,7 @@ def _load_toml(path: Path) -> dict[str, Any]:
 @dataclass(frozen=True, slots=True)
 class Settings:
     """全局配置类。"""
+
     data_dir: Path | None = None
     work_dir: Path | None = None
     log_level: str = "INFO"
@@ -42,4 +42,3 @@ def load_settings(config_path: Path | None = None) -> Settings:
         work_dir=Path(work_dir) if work_dir else None,
         log_level=str(log_level),
     )
-

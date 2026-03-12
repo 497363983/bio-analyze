@@ -27,7 +27,7 @@ dependencies = [
 dev = ["pytest"]
 
 [project.entry-points."bio_analyze.cli"]
-plot = "bio_plot.cli:get_app"
+plot = "bio_analyze_plot.cli:get_app"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/bio_plot"]

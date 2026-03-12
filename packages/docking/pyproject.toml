@@ -10,11 +10,27 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "qww" }]
-dependencies = ["bio-analyze-core>=0.1.0"]
+dependencies = [
+    "bio-analyze-core>=0.1.0",
+    "numpy>=1.20.0",
+    "meeko>=0.5.0",
+    # "vina>=1.2.0; sys_platform != 'win32'", # Provided by Conda
+    # "rdkit>=2023.3.1", # Provided by Conda
+    "scipy>=1.10.0",
+    "propka>=3.5.0",
+    "gemmi>=0.6.0",
+    "pdbfixer>=1.9.0",
+    "pandas>=2.0.0",
+    "openpyxl>=3.1.0",
+    # "pymol-open-source>=2.5.0", # Provided by Conda
+    # "openbabel>=3.1.0; sys_platform != 'win32'", # Provided by Conda
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
 
 [project.entry-points."bio_analyze.cli"]
-docking = "docking.cli:get_app"
+docking = "bio_analyze_docking.cli:get_app"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/docking"]
-
+packages = ["src/bio_analyze_docking"]

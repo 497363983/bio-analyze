@@ -1,0 +1,40 @@
+{% set name = "bio-analyze-docking" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ../../packages/docking
+
+build:
+  number: 0
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.11
+    - hatchling
+    - pip
+  run:
+    - python >=3.11
+    - bio-analyze-core >=0.1.0
+    - numpy >=1.20.0
+    - meeko >=0.5.0
+    - scipy >=1.10.0
+    - propka >=3.5.0
+    - gemmi >=0.6.0
+    - pdbfixer >=1.9.0
+    - pandas >=2.0.0
+    - openpyxl >=3.1.0
+    # Dependencies that are optional in PyPI but essential for full functionality in Conda
+    - vina >=1.2.0
+    - rdkit >=2023.3.1
+    - pymol-open-source >=2.5.0
+    - openbabel >=3.1.0
+
+test:
+  imports:
+    - bio_analyze_docking

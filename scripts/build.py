@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
-import subprocess
-import shutil
-from pathlib import Path
-import sys
-
 import argparse
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
 
 def build_package(package_dir: Path):
-    """Build a single package using uv build."""
+    """使用 uv build 构建单个包。"""
     print(f"Building package: {package_dir.name}...")
     try:
-        # Check if package exists
+        # 检查包是否存在
         if not package_dir.exists():
-             print(f"Error: Package directory {package_dir} does not exist.")
-             sys.exit(1)
-             
-        # Clean package dist
+            print(f"Error: Package directory {package_dir} does not exist.")
+            sys.exit(1)
+
+        # 清理包的 dist 目录
         pkg_dist = package_dir / "dist"
         if pkg_dist.exists():
             shutil.rmtree(pkg_dist)
@@ -27,19 +27,23 @@ def build_package(package_dir: Path):
         print(f"Failed to build {package_dir.name}: {e}")
         sys.exit(1)
 
+
 def main():
     parser = argparse.ArgumentParser(description="Build bio-analyze packages.")
-    parser.add_argument("packages", nargs="*", help="Specific packages to build (e.g., 'core', 'cli'). If empty, builds all.")
+    parser.add_argument(
+        "packages",
+        nargs="*",
+        help="Specific packages to build (e.g., 'core', 'cli'). If empty, builds all.",
+    )
     args = parser.parse_args()
 
     root_dir = Path(__file__).parent.parent
     packages_dir = root_dir / "packages"
     dist_dir = root_dir / "dist"
-    
-    # Create dist dir if not exists (don't clean if building specific packages, maybe?)
-    # If building all, clean. If specific, maybe keep others?
-    # Let's clean root dist only if building all or force clean?
-    # For simplicity, if args.packages is empty (build all), clean dist.
+
+    # 如果不存在则创建 dist 目录（如果构建特定包，是否不清理？）
+    # 如果构建所有，清理。如果特定，也许保留其他的？
+    # 为了简单起见，如果 args.packages 为空（构建所有），则清理 dist。
     if not args.packages:
         if dist_dir.exists():
             print(f"Cleaning dist directory: {dist_dir}")
@@ -47,10 +51,10 @@ def main():
         dist_dir.mkdir()
     else:
         dist_dir.mkdir(exist_ok=True)
-    
-    # Determine which packages to build
+
+    # 确定要构建哪些包
     all_packages = [p for p in packages_dir.iterdir() if p.is_dir() and (p / "pyproject.toml").exists()]
-    
+
     target_packages = []
     if args.packages:
         for name in args.packages:
@@ -70,14 +74,15 @@ def main():
 
     for pkg in target_packages:
         pkg_dist = build_package(pkg)
-        
-        # Copy artifacts to root dist
+
+        # 复制构建产物到根 dist 目录
         for artifact in pkg_dist.glob("*"):
             shutil.copy2(artifact, dist_dir)
-            
+
     print(f"\nBuild completed. Artifacts collected in {dist_dir}")
     if not args.packages:
         print("You can now upload to PyPI using: uv publish dist/*")
+
 
 if __name__ == "__main__":
     main()
