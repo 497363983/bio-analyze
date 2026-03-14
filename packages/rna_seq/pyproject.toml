@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Transcriptomics analysis module for bio-analyze."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [
     "bio-analyze-core>=0.1.0",

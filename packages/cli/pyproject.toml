@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Unified CLI for the bio-analyze toolbox (plugin-based)."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [
   "bio-analyze-core>=0.1.0",
@@ -20,4 +20,3 @@ bioanalyze = "bio_analyze_cli.main:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/bio_analyze_cli"]
-

@@ -30,8 +30,8 @@ export const zhConfig = {
       ]
     },
     footer: {
-      message: '基于 MIT 许可发布。',
-      copyright: '版权所有 © 2024-至今 Bio Analyze 贡献者'
+      message: '基于 GPL-3.0 许可发布。',
+      copyright: '版权所有 © 2026-至今 qww'
     },
     docFooter: {
       prev: '上一页',

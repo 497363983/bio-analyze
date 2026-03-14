@@ -182,3 +182,7 @@ docker run -it --rm --entrypoint bash -v $(pwd)/data:/data bio-analyze:latest
 ```
 
 4. 在 `bio_analyze.<module>.cli` 中实现 `get_app()` 并返回 `typer.Typer`
+
+## 许可证 (License)
+
+本项目采用 [GPL-3.0](LICENSE) 开源协议。

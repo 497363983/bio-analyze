@@ -30,8 +30,8 @@ export const enConfig = {
       ]
     },
     footer: {
-      message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2024-present Bio Analyze Contributors'
+      message: 'Released under the GPL-3.0 License.',
+      copyright: 'Copyright © 2026-present Bio Analyze Contributors'
     }
   }
 }
