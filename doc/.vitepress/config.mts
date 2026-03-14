@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { enConfig } from './locales/en'
 import { zhConfig } from './locales/zh'
+import { footer } from './configs/footer'
 
 export default defineConfig({
   title: "Bio Analyze",
@@ -15,11 +16,12 @@ export default defineConfig({
     socialLinks: [],
     search: {
       provider: 'local'
-    }
+    },
+    footer,
   },
 
   locales: {
     root: enConfig,
     zh: zhConfig
-  }
+  },
 })

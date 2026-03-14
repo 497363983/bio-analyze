@@ -29,10 +29,6 @@ export const zhConfig = {
         ...getSidebar(docRoot, 'zh/develop/modules', '模块开发')
       ]
     },
-    footer: {
-      message: '基于 GPL-3.0 许可发布。',
-      copyright: '版权所有 © 2026-至今 qww'
-    },
     docFooter: {
       prev: '上一页',
       next: '下一页'

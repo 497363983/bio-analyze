@@ -28,10 +28,6 @@ export const enConfig = {
         ...getSidebar(docRoot, 'develop', 'Developer Guide'),
         ...getSidebar(docRoot, 'develop/modules', 'Modules (Dev)')
       ]
-    },
-    footer: {
-      message: 'Released under the GPL-3.0 License.',
-      copyright: 'Copyright © 2026-present Bio Analyze Contributors'
     }
   }
 }
