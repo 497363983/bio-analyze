@@ -1,4 +1,4 @@
-# bio-analyze-plot 绘图模块
+# bio-analyze-plot
 
 **bio-analyze-plot** 是 `bio-analyze` 工具箱中的专业绘图模块。它基于 `matplotlib` 和 `seaborn` 构建，旨在生成各类生物信息学统计图表，并支持灵活的主题定制。
 

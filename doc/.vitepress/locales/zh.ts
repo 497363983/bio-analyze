@@ -19,7 +19,16 @@ export const zhConfig = {
         text: '模块',
         items: getSidebar(docRoot, 'zh/modules', '模块')[0]?.items || []
       },
-      { text: '开发者', link: '/zh/develop/architecture' }
+      {
+        text: '开发指南',
+        items: [
+          { text: '架构设计', link: '/zh/develop/architecture' },
+          { text: '环境搭建', link: '/zh/develop/environment' },
+          { text: '代码规范', link: '/zh/develop/standards/code-style' },
+          { text: '插件开发', link: '/zh/develop/plugins' },
+          { text: '核心模块', link: '/zh/develop/modules/core' }
+        ]
+      }
     ],
     sidebar: {
       '/zh/guide/': getSidebar(docRoot, 'zh/guide', '指南'),

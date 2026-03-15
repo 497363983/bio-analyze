@@ -17,16 +17,22 @@ hero:
       link: https://github.com/497363983/bio-analyze
 
 features:
-  - title: 🔄 Reproducibility
+  - icon: 🔄
+    title: Reproducibility
     details: Standardized analysis pipelines ensure your results are reproducible across environments, from local workstations to cloud clusters.
-  - title: ⚡ Efficiency
+  - icon: ⚡
+    title: Efficiency
     details: Automates repetitive tasks like data download, format conversion, and quality control, letting you focus on biological questions instead of tedious workflows.
-  - title: 👶 Ease of Use
+  - icon: 👶
+    title:  Ease of Use
     details: Designed for biologists. Simple commands with sensible defaults, while retaining full configurability for deep customization.
-  - title: 🔗 Integrated Workflows
+  - icon: 🔗
+    title:  Integrated Workflows
     details: Seamlessly complete the entire process from data processing (RNA-Seq, Molecular Docking) to analysis and publication-quality visualization in a single ecosystem.
-  - title: 🔌 Extensibility
+  - icon: 🔌
+    title: Extensibility
     details: Plugin architecture supports easy addition of new analysis modules and custom plotting themes, perfectly adapting to your specific research needs.
-  - title: 📊 Comprehensive Plotting Tools
+  - icon: 📊
+    title: Comprehensive Plotting Tools
     details: Generate various types of charts (Volcano plots, Heatmaps, PCA, etc.) with highly customizable themes to meet your specific presentation needs.
 ---

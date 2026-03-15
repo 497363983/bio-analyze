@@ -116,6 +116,21 @@ function getSidebarItems(rootDir: string, relativePath: string) {
 }
 
 export function getSidebar(rootDir: string, subDir: string, title: string) {
+  if (title === 'Development') {
+    return [
+      {
+        text: 'Development',
+        items: [
+          { text: 'Architecture', link: '/develop/architecture' },
+          { text: 'Environment Setup', link: '/develop/environment' },
+          { text: 'Code Standards', link: '/develop/standards/code-style' },
+          { text: 'Plugin Development', link: '/develop/plugins' },
+          { text: 'Core Modules', link: '/develop/modules/core' }
+        ]
+      }
+    ]
+  }
+
   const items = getSidebarItems(rootDir, subDir)
 
   return [

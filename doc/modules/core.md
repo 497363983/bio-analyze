@@ -1,4 +1,4 @@
-# Core Module Configuration
+# bio-analyze-core
 
 The `bio-analyze-core` module provides the infrastructure for the entire toolkit. Although primarily used internally by other modules, it also provides some user-configurable global options.
 
