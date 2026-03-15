@@ -11,6 +11,11 @@ logger = get_logger(__name__)
 
 
 class StarAlignmentManager:
+    """
+    zh: STAR 比对管理器。
+    en: STAR alignment manager.
+    """
+
     def __init__(
         self,
         reads: dict,
@@ -20,6 +25,30 @@ class StarAlignmentManager:
         star_index_dir: Path | None = None,
         theme: str = "default",
     ):
+        """
+        zh: 初始化 STAR 比对管理器。
+        en: Initialize the STAR alignment manager.
+
+        Args:
+            reads (dict):
+                zh: 样本读取文件字典。
+                en: Dictionary of sample read files.
+            reference (dict):
+                zh: 参考基因组文件字典（包含 'fasta' 和可选的 'gtf'）。
+                en: Dictionary of reference genome files (contains 'fasta' and optional 'gtf').
+            output_dir (Path):
+                zh: 输出目录路径。
+                en: Path to the output directory.
+            threads (int, optional):
+                zh: 使用的线程数。
+                en: Number of threads to use.
+            star_index_dir (Path | None, optional):
+                zh: STAR 索引目录。如果为 None，则默认为 output_dir/star_index。
+                en: STAR index directory. If None, defaults to output_dir/star_index.
+            theme (str, optional):
+                zh: 绘图主题。
+                en: Plotting theme.
+        """
         self.reads = reads
         self.reference = reference
         self.output_dir = output_dir
@@ -30,7 +59,15 @@ class StarAlignmentManager:
         self.star_index_dir.mkdir(parents=True, exist_ok=True)
 
     def check_star(self):
-        """检查 STAR 是否可用。"""
+        """
+        zh: 检查 STAR 是否可用。
+        en: Check if STAR is available.
+
+        Raises:
+            RuntimeError:
+                zh: 如果未找到 STAR 或 samtools。
+                en: If STAR or samtools is not found.
+        """
         if not shutil.which("STAR"):
             raise RuntimeError("STAR not found in PATH.")
         if not shutil.which("samtools"):
@@ -38,12 +75,22 @@ class StarAlignmentManager:
 
     def run(self) -> dict[str, Path]:
         """
-        运行 STAR 比对流程。
-        1. 检查/构建索引
-        2. 比对
-        3. 统计染色体分布
-        4. 绘图
-        返回 BAM 文件路径字典。
+        zh: 运行 STAR 比对流程。
+        en: Run the STAR alignment workflow.
+
+        zh: 1. 检查/构建索引
+        en: 1. Check/Build index
+        zh: 2. 比对
+        en: 2. Align
+        zh: 3. 统计染色体分布
+        en: 3. Calculate chromosome distribution
+        zh: 4. 绘图
+        en: 4. Plot
+
+        Returns:
+            dict[str, Path]:
+                zh: 样本名称到 BAM 文件路径的字典。
+                en: Dictionary mapping sample names to BAM file paths.
         """
         self.check_star()
 
@@ -63,7 +110,10 @@ class StarAlignmentManager:
         return bam_files
 
     def _build_index(self):
-        """构建 STAR 索引。"""
+        """
+        zh: 构建 STAR 索引。
+        en: Build STAR index.
+        """
         # 检查索引是否已存在（简单的检查：SA 文件存在）
         if (self.star_index_dir / "SA").exists():
             logger.info("STAR index already exists. Skipping build.")
@@ -102,7 +152,26 @@ class StarAlignmentManager:
             raise
 
     def _align_sample(self, sample: str, files: dict, out_prefix: Path) -> Path:
-        """比对单个样本。"""
+        """
+        zh: 比对单个样本。
+        en: Align a single sample.
+
+        Args:
+            sample (str):
+                zh: 样本名称。
+                en: Sample name.
+            files (dict):
+                zh: 样本文件字典（包含 'R1' 和可选的 'R2'）。
+                en: Dictionary of sample files (contains 'R1' and optional 'R2').
+            out_prefix (Path):
+                zh: 输出文件前缀。
+                en: Output file prefix.
+
+        Returns:
+            Path:
+                zh:生成的 BAM 文件路径。
+                en: Path to the generated BAM file.
+        """
         # STAR 输出文件名
         # Aligned.sortedByCoord.out.bam
         final_bam = Path(f"{out_prefix}Aligned.sortedByCoord.out.bam")
@@ -148,7 +217,18 @@ class StarAlignmentManager:
         return final_bam
 
     def _process_bam_stats(self, sample: str, bam_file: Path):
-        """统计 BAM 文件的染色体覆盖度分布并绘图（分链）。"""
+        """
+        zh: 统计 BAM 文件的染色体覆盖度分布并绘图（分链）。
+        en: Calculate chromosome coverage distribution for BAM file and plot (stranded).
+
+        Args:
+            sample (str):
+                zh: 样本名称。
+                en: Sample name.
+            bam_file (Path):
+                zh: BAM 文件路径。
+                en: Path to the BAM file.
+        """
         logger.info(f"Calculating chromosome coverage for {sample}...")
 
         # 1. 获取染色体长度信息

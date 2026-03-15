@@ -44,7 +44,10 @@ def confidence_ellipse(x, y, ax, n_std=2.0, facecolor="none", **kwargs):
 
 
 class ScatterPlot(BasePlot):
-    """散点图实现。"""
+    """
+    zh: 散点图实现。
+    en: Scatter plot implementation.
+    """
 
     @save_plot
     def plot(
@@ -64,21 +67,49 @@ class ScatterPlot(BasePlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        绘制散点图。
+        zh: 绘制散点图。
+        en: Plot scatter chart.
 
         Args:
-            data: 包含数据的 DataFrame。
-            x: x 轴的列名。
-            y: y 轴的列名。
-            hue: 分组列名。
-            style: 样式列名。
-            size: 大小列名。
-            title: 图表标题。
-            xlabel: X轴标签。
-            ylabel: Y轴标签。
-            output: 保存图表的路径。
-            add_ellipse: 是否为每个分组绘制置信椭圆。
-            ellipse_std: 椭圆的标准差倍数。
+            data:
+                zh: 包含数据的 DataFrame。
+                en: DataFrame containing data.
+            x:
+                zh: x 轴的列名。
+                en: Column name for x-axis.
+            y:
+                zh: y 轴的列名。
+                en: Column name for y-axis.
+            hue:
+                zh: 分组列名。
+                en: Column name for grouping.
+            style:
+                zh: 样式分组列名。
+                en: Column name for style grouping.
+            size:
+                zh: 大小分组列名。
+                en: Column name for size grouping.
+            title:
+                zh: 图表标题。
+                en: Chart title.
+            xlabel:
+                zh: X轴标签。
+                en: X-axis label.
+            ylabel:
+                zh: Y轴标签。
+                en: Y-axis label.
+            output:
+                zh: 保存图表的路径。
+                en: Path to save the chart.
+            add_ellipse:
+                zh: 是否为每个分组绘制置信椭圆。
+                en: Whether to draw confidence ellipses for each group.
+            ellipse_std:
+                zh: 椭圆的标准差倍数。
+                en: Number of standard deviations for ellipse.
+            **kwargs:
+                zh: 其他传递给 seaborn.scatterplot 的参数。
+                en: Other arguments passed to seaborn.scatterplot.
         """
         # 获取主题特定参数
         theme_params = self.get_chart_specific_params("scatter")
@@ -86,7 +117,7 @@ class ScatterPlot(BasePlot):
         # 合并参数: kwargs > theme_params
         if "palette" not in kwargs and "palette" in theme_params:
             kwargs["palette"] = theme_params["palette"]
-        
+
         # s (size) 是常见的 seaborn 参数
         if "s" not in kwargs and "s" in theme_params:
             kwargs["s"] = theme_params["s"]
@@ -96,7 +127,7 @@ class ScatterPlot(BasePlot):
                 kwargs[k] = v
 
         fig, ax = self.get_fig_ax()
-        
+
         # 椭圆绘制逻辑
         if add_ellipse and hue:
             # 椭圆样式参数
@@ -120,33 +151,27 @@ class ScatterPlot(BasePlot):
                 # 至少需要 3 个点来绘制有意义的椭圆
                 if len(group_data) < 3:
                     continue
-                
+
                 # 获取颜色
                 color = palette[group] if isinstance(palette, dict) else None
-                
+
                 # 准备填充样式
                 final_ellipse_kws = ellipse_kws.copy()
                 if "facecolor" not in final_ellipse_kws:
                     final_ellipse_kws["facecolor"] = color
-                
+
                 # 绘制填充椭圆
                 confidence_ellipse(
-                    group_data[x],
-                    group_data[y],
-                    ax,
-                    n_std=ellipse_std,
-                    edgecolor="none",
-                    zorder=0,
-                    **final_ellipse_kws
+                    group_data[x], group_data[y], ax, n_std=ellipse_std, edgecolor="none", zorder=0, **final_ellipse_kws
                 )
-                
+
                 # 绘制轮廓
                 final_outline_kws = ellipse_kws.copy()
                 if "alpha" in final_outline_kws:
                     del final_outline_kws["alpha"]
                 if "facecolor" in final_outline_kws:
                     del final_outline_kws["facecolor"]
-                
+
                 confidence_ellipse(
                     group_data[x],
                     group_data[y],
@@ -156,20 +181,11 @@ class ScatterPlot(BasePlot):
                     facecolor="none",
                     linestyle="--",
                     linewidth=1,
-                    zorder=0
+                    zorder=0,
                 )
 
         # 绘制散点
-        sns.scatterplot(
-            data=data,
-            x=x,
-            y=y,
-            hue=hue,
-            style=style,
-            size=size,
-            ax=ax,
-            **kwargs
-        )
+        sns.scatterplot(data=data, x=x, y=y, hue=hue, style=style, size=size, ax=ax, **kwargs)
 
         if title:
             ax.set_title(title)
@@ -177,5 +193,5 @@ class ScatterPlot(BasePlot):
             ax.set_xlabel(xlabel)
         if ylabel:
             ax.set_ylabel(ylabel)
-            
+
         return fig

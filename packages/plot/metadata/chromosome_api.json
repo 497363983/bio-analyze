@@ -3,7 +3,7 @@
   "type": "api",
   "description": {
     "zh": "绘制 Reads 在染色体上的覆盖度分布图（区分正负链）。",
-    "en": "绘制 Reads 在染色体上的覆盖度分布图（区分正负链）。"
+    "en": "Plot Reads coverage distribution on chromosomes (differentiating strands)."
   },
   "params": [
     {
@@ -12,8 +12,8 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "包含 bin 统计数据的 DataFrame。\n必需列: chrom, pos (bin start), counts_pos, counts_neg",
-        "en": "包含 bin 统计数据的 DataFrame。\n必需列: chrom, pos (bin start), counts_pos, counts_neg"
+        "zh": "包含 bin 统计数据的 DataFrame。必需列: chrom, pos (bin start), counts_pos, counts_neg。",
+        "en": "DataFrame containing bin statistics. Required columns: chrom, pos (bin start), counts_pos, counts_neg."
       }
     },
     {
@@ -23,7 +23,7 @@
       "default": "chrom",
       "description": {
         "zh": "染色体列名。",
-        "en": "染色体列名。"
+        "en": "Column name for chromosome."
       }
     },
     {
@@ -33,7 +33,7 @@
       "default": "pos",
       "description": {
         "zh": "位置列名（bin 起始位）。",
-        "en": "位置列名（bin 起始位）。"
+        "en": "Column name for position (bin start)."
       }
     },
     {
@@ -43,7 +43,7 @@
       "default": "counts_pos",
       "description": {
         "zh": "正链 Reads 计数列名。",
-        "en": "正链 Reads 计数列名。"
+        "en": "Column name for positive strand reads count."
       }
     },
     {
@@ -53,7 +53,7 @@
       "default": "counts_neg",
       "description": {
         "zh": "负链 Reads 计数列名。",
-        "en": "负链 Reads 计数列名。"
+        "en": "Column name for negative strand reads count."
       }
     },
     {
@@ -63,7 +63,7 @@
       "default": "Reads Coverage Distribution on Chromosomes",
       "description": {
         "zh": "图表标题。",
-        "en": "图表标题。"
+        "en": "Chart title."
       }
     },
     {
@@ -73,7 +73,7 @@
       "default": null,
       "description": {
         "zh": "保存路径。",
-        "en": "保存路径。"
+        "en": "Path to save the chart."
       }
     },
     {
@@ -83,7 +83,7 @@
       "default": "30",
       "description": {
         "zh": "最多显示的染色体数量（按长度或名称排序后）。",
-        "en": "最多显示的染色体数量（按长度或名称排序后）。"
+        "en": "Maximum number of chromosomes to display (after sorting by length or name)."
       }
     },
     {
@@ -93,7 +93,7 @@
       "default": "100000",
       "description": {
         "zh": "Bin 大小（用于 X 轴单位换算或标注）。",
-        "en": "Bin 大小（用于 X 轴单位换算或标注）。"
+        "en": "Bin size (used for X-axis unit conversion or annotation)."
       }
     },
     {
@@ -103,7 +103,7 @@
       "default": null,
       "description": {
         "zh": "正链颜色。",
-        "en": "正链颜色。"
+        "en": "Color for positive strand."
       }
     },
     {
@@ -113,7 +113,7 @@
       "default": null,
       "description": {
         "zh": "负链颜色。",
-        "en": "负链颜色。"
+        "en": "Color for negative strand."
       }
     }
   ]

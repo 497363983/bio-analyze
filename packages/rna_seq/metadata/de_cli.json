@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Counts matrix CSV file.",
+        "zh": "计数矩阵 CSV 文件。",
         "en": "Counts matrix CSV file."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Design matrix CSV file.",
+        "zh": "设计矩阵 CSV 文件。",
         "en": "Design matrix CSV file."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output directory.",
+        "zh": "输出目录。",
         "en": "Output directory."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "default",
       "description": {
-        "zh": "Plot theme.",
+        "zh": "绘图主题。",
         "en": "Plot theme."
       }
     }

@@ -10,7 +10,30 @@ logger = get_logger(__name__)
 
 
 class DEManager:
+    """
+    zh: 差异表达分析管理器。
+    en: Differential expression analysis manager.
+    """
+
     def __init__(self, counts: pd.DataFrame, design_file: Path, output_dir: Path, theme: str = "default"):
+        """
+        zh: 初始化差异表达分析管理器。
+        en: Initialize the differential expression analysis manager.
+
+        Args:
+            counts (pd.DataFrame):
+                zh: 计数矩阵（行为基因，列为样本）。
+                en: Counts matrix (genes as rows, samples as columns).
+            design_file (Path):
+                zh: 实验设计文件路径（CSV）。
+                en: Path to experimental design file (CSV).
+            output_dir (Path):
+                zh: 输出目录路径。
+                en: Path to the output directory.
+            theme (str, optional):
+                zh: 绘图主题。
+                en: Plotting theme.
+        """
         self.counts = counts
         self.design_file = Path(design_file)
         self.output_dir = output_dir
@@ -18,6 +41,20 @@ class DEManager:
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
     def run(self) -> pd.DataFrame:
+        """
+        zh: 运行差异表达分析 (DESeq2)。
+        en: Run differential expression analysis (DESeq2).
+
+        Returns:
+            pd.DataFrame:
+                zh: 差异表达结果 DataFrame。
+                en: Differential expression results DataFrame.
+
+        Raises:
+            ValueError:
+                zh: 如果设计文件缺少 'sample' 列，或者计数矩阵与设计文件之间没有匹配的样本，或者条件少于 2 个。
+                en: If the design file is missing the 'sample' column, or if there are no matching samples between the counts matrix and the design file, or if there are fewer than 2 conditions.
+        """
         # 加载实验设计
         design = pd.read_csv(self.design_file)
 

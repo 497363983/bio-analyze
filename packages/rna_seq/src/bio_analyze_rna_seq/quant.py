@@ -11,7 +11,30 @@ logger = get_logger(__name__)
 
 
 class QuantManager:
+    """
+    zh: 定量分析管理器。
+    en: Quantification analysis manager.
+    """
+
     def __init__(self, reads: dict, reference: dict, output_dir: Path, threads: int = 4):
+        """
+        zh: 初始化定量分析管理器。
+        en: Initialize the quantification analysis manager.
+
+        Args:
+            reads (dict):
+                zh: 样本读取文件字典。
+                en: Dictionary of sample read files.
+            reference (dict):
+                zh: 参考基因组文件字典（包含 'fasta' 和可选的 'gtf'）。
+                en: Dictionary of reference genome files (contains 'fasta' and optional 'gtf').
+            output_dir (Path):
+                zh: 输出目录路径。
+                en: Path to the output directory.
+            threads (int, optional):
+                zh: 使用的线程数。
+                en: Number of threads to use.
+        """
         self.reads = reads
         self.reference = reference
         self.output_dir = output_dir
@@ -20,6 +43,29 @@ class QuantManager:
         self.index_dir = self.output_dir / "salmon_index"
 
     def run(self) -> pd.DataFrame:
+        """
+        zh: 运行 Salmon 定量流程。
+        en: Run the Salmon quantification workflow.
+
+        zh: 1. 检查 salmon
+        en: 1. Check salmon
+        zh: 2. 构建索引
+        en: 2. Build index
+        zh: 3. 定量每个样本
+        en: 3. Quantify each sample
+        zh: 4. 合并计数
+        en: 4. Merge counts
+
+        Returns:
+            pd.DataFrame:
+                zh: 合并后的计数矩阵。
+                en: Merged counts matrix.
+
+        Raises:
+            RuntimeError:
+                zh: 如果未找到 Salmon。
+                en: If Salmon is not found.
+        """
         # 1. 检查 salmon
         if not shutil.which("salmon"):
             raise RuntimeError("Salmon not found in PATH.")
@@ -38,6 +84,10 @@ class QuantManager:
         return self._merge_counts(quant_files)
 
     def _build_index(self):
+        """
+        zh: 构建 Salmon 索引。
+        en: Build Salmon index.
+        """
         if self.index_dir.exists():
             logger.info("Salmon index already exists. Skipping build.")
             return
@@ -69,6 +119,21 @@ class QuantManager:
         run_command(cmd, check=True)
 
     def _quantify_sample(self, sample: str, files: dict, out_dir: Path):
+        """
+        zh: 定量单个样本。
+        en: Quantify a single sample.
+
+        Args:
+            sample (str):
+                zh: 样本名称。
+                en: Sample name.
+            files (dict):
+                zh: 样本文件字典。
+                en: Sample files dictionary.
+            out_dir (Path):
+                zh: 输出目录路径。
+                en: Output directory path.
+        """
         if out_dir.exists():
             logger.info(f"Sample {sample} already quantified.")
             return
@@ -95,6 +160,20 @@ class QuantManager:
         run_command(cmd, check=True)
 
     def _merge_counts(self, quant_files: dict) -> pd.DataFrame:
+        """
+        zh: 合并定量结果。
+        en: Merge quantification results.
+
+        Args:
+            quant_files (dict):
+                zh: 样本名称到 quant.sf 文件路径的字典。
+                en: Dictionary mapping sample names to quant.sf file paths.
+
+        Returns:
+            pd.DataFrame:
+                zh: 合并后的计数矩阵。
+                en: Merged counts matrix.
+        """
         logger.info("Merging quantification results...")
         counts = {}
         for sample, path in quant_files.items():
@@ -110,8 +189,13 @@ class QuantManager:
 
     def get_stats(self) -> dict:
         """
-        从 Salmon 输出中提取比对率。
-        返回: {sample: mapping_rate (float)}
+        zh: 从 Salmon 输出中提取比对率。
+        en: Extract mapping rate from Salmon output.
+
+        Returns:
+            dict:
+                zh: {sample: mapping_rate (float)}
+                en: {sample: mapping_rate (float)}
         """
         stats = {}
         for sample_dir in self.output_dir.iterdir():

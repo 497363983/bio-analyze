@@ -9,7 +9,10 @@ from .base import BasePlot, save_plot
 
 
 class VolcanoPlot(BasePlot):
-    """火山图实现。"""
+    """
+    zh: 火山图实现。
+    en: Volcano plot implementation.
+    """
 
     @save_plot
     def plot(
@@ -28,22 +31,48 @@ class VolcanoPlot(BasePlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        绘制火山图。
+        zh: 绘制火山图。
+        en: Plot volcano plot.
 
         Args:
-            data: 包含数据的 DataFrame。
-            x: log2 fold change 的列名。
-            y: p-value (或 adj. p-value) 的列名。
-            log_y: 是否对 y 轴进行 -log10 转换。
-            fc_cutoff: Fold change 截止值 (绝对值)。
-            p_cutoff: P-value 截止值。
-            title: 图表标题。
-            xlabel: X轴标签。
-            ylabel: Y轴标签。
-            output: 保存图表的路径。
-            labels: 自定义图例标签，字典格式，键为 "up", "down", "ns"。
+            data:
+                zh: 包含数据的 DataFrame。
+                en: DataFrame containing data.
+            x:
+                zh: log2 fold change 的列名。
+                en: Column name for log2 fold change.
+            y:
+                zh: p-value (或 adj. p-value) 的列名。
+                en: Column name for p-value (or adj. p-value).
+            log_y:
+                zh: 是否对 y 轴进行 -log10 转换。
+                en: Whether to apply -log10 transformation to y-axis.
+            fc_cutoff:
+                zh: Fold change 截止值 (绝对值)。
+                en: Fold change cutoff value (absolute).
+            p_cutoff:
+                zh: P-value 截止值。
+                en: P-value cutoff value.
+            title:
+                zh: 图表标题。
+                en: Chart title.
+            xlabel:
+                zh: X轴标签。
+                en: X-axis label.
+            ylabel:
+                zh: Y轴标签。
+                en: Y-axis label.
+            output:
+                zh: 保存图表的路径。
+                en: Path to save the chart.
+            labels:
+                zh: 自定义图例标签，字典格式，键为 "up", "down", "ns"。
                     默认为 {"up": "Up", "down": "Down", "ns": "Not Sig"}。
-            cutoff_line_kws: 截止线的样式参数（如 color, linestyle, linewidth）。
+                en: Custom legend labels, dict with keys "up", "down", "ns".
+                    Defaults to {"up": "Up", "down": "Down", "ns": "Not Sig"}.
+            **kwargs:
+                zh: 截止线的样式参数（如 color, linestyle, linewidth）以及其他传递给 seaborn.scatterplot 的参数。
+                en: Cutoff line style parameters (e.g. color, linestyle, linewidth) and other arguments passed to seaborn.scatterplot.
         """
         # 获取主题特定参数
         theme_params = self.get_chart_specific_params("volcano")

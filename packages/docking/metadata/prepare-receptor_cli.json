@@ -13,7 +13,7 @@
       "default": null,
       "description": {
         "zh": "输入受体文件 (PDB)。",
-        "en": "输入受体文件 (PDB)。"
+        "en": "Input receptor file (PDB)."
       }
     },
     {
@@ -23,7 +23,7 @@
       "default": null,
       "description": {
         "zh": "输出 PDBQT 文件。",
-        "en": "输出 PDBQT 文件。"
+        "en": "Output PDBQT file."
       }
     },
     {
@@ -33,7 +33,7 @@
       "default": "True",
       "description": {
         "zh": "添加氢原子。",
-        "en": "添加氢原子。"
+        "en": "Add hydrogens."
       }
     },
     {
@@ -43,7 +43,7 @@
       "default": "gasteiger",
       "description": {
         "zh": "电荷模型 (gasteiger, zero 等)。",
-        "en": "电荷模型 (gasteiger, zero 等)。"
+        "en": "Charge model (gasteiger, zero, etc.)."
       }
     }
   ]

@@ -10,8 +10,11 @@ from .vina import VinaEngine
 
 class DockingEngineFactory:
     """
-    对接引擎工厂类。
-    用于根据名称创建特定的对接引擎实例。
+    zh: 对接引擎工厂类。
+    en: Docking engine factory class.
+
+    zh: 用于根据名称创建特定的对接引擎实例。
+    en: Used to create specific docking engine instances based on name.
     """
 
     _engines: dict[str, type[BaseDockingEngine]] = {
@@ -25,19 +28,32 @@ class DockingEngineFactory:
         cls, engine_type: str, receptor_pdbqt: Path, ligand_pdbqt: Path, output_dir: Path
     ) -> BaseDockingEngine:
         """
-        创建一个对接引擎实例。
+        zh: 创建一个对接引擎实例。
+        en: Create a docking engine instance.
 
         Args:
-            engine_type: 引擎类型（例如 "vina"）
-            receptor_pdbqt: 受体 PDBQT 文件路径
-            ligand_pdbqt: 配体 PDBQT 文件路径
-            output_dir: 输出目录路径
+            engine_type (str):
+                zh: 引擎类型（例如 "vina"）
+                en: Engine type (e.g., "vina")
+            receptor_pdbqt (Path):
+                zh: 受体 PDBQT 文件路径
+                en: Path to the receptor PDBQT file
+            ligand_pdbqt (Path):
+                zh: 配体 PDBQT 文件路径
+                en: Path to the ligand PDBQT file
+            output_dir (Path):
+                zh: 输出目录路径
+                en: Path to the output directory
 
         Returns:
-            BaseDockingEngine: 对接引擎实例
+            BaseDockingEngine:
+                zh: 对接引擎实例
+                en: Docking engine instance
 
         Raises:
-            ValueError: 如果引擎类型不受支持
+            ValueError:
+                zh: 如果引擎类型不受支持
+                en: If the engine type is not supported
         """
         engine_class = cls._engines.get(engine_type.lower())
         if not engine_class:
@@ -48,10 +64,15 @@ class DockingEngineFactory:
     @classmethod
     def register_engine(cls, name: str, engine_class: type[BaseDockingEngine]):
         """
-        注册一个新的对接引擎。
+        zh: 注册一个新的对接引擎。
+        en: Register a new docking engine.
 
         Args:
-            name: 引擎名称
-            engine_class: 引擎类
+            name (str):
+                zh: 引擎名称
+                en: Engine name
+            engine_class (type[BaseDockingEngine]):
+                zh: 引擎类
+                en: Engine class
         """
         cls._engines[name.lower()] = engine_class

@@ -11,7 +11,10 @@ from .base import BasePlot, save_plot
 
 
 class BarPlot(BasePlot):
-    """柱状图实现。"""
+    """
+    zh: 柱状图实现。
+    en: Bar plot implementation.
+    """
 
     @save_plot
     def plot(
@@ -37,28 +40,66 @@ class BarPlot(BasePlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        绘制带有误差棒的柱状图。
+        zh: 绘制带有误差棒的柱状图。
+        en: Plot bar chart with error bars.
 
         Args:
-            data: 包含数据的 DataFrame。
-            x: x 轴的列名。
-            y: y 轴的列名。
-            hue: 分组列名。
-            title: 图表标题。
-            xlabel: X轴标签。
-            ylabel: Y轴标签。
-            output: 保存图表的路径。
-            error_bar_type: 误差棒类型 (SD, SE, CI)。如果提供了 max/min 则忽略。
-            error_bar_ci: 当类型为 CI 时的置信区间大小 (默认 95)。
-            error_bar_max: 误差棒上限的列名。
-            error_bar_min: 误差棒下限的列名。
-            error_bar_capsize: 误差棒的横线宽度。
-            significance: 要进行显著性检验的配对列表。例如 [("A", "B"), ("C", "D")]。
-                          如果是分组柱状图 (有 hue)，则格式为 [((x1, hue1), (x2, hue2)), ...]。
-            test: 统计检验方法。支持 't-test_ind', 't-test_welch', 't-test_paired', 'Mann-Whitney', 'Wilcoxon', 'Kruskal'。
-            text_format: 显著性标记格式 ('star', 'full', 'simple', 'pvalue')。
-            err_color: 误差棒颜色。
-            cap_color: 误差棒横线颜色。
+            data:
+                zh: 包含数据的 DataFrame。
+                en: DataFrame containing data.
+            x:
+                zh: x 轴的列名。
+                en: Column name for x-axis.
+            y:
+                zh: y 轴的列名。
+                en: Column name for y-axis.
+            hue:
+                zh: 分组列名。
+                en: Column name for grouping.
+            title:
+                zh: 图表标题。
+                en: Chart title.
+            xlabel:
+                zh: X轴标签。
+                en: X-axis label.
+            ylabel:
+                zh: Y轴标签。
+                en: Y-axis label.
+            output:
+                zh: 保存图表的路径。
+                en: Path to save the chart.
+            error_bar_type:
+                zh: 误差棒类型 (SD, SE, CI)。如果提供了 max/min 则忽略。
+                en: Error bar type (SD, SE, CI). Ignored if max/min are provided.
+            error_bar_ci:
+                zh: 当类型为 CI 时的置信区间大小 (默认 95)。
+                en: Confidence interval size when type is CI (default 95).
+            error_bar_max:
+                zh: 误差棒上限的列名。
+                en: Column name for error bar upper bound.
+            error_bar_min:
+                zh: 误差棒下限的列名。
+                en: Column name for error bar lower bound.
+            error_bar_capsize:
+                zh: 误差棒的横线宽度。
+                en: Width of error bar caps.
+            significance:
+                zh: 要进行显著性检验的配对列表。例如 [("A", "B"), ("C", "D")]。
+                    如果是分组柱状图 (有 hue)，则格式为 [((x1, hue1), (x2, hue2)), ...]。
+                en: List of pairs for significance testing. E.g. [("A", "B"), ("C", "D")].
+                    If grouped bar plot (with hue), format is [((x1, hue1), (x2, hue2)), ...].
+            test:
+                zh: 统计检验方法。支持 't-test_ind', 't-test_welch', 't-test_paired', 'Mann-Whitney', 'Wilcoxon', 'Kruskal'。
+                en: Statistical test method. Supports 't-test_ind', 't-test_welch', 't-test_paired', 'Mann-Whitney', 'Wilcoxon', 'Kruskal'.
+            text_format:
+                zh: 显著性标记格式 ('star', 'full', 'simple', 'pvalue')。
+                en: Significance annotation format ('star', 'full', 'simple', 'pvalue').
+            err_color:
+                zh: 误差棒颜色。
+                en: Error bar color.
+            cap_color:
+                zh: 误差棒横线颜色。
+                en: Error bar cap color.
         """
         # 获取主题特定参数
         theme_params = self.get_chart_specific_params("bar")

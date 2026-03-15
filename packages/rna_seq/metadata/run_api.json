@@ -3,7 +3,7 @@
   "type": "api",
   "description": {
     "zh": "运行 RNA-Seq 分析流程。",
-    "en": "运行 RNA-Seq 分析流程。"
+    "en": "Run RNA-Seq Analysis Pipeline."
   },
   "params": [
     {
@@ -13,7 +13,7 @@
       "default": null,
       "description": {
         "zh": "包含原始 FastQ 文件的目录。",
-        "en": "包含原始 FastQ 文件的目录。"
+        "en": "Directory containing raw FastQ files."
       }
     },
     {
@@ -23,7 +23,7 @@
       "default": null,
       "description": {
         "zh": "分析结果输出目录。",
-        "en": "分析结果输出目录。"
+        "en": "Output directory for analysis results."
       }
     },
     {
@@ -33,7 +33,7 @@
       "default": null,
       "description": {
         "zh": "实验设计 CSV 文件路径。",
-        "en": "实验设计 CSV 文件路径。"
+        "en": "Path to experimental design CSV file."
       }
     },
     {
@@ -43,7 +43,7 @@
       "default": null,
       "description": {
         "zh": "物种名称 (例如 \"Homo sapiens\")。",
-        "en": "物种名称 (例如 \"Homo sapiens\")。"
+        "en": "Species name (e.g. \"Homo sapiens\")."
       }
     },
     {
@@ -53,7 +53,7 @@
       "default": null,
       "description": {
         "zh": "参考基因组 FASTA 文件路径。",
-        "en": "参考基因组 FASTA 文件路径。"
+        "en": "Path to reference genome FASTA file."
       }
     },
     {
@@ -63,7 +63,7 @@
       "default": null,
       "description": {
         "zh": "基因组注释 GTF 文件路径。",
-        "en": "基因组注释 GTF 文件路径。"
+        "en": "Path to genome annotation GTF file."
       }
     },
     {
@@ -73,7 +73,7 @@
       "default": "4",
       "description": {
         "zh": "并行线程数 (默认: 4)。",
-        "en": "并行线程数 (默认: 4)。"
+        "en": "Number of parallel threads (default: 4)."
       }
     },
     {
@@ -83,7 +83,7 @@
       "default": "False",
       "description": {
         "zh": "跳过质量控制步骤。",
-        "en": "跳过质量控制步骤。"
+        "en": "Skip quality control steps."
       }
     },
     {
@@ -93,7 +93,7 @@
       "default": "False",
       "description": {
         "zh": "跳过修剪步骤。",
-        "en": "跳过修剪步骤。"
+        "en": "Skip trimming steps."
       }
     },
     {
@@ -103,7 +103,7 @@
       "default": null,
       "description": {
         "zh": "NCBI SRA Accession ID 列表。",
-        "en": "NCBI SRA Accession ID 列表。"
+        "en": "List of NCBI SRA Accession IDs."
       }
     },
     {
@@ -113,7 +113,7 @@
       "default": null,
       "description": {
         "zh": "仅运行特定步骤。",
-        "en": "仅运行特定步骤。"
+        "en": "Run only specific steps."
       }
     },
     {
@@ -123,7 +123,7 @@
       "default": null,
       "description": {
         "zh": "额外的 QC 参数。",
-        "en": "额外的 QC 参数。"
+        "en": "Additional QC parameters."
       }
     },
     {
@@ -133,7 +133,7 @@
       "default": "False",
       "description": {
         "zh": "启用 STAR 比对。",
-        "en": "启用 STAR 比对。"
+        "en": "Enable STAR alignment."
       }
     },
     {
@@ -143,7 +143,7 @@
       "default": "default",
       "description": {
         "zh": "绘图主题。",
-        "en": "绘图主题。"
+        "en": "Plotting theme."
       }
     }
   ]

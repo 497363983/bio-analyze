@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "DESeq2 results CSV file.",
+        "zh": "DESeq2 结果 CSV 文件。",
         "en": "DESeq2 results CSV file."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Species name (e.g. 'Homo sapiens').",
+        "zh": "物种名称 (例如 'Homo sapiens')。",
         "en": "Species name (e.g. 'Homo sapiens')."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output directory.",
+        "zh": "输出目录。",
         "en": "Output directory."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "default",
       "description": {
-        "zh": "Plot theme.",
+        "zh": "绘图主题。",
         "en": "Plot theme."
       }
     }

@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Input directory (raw FastQ).",
+        "zh": "输入目录 (原始 FastQ)。",
         "en": "Input directory (raw FastQ)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output directory.",
+        "zh": "输出目录。",
         "en": "Output directory."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": "4",
       "description": {
-        "zh": "Number of threads.",
+        "zh": "线程数。",
         "en": "Number of threads."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "Skip FastQC/fastp stats.",
+        "zh": "跳过 FastQC/fastp 统计。",
         "en": "Skip FastQC/fastp stats."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "Skip trimming.",
+        "zh": "跳过修剪。",
         "en": "Skip trimming."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Phred quality threshold.",
+        "zh": "碱基合格的质量值。",
         "en": "Phred quality threshold."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Unqualified percent limit.",
+        "zh": "允许的不合格碱基百分比。",
         "en": "Unqualified percent limit."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "N base limit.",
+        "zh": "允许的 N 碱基数量。",
         "en": "N base limit."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Length required.",
+        "zh": "所需的最小长度。",
         "en": "Length required."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Adapter sequence R1.",
+        "zh": "read1 的接头序列。",
         "en": "Adapter sequence R1."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Adapter sequence R2.",
+        "zh": "read2 的接头序列。",
         "en": "Adapter sequence R2."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "Enable deduplication.",
+        "zh": "启用去重。",
         "en": "Enable deduplication."
       }
     }

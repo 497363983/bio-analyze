@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Input file path (CSV, TSV, or Excel).",
+        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output file path.",
+        "zh": "输出文件路径。",
         "en": "Output file path."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": "rank",
       "description": {
-        "zh": "Column name for rank (x-axis).",
+        "zh": "排名列名 (X 轴)。",
         "en": "Column name for rank (x-axis)."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "running_es",
       "description": {
-        "zh": "Column name for running ES (y-axis).",
+        "zh": "运行富集得分列名 (Y 轴)。",
         "en": "Column name for running ES (y-axis)."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "hit",
       "description": {
-        "zh": "Column name for hit status (0/1 or boolean).",
+        "zh": "命中状态列名 (0/1 或布尔值)。",
         "en": "Column name for hit status (0/1 or boolean)."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Column name for ranking metric (y-axis bottom).",
+        "zh": "排名指标列名 (Y 轴底部)。",
         "en": "Column name for ranking metric (y-axis bottom)."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Plot title.",
+        "zh": "图表标题。",
         "en": "Plot title."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Sheet name for Excel files.",
+        "zh": "Excel 工作表名称。",
         "en": "Sheet name for Excel files."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "#4DAF4A",
       "description": {
-        "zh": "Color for enrichment score line.",
+        "zh": "富集得分曲线颜色。",
         "en": "Color for enrichment score line."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": "black",
       "description": {
-        "zh": "Color for hit lines.",
+        "zh": "命中线条颜色。",
         "en": "Color for hit lines."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Normalized Enrichment Score.",
+        "zh": "标准化富集得分 (NES)。",
         "en": "Normalized Enrichment Score."
       }
     },
@@ -132,7 +132,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "P-value.",
+        "zh": "P-value。",
         "en": "P-value."
       }
     },
@@ -142,7 +142,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "FDR q-value.",
+        "zh": "FDR q-value。",
         "en": "FDR q-value."
       }
     },
@@ -152,7 +152,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "Show top and right borders.",
+        "zh": "显示顶部和右侧边框。",
         "en": "Show top and right borders."
       }
     }

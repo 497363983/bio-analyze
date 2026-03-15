@@ -12,7 +12,10 @@ import seaborn as sns
 
 @dataclass
 class PlotTheme:
-    """SCI 风格绘图配置。"""
+    """
+    zh: SCI 风格绘图配置。
+    en: SCI style plotting configuration.
+    """
 
     name: str
     context: str = "paper"  # paper, notebook, talk, poster
@@ -27,7 +30,20 @@ class PlotTheme:
 
     @classmethod
     def from_json(cls, path: Path | str) -> PlotTheme:
-        """从 JSON 文件加载主题配置。"""
+        """
+        zh: 从 JSON 文件加载主题配置。
+        en: Load theme configuration from JSON file.
+
+        Args:
+            path (Path | str):
+                zh: JSON 文件路径
+                en: JSON file path
+
+        Returns:
+            PlotTheme:
+                zh: 主题对象
+                en: Theme object
+        """
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
 
@@ -44,7 +60,10 @@ class PlotTheme:
         )
 
     def apply(self) -> None:
-        """应用主题设置到 matplotlib/seaborn。"""
+        """
+        zh: 应用主题设置到 matplotlib/seaborn。
+        en: Apply theme settings to matplotlib/seaborn.
+        """
         # ... (原有代码保持不变) ...
         # 这里不需要修改 apply，因为 chart_specific_params 是在绘图类中手动获取的
 
@@ -78,7 +97,7 @@ class PlotTheme:
 
         if "font.serif" in self.rc_params:
             plt.rcParams["font.serif"] = self.rc_params["font.serif"]
-        
+
         # 解决负号显示问题
         plt.rcParams["axes.unicode_minus"] = False
         if "axes.unicode_minus" in self.rc_params:
@@ -91,22 +110,23 @@ class PlotTheme:
         # [Auto-Fix] 尝试注册常见中文字体，防止中文显示为方框
         # Matplotlib 有时无法自动发现系统安装的中文字体，需要手动添加字体管理器
         try:
-            from matplotlib.font_manager import fontManager
             import os
-            
+
+            from matplotlib.font_manager import fontManager
+
             # Windows 常见字体路径
             win_font_paths = [
-                "C:/Windows/Fonts/simhei.ttf",      # 黑体
-                "C:/Windows/Fonts/msyh.ttc",        # 微软雅黑
-                "C:/Windows/Fonts/simsun.ttc",      # 宋体
+                "C:/Windows/Fonts/simhei.ttf",  # 黑体
+                "C:/Windows/Fonts/msyh.ttc",  # 微软雅黑
+                "C:/Windows/Fonts/simsun.ttc",  # 宋体
             ]
-            
+
             # Linux 常见字体路径 (示例)
             linux_font_paths = [
                 "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf",
                 "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
             ]
-            
+
             # Mac 常见字体路径 (示例)
             mac_font_paths = [
                 "/System/Library/Fonts/PingFang.ttc",
@@ -114,7 +134,7 @@ class PlotTheme:
             ]
 
             all_paths = win_font_paths + linux_font_paths + mac_font_paths
-            
+
             for fpath in all_paths:
                 if os.path.exists(fpath):
                     fontManager.addfont(fpath)
@@ -123,7 +143,20 @@ class PlotTheme:
             pass
 
     def get_chart_params(self, chart_type: str) -> dict[str, Any]:
-        """获取特定图表类型的配置参数。"""
+        """
+        zh: 获取特定图表类型的配置参数。
+        en: Get configuration parameters for a specific chart type.
+
+        Args:
+            chart_type (str):
+                zh: 图表类型
+                en: Chart type
+
+        Returns:
+            dict[str, Any]:
+                zh: 配置参数字典
+                en: Configuration parameters dictionary
+        """
         return self.chart_specific_params.get(chart_type, {}).copy()
 
 

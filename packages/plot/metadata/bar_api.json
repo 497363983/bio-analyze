@@ -3,7 +3,7 @@
   "type": "api",
   "description": {
     "zh": "绘制带有误差棒的柱状图。",
-    "en": "绘制带有误差棒的柱状图。"
+    "en": "Plot bar chart with error bars."
   },
   "params": [
     {
@@ -13,7 +13,7 @@
       "default": null,
       "description": {
         "zh": "包含数据的 DataFrame。",
-        "en": "包含数据的 DataFrame。"
+        "en": "DataFrame containing data."
       }
     },
     {
@@ -23,7 +23,7 @@
       "default": null,
       "description": {
         "zh": "x 轴的列名。",
-        "en": "x 轴的列名。"
+        "en": "Column name for x-axis."
       }
     },
     {
@@ -33,7 +33,7 @@
       "default": null,
       "description": {
         "zh": "y 轴的列名。",
-        "en": "y 轴的列名。"
+        "en": "Column name for y-axis."
       }
     },
     {
@@ -43,7 +43,7 @@
       "default": null,
       "description": {
         "zh": "分组列名。",
-        "en": "分组列名。"
+        "en": "Column name for grouping."
       }
     },
     {
@@ -53,7 +53,7 @@
       "default": null,
       "description": {
         "zh": "图表标题。",
-        "en": "图表标题。"
+        "en": "Chart title."
       }
     },
     {
@@ -63,7 +63,7 @@
       "default": null,
       "description": {
         "zh": "X轴标签。",
-        "en": "X轴标签。"
+        "en": "X-axis label."
       }
     },
     {
@@ -73,7 +73,7 @@
       "default": null,
       "description": {
         "zh": "Y轴标签。",
-        "en": "Y轴标签。"
+        "en": "Y-axis label."
       }
     },
     {
@@ -83,7 +83,7 @@
       "default": null,
       "description": {
         "zh": "保存图表的路径。",
-        "en": "保存图表的路径。"
+        "en": "Path to save the chart."
       }
     },
     {
@@ -93,7 +93,7 @@
       "default": null,
       "description": {
         "zh": "误差棒类型 (SD, SE, CI)。如果提供了 max/min 则忽略。",
-        "en": "误差棒类型 (SD, SE, CI)。如果提供了 max/min 则忽略。"
+        "en": "Error bar type (SD, SE, CI). Ignored if max/min are provided."
       }
     },
     {
@@ -103,7 +103,7 @@
       "default": "95",
       "description": {
         "zh": "当类型为 CI 时的置信区间大小 (默认 95)。",
-        "en": "当类型为 CI 时的置信区间大小 (默认 95)。"
+        "en": "Confidence interval size when type is CI (default 95)."
       }
     },
     {
@@ -113,7 +113,7 @@
       "default": null,
       "description": {
         "zh": "误差棒上限的列名。",
-        "en": "误差棒上限的列名。"
+        "en": "Column name for error bar upper bound."
       }
     },
     {
@@ -123,7 +123,7 @@
       "default": null,
       "description": {
         "zh": "误差棒下限的列名。",
-        "en": "误差棒下限的列名。"
+        "en": "Column name for error bar lower bound."
       }
     },
     {
@@ -133,7 +133,7 @@
       "default": "0.1",
       "description": {
         "zh": "误差棒的横线宽度。",
-        "en": "误差棒的横线宽度。"
+        "en": "Width of error bar caps."
       }
     },
     {
@@ -143,7 +143,7 @@
       "default": null,
       "description": {
         "zh": "要进行显著性检验的配对列表。例如 [(\"A\", \"B\"), (\"C\", \"D\")]。\n如果是分组柱状图 (有 hue)，则格式为 [((x1, hue1), (x2, hue2)), ...]。",
-        "en": "要进行显著性检验的配对列表。例如 [(\"A\", \"B\"), (\"C\", \"D\")]。\n如果是分组柱状图 (有 hue)，则格式为 [((x1, hue1), (x2, hue2)), ...]。"
+        "en": "List of pairs for significance testing. E.g. [(\"A\", \"B\"), (\"C\", \"D\")].\nIf grouped bar plot (with hue), format is [((x1, hue1), (x2, hue2)), ...]."
       }
     },
     {
@@ -153,7 +153,7 @@
       "default": "t-test_ind",
       "description": {
         "zh": "统计检验方法。支持 't-test_ind', 't-test_welch', 't-test_paired', 'Mann-Whitney', 'Wilcoxon', 'Kruskal'。",
-        "en": "统计检验方法。支持 't-test_ind', 't-test_welch', 't-test_paired', 'Mann-Whitney', 'Wilcoxon', 'Kruskal'。"
+        "en": "Statistical test method. Supports 't-test_ind', 't-test_welch', 't-test_paired', 'Mann-Whitney', 'Wilcoxon', 'Kruskal'."
       }
     },
     {
@@ -163,7 +163,7 @@
       "default": "star",
       "description": {
         "zh": "显著性标记格式 ('star', 'full', 'simple', 'pvalue')。",
-        "en": "显著性标记格式 ('star', 'full', 'simple', 'pvalue')。"
+        "en": "Significance annotation format ('star', 'full', 'simple', 'pvalue')."
       }
     },
     {
@@ -173,7 +173,7 @@
       "default": null,
       "description": {
         "zh": "误差棒颜色。",
-        "en": "误差棒颜色。"
+        "en": "Error bar color."
       }
     },
     {
@@ -183,7 +183,7 @@
       "default": null,
       "description": {
         "zh": "误差棒横线颜色。",
-        "en": "误差棒横线颜色。"
+        "en": "Error bar cap color."
       }
     }
   ]

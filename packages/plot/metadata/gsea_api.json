@@ -3,7 +3,7 @@
   "type": "api",
   "description": {
     "zh": "绘制 GSEA 富集图。",
-    "en": "绘制 GSEA 富集图。"
+    "en": "Plot GSEA enrichment plot."
   },
   "params": [
     {
@@ -13,7 +13,7 @@
       "default": null,
       "description": {
         "zh": "包含 GSEA 结果的 DataFrame。",
-        "en": "包含 GSEA 结果的 DataFrame。"
+        "en": "DataFrame containing GSEA results."
       }
     },
     {
@@ -23,7 +23,7 @@
       "default": "rank",
       "description": {
         "zh": "排名列名（x 轴）。",
-        "en": "排名列名（x 轴）。"
+        "en": "Column name for rank (x-axis)."
       }
     },
     {
@@ -33,7 +33,7 @@
       "default": "running_es",
       "description": {
         "zh": "运行富集分数列名（y 轴顶部）。",
-        "en": "运行富集分数列名（y 轴顶部）。"
+        "en": "Column name for running enrichment score (y-axis top)."
       }
     },
     {
@@ -43,7 +43,7 @@
       "default": "hit",
       "description": {
         "zh": "命中状态列名（布尔值或 0/1）。",
-        "en": "命中状态列名（布尔值或 0/1）。"
+        "en": "Column name for hit status (boolean or 0/1)."
       }
     },
     {
@@ -53,7 +53,7 @@
       "default": null,
       "description": {
         "zh": "排名指标列名（y 轴底部）。可选。",
-        "en": "排名指标列名（y 轴底部）。可选。"
+        "en": "Column name for ranking metric (y-axis bottom). Optional."
       }
     },
     {
@@ -63,7 +63,7 @@
       "default": null,
       "description": {
         "zh": "图表标题。",
-        "en": "图表标题。"
+        "en": "Chart title."
       }
     },
     {
@@ -73,7 +73,7 @@
       "default": null,
       "description": {
         "zh": "输出文件路径。",
-        "en": "输出文件路径。"
+        "en": "Path to output file."
       }
     },
     {
@@ -83,7 +83,7 @@
       "default": "#4DAF4A",
       "description": {
         "zh": "富集分数线的颜色。",
-        "en": "富集分数线的颜色。"
+        "en": "Color of the enrichment score line."
       }
     },
     {
@@ -93,7 +93,7 @@
       "default": "black",
       "description": {
         "zh": "命中垂直线的颜色。",
-        "en": "命中垂直线的颜色。"
+        "en": "Color of the hit vertical lines."
       }
     },
     {
@@ -103,7 +103,7 @@
       "default": null,
       "description": {
         "zh": "标准化富集评分（用于注释）。",
-        "en": "标准化富集评分（用于注释）。"
+        "en": "Normalized Enrichment Score (for annotation)."
       }
     },
     {
@@ -113,7 +113,7 @@
       "default": null,
       "description": {
         "zh": "P 值（用于注释）。",
-        "en": "P 值（用于注释）。"
+        "en": "P-value (for annotation)."
       }
     },
     {
@@ -123,7 +123,7 @@
       "default": null,
       "description": {
         "zh": "FDR/调整后的 P 值（用于注释）。",
-        "en": "FDR/调整后的 P 值（用于注释）。"
+        "en": "FDR/Adjusted P-value (for annotation)."
       }
     },
     {
@@ -133,7 +133,7 @@
       "default": "True",
       "description": {
         "zh": "是否显示子图的顶部和右侧边框。默认为 True。",
-        "en": "是否显示子图的顶部和右侧边框。默认为 True。"
+        "en": "Whether to show top and right borders of subplots. Defaults to True."
       }
     }
   ]

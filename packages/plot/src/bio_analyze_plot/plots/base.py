@@ -16,7 +16,20 @@ F = TypeVar("F", bound=Callable[..., Any])
 
 
 def save_plot(func: F) -> F:
-    """保存图表到文件的装饰器。"""
+    """
+    zh: 保存图表到文件的装饰器。
+    en: Decorator to save plot to file.
+
+    Args:
+        func (F):
+            zh: 绘图函数
+            en: Plotting function
+
+    Returns:
+        F:
+            zh: 装饰后的函数
+            en: Decorated function
+    """
 
     @functools.wraps(func)
     def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -49,9 +62,21 @@ def save_plot(func: F) -> F:
 
 
 class BasePlot(ABC):
-    """所有绘图类的抽象基类。"""
+    """
+    zh: 所有绘图类的抽象基类。
+    en: Abstract base class for all plotting classes.
+    """
 
     def __init__(self, theme: str = "default"):
+        """
+        zh: 初始化绘图类。
+        en: Initialize the plotting class.
+
+        Args:
+            theme (str, optional):
+                zh: 主题名称或路径
+                en: Theme name or path
+        """
         self.theme = theme
         set_theme(theme)
 
@@ -64,16 +89,59 @@ class BasePlot(ABC):
             self.theme_obj = load_custom_theme(theme)
 
     def get_chart_specific_params(self, chart_type: str) -> dict[str, Any]:
-        """获取当前主题中针对该图表类型的特有配置。"""
+        """
+        zh: 获取当前主题中针对该图表类型的特有配置。
+        en: Get chart-specific configuration from the current theme.
+
+        Args:
+            chart_type (str):
+                zh: 图表类型
+                en: Chart type
+
+        Returns:
+            dict[str, Any]:
+                zh: 配置参数字典
+                en: Configuration parameters dictionary
+        """
         if self.theme_obj:
             return self.theme_obj.get_chart_params(chart_type)
         return {}
 
     def get_fig_ax(self, figsize: tuple[float, float] | None = None) -> tuple[Figure, Axes]:
+        """
+        zh: 创建 Figure 和 Axes 对象。
+        en: Create Figure and Axes objects.
+
+        Args:
+            figsize (tuple[float, float] | None, optional):
+                zh: 图表大小
+                en: Figure size
+
+        Returns:
+            tuple[Figure, Axes]:
+                zh: (Figure, Axes) 元组
+                en: (Figure, Axes) tuple
+        """
         fig, ax = plt.subplots(figsize=figsize)
         return fig, ax
 
     @abstractmethod
     def plot(self, data: Any, **kwargs: Any) -> Figure:
-        """执行绘图逻辑。"""
+        """
+        zh: 执行绘图逻辑。
+        en: Execute plotting logic.
+
+        Args:
+            data (Any):
+                zh: 数据
+                en: Data
+            **kwargs:
+                zh: 其他参数
+                en: Other arguments
+
+        Returns:
+            Figure:
+                zh: matplotlib Figure 对象
+                en: matplotlib Figure object
+        """
         pass

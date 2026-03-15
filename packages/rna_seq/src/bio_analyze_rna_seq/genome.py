@@ -18,7 +18,30 @@ except Exception as e:
 
 
 class GenomeManager:
+    """
+    zh: 基因组管理器。
+    en: Genome manager.
+    """
+
     def __init__(self, species: str | None, fasta: Path | None, gtf: Path | None, output_dir: Path):
+        """
+        zh: 初始化基因组管理器。
+        en: Initialize the genome manager.
+
+        Args:
+            species (str | None):
+                zh: 物种名称（例如 'Homo sapiens'）。
+                en: Species name (e.g., 'Homo sapiens').
+            fasta (Path | None):
+                zh: 基因组 FASTA 文件路径。
+                en: Path to genome FASTA file.
+            gtf (Path | None):
+                zh: 基因组 GTF 文件路径。
+                en: Path to genome GTF file.
+            output_dir (Path):
+                zh: 输出目录路径。
+                en: Path to the output directory.
+        """
         self.species = species
         self.fasta = fasta
         self.gtf = gtf
@@ -27,8 +50,24 @@ class GenomeManager:
 
     def prepare(self) -> dict:
         """
-        准备参考基因组。
-        返回包含 'fasta' 和 'gtf' 路径的字典。
+        zh: 准备参考基因组。
+        en: Prepare reference genome.
+
+        zh: 如果提供了本地文件，则直接使用。否则尝试使用 genomepy 下载。
+        en: If local files are provided, use them directly. Otherwise, try to download using genomepy.
+
+        Returns:
+            dict:
+                zh: 包含 'fasta' 和 'gtf' 路径的字典。
+                en: Dictionary containing 'fasta' and 'gtf' paths.
+
+        Raises:
+            RuntimeError:
+                zh: 如果 genomepy 未安装或下载失败。
+                en: If genomepy is not installed or download fails.
+            ValueError:
+                zh: 如果未提供物种名称且未提供本地文件。
+                en: If neither species name nor local files are provided.
         """
         if self.fasta and self.gtf:
             logger.info(f"Using provided reference files: {self.fasta}, {self.gtf}")

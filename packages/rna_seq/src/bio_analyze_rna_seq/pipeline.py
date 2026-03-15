@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from bio_analyze_core.logging import get_logger, setup_logging
+from bio_analyze_core.logging import get_logger
 from bio_analyze_core.pipeline import Pipeline
 
 from .nodes import (
@@ -20,24 +20,54 @@ logger = get_logger("bio_analyze.rna_seq")
 
 class RNASeqPipeline:
     """
-    运行 RNA-Seq 分析流程。
+    zh: 运行 RNA-Seq 分析流程。
+    en: Run RNA-Seq Analysis Pipeline.
 
     Args:
-        input_dir (Path, optional): 包含原始 FastQ 文件的目录。
-        output_dir (Path): 分析结果输出目录。
-        design_file (Path): 实验设计 CSV 文件路径。
-        species (str, optional): 物种名称 (例如 "Homo sapiens")。
-        genome_fasta (Path, optional): 参考基因组 FASTA 文件路径。
-        genome_gtf (Path, optional): 基因组注释 GTF 文件路径。
-        threads (int, optional): 并行线程数 (默认: 4)。
-        skip_qc (bool, optional): 跳过质量控制步骤。
-        skip_trim (bool, optional): 跳过修剪步骤。
-        sra_ids (list[str], optional): NCBI SRA Accession ID 列表。
-        step (str, optional): 仅运行特定步骤。
-        qc_params (dict, optional): 额外的 QC 参数。
-        star_align (bool, optional): 启用 STAR 比对。
-        theme (str, optional): 绘图主题。
+        input_dir (Path, optional):
+            zh: 包含原始 FastQ 文件的目录。
+            en: Directory containing raw FastQ files.
+        output_dir (Path):
+            zh: 分析结果输出目录。
+            en: Output directory for analysis results.
+        design_file (Path):
+            zh: 实验设计 CSV 文件路径。
+            en: Path to experimental design CSV file.
+        species (str, optional):
+            zh: 物种名称 (例如 "Homo sapiens")。
+            en: Species name (e.g. "Homo sapiens").
+        genome_fasta (Path, optional):
+            zh: 参考基因组 FASTA 文件路径。
+            en: Path to reference genome FASTA file.
+        genome_gtf (Path, optional):
+            zh: 基因组注释 GTF 文件路径。
+            en: Path to genome annotation GTF file.
+        threads (int, optional):
+            zh: 并行线程数 (默认: 4)。
+            en: Number of parallel threads (default: 4).
+        skip_qc (bool, optional):
+            zh: 跳过质量控制步骤。
+            en: Skip quality control steps.
+        skip_trim (bool, optional):
+            zh: 跳过修剪步骤。
+            en: Skip trimming steps.
+        sra_ids (list[str], optional):
+            zh: NCBI SRA Accession ID 列表。
+            en: List of NCBI SRA Accession IDs.
+        step (str, optional):
+            zh: 仅运行特定步骤。
+            en: Run only specific steps.
+        qc_params (dict, optional):
+            zh: 额外的 QC 参数。
+            en: Additional QC parameters.
+        star_align (bool, optional):
+            zh: 启用 STAR 比对。
+            en: Enable STAR alignment.
+        theme (str, optional):
+            zh: 绘图主题。
+            en: Plotting theme.
     """
+
     def __init__(
         self,
         input_dir: Path | None,
@@ -74,7 +104,6 @@ class RNASeqPipeline:
 
         if not self.input_dir and not self.sra_ids and not self.step:
             raise ValueError("Either input_dir or sra_ids must be provided.")
-
 
     def run(self):
         logger.info("Starting RNA-Seq Analysis Pipeline...")

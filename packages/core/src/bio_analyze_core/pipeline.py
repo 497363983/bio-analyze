@@ -10,7 +10,10 @@ from .utils import safe_load_json, safe_save_json
 
 
 class Context(dict):
-    """用于共享数据的字典类对象。"""
+    """
+    zh: 用于在管道节点之间共享数据的上下文字典。
+    en: Context dictionary for sharing data between pipeline nodes.
+    """
 
     def __getattr__(self, item):
         try:
@@ -22,16 +25,31 @@ class Context(dict):
         self[key] = value
 
     def set_save_callback(self, callback):
+        """
+        zh: 设置保存状态的回调函数。
+        en: Set callback function for saving state.
+
+        Args:
+            callback (callable):
+                zh: 回调函数。
+                en: Callback function.
+        """
         self._save_callback = callback
 
     def checkpoint(self):
-        """保存流程的当前状态。"""
+        """
+        zh: 触发保存流程的当前状态（检查点）。
+        en: Trigger saving current pipeline state (checkpoint).
+        """
         if hasattr(self, "_save_callback") and self._save_callback:
             self._save_callback()
 
 
 class Progress:
-    """使用 rich 报告进度的类。"""
+    """
+    zh: 使用 rich 库报告任务进度的类。
+    en: Class for reporting task progress using rich library.
+    """
 
     def __init__(self):
         self._progress = RichProgress(
@@ -50,13 +68,35 @@ class Progress:
         self._progress.stop()
 
     def start_task(self, description: str, total: float = 100):
-        """开始一个带有描述的新任务。"""
+        """
+        zh: 开始一个带有描述的新任务。
+        en: Start a new task with description.
+
+        Args:
+            description (str):
+                zh: 任务描述。
+                en: Task description.
+            total (float, optional):
+                zh: 总进度值。默认为 100。
+                en: Total progress value. Defaults to 100.
+        """
         if self._task_id is not None:
             self._progress.remove_task(self._task_id)
         self._task_id = self._progress.add_task(description, total=total)
 
     def update(self, message: str = None, percentage: float = None):
-        """更新进度，包含消息和百分比 (0-100)。"""
+        """
+        zh: 更新当前任务的进度和消息。
+        en: Update progress and message of current task.
+
+        Args:
+            message (str, optional):
+                zh: 进度消息描述。
+                en: Progress message description.
+            percentage (float, optional):
+                zh: 完成百分比 (0-100)。
+                en: Completion percentage (0-100).
+        """
         if self._task_id is None:
             return
 
@@ -70,16 +110,59 @@ class Progress:
 
 
 class Node(ABC):
+    """
+    zh: 管道节点的抽象基类。
+    en: Abstract base class for pipeline nodes.
+
+    Attributes:
+        name (str):
+            zh: 节点名称。
+            en: Node name.
+    """
+
     def __init__(self, name: str):
         self.name = name
 
     @abstractmethod
     def run(self, context: Context, progress: Progress, logger: Any):
-        """执行节点逻辑。"""
+        """
+        zh: 执行节点逻辑。
+        en: Execute node logic.
+
+        Args:
+            context (Context):
+                zh: 管道上下文对象。
+                en: Pipeline context object.
+            progress (Progress):
+                zh: 进度报告器。
+                en: Progress reporter.
+            logger (Any):
+                zh: 日志记录器。
+                en: Logger instance.
+        """
         pass
 
 
 class Pipeline:
+    """
+    zh: 线性执行节点的管道类，支持状态保存和恢复。
+    en: Pipeline class for linear execution of nodes, supporting state saving and restoration.
+
+    Attributes:
+        name (str):
+            zh: 管道名称。
+            en: Pipeline name.
+        state_file (str):
+            zh: 状态文件路径。
+            en: Path to state file.
+        nodes (list[Node]):
+            zh: 节点列表。
+            en: List of nodes.
+        context (Context):
+            zh: 上下文数据。
+            en: Context data.
+    """
+
     def __init__(self, name: str, state_file: str):
         self.name = name
         self.state_file = state_file
@@ -89,6 +172,15 @@ class Pipeline:
         self._completed_nodes: list[str] = []
 
     def add_node(self, node: Node):
+        """
+        zh: 向管道添加节点。
+        en: Add a node to the pipeline.
+
+        Args:
+            node (Node):
+                zh: 要添加的节点实例。
+                en: Node instance to add.
+        """
         self.nodes.append(node)
 
     def _load_state(self):

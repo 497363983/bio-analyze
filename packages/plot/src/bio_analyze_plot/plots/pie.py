@@ -9,7 +9,10 @@ from .base import BasePlot, save_plot
 
 
 class PiePlot(BasePlot):
-    """饼图实现。"""
+    """
+    zh: 饼图实现。
+    en: Pie chart implementation.
+    """
 
     @save_plot
     def plot(
@@ -27,19 +30,43 @@ class PiePlot(BasePlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        绘制饼图。
+        zh: 绘制饼图。
+        en: Plot pie chart.
 
         Args:
-            data: 包含数据的 DataFrame。
-            x: 标签列名 (Categorical)。
-            y: 数值列名 (Numerical)。
-            title: 图表标题。
-            autopct: 百分比显示格式，例如 '%1.1f%%'。
-            startangle: 起始角度。
-            explode: 突出显示的切片。可以是列名（布尔值或数值），也可以是列表。
-            shadow: 是否显示阴影。
-            colors: 颜色列表。
-            output: 保存图表的路径。
+            data:
+                zh: 包含数据的 DataFrame。
+                en: DataFrame containing data.
+            x:
+                zh: 标签列名 (Categorical)。
+                en: Column name for labels (Categorical).
+            y:
+                zh: 数值列名 (Numerical)。
+                en: Column name for values (Numerical).
+            title:
+                zh: 图表标题。
+                en: Chart title.
+            autopct:
+                zh: 百分比显示格式，例如 '%1.1f%%'。
+                en: Percentage format string, e.g., '%1.1f%%'.
+            startangle:
+                zh: 起始角度。
+                en: Starting angle.
+            explode:
+                zh: 突出显示的切片。可以是列名（布尔值或数值），也可以是列表。
+                en: Slices to explode. Can be column name (boolean or numeric) or list.
+            shadow:
+                zh: 是否显示阴影。
+                en: Whether to show shadow.
+            colors:
+                zh: 颜色列表。
+                en: List of colors.
+            output:
+                zh: 保存图表的路径。
+                en: Path to save the chart.
+            **kwargs:
+                zh: 其他传递给 matplotlib.pyplot.pie 的参数。
+                en: Other arguments passed to matplotlib.pyplot.pie.
         """
         # 获取主题特定参数
         theme_params = self.get_chart_specific_params("pie")

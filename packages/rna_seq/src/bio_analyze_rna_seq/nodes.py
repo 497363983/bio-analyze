@@ -15,7 +15,27 @@ from .sra import SRAManager
 
 
 class CheckDependenciesNode(Node):
+    """
+    zh: 检查外部依赖工具节点。
+    en: Node to check for external dependency tools.
+    """
+
     def run(self, context: Context, progress: Progress, logger):
+        """
+        zh: 执行依赖检查。
+        en: Execute dependency check.
+
+        Args:
+            context (Context):
+                zh: 流转上下文。
+                en: Execution context.
+            progress (Progress):
+                zh: 进度管理器。
+                en: Progress manager.
+            logger (Logger):
+                zh: 日志记录器。
+                en: Logger instance.
+        """
         step = context.get("step")
         star_align = context.get("star_align", False)
 
@@ -55,7 +75,16 @@ class CheckDependenciesNode(Node):
 
 
 class SRADownloadNode(Node):
+    """
+    zh: SRA 数据下载节点。
+    en: SRA data download node.
+    """
+
     def run(self, context: Context, progress: Progress, logger):
+        """
+        zh: 执行 SRA 数据下载。
+        en: Execute SRA data download.
+        """
         if context.get("sra_ids"):
             logger.info("Downloading SRA Data")
             sra_dir = context.output_dir / "raw_data"
@@ -89,7 +118,16 @@ class SRADownloadNode(Node):
 
 
 class GenomePrepNode(Node):
+    """
+    zh: 基因组准备节点。
+    en: Genome preparation node.
+    """
+
     def run(self, context: Context, progress: Progress, logger):
+        """
+        zh: 执行基因组准备。
+        en: Execute genome preparation.
+        """
         logger.info("Genome Preparation")
         genome_mgr = GenomeManager(
             species=context.species,
@@ -102,7 +140,16 @@ class GenomePrepNode(Node):
 
 
 class QCNode(Node):
+    """
+    zh: 质量控制节点。
+    en: Quality control node.
+    """
+
     def run(self, context: Context, progress: Progress, logger):
+        """
+        zh: 执行质量控制和修剪。
+        en: Execute quality control and trimming.
+        """
         logger.info("Quality Control & Trimming")
         qc_mgr = QCManager(
             input_dir=context.input_dir,
@@ -114,15 +161,19 @@ class QCNode(Node):
         )
         clean_reads = qc_mgr.run()
         context.clean_reads = clean_reads
-        # We might want to store qc_stats if QCManager returns it, but currently it returns clean_reads
-        # If we need qc_stats later for report, we might need to parse it or have QCManager return it.
-        # Original code didn't explicitly pass qc_stats to context from here,
-        # but ReportGenerator tried to use it.
-        # For now, we stick to clean_reads.
 
 
 class StarAlignNode(Node):
+    """
+    zh: STAR 比对节点。
+    en: STAR alignment node.
+    """
+
     def run(self, context: Context, progress: Progress, logger):
+        """
+        zh: 执行 STAR 比对。
+        en: Execute STAR alignment.
+        """
         logger.info("STAR Alignment & Chromosome Distribution")
 
         ref_info = context.get("ref_info")
@@ -178,7 +229,16 @@ class StarAlignNode(Node):
 
 
 class QuantNode(Node):
+    """
+    zh: 定量节点。
+    en: Quantification node.
+    """
+
     def run(self, context: Context, progress: Progress, logger):
+        """
+        zh: 执行 Salmon 定量。
+        en: Execute Salmon quantification.
+        """
         logger.info("Quantification")
 
         ref_info = context.get("ref_info")
@@ -234,7 +294,16 @@ class QuantNode(Node):
 
 
 class DENode(Node):
+    """
+    zh: 差异表达分析节点。
+    en: Differential expression analysis node.
+    """
+
     def run(self, context: Context, progress: Progress, logger):
+        """
+        zh: 执行差异表达分析。
+        en: Execute differential expression analysis.
+        """
         logger.info("Differential Expression Analysis")
 
         counts_matrix = context.get("counts_matrix")
@@ -257,7 +326,16 @@ class DENode(Node):
 
 
 class EnrichmentNode(Node):
+    """
+    zh: 富集分析节点。
+    en: Enrichment analysis node.
+    """
+
     def run(self, context: Context, progress: Progress, logger):
+        """
+        zh: 执行富集分析。
+        en: Execute enrichment analysis.
+        """
         logger.info("Enrichment Analysis")
 
         de_results = context.get("de_results")
@@ -287,7 +365,16 @@ class EnrichmentNode(Node):
 
 
 class ReportNode(Node):
+    """
+    zh: 报告生成节点。
+    en: Report generation node.
+    """
+
     def run(self, context: Context, progress: Progress, logger):
+        """
+        zh: 执行报告生成。
+        en: Execute report generation.
+        """
         logger.info("Generating Report")
 
         counts_matrix = context.get("counts_matrix")

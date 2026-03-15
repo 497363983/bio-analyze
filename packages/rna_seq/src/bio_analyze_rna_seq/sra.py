@@ -8,20 +8,55 @@ logger = get_logger(__name__)
 
 
 class SRAManager:
+    """
+    zh: SRA 数据管理器。
+    en: SRA data manager.
+    """
+
     def __init__(self, output_dir: Path, threads: int = 4):
+        """
+        zh: 初始化 SRA 数据管理器。
+        en: Initialize the SRA data manager.
+
+        Args:
+            output_dir (Path):
+                zh: 输出目录路径。
+                en: Path to the output directory.
+            threads (int, optional):
+                zh: 使用的线程数。
+                en: Number of threads to use.
+        """
         self.output_dir = output_dir
         self.threads = threads
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
     def check_dependencies(self):
-        """检查 sra-tools 是否可用。"""
+        """
+        zh: 检查 sra-tools 是否可用。
+        en: Check if sra-tools are available.
+
+        Raises:
+            RuntimeError:
+                zh: 如果未找到 prefetch 或 fasterq-dump。
+                en: If prefetch or fasterq-dump is not found.
+        """
         if not shutil.which("prefetch") or not shutil.which("fasterq-dump"):
             raise RuntimeError("sra-tools (prefetch, fasterq-dump) not found in PATH.")
 
     def download(self, sra_ids: list[str]) -> Path:
         """
-        下载 SRA 数据并转换为 FASTQ。
-        返回包含下载的 FASTQ 文件的目录。
+        zh: 下载 SRA 数据并转换为 FASTQ。
+        en: Download SRA data and convert to FASTQ.
+
+        Args:
+            sra_ids (list[str]):
+                zh: SRA ID 列表。
+                en: List of SRA IDs.
+
+        Returns:
+            Path:
+                zh: 包含下载的 FASTQ 文件的目录。
+                en: Directory containing downloaded FASTQ files.
         """
         self.check_dependencies()
 
@@ -33,7 +68,15 @@ class SRAManager:
         return self.output_dir
 
     def process_single_sra(self, sra_id: str):
-        """处理单个 SRA ID: prefetch -> fasterq-dump。"""
+        """
+        zh: 处理单个 SRA ID: prefetch -> fasterq-dump。
+        en: Process a single SRA ID: prefetch -> fasterq-dump.
+
+        Args:
+            sra_id (str):
+                zh: SRA ID。
+                en: SRA ID.
+        """
         # 检查文件是否已存在
         # fasterq-dump 输出格式: {sra_id}_1.fastq, {sra_id}_2.fastq (双端) 或 {sra_id}.fastq (单端)
         # 我们查找以 sra_id 开头的 .fastq 文件
@@ -114,7 +157,15 @@ class SRAManager:
             raise
 
     def _compress_fastq(self, sra_id: str):
-        """将生成的 .fastq 文件压缩为 .fastq.gz。"""
+        """
+        zh: 将生成的 .fastq 文件压缩为 .fastq.gz。
+        en: Compress generated .fastq files to .fastq.gz.
+
+        Args:
+            sra_id (str):
+                zh: SRA ID。
+                en: SRA ID.
+        """
         logger.info(f"Compressing FASTQ files for {sra_id}...")
         fastqs = list(self.output_dir.glob(f"{sra_id}*.fastq"))
 

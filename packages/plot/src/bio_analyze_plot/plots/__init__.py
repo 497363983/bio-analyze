@@ -1,3 +1,8 @@
+"""
+zh: 图表类集合。
+en: Collection of chart classes.
+"""
+
 from .bar import BarPlot
 from .base import BasePlot
 from .box import BoxPlot

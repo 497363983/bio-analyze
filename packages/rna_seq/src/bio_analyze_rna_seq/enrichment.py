@@ -17,16 +17,27 @@ def calculate_running_es(
     weighted_score_type: float = 1.0,
 ) -> tuple[np.ndarray, np.ndarray]:
     """
-    计算 GSEA 运行富集评分。
+    zh: 计算 GSEA 运行富集评分。
+    en: Calculate GSEA running enrichment score.
 
     Args:
-        ranked_genes: 按指标排序的基因名称列表。
-        gene_set: 目标基因集中的基因列表。
-        ranking_metrics: 对应于 ranked_genes 的排序指标数组。
-        weighted_score_type: 排序指标的权重（默认为 1.0）。
+        ranked_genes (list[str]):
+            zh: 按指标排序的基因名称列表。
+            en: List of gene names sorted by metric.
+        gene_set (list[str]):
+            zh: 目标基因集中的基因列表。
+            en: List of genes in the target gene set.
+        ranking_metrics (np.ndarray):
+            zh: 对应于 ranked_genes 的排序指标数组。
+            en: Array of ranking metrics corresponding to ranked_genes.
+        weighted_score_type (float, optional):
+            zh: 排序指标的权重（默认为 1.0）。
+            en: Weight of ranking metric (default is 1.0).
 
     Returns:
-        tuple: (running_es_array, hits_boolean_array)
+        tuple[np.ndarray, np.ndarray]:
+            zh: (running_es_array, hits_boolean_array)
+            en: (running_es_array, hits_boolean_array)
     """
     N = len(ranked_genes)
     # 命中的布尔数组
@@ -61,7 +72,30 @@ def calculate_running_es(
 
 
 class EnrichmentManager:
+    """
+    zh: 富集分析管理器。
+    en: Enrichment analysis manager.
+    """
+
     def __init__(self, de_results: pd.DataFrame, species: str | None, output_dir: Path, theme: str = "default"):
+        """
+        zh: 初始化富集分析管理器。
+        en: Initialize the enrichment analysis manager.
+
+        Args:
+            de_results (pd.DataFrame):
+                zh: 差异表达分析结果 DataFrame。
+                en: Differential expression analysis results DataFrame.
+            species (str | None):
+                zh: 物种名称（例如 'Homo sapiens'）。
+                en: Species name (e.g., 'Homo sapiens').
+            output_dir (Path):
+                zh: 输出目录路径。
+                en: Path to the output directory.
+            theme (str, optional):
+                zh: 绘图主题。
+                en: Plotting theme.
+        """
         self.de_results = de_results
         self.species = species
         self.output_dir = output_dir
@@ -69,6 +103,15 @@ class EnrichmentManager:
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
     def run(self) -> dict:
+        """
+        zh: 运行富集分析 (GO/KEGG)。
+        en: Run enrichment analysis (GO/KEGG).
+
+        Returns:
+            dict:
+                zh: 包含每个库的富集结果的字典。
+                en: Dictionary containing enrichment results for each library.
+        """
         if not self.species:
             logger.warning("No species provided. Skipping enrichment analysis.")
             return {}
@@ -123,16 +166,27 @@ class EnrichmentManager:
         plot_categories: list[str] | None = None,
     ) -> dict[str, Path]:
         """
-        运行 GSEA 分析。
+        zh: 运行 GSEA 分析。
+        en: Run GSEA analysis.
 
         Args:
-            gene_sets: 基因集库名称（例如 'KEGG_2021_Human'）或基因集列表。
-            ranking_metric: 用于排序的列。'auto' 尝试 'stat'，然后根据 pvalue/log2fc 计算。
-            top_n_plot: 要绘制的顶部通路数量。
-            plot_categories: 要绘制的特定类别（术语）。
+            gene_sets (str | list[str], optional):
+                zh: 基因集库名称（例如 'KEGG_2021_Human'）或基因集列表。
+                en: Gene set library name (e.g. 'KEGG_2021_Human') or list of gene sets.
+            ranking_metric (str, optional):
+                zh: 用于排序的列。'auto' 尝试 'stat'，然后根据 pvalue/log2fc 计算。
+                en: Column used for ranking. 'auto' tries 'stat', then calculates from pvalue/log2fc.
+            top_n_plot (int, optional):
+                zh: 要绘制的顶部通路数量。
+                en: Number of top pathways to plot.
+            plot_categories (list[str] | None, optional):
+                zh: 要绘制的特定类别（术语）。
+                en: Specific categories (terms) to plot.
 
         Returns:
-            dict[str, Path]: 术语名称到生成的绘图文件路径的映射。
+            dict[str, Path]:
+                zh: 术语名称到生成的绘图文件路径的映射。
+                en: Mapping of term names to generated plot file paths.
         """
         if not self.species:
             logger.warning("No species provided. Skipping GSEA.")

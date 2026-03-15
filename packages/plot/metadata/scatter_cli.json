@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Input file path (CSV, TSV, or Excel).",
+        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output file path.",
+        "zh": "输出文件路径。",
         "en": "Output file path."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Column name for X-axis.",
+        "zh": "X 轴列名。",
         "en": "Column name for X-axis."
       }
     },
@@ -42,7 +42,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Column name for Y-axis.",
+        "zh": "Y 轴列名。",
         "en": "Column name for Y-axis."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Grouping column name (hue).",
+        "zh": "分组列名 (hue)。",
         "en": "Grouping column name (hue)."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Column name for marker style.",
+        "zh": "标记样式列名。",
         "en": "Column name for marker style."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Column name for marker size.",
+        "zh": "标记大小列名。",
         "en": "Column name for marker size."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Plot title.",
+        "zh": "图表标题。",
         "en": "Plot title."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "Draw confidence ellipses for each group.",
+        "zh": "为每个分组绘制置信椭圆。",
         "en": "Draw confidence ellipses for each group."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": "2.0",
       "description": {
-        "zh": "Standard deviation for confidence ellipses.",
+        "zh": "置信椭圆的标准差。",
         "en": "Standard deviation for confidence ellipses."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Sheet name for Excel files.",
+        "zh": "Excel 工作表名称。",
         "en": "Sheet name for Excel files."
       }
     }

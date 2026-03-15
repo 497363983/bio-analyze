@@ -34,8 +34,27 @@ logger = get_logger(__name__)
 
 def prepare_ligand(input_file: Path, output_file: Path, add_hydrogens: bool = True) -> Path:
     """
-    准备配体用于对接 (SDF/SMILES -> PDBQT)。
+    zh: 准备配体用于对接 (SDF/SMILES -> PDBQT)。
+    en: Prepare ligand for docking (SDF/SMILES -> PDBQT).
+
     使用 RDKit 生成 3D 结构，使用 Meeko 转换为 PDBQT 格式。
+    Uses RDKit to generate 3D structure, and Meeko to convert to PDBQT format.
+
+    Args:
+        input_file (Path):
+            zh: 输入配体文件路径 (SDF, MOL2, PDB, SMI)。
+            en: Path to input ligand file (SDF, MOL2, PDB, SMI).
+        output_file (Path):
+            zh: 输出 PDBQT 文件路径。
+            en: Path to output PDBQT file.
+        add_hydrogens (bool, optional):
+            zh: 是否自动添加氢原子并生成 3D 构象。默认为 True。
+            en: Whether to automatically add hydrogens and generate 3D conformation. Defaults to True.
+
+    Returns:
+        Path:
+            zh: 生成的 PDBQT 文件路径。
+            en: Path to generated PDBQT file.
     """
     input_file = Path(input_file)
     output_file = Path(output_file)
@@ -94,18 +113,39 @@ def prepare_receptor(
     charge_model: str = "gasteiger",
 ) -> Path:
     """
-    准备受体用于对接 (PDB -> PDBQT)。
-    使用 PDBFixer 修复结构，PropKa 进行 pKa 分析，
-    并使用 Meeko 转换为 PDBQT 格式。
+    zh: 准备受体用于对接 (PDB -> PDBQT)。
+    en: Prepare receptor for docking (PDB -> PDBQT).
+
+    使用 PDBFixer 修复结构，PropKa 进行 pKa 分析，并使用 Meeko 转换为 PDBQT 格式。
+    Uses PDBFixer to repair structure, PropKa for pKa analysis, and Meeko to convert to PDBQT format.
 
     Args:
-        input_file: 输入 PDB 文件路径
-        output_file: 输出 PDBQT 文件路径
-        add_hydrogens: 是否加氢
-        ph: 质子化状态计算的 pH 值
-        keep_water: 是否保留结晶水
-        rigid_macrocycles: 是否将大环视为刚性
-        charge_model: Meeko 的电荷模型 (例如 'gasteiger', 'zero', 'scikit_learn')。
+        input_file (Path):
+            zh: 输入 PDB 文件路径。
+            en: Path to input PDB file.
+        output_file (Path):
+            zh: 输出 PDBQT 文件路径。
+            en: Path to output PDBQT file.
+        add_hydrogens (bool, optional):
+            zh: 是否加氢。默认为 True。
+            en: Whether to add hydrogens. Defaults to True.
+        ph (float, optional):
+            zh: 质子化状态计算的 pH 值。默认为 7.4。
+            en: pH value for protonation state calculation. Defaults to 7.4.
+        keep_water (bool, optional):
+            zh: 是否保留结晶水。默认为 False。
+            en: Whether to keep crystal water. Defaults to False.
+        rigid_macrocycles (bool, optional):
+            zh: 是否将大环视为刚性。默认为 True。
+            en: Whether to treat macrocycles as rigid. Defaults to True.
+        charge_model (str, optional):
+            zh: Meeko 的电荷模型 (例如 'gasteiger', 'zero', 'scikit_learn')。默认为 'gasteiger'。
+            en: Charge model for Meeko (e.g. 'gasteiger', 'zero', 'scikit_learn'). Defaults to 'gasteiger'.
+
+    Returns:
+        Path:
+            zh: 生成的 PDBQT 文件路径。
+            en: Path to generated PDBQT file.
     """
     input_file = Path(input_file)
     output_file = Path(output_file)
@@ -315,8 +355,29 @@ def prepare_receptor(
 
 def get_box_from_ligand(ligand_file: Path, padding: float = 4.0) -> tuple[list[float], list[float]]:
     """
-    根据参考配体计算网格盒中心和大小。
-    Returns: (center, size)
+    zh: 根据参考配体计算网格盒中心和大小。
+    en: Calculate grid box center and size from reference ligand.
+
+    Args:
+        ligand_file (Path):
+            zh: 配体文件路径。
+            en: Path to ligand file.
+        padding (float, optional):
+            zh: 额外的填充 (Angstrom)。默认为 4.0。
+            en: Extra padding (Angstrom). Defaults to 4.0.
+
+    Returns:
+        tuple[list[float], list[float]]:
+            zh: (中心, 大小) 列表。
+            en: (center, size) lists.
+
+    Raises:
+        FileNotFoundError:
+            zh: 如果配体文件不存在。
+            en: If ligand file does not exist.
+        ValueError:
+            zh: 如果无法读取配体坐标。
+            en: If ligand coordinates cannot be read.
     """
     ligand_file = Path(ligand_file)
     if not ligand_file.exists():
@@ -376,14 +437,29 @@ def get_box_from_ligand(ligand_file: Path, padding: float = 4.0) -> tuple[list[f
 
 def get_box_from_receptor(receptor_file: Path, padding: float = 0.0) -> tuple[list[float], list[float]]:
     """
-    根据受体计算最小外接盒中心和大小。
+    zh: 根据受体计算最小外接盒中心和大小。
+    en: Calculate bounding box center and size from receptor.
 
     Args:
-        receptor_file: 受体文件路径 (PDB/PDBQT)。
-        padding: 额外的填充 (Angstrom)。
+        receptor_file (Path):
+            zh: 受体文件路径 (PDB/PDBQT)。
+            en: Path to receptor file (PDB/PDBQT).
+        padding (float, optional):
+            zh: 额外的填充 (Angstrom)。默认为 0.0。
+            en: Extra padding (Angstrom). Defaults to 0.0.
 
     Returns:
-        (center, size)
+        tuple[list[float], list[float]]:
+            zh: (中心, 大小) 列表。
+            en: (center, size) lists.
+
+    Raises:
+        FileNotFoundError:
+            zh: 如果受体文件不存在。
+            en: If receptor file does not exist.
+        ValueError:
+            zh: 如果无法解析受体坐标。
+            en: If receptor coordinates cannot be parsed.
     """
     receptor_file = Path(receptor_file)
     if not receptor_file.exists():

@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Input file path (CSV, TSV, or Excel).",
+        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output file path.",
+        "zh": "输出文件路径。",
         "en": "Output file path."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": "chrom",
       "description": {
-        "zh": "Column name for chromosome.",
+        "zh": "染色体列名。",
         "en": "Column name for chromosome."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "pos",
       "description": {
-        "zh": "Column name for position.",
+        "zh": "位置列名。",
         "en": "Column name for position."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "pos_counts",
       "description": {
-        "zh": "Column name for positive strand counts.",
+        "zh": "正链计数列名。",
         "en": "Column name for positive strand counts."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": "neg_counts",
       "description": {
-        "zh": "Column name for negative strand counts.",
+        "zh": "负链计数列名。",
         "en": "Column name for negative strand counts."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Plot title.",
+        "zh": "图表标题。",
         "en": "Plot title."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Sheet name for Excel files.",
+        "zh": "Excel 工作表名称。",
         "en": "Sheet name for Excel files."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "24",
       "description": {
-        "zh": "Maximum number of chromosomes to display.",
+        "zh": "显示的最大染色体数量。",
         "en": "Maximum number of chromosomes to display."
       }
     }

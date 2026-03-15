@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "List of SRA Accession IDs.",
+        "zh": "SRA Accession ID 列表。",
         "en": "List of SRA Accession IDs."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output directory.",
+        "zh": "输出目录。",
         "en": "Output directory."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": "4",
       "description": {
-        "zh": "Number of threads.",
+        "zh": "线程数。",
         "en": "Number of threads."
       }
     }

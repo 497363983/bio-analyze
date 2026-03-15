@@ -13,7 +13,7 @@
       "default": null,
       "description": {
         "zh": "输入配体文件 (SDF, SMILES, PDB)。",
-        "en": "输入配体文件 (SDF, SMILES, PDB)。"
+        "en": "Input ligand file (SDF, SMILES, PDB)."
       }
     },
     {
@@ -23,7 +23,7 @@
       "default": null,
       "description": {
         "zh": "输出 PDBQT 文件。",
-        "en": "输出 PDBQT 文件。"
+        "en": "Output PDBQT file."
       }
     },
     {
@@ -33,7 +33,7 @@
       "default": "True",
       "description": {
         "zh": "添加氢原子。",
-        "en": "添加氢原子。"
+        "en": "Add hydrogens."
       }
     }
   ]

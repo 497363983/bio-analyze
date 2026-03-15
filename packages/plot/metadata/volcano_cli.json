@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Input file path (CSV, TSV, or Excel).",
+        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output file path (e.g. volcano.png).",
+        "zh": "输出文件路径 (例如 volcano.png)。",
         "en": "Output file path (e.g. volcano.png)."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": "log2FoldChange",
       "description": {
-        "zh": "Column name for log2 fold change.",
+        "zh": "log2 fold change 列名。",
         "en": "Column name for log2 fold change."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "pvalue",
       "description": {
-        "zh": "Column name for p-value.",
+        "zh": "p-value 列名。",
         "en": "Column name for p-value."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": "1.0",
       "description": {
-        "zh": "Fold change cutoff.",
+        "zh": "Fold change 截断值。",
         "en": "Fold change cutoff."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": "0.05",
       "description": {
-        "zh": "P-value cutoff.",
+        "zh": "P-value 截断值。",
         "en": "P-value cutoff."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Plot title.",
+        "zh": "图表标题。",
         "en": "Plot title."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Sheet name for Excel files.",
+        "zh": "Excel 工作表名称。",
         "en": "Sheet name for Excel files."
       }
     }

@@ -14,6 +14,11 @@ logger = get_logger(__name__)
 
 
 class ReportGenerator:
+    """
+    zh: 报告生成器。
+    en: Report generator.
+    """
+
     def __init__(
         self,
         output_dir: Path,
@@ -24,6 +29,33 @@ class ReportGenerator:
         gsea_plots: dict[str, Path] | None = None,
         theme: str = "default",
     ):
+        """
+        zh: 初始化报告生成器。
+        en: Initialize the report generator.
+
+        Args:
+            output_dir (Path):
+                zh: 输出目录路径。
+                en: Path to the output directory.
+            qc_stats (dict):
+                zh: QC 统计信息字典。
+                en: Dictionary of QC statistics.
+            counts (pd.DataFrame):
+                zh: 计数矩阵。
+                en: Counts matrix.
+            de_results (pd.DataFrame):
+                zh: 差异表达分析结果。
+                en: Differential expression analysis results.
+            enrich_results (dict):
+                zh: 富集分析结果。
+                en: Enrichment analysis results.
+            gsea_plots (dict[str, Path] | None, optional):
+                zh: GSEA 绘图路径字典。
+                en: Dictionary of GSEA plot paths.
+            theme (str, optional):
+                zh: 绘图主题。
+                en: Plotting theme.
+        """
         self.output_dir = output_dir
         self.qc_stats = qc_stats
         self.counts = counts
@@ -36,6 +68,13 @@ class ReportGenerator:
         self.plots_dir.mkdir(parents=True, exist_ok=True)
 
     def generate(self):
+        """
+        zh: 生成 HTML 报告。
+        en: Generate HTML report.
+
+        zh: 包括 PCA、火山图、热图、差异表达基因表和富集分析结果。
+        en: Includes PCA, volcano plot, heatmap, differential expression gene table, and enrichment analysis results.
+        """
         logger.info("Generating report...")
 
         # 1. 生成 PCA 图
@@ -84,6 +123,15 @@ class ReportGenerator:
         logger.info(f"Report generated at {self.output_dir / 'report.html'}")
 
     def _generate_pca(self) -> Path:
+        """
+        zh: 生成 PCA 图。
+        en: Generate PCA plot.
+
+        Returns:
+            Path:
+                zh: PCA 图文件路径。
+                en: Path to PCA plot file.
+        """
         # 对数转换
         log_counts = np.log1p(self.counts)
 
@@ -109,6 +157,15 @@ class ReportGenerator:
         return out_path
 
     def _generate_volcano(self) -> Path:
+        """
+        zh: 生成火山图。
+        en: Generate volcano plot.
+
+        Returns:
+            Path:
+                zh: 火山图文件路径。
+                en: Path to volcano plot file.
+        """
         # 使用 bio_plot VolcanoPlot
         # 假设 de_results 有 'log2FoldChange' 和 'padj' 或 'pvalue'
         # 如果需要，重置索引以获取基因名称，但 VolcanoPlot 接受 dataframe
@@ -129,6 +186,15 @@ class ReportGenerator:
         return out_path
 
     def _generate_heatmap(self) -> Path:
+        """
+        zh: 生成热图。
+        en: Generate heatmap.
+
+        Returns:
+            Path:
+                zh: 热图文件路径。
+                en: Path to heatmap file.
+        """
         # 前 50 个高变基因或前 50 个差异表达基因
         # 这里取前 50 个显著差异表达基因
         sig_genes = self.de_results[self.de_results["padj"] < 0.05].sort_values("padj").head(50).index
@@ -154,7 +220,15 @@ class ReportGenerator:
         return out_path
 
     def _process_gsea_plots(self) -> dict[str, str]:
-        """Process GSEA plots and return relative paths."""
+        """
+        zh: 处理 GSEA 图并返回相对路径。
+        en: Process GSEA plots and return relative paths.
+
+        Returns:
+            dict[str, str]:
+                zh: 术语到相对路径的映射。
+                en: Mapping of terms to relative paths.
+        """
         processed_plots = {}
         if not self.gsea_plots:
             return processed_plots

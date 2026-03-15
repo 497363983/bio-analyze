@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Input file path (CSV, TSV, or Excel).",
+        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output file path.",
+        "zh": "输出文件路径。",
         "en": "Output file path."
       }
     },
@@ -32,8 +32,28 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Grouping column name (hue).",
+        "zh": "分组列名 (hue)。",
         "en": "Grouping column name (hue)."
+      }
+    },
+    {
+      "name": "--style",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "标记样式列名。",
+        "en": "Column name for marker style."
+      }
+    },
+    {
+      "name": "--size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "标记大小列名。",
+        "en": "Column name for marker size."
       }
     },
     {
@@ -42,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Column to use as index (e.g. gene names).",
+        "zh": "用作索引的列 (例如基因名)。",
         "en": "Column to use as index (e.g. gene names)."
       }
     },
@@ -52,7 +72,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "Transpose input data (default: True, assumes Genes x Samples).",
+        "zh": "转置输入数据 (默认: True, 假设 Genes x Samples)。",
         "en": "Transpose input data (default: True, assumes Genes x Samples)."
       }
     },
@@ -62,7 +82,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -72,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Plot title.",
+        "zh": "图表标题。",
         "en": "Plot title."
       }
     },
@@ -82,7 +102,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "Perform KMeans clustering.",
+        "zh": "执行 KMeans 聚类。",
         "en": "Perform KMeans clustering."
       }
     },
@@ -92,8 +112,28 @@
       "required": false,
       "default": "3",
       "description": {
-        "zh": "Number of clusters for KMeans.",
+        "zh": "KMeans 聚类的簇数。",
         "en": "Number of clusters for KMeans."
+      }
+    },
+    {
+      "name": "--add-ellipse",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "为每个分组绘制置信椭圆。",
+        "en": "Draw confidence ellipses for each group."
+      }
+    },
+    {
+      "name": "--ellipse-std",
+      "type": "float",
+      "required": false,
+      "default": "2.0",
+      "description": {
+        "zh": "置信椭圆的标准差。",
+        "en": "Standard deviation for confidence ellipses."
       }
     },
     {
@@ -102,7 +142,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Sheet name for Excel files.",
+        "zh": "Excel 工作表名称。",
         "en": "Sheet name for Excel files."
       }
     }

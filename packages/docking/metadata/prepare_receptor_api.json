@@ -2,8 +2,8 @@
   "name": "prepare_receptor",
   "type": "api",
   "description": {
-    "zh": "准备受体用于对接 (PDB -> PDBQT)。\n使用 PDBFixer 修复结构，PropKa 进行 pKa 分析，\n并使用 Meeko 转换为 PDBQT 格式。",
-    "en": "准备受体用于对接 (PDB -> PDBQT)。\n使用 PDBFixer 修复结构，PropKa 进行 pKa 分析，\n并使用 Meeko 转换为 PDBQT 格式。"
+    "zh": "准备受体用于对接 (PDB -> PDBQT)。",
+    "en": "Prepare receptor for docking (PDB -> PDBQT).\n\n使用 PDBFixer 修复结构，PropKa 进行 pKa 分析，并使用 Meeko 转换为 PDBQT 格式。\nUses PDBFixer to repair structure, PropKa for pKa analysis, and Meeko to convert to PDBQT format."
   },
   "params": [
     {
@@ -12,8 +12,8 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输入 PDB 文件路径",
-        "en": "输入 PDB 文件路径"
+        "zh": "输入 PDB 文件路径。",
+        "en": "Path to input PDB file."
       }
     },
     {
@@ -22,8 +22,8 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输出 PDBQT 文件路径",
-        "en": "输出 PDBQT 文件路径"
+        "zh": "输出 PDBQT 文件路径。",
+        "en": "Path to output PDBQT file."
       }
     },
     {
@@ -32,8 +32,8 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "是否加氢",
-        "en": "是否加氢"
+        "zh": "是否加氢。默认为 True。",
+        "en": "Whether to add hydrogens. Defaults to True."
       }
     },
     {
@@ -42,8 +42,8 @@
       "required": false,
       "default": "7.4",
       "description": {
-        "zh": "质子化状态计算的 pH 值",
-        "en": "质子化状态计算的 pH 值"
+        "zh": "质子化状态计算的 pH 值。默认为 7.4。",
+        "en": "pH value for protonation state calculation. Defaults to 7.4."
       }
     },
     {
@@ -52,8 +52,8 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "是否保留结晶水",
-        "en": "是否保留结晶水"
+        "zh": "是否保留结晶水。默认为 False。",
+        "en": "Whether to keep crystal water. Defaults to False."
       }
     },
     {
@@ -62,8 +62,8 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "是否将大环视为刚性",
-        "en": "是否将大环视为刚性"
+        "zh": "是否将大环视为刚性。默认为 True。",
+        "en": "Whether to treat macrocycles as rigid. Defaults to True."
       }
     },
     {
@@ -72,8 +72,8 @@
       "required": false,
       "default": "gasteiger",
       "description": {
-        "zh": "Meeko 的电荷模型 (例如 'gasteiger', 'zero', 'scikit_learn')。",
-        "en": "Meeko 的电荷模型 (例如 'gasteiger', 'zero', 'scikit_learn')。"
+        "zh": "Meeko 的电荷模型 (例如 'gasteiger', 'zero', 'scikit_learn')。默认为 'gasteiger'。",
+        "en": "Charge model for Meeko (e.g. 'gasteiger', 'zero', 'scikit_learn'). Defaults to 'gasteiger'."
       }
     }
   ]

@@ -11,6 +11,11 @@ logger = get_logger(__name__)
 
 
 class QCManager:
+    """
+    zh: 质量控制管理器。
+    en: Quality control manager.
+    """
+
     def __init__(
         self,
         input_dir: Path,
@@ -34,6 +39,72 @@ class QCManager:
         dedup: bool = False,
         poly_g_min_len: int | None = None,
     ):
+        """
+        zh: 初始化质量控制管理器。
+        en: Initialize the quality control manager.
+
+        Args:
+            input_dir (Path):
+                zh: 输入目录路径。
+                en: Path to the input directory.
+            output_dir (Path):
+                zh: 输出目录路径。
+                en: Path to the output directory.
+            threads (int, optional):
+                zh: 使用的线程数。
+                en: Number of threads to use.
+            skip_qc (bool, optional):
+                zh: 跳过质量控制步骤。
+                en: Skip the quality control step.
+            skip_trim (bool, optional):
+                zh: 跳过修剪步骤。
+                en: Skip the trimming step.
+            qualified_quality_phred (int | None, optional):
+                zh: 碱基合格的质量值。
+                en: The quality value that a base is qualified.
+            unqualified_percent_limit (int | None, optional):
+                zh: 允许的不合格碱基百分比限制。
+                en: Unqualified percent limit.
+            n_base_limit (int | None, optional):
+                zh: 允许的 N 碱基数量限制。
+                en: N base limit.
+            length_required (int | None, optional):
+                zh: 需要的最小长度。
+                en: Length required.
+            max_len1 (int | None, optional):
+                zh: Read1 的最大长度。
+                en: Max length for read1.
+            max_len2 (int | None, optional):
+                zh: Read2 的最大长度。
+                en: Max length for read2.
+            adapter_sequence (str | None, optional):
+                zh: Read1 的接头序列。
+                en: Adapter sequence for read1.
+            adapter_sequence_r2 (str | None, optional):
+                zh: Read2 的接头序列。
+                en: Adapter sequence for read2.
+            trim_front1 (int | None, optional):
+                zh: Read1 前端修剪碱基数。
+                en: Trimming how many bases in front for read1.
+            trim_tail1 (int | None, optional):
+                zh: Read1 后端修剪碱基数。
+                en: Trimming how many bases in tail for read1.
+            cut_right (bool, optional):
+                zh: 启用右侧滑动窗口修剪。
+                en: Enable cut_right (sliding window trimming).
+            cut_window_size (int | None, optional):
+                zh: 右侧修剪的窗口大小。
+                en: Window size for cut_right.
+            cut_mean_quality (int | None, optional):
+                zh: 右侧修剪的平均质量要求。
+                en: Mean quality requirement for cut_right.
+            dedup (bool, optional):
+                zh: 启用去重。
+                en: Enable deduplication.
+            poly_g_min_len (int | None, optional):
+                zh: PolyG 尾部修剪的最小长度。
+                en: Minimum length for polyG tail trimming.
+        """
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.threads = threads
@@ -58,8 +129,13 @@ class QCManager:
 
     def run(self) -> dict[str, dict]:
         """
-        运行 QC 和修剪。
-        返回一个映射 sample_name -> {"R1": path, "R2": path} 的字典
+        zh: 运行 QC 和修剪。
+        en: Run QC and trimming.
+
+        Returns:
+            dict[str, dict]:
+                zh: 一个映射 sample_name -> {"R1": path, "R2": path} 的字典。
+                en: A dictionary mapping sample_name -> {"R1": path, "R2": path}.
         """
         if self.skip_qc and self.skip_trim:
             logger.info("Skipping QC and Trimming steps.")
@@ -188,8 +264,18 @@ class QCManager:
 
     def _detect_files(self, directory: Path) -> dict[str, dict]:
         """
-        检测双端或单端 FastQ 文件。
-        返回: {sample_name: {"R1": path, "R2": path}}
+        zh: 检测双端或单端 FastQ 文件。
+        en: Detect paired-end or single-end FastQ files.
+
+        Args:
+            directory (Path):
+                zh: 目录路径。
+                en: Directory path.
+
+        Returns:
+            dict[str, dict]:
+                zh: {sample_name: {"R1": path, "R2": path}}
+                en: {sample_name: {"R1": path, "R2": path}}
         """
         files = sorted(list(directory.glob("*.fastq.gz")) + list(directory.glob("*.fq.gz")))
         samples = defaultdict(dict)
@@ -212,6 +298,18 @@ class QCManager:
         return dict(samples)
 
     def get_stats(self) -> dict:
+        """
+        zh: 获取 QC 统计信息。
+        en: Get QC statistics.
+
+        zh: 如果可用，解析 FastQC 报告以获取统计信息，否则回退到 fastp。
+        en: Parse FastQC reports for statistics if available, otherwise fallback to fastp.
+
+        Returns:
+            dict:
+                zh: 样本统计信息字典。
+                en: Dictionary of sample statistics.
+        """
         # 如果可用，解析 FastQC 报告以获取统计信息，否则回退到 fastp
         stats = {}
 

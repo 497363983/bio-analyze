@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Directory with clean FastQ files.",
+        "zh": "包含 clean FastQ 文件的目录。",
         "en": "Directory with clean FastQ files."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output directory.",
+        "zh": "输出目录。",
         "en": "Output directory."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Genome FASTA file.",
+        "zh": "基因组 FASTA 文件。",
         "en": "Genome FASTA file."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Genome GTF file.",
+        "zh": "基因组 GTF 文件。",
         "en": "Genome GTF file."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "4",
       "description": {
-        "zh": "Number of threads.",
+        "zh": "线程数。",
         "en": "Number of threads."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": "default",
       "description": {
-        "zh": "Plot theme.",
+        "zh": "绘图主题。",
         "en": "Plot theme."
       }
     }

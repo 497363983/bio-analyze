@@ -2,7 +2,6 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
-import seaborn as sns
 from matplotlib.figure import Figure
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
@@ -14,15 +13,14 @@ from .scatter import ScatterPlot
 
 class PCAPlot(ScatterPlot):
     """
-    PCA 图实现。
+    zh: PCA 图实现。
+    en: PCA plot implementation.
     """
 
     @save_plot
     def plot(
         self,
         data: pd.DataFrame,
-        x: str | None = None,  # 未使用
-        y: str | None = None,  # 未使用
         hue: str | None = None,  # 分组列或值列表
         index_col: str | None = None,  # 用作索引的列
         transpose: bool = True,  # 默认为 True，适用于表达矩阵（基因 x 样本）
@@ -36,21 +34,46 @@ class PCAPlot(ScatterPlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        生成 PCA 图。
+        zh: 生成 PCA 图。
+        en: Generate PCA plot.
 
         Args:
-            data: 包含数值数据的 DataFrame。
-            hue: 分组信息。可以是 data 中的列名（如果 transpose=False），
-                 或者是与样本匹配的值列表/Series（如果 transpose=True）。
-            index_col: 用作索引的列（例如基因 ID）。
-            transpose: 是否转置 dataframe。
-                       通常表达矩阵是 基因 x 样本。
-                       PCA 需要 样本 x 基因。所以默认为 True。
-            n_components: 组件数量（默认 2）。
-            cluster: 如果为 True，则围绕 hue 定义的组绘制置信椭圆。
-            n_clusters: 已弃用/忽略。椭圆是基于 'hue' 分组绘制的。
-            xlabel: X轴标签。
-            ylabel: Y轴标签。
+            data:
+                zh: 包含数值数据的 DataFrame。
+                en: DataFrame containing numerical data.
+            hue:
+                zh: 分组信息。可以是 data 中的列名（如果 transpose=False），或者是与样本匹配的值列表/Series（如果 transpose=True）。
+                en: Grouping info. Can be column name in data (if transpose=False), or list/Series matching samples (if transpose=True).
+            index_col:
+                zh: 用作索引的列（例如基因 ID）。
+                en: Column to use as index (e.g. Gene ID).
+            transpose:
+                zh: 是否转置 dataframe。通常表达矩阵是 基因 x 样本。PCA 需要 样本 x 基因。所以默认为 True。
+                en: Whether to transpose dataframe. Usually expression matrix is Gene x Sample. PCA needs Sample x Gene. So defaults to True.
+            n_components:
+                zh: 组件数量（默认 2）。
+                en: Number of components (default 2).
+            cluster:
+                zh: 如果为 True，则围绕 hue 定义的组绘制置信椭圆。
+                en: If True, draw confidence ellipses around groups defined by hue.
+            n_clusters:
+                zh: 已弃用/忽略。椭圆是基于 'hue' 分组绘制的。
+                en: Deprecated/Ignored. Ellipses are drawn based on 'hue' grouping.
+            title:
+                zh: 图表标题。
+                en: Chart title.
+            xlabel:
+                zh: X轴标签。
+                en: X-axis label.
+            ylabel:
+                zh: Y轴标签。
+                en: Y-axis label.
+            output:
+                zh: 保存图表的路径。
+                en: Path to save the chart.
+            **kwargs:
+                zh: 其他传递给 ScatterPlot 的参数。
+                en: Other arguments passed to ScatterPlot.
         """
         # 获取主题特定参数
         theme_params = self.get_chart_specific_params("pca")
@@ -134,10 +157,10 @@ class PCAPlot(ScatterPlot):
         # 调用父类 ScatterPlot.plot
         # 注意：这里我们通过 add_ellipse 参数复用父类的椭圆绘制逻辑
         # PCA 的 cluster 参数现在对应 ScatterPlot 的 add_ellipse 参数
-        
+
         # 传递给父类的 kwargs
         # 移除已处理的参数，避免传递冲突（虽然 kwargs 主要是给 seaborn 的）
-        
+
         return super().plot(
             data=plot_df,
             x="PC1",
@@ -148,5 +171,5 @@ class PCAPlot(ScatterPlot):
             ylabel=ylabel,
             add_ellipse=cluster and (hue_col is not None),
             # 其他 kwargs 透传给 ScatterPlot -> seaborn.scatterplot
-            **kwargs
+            **kwargs,
         )

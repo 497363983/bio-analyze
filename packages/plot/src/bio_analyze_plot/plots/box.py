@@ -11,7 +11,10 @@ from .base import BasePlot, save_plot
 
 
 class BoxPlot(BasePlot):
-    """箱线图实现。"""
+    """
+    zh: 箱线图实现。
+    en: Box plot implementation.
+    """
 
     @save_plot
     def plot(
@@ -33,23 +36,55 @@ class BoxPlot(BasePlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        绘制箱线图。
+        zh: 绘制箱线图。
+        en: Plot box chart.
 
         Args:
-            data: 包含数据的 DataFrame。
-            x: x 轴的列名。
-            y: y 轴的列名。
-            hue: 分组列名。
-            title: 图表标题。
-            xlabel: X轴标签。
-            ylabel: Y轴标签。
-            output: 保存图表的路径。
-            significance: 要进行显著性检验的配对列表。
-            test: 统计检验方法。
-            text_format: 显著性标记格式。
-            add_swarm: 是否叠加散点图 (swarmplot)。
-            swarm_color: 散点颜色。
-            swarm_size: 散点大小。
+            data:
+                zh: 包含数据的 DataFrame。
+                en: DataFrame containing data.
+            x:
+                zh: x 轴的列名。
+                en: Column name for x-axis.
+            y:
+                zh: y 轴的列名。
+                en: Column name for y-axis.
+            hue:
+                zh: 分组列名。
+                en: Column name for grouping.
+            title:
+                zh: 图表标题。
+                en: Chart title.
+            xlabel:
+                zh: X轴标签。
+                en: X-axis label.
+            ylabel:
+                zh: Y轴标签。
+                en: Y-axis label.
+            output:
+                zh: 保存图表的路径。
+                en: Path to save the chart.
+            significance:
+                zh: 要进行显著性检验的配对列表。
+                en: List of pairs for significance testing.
+            test:
+                zh: 统计检验方法。
+                en: Statistical test method.
+            text_format:
+                zh: 显著性标记格式。
+                en: Significance annotation format.
+            add_swarm:
+                zh: 是否叠加散点图 (swarmplot)。
+                en: Whether to overlay swarmplot.
+            swarm_color:
+                zh: 散点颜色。
+                en: Color of swarm points.
+            swarm_size:
+                zh: 散点大小。
+                en: Size of swarm points.
+            **kwargs:
+                zh: 其他传递给 seaborn.boxplot 的参数。
+                en: Other arguments passed to seaborn.boxplot.
         """
         theme_params = self.get_chart_specific_params("box")
 

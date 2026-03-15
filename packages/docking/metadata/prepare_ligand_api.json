@@ -2,8 +2,8 @@
   "name": "prepare_ligand",
   "type": "api",
   "description": {
-    "zh": "准备配体用于对接 (SDF/SMILES -> PDBQT)。\n使用 RDKit 生成 3D 结构，使用 Meeko 转换为 PDBQT 格式。",
-    "en": "准备配体用于对接 (SDF/SMILES -> PDBQT)。\n使用 RDKit 生成 3D 结构，使用 Meeko 转换为 PDBQT 格式。"
+    "zh": "准备配体用于对接 (SDF/SMILES -> PDBQT)。",
+    "en": "Prepare ligand for docking (SDF/SMILES -> PDBQT).\n\n使用 RDKit 生成 3D 结构，使用 Meeko 转换为 PDBQT 格式。\nUses RDKit to generate 3D structure, and Meeko to convert to PDBQT format."
   },
   "params": [
     {
@@ -12,8 +12,8 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "",
-        "en": ""
+        "zh": "输入配体文件路径 (SDF, MOL2, PDB, SMI)。",
+        "en": "Path to input ligand file (SDF, MOL2, PDB, SMI)."
       }
     },
     {
@@ -22,8 +22,8 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "",
-        "en": ""
+        "zh": "输出 PDBQT 文件路径。",
+        "en": "Path to output PDBQT file."
       }
     },
     {
@@ -32,8 +32,8 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "",
-        "en": ""
+        "zh": "是否自动添加氢原子并生成 3D 构象。默认为 True。",
+        "en": "Whether to automatically add hydrogens and generate 3D conformation. Defaults to True."
       }
     }
   ]

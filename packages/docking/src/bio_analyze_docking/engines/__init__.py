@@ -1,3 +1,8 @@
+"""
+zh: 对接引擎集合。
+en: Collection of docking engines.
+"""
+
 from .base import BaseDockingEngine
 from .factory import DockingEngineFactory
 from .gnina import GninaEngine

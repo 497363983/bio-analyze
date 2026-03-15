@@ -7,6 +7,22 @@ from rich.prompt import Prompt
 
 
 class Template:
+    """
+    zh: 模板基类，用于管理和渲染模板目录。
+    en: Base template class for managing and rendering template directories.
+
+    Attributes:
+        name (str):
+            zh: 模板名称。
+            en: Template name.
+        description (str):
+            zh: 模板描述。
+            en: Template description.
+        env (Environment):
+            zh: Jinja2 环境对象。
+            en: Jinja2 Environment object.
+    """
+
     def __init__(self, name: str, description: str):
         self.name = name
         self.description = description
@@ -17,8 +33,19 @@ class Template:
 
     def render_directory(self, context: dict[str, Any], output_dir: Path) -> None:
         """
-        递归地将模板目录渲染到 output_dir。
+        zh: 递归地将模板目录渲染到 output_dir。
+        en: Recursively render template directory to output_dir.
+
         模板文件路径可以包含 jinja2 变量（例如 {{name}}）。
+        Template file paths can contain jinja2 variables (e.g. {{name}}).
+
+        Args:
+            context (dict[str, Any]):
+                zh: 渲染上下文变量。
+                en: Context variables for rendering.
+            output_dir (Path):
+                zh: 输出目录路径。
+                en: Output directory path.
         """
         template_base = Path(__file__).parent.parent / "templates" / self.name
 
@@ -52,16 +79,51 @@ class Template:
             self.render_template(template_name, context, target_path)
 
     def render_template(self, template_name: str, context: dict[str, Any], output_path: Path) -> None:
+        """
+        zh: 渲染单个模板文件并保存。
+        en: Render a single template file and save it.
+
+        Args:
+            template_name (str):
+                zh: 模板文件名（相对于 loader 根目录）。
+                en: Template file name (relative to loader root).
+            context (dict[str, Any]):
+                zh: 渲染上下文变量。
+                en: Context variables for rendering.
+            output_path (Path):
+                zh: 输出文件路径。
+                en: Output file path.
+        """
         template = self.env.get_template(template_name)
         content = template.render(**context)
         with open(output_path, "w") as f:
             f.write(content)
 
     def create(self, name: str, output_dir: Path, **kwargs: Any) -> None:
+        """
+        zh: 执行创建操作（抽象方法）。
+        en: Execute creation operation (abstract method).
+
+        Args:
+            name (str):
+                zh: 工件名称。
+                en: Artifact name.
+            output_dir (Path):
+                zh: 输出目录。
+                en: Output directory.
+            **kwargs:
+                zh: 其他参数。
+                en: Additional arguments.
+        """
         raise NotImplementedError
 
 
 class ToolTemplate(Template):
+    """
+    zh: 用于创建新分析工具包的模板。
+    en: Template for creating a new analysis tool package.
+    """
+
     def __init__(self):
         super().__init__("tool", "Create a new analysis tool package")
 
@@ -95,6 +157,11 @@ class ToolTemplate(Template):
 
 
 class ThemeTemplate(Template):
+    """
+    zh: 用于创建新绘图主题包的模板。
+    en: Template for creating a new plot theme package.
+    """
+
     def __init__(self):
         super().__init__("theme", "Create a new plot theme package")
 
@@ -130,8 +197,21 @@ def create_command(
     name: str = typer.Option(None, "--name", "-n", help="Name of the artifact."),
     output: Path = typer.Option(Path.cwd(), "--output", "-o", help="Output directory (default: current directory)."),
 ) -> None:
-    """根据模板创建新工具或主题。"""
+    """
+    zh: 根据模板创建新工具或主题。
+    en: Create a new tool or theme based on a template.
 
+    Args:
+        template_type (str, optional):
+            zh: 要创建的工件类型 (tool, theme)。
+            en: Type of artifact to create (tool, theme).
+        name (str, optional):
+            zh: 工件名称。
+            en: Name of the artifact.
+        output (Path, optional):
+            zh: 输出目录 (默认为当前目录)。
+            en: Output directory (default: current directory).
+    """
     # 如果未提供，则进行交互式选择
     if not template_type:
         template_type = Prompt.ask("What do you want to create?", choices=list(TEMPLATES.keys()), default="tool")

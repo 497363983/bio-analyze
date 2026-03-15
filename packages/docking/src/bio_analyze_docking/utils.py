@@ -17,17 +17,26 @@ logger = get_logger(__name__)
 
 def convert_cif_to_pdb(input_file: Path, output_file: Optional[Path] = None) -> Path:
     """
-    将 CIF/mmCIF 文件转换为 PDB 文件。
+    zh: 将 CIF/mmCIF 文件转换为 PDB 文件。
+    en: Convert CIF/mmCIF file to PDB file.
 
     Args:
-        input_file: 输入的 CIF/mmCIF 文件路径。
-        output_file: 输出的 PDB 文件路径。如果为 None，则在同目录下生成。
+        input_file (Path):
+            zh: 输入的 CIF/mmCIF 文件路径。
+            en: Path to input CIF/mmCIF file.
+        output_file (Optional[Path], optional):
+            zh: 输出的 PDB 文件路径。如果为 None，则在同目录下生成。
+            en: Path to output PDB file. If None, generated in the same directory.
 
     Returns:
-        Path: 生成的 PDB 文件路径。
+        Path:
+            zh: 生成的 PDB 文件路径。
+            en: Path to generated PDB file.
 
     Raises:
-        RuntimeError: 如果转换失败。
+        RuntimeError:
+            zh: 如果转换失败。
+            en: If conversion fails.
     """
     input_file = Path(input_file)
     if output_file is None:
@@ -57,15 +66,27 @@ def merge_complex_with_pymol(
     output_name_prefix: str = "complex_pose",
 ) -> None:
     """
-    使用 PyMOL 将受体和配体姿态合并为复合物 PDB 文件。
+    zh: 使用 PyMOL 将受体和配体姿态合并为复合物 PDB 文件。
+    en: Merge receptor and ligand poses into complex PDB files using PyMOL.
 
     Args:
-        receptor_path: 受体文件路径 (PDB/PDBQT)。
-        ligand_poses_path: 包含多个姿态的配体文件路径 (PDBQT)。
-        output_dir: 保存结果的输出目录。
-        n_save: 要保存的前 N 个姿态。
-        output_name_prefix: 输出文件名的前缀 (默认为 "complex_pose")。
-                            例如前缀为 "foo"，则文件名为 "foo_1.pdb", "foo_2.pdb" 等。
+        receptor_path (Path):
+            zh: 受体文件路径 (PDB/PDBQT)。
+            en: Path to receptor file (PDB/PDBQT).
+        ligand_poses_path (Path):
+            zh: 包含多个姿态的配体文件路径 (PDBQT)。
+            en: Path to ligand file containing multiple poses (PDBQT).
+        output_dir (Path):
+            zh: 保存结果的输出目录。
+            en: Output directory for saving results.
+        n_save (int):
+            zh: 要保存的前 N 个姿态。
+            en: Number of top poses to save.
+        output_name_prefix (str, optional):
+            zh: 输出文件名的前缀 (默认为 "complex_pose")。
+                例如前缀为 "foo"，则文件名为 "foo_1.pdb", "foo_2.pdb" 等。
+            en: Prefix for output filenames (default "complex_pose").
+                E.g., if prefix is "foo", filenames will be "foo_1.pdb", "foo_2.pdb", etc.
     """
     if cmd is None:
         logger.error("PyMOL module not found. Cannot merge complexes.")

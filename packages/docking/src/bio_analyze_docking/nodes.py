@@ -30,7 +30,54 @@ def run_docking_task(
     padding: float = 4.0,  # 添加 padding 参数以防自动计算
 ) -> dict:
     """
-    并行对接执行的辅助函数。
+    zh: 并行对接执行的辅助函数。
+    en: Helper function for parallel docking execution.
+
+    Args:
+        rec_prep (str):
+            zh: 准备好的受体文件路径。
+            en: Path to prepared receptor file.
+        lig_prep (str):
+            zh: 准备好的配体文件路径。
+            en: Path to prepared ligand file.
+        output_dir (Path):
+            zh: 输出目录。
+            en: Output directory.
+        rec_name (str):
+            zh: 受体名称。
+            en: Receptor name.
+        lig_name (str):
+            zh: 配体名称。
+            en: Ligand name.
+        center (list[float] | None):
+            zh: 盒子中心 [x, y, z]。如果为 None，则自动计算。
+            en: Box center [x, y, z]. If None, auto-calculated.
+        size (list[float] | None):
+            zh: 盒子大小 [x, y, z]。如果为 None，则自动计算。
+            en: Box size [x, y, z]. If None, auto-calculated.
+        exhaustiveness (int):
+            zh: 搜索穷尽性。
+            en: Search exhaustiveness.
+        n_poses (int):
+            zh: 生成的姿态数量。
+            en: Number of poses to generate.
+        output_docked_lig_recep_struct (bool, optional):
+            zh: 是否输出复合物结构。默认为 False。
+            en: Whether to output complex structure. Defaults to False.
+        n_docked_lig_recep_struct (int | None, optional):
+            zh: 输出复合物的数量。
+            en: Number of complexes to output.
+        engine_type (str, optional):
+            zh: 对接引擎类型。默认为 "vina"。
+            en: Docking engine type. Defaults to "vina".
+        padding (float, optional):
+            zh: 自动盒填充。默认为 4.0。
+            en: Autobox padding. Defaults to 4.0.
+
+    Returns:
+        dict:
+            zh: 对接结果字典。
+            en: Docking result dictionary.
     """
     output_dir = output_dir.resolve()
     # 为此任务配置记录器
@@ -131,7 +178,8 @@ def run_docking_task(
 
 class ReceptorPrepNode(Node):
     """
-    准备受体文件的节点 (PDB -> PDBQT)。
+    zh: 准备受体文件的节点 (PDB -> PDBQT)。
+    en: Node for preparing receptor files (PDB -> PDBQT).
     """
 
     def __init__(
@@ -146,13 +194,27 @@ class ReceptorPrepNode(Node):
     ):
         """
         Args:
-            receptor_path: 输入受体文件的路径。
-            output_dir: 保存准备后文件的目录。
-            context_key: 在上下文中存储输出路径的键。
-            ph: 质子化的 pH 值。
-            keep_water: 是否保留结晶水。
-            rigid_macrocycles: 是否将大环视为刚性。
-            charge_model: Meeko 的电荷模型。
+            receptor_path (Path):
+                zh: 输入受体文件的路径。
+                en: Path to input receptor file.
+            output_dir (Path):
+                zh: 保存准备后文件的目录。
+                en: Directory to save prepared files.
+            context_key (str):
+                zh: 在上下文中存储输出路径的键。
+                en: Key to store output path in context.
+            ph (float, optional):
+                zh: 质子化的 pH 值。默认为 7.4。
+                en: pH value for protonation. Defaults to 7.4.
+            keep_water (bool, optional):
+                zh: 是否保留结晶水。默认为 False。
+                en: Whether to keep crystal water. Defaults to False.
+            rigid_macrocycles (bool, optional):
+                zh: 是否将大环视为刚性。默认为 True。
+                en: Whether to treat macrocycles as rigid. Defaults to True.
+            charge_model (str, optional):
+                zh: Meeko 的电荷模型。默认为 'gasteiger'。
+                en: Charge model for Meeko. Defaults to 'gasteiger'.
         """
         super().__init__(f"Prepare Receptor: {receptor_path.name}")
         self.receptor_path = Path(receptor_path)
@@ -164,6 +226,21 @@ class ReceptorPrepNode(Node):
         self.charge_model = charge_model
 
     def run(self, context: Context, progress: Progress, logger: Any):
+        """
+        zh: 执行节点逻辑。
+        en: Execute node logic.
+
+        Args:
+            context (Context):
+                zh: 管道上下文。
+                en: Pipeline context.
+            progress (Progress):
+                zh: 进度报告器。
+                en: Progress reporter.
+            logger (Any):
+                zh: 日志记录器。
+                en: Logger instance.
+        """
         self.output_dir.mkdir(parents=True, exist_ok=True)
         output_path = self.output_dir / f"{self.receptor_path.stem}.pdbqt"
 
@@ -183,7 +260,8 @@ class ReceptorPrepNode(Node):
 
 class BatchReceptorPrepNode(Node):
     """
-    用于准备多个受体文件并支持断点续传的节点。
+    zh: 用于准备多个受体文件并支持断点续传的节点。
+    en: Node for preparing multiple receptor files with resume support.
     """
 
     def __init__(
@@ -198,13 +276,27 @@ class BatchReceptorPrepNode(Node):
     ):
         """
         Args:
-            receptors: 输入受体路径列表。
-            output_dir: 保存准备后文件的目录。
-            context_map_key: 在上下文中存储映射 {input_path_str: output_path_str} 的键。
-            ph: 质子化的 pH 值。
-            keep_water: 是否保留结晶水。
-            rigid_macrocycles: 是否将大环视为刚性。
-            charge_model: Meeko 的电荷模型。
+            receptors (list[Path]):
+                zh: 输入受体路径列表。
+                en: List of input receptor paths.
+            output_dir (Path):
+                zh: 保存准备后文件的目录。
+                en: Directory to save prepared files.
+            context_map_key (str):
+                zh: 在上下文中存储映射 {input_path_str: output_path_str} 的键。
+                en: Key to store map {input_path_str: output_path_str} in context.
+            ph (float, optional):
+                zh: 质子化的 pH 值。默认为 7.4。
+                en: pH value for protonation. Defaults to 7.4.
+            keep_water (bool, optional):
+                zh: 是否保留结晶水。默认为 False。
+                en: Whether to keep crystal water. Defaults to False.
+            rigid_macrocycles (bool, optional):
+                zh: 是否将大环视为刚性。默认为 True。
+                en: Whether to treat macrocycles as rigid. Defaults to True.
+            charge_model (str, optional):
+                zh: Meeko 的电荷模型。默认为 'gasteiger'。
+                en: Charge model for Meeko. Defaults to 'gasteiger'.
         """
         super().__init__("Batch Receptor Preparation")
         self.receptors = receptors
@@ -216,6 +308,21 @@ class BatchReceptorPrepNode(Node):
         self.charge_model = charge_model
 
     def run(self, context: Context, progress: Progress, logger: Any):
+        """
+        zh: 执行节点逻辑。
+        en: Execute node logic.
+
+        Args:
+            context (Context):
+                zh: 管道上下文。
+                en: Pipeline context.
+            progress (Progress):
+                zh: 进度报告器。
+                en: Progress reporter.
+            logger (Any):
+                zh: 日志记录器。
+                en: Logger instance.
+        """
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
         # 从上下文获取现有映射或创建新的
@@ -264,15 +371,22 @@ class BatchReceptorPrepNode(Node):
 
 class LigandPrepNode(Node):
     """
-    准备配体文件的节点 (SDF/MOL2/PDB -> PDBQT)。
+    zh: 准备配体文件的节点 (SDF/MOL2/PDB -> PDBQT)。
+    en: Node for preparing ligand files (SDF/MOL2/PDB -> PDBQT).
     """
 
     def __init__(self, ligand_path: Path, output_dir: Path, context_key: str):
         """
         Args:
-            ligand_path: 输入配体文件的路径。
-            output_dir: 保存准备后文件的目录。
-            context_key: 在上下文中存储输出路径的键。
+            ligand_path (Path):
+                zh: 输入配体文件的路径。
+                en: Path to input ligand file.
+            output_dir (Path):
+                zh: 保存准备后文件的目录。
+                en: Directory to save prepared files.
+            context_key (str):
+                zh: 在上下文中存储输出路径的键。
+                en: Key to store output path in context.
         """
         super().__init__(f"Prepare Ligand: {ligand_path.name}")
         self.ligand_path = Path(ligand_path)
@@ -280,6 +394,21 @@ class LigandPrepNode(Node):
         self.context_key = context_key
 
     def run(self, context: Context, progress: Progress, logger: Any):
+        """
+        zh: 执行节点逻辑。
+        en: Execute node logic.
+
+        Args:
+            context (Context):
+                zh: 管道上下文。
+                en: Pipeline context.
+            progress (Progress):
+                zh: 进度报告器。
+                en: Progress reporter.
+            logger (Any):
+                zh: 日志记录器。
+                en: Logger instance.
+        """
         self.output_dir.mkdir(parents=True, exist_ok=True)
         output_path = self.output_dir / f"{self.ligand_path.stem}.pdbqt"
 
@@ -292,15 +421,22 @@ class LigandPrepNode(Node):
 
 class BatchLigandPrepNode(Node):
     """
-    用于准备多个配体文件并支持断点续传的节点。
+    zh: 用于准备多个配体文件并支持断点续传的节点。
+    en: Node for preparing multiple ligand files with resume support.
     """
 
     def __init__(self, ligands: list[Path], output_dir: Path, context_map_key: str):
         """
         Args:
-            ligands: 输入配体路径列表。
-            output_dir: 保存准备后文件的目录。
-            context_map_key: 在上下文中存储映射 {input_path_str: output_path_str} 的键。
+            ligands (list[Path]):
+                zh: 输入配体路径列表。
+                en: List of input ligand paths.
+            output_dir (Path):
+                zh: 保存准备后文件的目录。
+                en: Directory to save prepared files.
+            context_map_key (str):
+                zh: 在上下文中存储映射 {input_path_str: output_path_str} 的键。
+                en: Key to store map {input_path_str: output_path_str} in context.
         """
         super().__init__("Batch Ligand Preparation")
         self.ligands = ligands
@@ -308,6 +444,21 @@ class BatchLigandPrepNode(Node):
         self.context_map_key = context_map_key
 
     def run(self, context: Context, progress: Progress, logger: Any):
+        """
+        zh: 执行节点逻辑。
+        en: Execute node logic.
+
+        Args:
+            context (Context):
+                zh: 管道上下文。
+                en: Pipeline context.
+            progress (Progress):
+                zh: 进度报告器。
+                en: Progress reporter.
+            logger (Any):
+                zh: 日志记录器。
+                en: Logger instance.
+        """
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
         # 从上下文获取现有映射或创建新的

@@ -23,12 +23,14 @@ logger = get_logger(__name__)
 
 class VinaEngine(BaseDockingEngine):
     """
-    基于 Vina 的对接引擎实现。
+    zh: 基于 Vina 的对接引擎实现。
+    en: Vina-based docking engine implementation.
     """
 
     def __init__(self, receptor_pdbqt: Path, ligand_pdbqt: Path, output_dir: Path):
         """
-        初始化 Vina 对接引擎。
+        zh: 初始化 Vina 对接引擎。
+        en: Initialize the Vina docking engine.
         """
         if Vina is None:
             raise ImportError("Vina module not found. Please install vina to use VinaEngine.")
@@ -49,25 +51,32 @@ class VinaEngine(BaseDockingEngine):
 
     def compute_box(self, center: list[float], size: list[float]):
         """
-        定义搜索空间（网格盒）。
+        zh: 定义搜索空间（网格盒）。
+        en: Define the search space (grid box).
 
         Args:
-            center: [x, y, z] 中心坐标（埃）
-            size: [x, y, z] 盒子尺寸（埃）
+            center (list[float]):
+                zh: [x, y, z] 中心坐标（埃）
+                en: [x, y, z] center coordinates (Angstroms)
+            size (list[float]):
+                zh: [x, y, z] 盒子尺寸（埃）
+                en: [x, y, z] box dimensions (Angstroms)
         """
         logger.info(f"计算 Vina 映射 (中心={center}, 尺寸={size})...")
         self.engine.compute_vina_maps(center=center, box_size=size)
 
     def dock(self, exhaustiveness: int = 8, n_poses: int = 9, min_rmsd: float = 1.0):
         """
-        执行对接。
+        zh: 执行对接。
+        en: Perform docking.
         """
         logger.info(f"开始对接 (搜索深度={exhaustiveness})...")
         self.engine.dock(exhaustiveness=exhaustiveness, n_poses=n_poses, min_rmsd=min_rmsd)
 
     def save_results(self, output_name: str = "docked.pdbqt", output_dir: Optional[Path] = None) -> Path:
         """
-        保存对接姿态。
+        zh: 保存对接姿态。
+        en: Save docked poses.
         """
         target_dir = output_dir if output_dir else self.output_dir
         target_dir.mkdir(parents=True, exist_ok=True)
@@ -84,12 +93,19 @@ class VinaEngine(BaseDockingEngine):
         output_name_prefix: str = "complex_pose",
     ):
         """
-        使用 PyMOL 将对接的配体-受体复合物保存为 PDB 文件。
+        zh: 使用 PyMOL 将对接的配体-受体复合物保存为 PDB 文件。
+        en: Save the docked ligand-receptor complex as a PDB file using PyMOL.
 
         Args:
-            n_complexes: 要保存的前几名复合物的数量。如果为 None，则保存所有。
-            output_dir: 输出目录。如果为 None，则使用初始化时的 output_dir。
-            output_name_prefix: 输出文件名的前缀 (默认为 "complex_pose")。
+            n_complexes (Optional[int], optional):
+                zh: 要保存的前几名复合物的数量。如果为 None，则保存所有。
+                en: Number of top complexes to save. If None, saves all.
+            output_dir (Optional[Path], optional):
+                zh: 输出目录。如果为 None，则使用初始化时的 output_dir。
+                en: Output directory. If None, uses the output_dir from initialization.
+            output_name_prefix (str, optional):
+                zh: 输出文件名的前缀 (默认为 "complex_pose")。
+                en: Prefix for output filenames (default is "complex_pose").
         """
         if cmd is None:
             logger.error("PyMOL 未安装。无法保存 PDB 复合物。")
@@ -128,7 +144,8 @@ class VinaEngine(BaseDockingEngine):
 
     def score(self) -> float:
         """
-        返回最佳能量评分（kcal/mol）。
+        zh: 返回最佳能量评分（kcal/mol）。
+        en: Return the best energy score (kcal/mol).
         """
         energies = self.engine.energies(n_poses=1)
         if len(energies) > 0:
@@ -137,7 +154,8 @@ class VinaEngine(BaseDockingEngine):
 
     def get_all_poses_info(self, n_poses: int = 9) -> list[dict[str, Any]]:
         """
-        返回所有姿态的信息：能量，RMSD 下界，RMSD 上界。
+        zh: 返回所有姿态的信息：能量，RMSD 下界，RMSD 上界。
+        en: Return information for all poses: energy, RMSD lower bound, RMSD upper bound.
         """
         # energies() 返回每个姿态的 [affinity, rmsd_lb, rmsd_ub] 列表
         energies = self.engine.energies(n_poses=n_poses)

@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "DESeq2 results CSV file.",
+        "zh": "DESeq2 结果 CSV 文件。",
         "en": "DESeq2 results CSV file."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Species name (e.g. 'Homo sapiens').",
+        "zh": "物种名称 (例如 'Homo sapiens')。",
         "en": "Species name (e.g. 'Homo sapiens')."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output directory.",
+        "zh": "输出目录。",
         "en": "Output directory."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "KEGG_2021_Human",
       "description": {
-        "zh": "Gene sets library (e.g. KEGG_2021_Human, GO_Biological_Process_2021).",
+        "zh": "基因集库 (例如 KEGG_2021_Human, GO_Biological_Process_2021)。",
         "en": "Gene sets library (e.g. KEGG_2021_Human, GO_Biological_Process_2021)."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "auto",
       "description": {
-        "zh": "Column for ranking (auto, stat, log2FoldChange).",
+        "zh": "排名列 (auto, stat, log2FoldChange)。",
         "en": "Column for ranking (auto, stat, log2FoldChange)."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": "5",
       "description": {
-        "zh": "Number of top pathways to plot.",
+        "zh": "绘制的顶部通路数量。",
         "en": "Number of top pathways to plot."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": "default",
       "description": {
-        "zh": "Plot theme.",
+        "zh": "绘图主题。",
         "en": "Plot theme."
       }
     }

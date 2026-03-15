@@ -21,14 +21,19 @@ logger = get_logger(__name__)
 
 class SminaEngine(BaseDockingEngine):
     """
-    基于 Smina 的对接引擎实现。
-    Smina 是 Vina 的一个分支，提供了更好的评分函数和更多功能。
-    本引擎通过 subprocess 调用 smina 命令行工具。
+    zh: 基于 Smina 的对接引擎实现。
+    en: Smina-based docking engine implementation.
+
+    zh: Smina 是 Vina 的一个分支，提供了更好的评分函数和更多功能。
+    en: Smina is a fork of Vina that provides better scoring functions and more features.
+    zh: 本引擎通过 subprocess 调用 smina 命令行工具。
+    en: This engine invokes the smina command-line tool via subprocess.
     """
 
     def __init__(self, receptor_pdbqt: Path, ligand_pdbqt: Path, output_dir: Path):
         """
-        初始化 Smina 对接引擎。
+        zh: 初始化 Smina 对接引擎。
+        en: Initialize the Smina docking engine.
         """
         super().__init__(receptor_pdbqt, ligand_pdbqt, output_dir)
 
@@ -54,7 +59,8 @@ class SminaEngine(BaseDockingEngine):
 
     def compute_box(self, center: list[float], size: list[float]):
         """
-        定义搜索空间（网格盒）。
+        zh: 定义搜索空间（网格盒）。
+        en: Define the search space (grid box).
         """
         logger.info(f"设置 Smina 搜索盒子 (中心={center}, 尺寸={size})...")
         self.box_center = center
@@ -62,7 +68,8 @@ class SminaEngine(BaseDockingEngine):
 
     def dock(self, exhaustiveness: int = 8, n_poses: int = 9, min_rmsd: float = 1.0):
         """
-        执行对接。
+        zh: 执行对接。
+        en: Perform docking.
         """
         if self.box_center is None or self.box_size is None:
             raise RuntimeError("在执行对接前必须先调用 compute_box 设置搜索空间。")
@@ -114,20 +121,19 @@ class SminaEngine(BaseDockingEngine):
         logger.info(f"执行 Smina 命令: {' '.join(cmd_args)}")
 
         try:
-            result = subprocess.run(
-                cmd_args, capture_output=True, text=True, check=True, encoding="utf-8"
-            )
+            result = subprocess.run(cmd_args, capture_output=True, text=True, check=True, encoding="utf-8")
             logger.debug(f"Smina 输出:\n{result.stdout}")
         except subprocess.CalledProcessError as e:
             logger.error(f"Smina 执行失败: {e.stderr}")
             raise RuntimeError(f"Smina 对接失败: {e.stderr}")
 
-    def save_results(
-        self, output_name: str = "docked.pdbqt", output_dir: Optional[Path] = None
-    ) -> Path:
+    def save_results(self, output_name: str = "docked.pdbqt", output_dir: Optional[Path] = None) -> Path:
         """
-        保存对接姿态。
-        实际上是将临时输出文件复制到目标位置。
+        zh: 保存对接姿态。
+        en: Save docked poses.
+
+        zh: 实际上是将临时输出文件复制到目标位置。
+        en: Actually copies the temporary output file to the target location.
         """
         if not self._temp_output_file.exists():
             raise RuntimeError("未找到对接结果文件。请先运行 dock()。")
@@ -147,7 +153,8 @@ class SminaEngine(BaseDockingEngine):
         output_name_prefix: str = "complex_pose",
     ):
         """
-        使用 PyMOL 将对接的配体-受体复合物保存为 PDB 文件。
+        zh: 使用 PyMOL 将对接的配体-受体复合物保存为 PDB 文件。
+        en: Save the docked ligand-receptor complex as a PDB file using PyMOL.
         """
         if cmd is None:
             logger.error("PyMOL 未安装。无法保存 PDB 复合物。")
@@ -163,7 +170,7 @@ class SminaEngine(BaseDockingEngine):
         # 解析结果数量
         poses_info = self.get_all_poses_info(n_poses=999)
         total_poses = len(poses_info)
-        
+
         if total_poses == 0:
             logger.warning("对接结果为空，无法保存复合物。")
             return
@@ -175,20 +182,19 @@ class SminaEngine(BaseDockingEngine):
         logger.info(f"保存 {n_save} 个对接复合物 (PDB 格式) 到 {target_dir}...")
 
         try:
-            merge_complex_with_pymol(
-                self.receptor, self._temp_output_file, target_dir, n_save, output_name_prefix
-            )
+            merge_complex_with_pymol(self.receptor, self._temp_output_file, target_dir, n_save, output_name_prefix)
 
         except Exception as e:
             logger.error(f"使用 PyMOL 生成复合物 PDB 失败: {e}")
             # finally 块中的清理工作由 merge_complex_with_pymol 处理一部分，但这里我们也需要清理
         finally:
-             if cmd is not None:
+            if cmd is not None:
                 cmd.reinitialize()
 
     def score(self) -> float:
         """
-        返回最佳能量评分（kcal/mol）。
+        zh: 返回最佳能量评分（kcal/mol）。
+        en: Return the best energy score (kcal/mol).
         """
         if not self._temp_output_file.exists():
             return 0.0
@@ -200,8 +206,11 @@ class SminaEngine(BaseDockingEngine):
 
     def get_all_poses_info(self, n_poses: int = 9) -> list[dict[str, Any]]:
         """
-        返回所有姿态的信息：能量，RMSD 下界，RMSD 上界。
-        从 PDBQT 输出文件中解析。
+        zh: 返回所有姿态的信息：能量，RMSD 下界，RMSD 上界。
+        en: Return information for all poses: energy, RMSD lower bound, RMSD upper bound.
+
+        zh: 从 PDBQT 输出文件中解析。
+        en: Parsed from the PDBQT output file.
         """
         if not self._temp_output_file.exists():
             return []
@@ -218,12 +227,12 @@ class SminaEngine(BaseDockingEngine):
 
         # Smina 默认似乎也保持这个格式，或者是:
         # REMARK minimized affinity <val>
-        
+
         # 我们可以尝试匹配这两种格式
         vina_pattern = re.compile(r"REMARK VINA RESULT:\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)")
-        
+
         try:
-            with open(self._temp_output_file, "r", encoding="utf-8") as f:
+            with open(self._temp_output_file, encoding="utf-8") as f:
                 pose_idx = 1
                 for line in f:
                     if line.startswith("REMARK VINA RESULT:"):
@@ -232,15 +241,12 @@ class SminaEngine(BaseDockingEngine):
                             affinity = float(match.group(1))
                             rmsd_lb = float(match.group(2))
                             rmsd_ub = float(match.group(3))
-                            
-                            results.append({
-                                "pose": pose_idx,
-                                "affinity": affinity,
-                                "rmsd_lb": rmsd_lb,
-                                "rmsd_ub": rmsd_ub
-                            })
+
+                            results.append(
+                                {"pose": pose_idx, "affinity": affinity, "rmsd_lb": rmsd_lb, "rmsd_ub": rmsd_ub}
+                            )
                             pose_idx += 1
-                            
+
                             if len(results) >= n_poses:
                                 break
         except Exception as e:

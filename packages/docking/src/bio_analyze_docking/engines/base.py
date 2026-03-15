@@ -7,18 +7,28 @@ from typing import Any, Optional
 
 class BaseDockingEngine(ABC):
     """
-    对接引擎的抽象基类。
-    所有对接引擎都应继承此类并实现抽象方法。
+    zh: 对接引擎的抽象基类。
+    en: Abstract base class for docking engines.
+
+    zh: 所有对接引擎都应继承此类并实现抽象方法。
+    en: All docking engines should inherit from this class and implement abstract methods.
     """
 
     def __init__(self, receptor_pdbqt: Path, ligand_pdbqt: Path, output_dir: Path):
         """
-        初始化对接引擎。
+        zh: 初始化对接引擎。
+        en: Initialize the docking engine.
 
         Args:
-            receptor_pdbqt: 受体 PDBQT 文件路径
-            ligand_pdbqt: 配体 PDBQT 文件路径
-            output_dir: 输出目录路径
+            receptor_pdbqt (Path):
+                zh: 受体 PDBQT 文件路径
+                en: Path to the receptor PDBQT file
+            ligand_pdbqt (Path):
+                zh: 配体 PDBQT 文件路径
+                en: Path to the ligand PDBQT file
+            output_dir (Path):
+                zh: 输出目录路径
+                en: Path to the output directory
         """
         self.receptor = Path(receptor_pdbqt)
         self.ligand = Path(ligand_pdbqt)
@@ -33,37 +43,56 @@ class BaseDockingEngine(ABC):
     @abstractmethod
     def compute_box(self, center: list[float], size: list[float]):
         """
-        定义搜索空间（网格盒）。
+        zh: 定义搜索空间（网格盒）。
+        en: Define the search space (grid box).
 
         Args:
-            center: [x, y, z] 中心坐标（埃）
-            size: [x, y, z] 盒子尺寸（埃）
+            center (list[float]):
+                zh: [x, y, z] 中心坐标（埃）
+                en: [x, y, z] center coordinates (Angstroms)
+            size (list[float]):
+                zh: [x, y, z] 盒子尺寸（埃）
+                en: [x, y, z] box dimensions (Angstroms)
         """
         pass
 
     @abstractmethod
     def dock(self, exhaustiveness: int = 8, n_poses: int = 9, min_rmsd: float = 1.0):
         """
-        执行对接。
+        zh: 执行对接。
+        en: Perform docking.
 
         Args:
-            exhaustiveness: 搜索详尽程度
-            n_poses: 生成的姿态数量
-            min_rmsd: 最小 RMSD 阈值
+            exhaustiveness (int, optional):
+                zh: 搜索详尽程度
+                en: Search exhaustiveness
+            n_poses (int, optional):
+                zh: 生成的姿态数量
+                en: Number of poses to generate
+            min_rmsd (float, optional):
+                zh: 最小 RMSD 阈值
+                en: Minimum RMSD threshold
         """
         pass
 
     @abstractmethod
     def save_results(self, output_name: str = "docked.pdbqt", output_dir: Optional[Path] = None) -> Path:
         """
-        保存对接姿态。
+        zh: 保存对接姿态。
+        en: Save docked poses.
 
         Args:
-            output_name: 输出文件名
-            output_dir: 输出目录路径。如果为 None，则使用初始化时的 output_dir。
+            output_name (str, optional):
+                zh: 输出文件名
+                en: Output filename
+            output_dir (Optional[Path], optional):
+                zh: 输出目录路径。如果为 None，则使用初始化时的 output_dir。
+                en: Output directory path. If None, uses the output_dir from initialization.
 
         Returns:
-            Path: 保存的结果文件路径
+            Path:
+                zh: 保存的结果文件路径
+                en: Path to the saved result file
         """
         pass
 
@@ -75,34 +104,49 @@ class BaseDockingEngine(ABC):
         output_name_prefix: str = "complex_pose",
     ):
         """
-        保存对接后的复合物结构。
+        zh: 保存对接后的复合物结构。
+        en: Save the docked ligand-receptor complex structures.
 
         Args:
-            n_complexes: 要保存的复合物数量。如果为 None，则保存所有。
-            output_dir: 输出目录路径。如果为 None，则使用初始化时的 output_dir。
-            output_name_prefix: 输出文件名的前缀 (默认为 "complex_pose")。
+            n_complexes (Optional[int], optional):
+                zh: 要保存的复合物数量。如果为 None，则保存所有。
+                en: Number of complexes to save. If None, saves all.
+            output_dir (Optional[Path], optional):
+                zh: 输出目录路径。如果为 None，则使用初始化时的 output_dir。
+                en: Output directory path. If None, uses the output_dir from initialization.
+            output_name_prefix (str, optional):
+                zh: 输出文件名的前缀 (默认为 "complex_pose")。
+                en: Prefix for output filenames (default is "complex_pose").
         """
         pass
 
     @abstractmethod
     def score(self) -> float:
         """
-        获取最佳能量评分（kcal/mol）。
+        zh: 获取最佳能量评分（kcal/mol）。
+        en: Get the best energy score (kcal/mol).
 
         Returns:
-            float: 最佳能量评分
+            float:
+                zh: 最佳能量评分
+                en: Best energy score
         """
         pass
 
     @abstractmethod
     def get_all_poses_info(self, n_poses: int = 9) -> list[dict[str, Any]]:
         """
-        获取所有姿态的信息：能量，RMSD 下界，RMSD 上界。
+        zh: 获取所有姿态的信息：能量，RMSD 下界，RMSD 上界。
+        en: Get information for all poses: energy, RMSD lower bound, RMSD upper bound.
 
         Args:
-            n_poses: 要获取信息的姿态数量
+            n_poses (int, optional):
+                zh: 要获取信息的姿态数量
+                en: Number of poses to get information for
 
         Returns:
-            List[Dict[str, Any]]: 包含姿态信息的字典列表
+            list[dict[str, Any]]:
+                zh: 包含姿态信息的字典列表
+                en: List of dictionaries containing pose information
         """
         pass

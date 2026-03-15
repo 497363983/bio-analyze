@@ -43,23 +43,52 @@ def run_docking(
     engine: str = "vina",
 ) -> dict:
     """
-    运行单个受体-配体对的完整对接流程。
+    zh: 运行单个受体-配体对的完整对接流程。
+    en: Run complete docking pipeline for a single receptor-ligand pair.
 
     Args:
-        receptor: 受体文件路径 (PDB/PDBQT)。
-        ligand: 配体文件路径 (SDF/MOL2/PDB/SMILES)。
-        output_dir: 输出目录。
-        center: 盒子中心 [x, y, z]。
-        size: 盒子大小 [x, y, z]。
-        autobox_ligand: 用于自动盒计算的配体路径。
-        padding: 自动盒填充。
-        exhaustiveness: Vina 穷尽性。
-        n_poses: 姿态数量。
-        summary_filename: 摘要文件名。
-        output_docked_lig_recep_struct: 是否保存复合物结构（PDB 格式，通过 PyMOL）。
-        n_docked_lig_recep_struct: 要保存的复合物数量。
-        charge_model: 受体准备的电荷模型 (例如 'gasteiger', 'zero')。
-        engine: 对接引擎类型 (例如 'vina', 'gnina')。
+        receptor:
+            zh: 受体文件路径 (PDB/PDBQT)。
+            en: Path to receptor file (PDB/PDBQT).
+        ligand:
+            zh: 配体文件路径 (SDF/MOL2/PDB/SMILES)。
+            en: Path to ligand file (SDF/MOL2/PDB/SMILES).
+        output_dir:
+            zh: 输出目录。
+            en: Output directory.
+        center:
+            zh: 盒子中心 [x, y, z]。
+            en: Box center [x, y, z].
+        size:
+            zh: 盒子大小 [x, y, z]。
+            en: Box size [x, y, z].
+        autobox_ligand:
+            zh: 用于自动盒计算的配体路径。
+            en: Ligand path for autobox calculation.
+        padding:
+            zh: 自动盒填充。
+            en: Autobox padding.
+        exhaustiveness:
+            zh: Vina 穷尽性。
+            en: Vina exhaustiveness.
+        n_poses:
+            zh: 姿态数量。
+            en: Number of poses.
+        summary_filename:
+            zh: 摘要文件名。
+            en: Summary filename.
+        output_docked_lig_recep_struct:
+            zh: 是否保存复合物结构（PDB 格式，通过 PyMOL）。
+            en: Whether to save complex structure (PDB format, via PyMOL).
+        n_docked_lig_recep_struct:
+            zh: 要保存的复合物数量。
+            en: Number of complexes to save.
+        charge_model:
+            zh: 受体准备的电荷模型 (例如 'gasteiger', 'zero')。
+            en: Charge model for receptor preparation (e.g. 'gasteiger', 'zero').
+        engine:
+            zh: 对接引擎类型 (例如 'vina', 'gnina')。
+            en: Docking engine type (e.g. 'vina', 'gnina').
     """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -140,23 +169,52 @@ def run_docking_batch(
     engine: str = "vina",
 ) -> list[dict]:
     """
-    对多个受体和/或配体 (M x N) 运行对接。
+    zh: 对多个受体和/或配体 (M x N) 运行对接。
+    en: Run docking for multiple receptors and/or ligands (M x N).
 
     Args:
-        receptors: 受体路径列表或包含受体的目录。
-        ligands: 配体路径列表或包含配体的目录。
-        output_dir: 基础输出目录。
-        center: 盒子中心 [x, y, z]。
-        size: 盒子大小 [x, y, z]。
-        autobox_ligand: 用于自动盒计算的配体路径。
-        padding: 自动盒填充。
-        exhaustiveness: Vina 穷尽性。
-        n_poses: 姿态数量。
-        summary_filename: 摘要文件名（例如 'summary.csv', 'results.xlsx'）或 None 以禁用。
-        output_docked_lig_recep_struct: 是否输出对接的复合物结构（PDB 格式，通过 PyMOL）。
-        n_docked_lig_recep_struct: 要保存的前几名复合物数量（None=全部）。
-        charge_model: 受体准备的电荷模型 (例如 'gasteiger', 'zero')。
-        engine: 对接引擎类型 (例如 'vina', 'gnina')。
+        receptors:
+            zh: 受体路径列表或包含受体的目录。
+            en: List of receptor paths or directory containing receptors.
+        ligands:
+            zh: 配体路径列表或包含配体的目录。
+            en: List of ligand paths or directory containing ligands.
+        output_dir:
+            zh: 基础输出目录。
+            en: Base output directory.
+        center:
+            zh: 盒子中心 [x, y, z]。
+            en: Box center [x, y, z].
+        size:
+            zh: 盒子大小 [x, y, z]。
+            en: Box size [x, y, z].
+        autobox_ligand:
+            zh: 用于自动盒计算的配体路径。
+            en: Ligand path for autobox calculation.
+        padding:
+            zh: 自动盒填充。
+            en: Autobox padding.
+        exhaustiveness:
+            zh: Vina 穷尽性。
+            en: Vina exhaustiveness.
+        n_poses:
+            zh: 姿态数量。
+            en: Number of poses.
+        summary_filename:
+            zh: 摘要文件名（例如 'summary.csv', 'results.xlsx'）或 None 以禁用。
+            en: Summary filename (e.g. 'summary.csv', 'results.xlsx') or None to disable.
+        output_docked_lig_recep_struct:
+            zh: 是否输出对接的复合物结构（PDB 格式，通过 PyMOL）。
+            en: Whether to output docked complex structures (PDB format, via PyMOL).
+        n_docked_lig_recep_struct:
+            zh: 要保存的前几名复合物数量（None=全部）。
+            en: Number of top complexes to save (None=All).
+        charge_model:
+            zh: 受体准备的电荷模型 (例如 'gasteiger', 'zero')。
+            en: Charge model for receptor preparation (e.g. 'gasteiger', 'zero').
+        engine:
+            zh: 对接引擎类型 (例如 'vina', 'gnina')。
+            en: Docking engine type (e.g. 'vina', 'gnina').
     """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)

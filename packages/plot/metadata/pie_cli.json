@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Input file path (CSV, TSV, or Excel).",
+        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output file path.",
+        "zh": "输出文件路径。",
         "en": "Output file path."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Column name for labels (categorical).",
+        "zh": "标签列名 (分类变量)。",
         "en": "Column name for labels (categorical)."
       }
     },
@@ -42,7 +42,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Column name for values (numerical).",
+        "zh": "数值列名。",
         "en": "Column name for values (numerical)."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Plot title.",
+        "zh": "图表标题。",
         "en": "Plot title."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": "%1.1f%%",
       "description": {
-        "zh": "Percentage format.",
+        "zh": "百分比格式。",
         "en": "Percentage format."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": "90",
       "description": {
-        "zh": "Start angle.",
+        "zh": "起始角度。",
         "en": "Start angle."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Explode slices. Can be a column name or comma-separated values.",
+        "zh": "扇区偏移。可以是列名或逗号分隔的数值。",
         "en": "Explode slices. Can be a column name or comma-separated values."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "Show shadow.",
+        "zh": "显示阴影。",
         "en": "Show shadow."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Sheet name for Excel files.",
+        "zh": "Excel 工作表名称。",
         "en": "Sheet name for Excel files."
       }
     }

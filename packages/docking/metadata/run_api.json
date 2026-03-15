@@ -3,7 +3,7 @@
   "type": "api",
   "description": {
     "zh": "运行单个受体-配体对的完整对接流程。",
-    "en": "运行单个受体-配体对的完整对接流程。"
+    "en": "Run complete docking pipeline for a single receptor-ligand pair."
   },
   "params": [
     {
@@ -13,7 +13,7 @@
       "default": null,
       "description": {
         "zh": "受体文件路径 (PDB/PDBQT)。",
-        "en": "受体文件路径 (PDB/PDBQT)。"
+        "en": "Path to receptor file (PDB/PDBQT)."
       }
     },
     {
@@ -23,7 +23,7 @@
       "default": null,
       "description": {
         "zh": "配体文件路径 (SDF/MOL2/PDB/SMILES)。",
-        "en": "配体文件路径 (SDF/MOL2/PDB/SMILES)。"
+        "en": "Path to ligand file (SDF/MOL2/PDB/SMILES)."
       }
     },
     {
@@ -33,7 +33,7 @@
       "default": null,
       "description": {
         "zh": "输出目录。",
-        "en": "输出目录。"
+        "en": "Output directory."
       }
     },
     {
@@ -43,7 +43,7 @@
       "default": null,
       "description": {
         "zh": "盒子中心 [x, y, z]。",
-        "en": "盒子中心 [x, y, z]。"
+        "en": "Box center [x, y, z]."
       }
     },
     {
@@ -53,7 +53,7 @@
       "default": "[20.0, 20.0, 20.0]",
       "description": {
         "zh": "盒子大小 [x, y, z]。",
-        "en": "盒子大小 [x, y, z]。"
+        "en": "Box size [x, y, z]."
       }
     },
     {
@@ -63,7 +63,7 @@
       "default": null,
       "description": {
         "zh": "用于自动盒计算的配体路径。",
-        "en": "用于自动盒计算的配体路径。"
+        "en": "Ligand path for autobox calculation."
       }
     },
     {
@@ -73,7 +73,7 @@
       "default": "4.0",
       "description": {
         "zh": "自动盒填充。",
-        "en": "自动盒填充。"
+        "en": "Autobox padding."
       }
     },
     {
@@ -83,7 +83,7 @@
       "default": "8",
       "description": {
         "zh": "Vina 穷尽性。",
-        "en": "Vina 穷尽性。"
+        "en": "Vina exhaustiveness."
       }
     },
     {
@@ -93,7 +93,7 @@
       "default": "9",
       "description": {
         "zh": "姿态数量。",
-        "en": "姿态数量。"
+        "en": "Number of poses."
       }
     },
     {
@@ -103,7 +103,7 @@
       "default": "docking_summary.csv",
       "description": {
         "zh": "摘要文件名。",
-        "en": "摘要文件名。"
+        "en": "Summary filename."
       }
     },
     {
@@ -113,7 +113,7 @@
       "default": "False",
       "description": {
         "zh": "是否保存复合物结构（PDB 格式，通过 PyMOL）。",
-        "en": "是否保存复合物结构（PDB 格式，通过 PyMOL）。"
+        "en": "Whether to save complex structure (PDB format, via PyMOL)."
       }
     },
     {
@@ -123,7 +123,7 @@
       "default": null,
       "description": {
         "zh": "要保存的复合物数量。",
-        "en": "要保存的复合物数量。"
+        "en": "Number of complexes to save."
       }
     },
     {
@@ -133,7 +133,7 @@
       "default": "gasteiger",
       "description": {
         "zh": "受体准备的电荷模型 (例如 'gasteiger', 'zero')。",
-        "en": "受体准备的电荷模型 (例如 'gasteiger', 'zero')。"
+        "en": "Charge model for receptor preparation (e.g. 'gasteiger', 'zero')."
       }
     },
     {
@@ -143,7 +143,7 @@
       "default": "vina",
       "description": {
         "zh": "对接引擎类型 (例如 'vina', 'gnina')。",
-        "en": "对接引擎类型 (例如 'vina', 'gnina')。"
+        "en": "Docking engine type (e.g. 'vina', 'gnina')."
       }
     }
   ]

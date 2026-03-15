@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Output directory.",
+        "zh": "输出目录。",
         "en": "Output directory."
       }
     },
@@ -22,7 +22,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Species name.",
+        "zh": "物种名称。",
         "en": "Species name."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Genome FASTA file.",
+        "zh": "基因组 FASTA 文件。",
         "en": "Genome FASTA file."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Genome GTF file.",
+        "zh": "基因组 GTF 文件。",
         "en": "Genome GTF file."
       }
     }

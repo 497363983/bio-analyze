@@ -21,14 +21,19 @@ logger = get_logger(__name__)
 
 class GninaEngine(BaseDockingEngine):
     """
-    基于 Gnina 的对接引擎实现。
-    Gnina 是 Smina 的一个分支，集成了深度学习评分函数 (CNN scoring)。
-    本引擎通过 subprocess 调用 gnina 命令行工具。
+    zh: 基于 Gnina 的对接引擎实现。
+    en: Gnina-based docking engine implementation.
+
+    zh: Gnina 是 Smina 的一个分支，集成了深度学习评分函数 (CNN scoring)。
+    en: Gnina is a fork of Smina that integrates deep learning scoring functions (CNN scoring).
+    zh: 本引擎通过 subprocess 调用 gnina 命令行工具。
+    en: This engine invokes the gnina command-line tool via subprocess.
     """
 
     def __init__(self, receptor_pdbqt: Path, ligand_pdbqt: Path, output_dir: Path):
         """
-        初始化 Gnina 对接引擎。
+        zh: 初始化 Gnina 对接引擎。
+        en: Initialize the Gnina docking engine.
         """
         super().__init__(receptor_pdbqt, ligand_pdbqt, output_dir)
 
@@ -53,7 +58,8 @@ class GninaEngine(BaseDockingEngine):
 
     def compute_box(self, center: list[float], size: list[float]):
         """
-        定义搜索空间（网格盒）。
+        zh: 定义搜索空间（网格盒）。
+        en: Define the search space (grid box).
         """
         logger.info(f"设置 Gnina 搜索盒子 (中心={center}, 尺寸={size})...")
         self.box_center = center
@@ -61,7 +67,8 @@ class GninaEngine(BaseDockingEngine):
 
     def dock(self, exhaustiveness: int = 8, n_poses: int = 9, min_rmsd: float = 1.0):
         """
-        执行对接。
+        zh: 执行对接。
+        en: Perform docking.
         """
         if self.box_center is None or self.box_size is None:
             raise RuntimeError("在执行对接前必须先调用 compute_box 设置搜索空间。")
@@ -113,20 +120,19 @@ class GninaEngine(BaseDockingEngine):
         logger.info(f"执行 Gnina 命令: {' '.join(cmd_args)}")
 
         try:
-            result = subprocess.run(
-                cmd_args, capture_output=True, text=True, check=True, encoding="utf-8"
-            )
+            result = subprocess.run(cmd_args, capture_output=True, text=True, check=True, encoding="utf-8")
             logger.debug(f"Gnina 输出:\n{result.stdout}")
         except subprocess.CalledProcessError as e:
             logger.error(f"Gnina 执行失败: {e.stderr}")
             raise RuntimeError(f"Gnina 对接失败: {e.stderr}")
 
-    def save_results(
-        self, output_name: str = "docked.pdbqt", output_dir: Optional[Path] = None
-    ) -> Path:
+    def save_results(self, output_name: str = "docked.pdbqt", output_dir: Optional[Path] = None) -> Path:
         """
-        保存对接姿态。
-        实际上是将临时输出文件复制到目标位置。
+        zh: 保存对接姿态。
+        en: Save docked poses.
+
+        zh: 实际上是将临时输出文件复制到目标位置。
+        en: Actually copies the temporary output file to the target location.
         """
         if not self._temp_output_file.exists():
             raise RuntimeError("未找到对接结果文件。请先运行 dock()。")
@@ -146,7 +152,8 @@ class GninaEngine(BaseDockingEngine):
         output_name_prefix: str = "complex_pose",
     ):
         """
-        使用 PyMOL 将对接的配体-受体复合物保存为 PDB 文件。
+        zh: 使用 PyMOL 将对接的配体-受体复合物保存为 PDB 文件。
+        en: Save the docked ligand-receptor complex as a PDB file using PyMOL.
         """
         if cmd is None:
             logger.error("PyMOL 未安装。无法保存 PDB 复合物。")
@@ -162,7 +169,7 @@ class GninaEngine(BaseDockingEngine):
         # 解析结果数量
         poses_info = self.get_all_poses_info(n_poses=999)
         total_poses = len(poses_info)
-        
+
         if total_poses == 0:
             logger.warning("对接结果为空，无法保存复合物。")
             return
@@ -174,19 +181,18 @@ class GninaEngine(BaseDockingEngine):
         logger.info(f"保存 {n_save} 个对接复合物 (PDB 格式) 到 {target_dir}...")
 
         try:
-            merge_complex_with_pymol(
-                self.receptor, self._temp_output_file, target_dir, n_save, output_name_prefix
-            )
+            merge_complex_with_pymol(self.receptor, self._temp_output_file, target_dir, n_save, output_name_prefix)
 
         except Exception as e:
             logger.error(f"使用 PyMOL 生成复合物 PDB 失败: {e}")
         finally:
-             if cmd is not None:
+            if cmd is not None:
                 cmd.reinitialize()
 
     def score(self) -> float:
         """
-        返回最佳能量评分（kcal/mol）。
+        zh: 返回最佳能量评分（kcal/mol）。
+        en: Return the best energy score (kcal/mol).
         """
         if not self._temp_output_file.exists():
             return 0.0
@@ -198,8 +204,11 @@ class GninaEngine(BaseDockingEngine):
 
     def get_all_poses_info(self, n_poses: int = 9) -> list[dict[str, Any]]:
         """
-        返回所有姿态的信息：能量，RMSD 下界，RMSD 上界，以及 CNN 评分。
-        从 PDBQT 输出文件中解析。
+        zh: 返回所有姿态的信息：能量，RMSD 下界，RMSD 上界，以及 CNN 评分。
+        en: Return information for all poses: energy, RMSD lower bound, RMSD upper bound, and CNN score.
+
+        zh: 从 PDBQT 输出文件中解析。
+        en: Parsed from the PDBQT output file.
         """
         if not self._temp_output_file.exists():
             return []
@@ -216,7 +225,7 @@ class GninaEngine(BaseDockingEngine):
         cnn_affinity_pattern = re.compile(r"REMARK CNNaffinity:\s+([-\d.]+)")
 
         try:
-            with open(self._temp_output_file, "r", encoding="utf-8") as f:
+            with open(self._temp_output_file, encoding="utf-8") as f:
                 lines = f.readlines()
 
             current_pose = {}
@@ -228,7 +237,7 @@ class GninaEngine(BaseDockingEngine):
                     pose_idx += 1
                     current_pose = {"pose": pose_idx}
                     in_model = True
-                
+
                 elif in_model:
                     if line.startswith("REMARK VINA RESULT:"):
                         match = vina_pattern.search(line)
@@ -236,24 +245,24 @@ class GninaEngine(BaseDockingEngine):
                             current_pose["affinity"] = float(match.group(1))
                             current_pose["rmsd_lb"] = float(match.group(2))
                             current_pose["rmsd_ub"] = float(match.group(3))
-                    
+
                     elif line.startswith("REMARK CNNscore:"):
                         match = cnn_score_pattern.search(line)
                         if match:
                             current_pose["cnn_score"] = float(match.group(1))
-                            
+
                     elif line.startswith("REMARK CNNaffinity:"):
                         match = cnn_affinity_pattern.search(line)
                         if match:
                             current_pose["cnn_affinity"] = float(match.group(1))
-                            
+
                     elif line.startswith("ENDMDL"):
                         if "affinity" in current_pose:
                             results.append(current_pose)
                             if len(results) >= n_poses:
                                 break
                         in_model = False
-                                
+
         except Exception as e:
             logger.error(f"解析 Gnina 结果文件失败: {e}")
             return []
