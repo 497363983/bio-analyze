@@ -18,7 +18,7 @@ def test_docking_integration_real_data():
     Integration test using real CIF receptors and SDF ligands.
     """
     # Use fixed output directory
-    output_dir = OUTPUT_DIR
+    output_dir = OUTPUT_DIR / "vina"
     if output_dir.exists():
         shutil.rmtree(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,100 @@
+{
+  "name": "heatmap",
+  "type": "cli",
+  "description": {
+    "zh": "",
+    "en": ""
+  },
+  "params": [
+    {
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Input file path (CSV, TSV, or Excel).",
+        "en": "Input file path (CSV, TSV, or Excel)."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Output file path.",
+        "en": "Output file path."
+      }
+    },
+    {
+      "name": "--index-col",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Column to use as row index.",
+        "en": "Column to use as row index."
+      }
+    },
+    {
+      "name": "--cluster-rows",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": {
+        "zh": "Whether to cluster rows.",
+        "en": "Whether to cluster rows."
+      }
+    },
+    {
+      "name": "--cluster-cols",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": {
+        "zh": "Whether to cluster columns.",
+        "en": "Whether to cluster columns."
+      }
+    },
+    {
+      "name": "--z-score",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "0 (rows) or 1 (columns) for standardization. None to disable.",
+        "en": "0 (rows) or 1 (columns) for standardization. None to disable."
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": {
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+      }
+    },
+    {
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Plot title.",
+        "en": "Plot title."
+      }
+    },
+    {
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Sheet name for Excel files.",
+        "en": "Sheet name for Excel files."
+      }
+    }
+  ]
+}

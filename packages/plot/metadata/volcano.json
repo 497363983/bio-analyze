@@ -1,0 +1,99 @@
+{
+  "name": "volcano",
+  "description": {
+    "en": "",
+    "zh": ""
+  },
+  "params": [
+    {
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Input file path (CSV, TSV, or Excel).",
+        "zh": "Input file path (CSV, TSV, or Excel)."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Output file path (e.g. volcano.png).",
+        "zh": "Output file path (e.g. volcano.png)."
+      }
+    },
+    {
+      "name": "--x",
+      "type": "string",
+      "required": false,
+      "default": "log2FoldChange",
+      "description": {
+        "en": "Column name for log2 fold change.",
+        "zh": "Column name for log2 fold change."
+      }
+    },
+    {
+      "name": "--y",
+      "type": "string",
+      "required": false,
+      "default": "pvalue",
+      "description": {
+        "en": "Column name for p-value.",
+        "zh": "Column name for p-value."
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": {
+        "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+      }
+    },
+    {
+      "name": "--fc-cutoff",
+      "type": "float",
+      "required": false,
+      "default": "1.0",
+      "description": {
+        "en": "Fold change cutoff.",
+        "zh": "Fold change cutoff."
+      }
+    },
+    {
+      "name": "--p-cutoff",
+      "type": "float",
+      "required": false,
+      "default": "0.05",
+      "description": {
+        "en": "P-value cutoff.",
+        "zh": "P-value cutoff."
+      }
+    },
+    {
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Plot title.",
+        "zh": "Plot title."
+      }
+    },
+    {
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Sheet name for Excel files.",
+        "zh": "Sheet name for Excel files."
+      }
+    }
+  ]
+}

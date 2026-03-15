@@ -124,3 +124,46 @@ def test_invalid_config_format(tmp_path):
     result = runner.invoke(app, ["run", "--config", str(config_file)])
     assert result.exit_code == 1
     assert "Error loading config" in result.output
+
+
+def test_engine_config(test_data, tmp_path):
+    rec, lig, output_dir = test_data
+
+    with patch("bio_analyze_docking.cli.run_docking") as mock_run:
+        mock_run.return_value = {}
+
+        # Test command line argument
+        result = runner.invoke(
+            app,
+            [
+                "run",
+                "--receptor",
+                str(rec),
+                "--ligand",
+                str(lig),
+                "--output",
+                str(output_dir),
+                "--engine",
+                "gnina",
+            ],
+        )
+
+        assert result.exit_code == 0
+        call_kwargs = mock_run.call_args.kwargs
+        assert call_kwargs["engine"] == "gnina"
+
+        # Test config file
+        config_file = tmp_path / "config_engine.json"
+        config = {
+            "receptor": str(rec),
+            "ligand": str(lig),
+            "output_dir": str(output_dir),
+            "engine": "smina",
+        }
+        with open(config_file, "w") as f:
+            json.dump(config, f)
+
+        result = runner.invoke(app, ["run", "--config", str(config_file)])
+        assert result.exit_code == 0
+        call_kwargs = mock_run.call_args.kwargs
+        assert call_kwargs["engine"] == "smina"

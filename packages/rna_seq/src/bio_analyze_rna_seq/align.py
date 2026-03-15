@@ -2,7 +2,7 @@ import shutil
 from pathlib import Path
 
 import pandas as pd
-from bio_analyze_plot.plots.chromosome import ChromosomeDistributionPlot
+from bio_analyze_plot.plots.chromosome import ChromosomePlot
 
 from bio_analyze_core.logging import get_logger
 from bio_analyze_core.subprocess import run as run_command
@@ -245,7 +245,7 @@ class StarAlignmentManager:
 
         # 绘图
         plot_out = self.output_dir / f"{sample}_chrom_dist.png"
-        plotter = ChromosomeDistributionPlot(theme=self.theme)
+        plotter = ChromosomePlot(theme=self.theme)
         plotter.plot(
             data=df,
             chrom_col="chrom",

@@ -1,3 +1,6 @@
+---
+---
+
 # bio-analyze-docking
 
 Automated molecular docking module based on Vina, providing a full-process solution from receptor/ligand preparation to docking simulation and result summarization. Supports single docking and high-throughput batch docking.
@@ -30,6 +33,8 @@ Automated molecular docking module based on Vina, providing a full-process solut
 
 Convert PDB/CIF files to PDBQT format, automatically adding polar hydrogens.
 
+<ParamTable params-path="docking/prepare-receptor_cli" />
+
 ```bash
 # Single file
 uv run bioanalyze docking prepare-receptor receptor.pdb -o receptor.pdbqt
@@ -42,11 +47,15 @@ uv run bioanalyze docking prepare-receptor structure.cif -o structure.pdbqt
 
 Convert SDF/SMILES/PDB files to PDBQT format, automatically generating 3D conformations and handling flexible bonds.
 
+<ParamTable params-path="docking/prepare-ligand_cli" />
+
 ```bash
 uv run bioanalyze docking prepare-ligand ligand.sdf -o ligand.pdbqt
 ```
 
 ### 3. Run Docking (Run Docking)
+
+<ParamTable params-path="docking/run_cli" />
 
 #### Scenario A: Single Docking
 
@@ -152,6 +161,10 @@ result = run_docking(
 print(f"Best Score: {result['best_score']}")
 ```
 
+**Parameters**:
+
+<ParamTable params-path="docking/run_api" />
+
 ### 2. Batch Docking (`run_docking_batch`)
 
 ```python
@@ -168,6 +181,10 @@ results = run_docking_batch(
 
 # results is a list containing results of each docking task
 ```
+
+**Parameters**:
+
+<ParamTable params-path="docking/run_batch_api" />
 
 ### 3. Underlying Components (Components)
 

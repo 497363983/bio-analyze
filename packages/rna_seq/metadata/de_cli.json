@@ -1,0 +1,50 @@
+{
+  "name": "de",
+  "type": "cli",
+  "description": {
+    "zh": "",
+    "en": ""
+  },
+  "params": [
+    {
+      "name": "--counts",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Counts matrix CSV file.",
+        "en": "Counts matrix CSV file."
+      }
+    },
+    {
+      "name": "--design",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Design matrix CSV file.",
+        "en": "Design matrix CSV file."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Output directory.",
+        "en": "Output directory."
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": {
+        "zh": "Plot theme.",
+        "en": "Plot theme."
+      }
+    }
+  ]
+}

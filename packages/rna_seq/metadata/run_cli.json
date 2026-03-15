@@ -1,0 +1,300 @@
+{
+  "name": "run",
+  "type": "cli",
+  "description": {
+    "zh": "",
+    "en": ""
+  },
+  "params": [
+    {
+      "name": "--config, -c",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Path to JSON/YAML config file. Overrides other options if provided.",
+        "en": "Path to JSON/YAML config file. Overrides other options if provided."
+      }
+    },
+    {
+      "name": "--input, -i",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Directory containing raw FastQ files. Required if --sra-ids is not provided.",
+        "en": "Directory containing raw FastQ files. Required if --sra-ids is not provided."
+      }
+    },
+    {
+      "name": "--sra-id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "SRA Accession IDs to download and process (e.g. SRR123456).",
+        "en": "SRA Accession IDs to download and process (e.g. SRR123456)."
+      }
+    },
+    {
+      "name": "--output, -o",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Directory for analysis results.",
+        "en": "Directory for analysis results."
+      }
+    },
+    {
+      "name": "--design, -d",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "CSV file describing experimental design (columns: sample, condition, ...).",
+        "en": "CSV file describing experimental design (columns: sample, condition, ...)."
+      }
+    },
+    {
+      "name": "--species, -s",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Species name for auto-downloading reference genome (e.g. 'Homo sapiens').",
+        "en": "Species name for auto-downloading reference genome (e.g. 'Homo sapiens')."
+      }
+    },
+    {
+      "name": "--genome-fasta",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Path to reference genome FASTA file (overrides --species).",
+        "en": "Path to reference genome FASTA file (overrides --species)."
+      }
+    },
+    {
+      "name": "--genome-gtf",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Path to reference genome GTF annotation file (overrides --species).",
+        "en": "Path to reference genome GTF annotation file (overrides --species)."
+      }
+    },
+    {
+      "name": "--threads, -t",
+      "type": "int",
+      "required": false,
+      "default": "4",
+      "description": {
+        "zh": "Number of threads to use.",
+        "en": "Number of threads to use."
+      }
+    },
+    {
+      "name": "--skip-qc",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "Skip Quality Control step.",
+        "en": "Skip Quality Control step."
+      }
+    },
+    {
+      "name": "--skip-trim",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "Skip Trimming step.",
+        "en": "Skip Trimming step."
+      }
+    },
+    {
+      "name": "--star-align",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "Enable STAR alignment and chromosome distribution analysis.",
+        "en": "Enable STAR alignment and chromosome distribution analysis."
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": {
+        "zh": "Plotting theme (default, nature, science, or custom package name).",
+        "en": "Plotting theme (default, nature, science, or custom package name)."
+      }
+    },
+    {
+      "name": "--step",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Run only a specific step (qc, quant, de, enrichment, report). If None, run all.",
+        "en": "Run only a specific step (qc, quant, de, enrichment, report). If None, run all."
+      }
+    },
+    {
+      "name": "--qualified-quality-phred",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "The quality value that a base is qualified. Default 15 means Phred quality >= Q15.",
+        "en": "The quality value that a base is qualified. Default 15 means Phred quality >= Q15."
+      }
+    },
+    {
+      "name": "--unqualified-percent-limit",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "How many percents of bases are allowed to be unqualified (0~100). Default 40 means 40%.",
+        "en": "How many percents of bases are allowed to be unqualified (0~100). Default 40 means 40%."
+      }
+    },
+    {
+      "name": "--n-base-limit",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "How many N bases are allowed. Default 5.",
+        "en": "How many N bases are allowed. Default 5."
+      }
+    },
+    {
+      "name": "--length-required",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Reads shorter than length_required will be discarded. Default 15.",
+        "en": "Reads shorter than length_required will be discarded. Default 15."
+      }
+    },
+    {
+      "name": "--max-len1",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "If read1 is longer than max_len1, trim it at tail. Default 0 (no trim).",
+        "en": "If read1 is longer than max_len1, trim it at tail. Default 0 (no trim)."
+      }
+    },
+    {
+      "name": "--max-len2",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "If read2 is longer than max_len2, trim it at tail. Default 0 (no trim).",
+        "en": "If read2 is longer than max_len2, trim it at tail. Default 0 (no trim)."
+      }
+    },
+    {
+      "name": "--adapter-sequence",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Adapter sequence for read1. Auto-detected if not provided.",
+        "en": "Adapter sequence for read1. Auto-detected if not provided."
+      }
+    },
+    {
+      "name": "--adapter-sequence-r2",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Adapter sequence for read2. Auto-detected if not provided.",
+        "en": "Adapter sequence for read2. Auto-detected if not provided."
+      }
+    },
+    {
+      "name": "--trim-front1",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Trimming how many bases in front for read1.",
+        "en": "Trimming how many bases in front for read1."
+      }
+    },
+    {
+      "name": "--trim-tail1",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Trimming how many bases in tail for read1.",
+        "en": "Trimming how many bases in tail for read1."
+      }
+    },
+    {
+      "name": "--cut-right",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "Enable cut_right (sliding window trimming).",
+        "en": "Enable cut_right (sliding window trimming)."
+      }
+    },
+    {
+      "name": "--cut-window-size",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Window size for cut_right. Default 4.",
+        "en": "Window size for cut_right. Default 4."
+      }
+    },
+    {
+      "name": "--cut-mean-quality",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Mean quality requirement for cut_right. Default 20.",
+        "en": "Mean quality requirement for cut_right. Default 20."
+      }
+    },
+    {
+      "name": "--dedup",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "Enable deduplication.",
+        "en": "Enable deduplication."
+      }
+    },
+    {
+      "name": "--poly-g-min-len",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Minimum length for polyG tail trimming. Default 10.",
+        "en": "Minimum length for polyG tail trimming. Default 10."
+      }
+    }
+  ]
+}

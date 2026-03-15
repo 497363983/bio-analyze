@@ -19,6 +19,25 @@ logger = get_logger("bio_analyze.rna_seq")
 
 
 class RNASeqPipeline:
+    """
+    运行 RNA-Seq 分析流程。
+
+    Args:
+        input_dir (Path, optional): 包含原始 FastQ 文件的目录。
+        output_dir (Path): 分析结果输出目录。
+        design_file (Path): 实验设计 CSV 文件路径。
+        species (str, optional): 物种名称 (例如 "Homo sapiens")。
+        genome_fasta (Path, optional): 参考基因组 FASTA 文件路径。
+        genome_gtf (Path, optional): 基因组注释 GTF 文件路径。
+        threads (int, optional): 并行线程数 (默认: 4)。
+        skip_qc (bool, optional): 跳过质量控制步骤。
+        skip_trim (bool, optional): 跳过修剪步骤。
+        sra_ids (list[str], optional): NCBI SRA Accession ID 列表。
+        step (str, optional): 仅运行特定步骤。
+        qc_params (dict, optional): 额外的 QC 参数。
+        star_align (bool, optional): 启用 STAR 比对。
+        theme (str, optional): 绘图主题。
+    """
     def __init__(
         self,
         input_dir: Path | None,
@@ -56,8 +75,6 @@ class RNASeqPipeline:
         if not self.input_dir and not self.sra_ids and not self.step:
             raise ValueError("Either input_dir or sra_ids must be provided.")
 
-        # 设置日志
-        setup_logging()
 
     def run(self):
         logger.info("Starting RNA-Seq Analysis Pipeline...")

@@ -1,0 +1,169 @@
+{
+  "name": "line",
+  "description": {
+    "en": "",
+    "zh": ""
+  },
+  "params": [
+    {
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Input file path (CSV, TSV, or Excel).",
+        "zh": "Input file path (CSV, TSV, or Excel)."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Output file path.",
+        "zh": "Output file path."
+      }
+    },
+    {
+      "name": "--x",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Column name for X-axis.",
+        "zh": "Column name for X-axis."
+      }
+    },
+    {
+      "name": "--y",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Column name for Y-axis.",
+        "zh": "Column name for Y-axis."
+      }
+    },
+    {
+      "name": "--hue",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Grouping column name (hue).",
+        "zh": "Grouping column name (hue)."
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": {
+        "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+      }
+    },
+    {
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Plot title.",
+        "zh": "Plot title."
+      }
+    },
+    {
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Sheet name for Excel files.",
+        "zh": "Sheet name for Excel files."
+      }
+    },
+    {
+      "name": "--error-bar-type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Error bar type: SD, SE, CI.",
+        "zh": "Error bar type: SD, SE, CI."
+      }
+    },
+    {
+      "name": "--error-bar-ci",
+      "type": "float",
+      "required": false,
+      "default": "95",
+      "description": {
+        "en": "Confidence interval size (default: 95).",
+        "zh": "Confidence interval size (default: 95)."
+      }
+    },
+    {
+      "name": "--error-bar-capsize",
+      "type": "float",
+      "required": false,
+      "default": "3.0",
+      "description": {
+        "en": "Error bar capsize (in points).",
+        "zh": "Error bar capsize (in points)."
+      }
+    },
+    {
+      "name": "--markers",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "en": "Use default markers for data points.",
+        "zh": "Use default markers for data points."
+      }
+    },
+    {
+      "name": "--marker-style",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Specific marker symbols (comma-separated, e.g. 'o,s'). Overrides --markers.",
+        "zh": "Specific marker symbols (comma-separated, e.g. 'o,s'). Overrides --markers."
+      }
+    },
+    {
+      "name": "--dashes",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": {
+        "en": "Use dashes for lines.",
+        "zh": "Use dashes for lines."
+      }
+    },
+    {
+      "name": "--smooth",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "en": "Enable smooth curve fitting.",
+        "zh": "Enable smooth curve fitting."
+      }
+    },
+    {
+      "name": "--smooth-points",
+      "type": "int",
+      "required": false,
+      "default": "300",
+      "description": {
+        "en": "Number of points for interpolation.",
+        "zh": "Number of points for interpolation."
+      }
+    }
+  ]
+}

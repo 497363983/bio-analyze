@@ -1,50 +1,18 @@
 from typing import Any
 
-import matplotlib.transforms as transforms
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from matplotlib.figure import Figure
-from matplotlib.patches import Ellipse
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-from .base import BasePlot, save_plot
+from .base import save_plot
+from .scatter import ScatterPlot
 
 
-def confidence_ellipse(x, y, ax, n_std=2.0, facecolor="none", **kwargs):
-    """
-    Create a plot of the covariance confidence ellipse of *x* and *y*.
-    """
-    if x.size != y.size:
-        raise ValueError("x and y must be the same size")
-
-    cov = np.cov(x, y)
-    pearson = cov[0, 1] / np.sqrt(cov[0, 0] * cov[1, 1])
-    # Using a special case to obtain the eigenvalues of this
-    # two-dimensional dataset.
-    ell_radius_x = np.sqrt(1 + pearson)
-    ell_radius_y = np.sqrt(1 - pearson)
-    ellipse = Ellipse((0, 0), width=ell_radius_x * 2, height=ell_radius_y * 2, facecolor=facecolor, **kwargs)
-
-    # Calculating the standard deviation of x from
-    # the squareroot of the variance and multiplying
-    # with the given number of standard deviations.
-    scale_x = np.sqrt(cov[0, 0]) * n_std
-    mean_x = np.mean(x)
-
-    # calculating the standard deviation of y ...
-    scale_y = np.sqrt(cov[1, 1]) * n_std
-    mean_y = np.mean(y)
-
-    transf = transforms.Affine2D().rotate_deg(45).scale(scale_x, scale_y).translate(mean_x, mean_y)
-
-    ellipse.set_transform(transf + ax.transData)
-    return ax.add_patch(ellipse)
-
-
-class PCAPlot(BasePlot):
+class PCAPlot(ScatterPlot):
     """
     PCA 图实现。
     """
@@ -61,7 +29,7 @@ class PCAPlot(BasePlot):
         n_components: int = 2,
         cluster: bool = False,  # 是否在组周围绘制置信椭圆
         n_clusters: int = 3,  # 未用于椭圆，但为兼容性保留。实际上我们使用 hue 分组。
-        title: str | None = None,  # 移回显式参数列表以修复 NameError
+        title: str | None = None,
         xlabel: str | None = None,
         ylabel: str | None = None,
         output: str = "pca.png",
@@ -88,23 +56,9 @@ class PCAPlot(BasePlot):
         theme_params = self.get_chart_specific_params("pca")
 
         # 合并参数
-        # s (size) 是常见的 seaborn 参数
-        s = kwargs.get("s", theme_params.get("s", None))
-        if s is not None:
-            kwargs["s"] = s
-
-        # 处理 palette: kwargs > theme_params > 自动生成
-        palette = kwargs.get("palette", theme_params.get("palette", None))
-        if palette is not None:
-            kwargs["palette"] = palette
-
-        # 椭圆样式参数
-        ellipse_kws = kwargs.get("ellipse_kws", theme_params.get("ellipse_kws", {}))
-        # 默认椭圆 alpha
-        if "alpha" not in ellipse_kws:
-            ellipse_kws["alpha"] = 0.1
-
-        fig, ax = self.get_fig_ax()
+        for k, v in theme_params.items():
+            if k not in kwargs:
+                kwargs[k] = v
 
         # 准备数据
         df = data.copy()
@@ -170,101 +124,29 @@ class PCAPlot(BasePlot):
             hue_col = "Cluster"
             plot_df[hue_col] = [f"Cluster {c + 1}" for c in clusters]
 
-        # 聚类 / 椭圆
-        if cluster and hue_col:
-            # 为每组绘制置信椭圆
-            # 我们需要访问调色板以使椭圆颜色与点匹配
-
-            # 获取唯一组
-            unique_groups = plot_df[hue_col].unique()
-
-            # 如果未提供，手动创建调色板以确保持致性
-            palette = None
-            if "palette" in kwargs:
-                palette = kwargs["palette"]
-            else:
-                # 从 seaborn 获取默认调色板
-                # 这很棘手，因为如果我们不提供调色板映射，seaborn 会在内部全分配颜色
-                # 但我们可以生成一个。
-                n_colors = len(unique_groups)
-                colors = sns.color_palette(n_colors=n_colors)
-                palette = dict(zip(unique_groups, colors))
-                # 稍后将此调色板传递给 scatterplot 以确保匹配
-                kwargs["palette"] = palette
-
-            for group in unique_groups:
-                group_data = plot_df[plot_df[hue_col] == group]
-                if len(group_data) < 3:
-                    # 至少需要 3 个点来绘制椭圆？实际上 2 个可能行，但 3 个对方差更安全
-                    continue
-
-                # 绘制椭圆
-                # 获取颜色
-                color = palette[group] if isinstance(palette, dict) else None
-
-                # 准备椭圆参数
-                final_ellipse_kws = ellipse_kws.copy()
-                if "facecolor" not in final_ellipse_kws:
-                    final_ellipse_kws["facecolor"] = color
-
-                # 绘制填充椭圆
-                confidence_ellipse(
-                    group_data["PC1"],
-                    group_data["PC2"],
-                    ax,
-                    n_std=2.0,
-                    edgecolor="none",  # 填充无边缘
-                    zorder=0,  # 在点后面
-                    **final_ellipse_kws,
-                )
-                # 绘制轮廓
-                final_outline_kws = ellipse_kws.copy()
-                # 移除填充相关的参数
-                if "alpha" in final_outline_kws:
-                    del final_outline_kws["alpha"]
-                if "facecolor" in final_outline_kws:
-                    del final_outline_kws["facecolor"]
-
-                confidence_ellipse(
-                    group_data["PC1"],
-                    group_data["PC2"],
-                    ax,
-                    n_std=2.0,
-                    edgecolor=color,
-                    facecolor="none",
-                    linestyle="--",
-                    linewidth=1,
-                    zorder=0,
-                )
-
         # 使用方差确定 x 和 y 标签
         var_ratio = pca.explained_variance_ratio_
-        xlabel = f"PC1 ({var_ratio[0]:.2%})"
-        ylabel = f"PC2 ({var_ratio[1]:.2%})"
+        if xlabel is None:
+            xlabel = f"PC1 ({var_ratio[0]:.2%})"
+        if ylabel is None:
+            ylabel = f"PC2 ({var_ratio[1]:.2%})"
 
-        sns.scatterplot(
+        # 调用父类 ScatterPlot.plot
+        # 注意：这里我们通过 add_ellipse 参数复用父类的椭圆绘制逻辑
+        # PCA 的 cluster 参数现在对应 ScatterPlot 的 add_ellipse 参数
+        
+        # 传递给父类的 kwargs
+        # 移除已处理的参数，避免传递冲突（虽然 kwargs 主要是给 seaborn 的）
+        
+        return super().plot(
             data=plot_df,
             x="PC1",
             y="PC2",
             hue=hue_col,
-            ax=ax,
-            **{
-                k: v for k, v in kwargs.items() if k not in ["title", "ellipse_kws", "palette"]
-            },  # 避免将 title, ellipse_kws, palette 传递给 scatterplot (palette 单独传或者已经在 kwargs 中？)
-            palette=kwargs.get("palette"),  # 显式传递 palette
+            title=title,
+            xlabel=xlabel,
+            ylabel=ylabel,
+            add_ellipse=cluster and (hue_col is not None),
+            # 其他 kwargs 透传给 ScatterPlot -> seaborn.scatterplot
+            **kwargs
         )
-
-        if title:
-            ax.set_title(title)  # 显式设置标题
-
-        if xlabel:
-            ax.set_xlabel(xlabel)
-        else:
-            ax.set_xlabel(f"PC1 ({var_ratio[0]:.2%})")
-
-        if ylabel:
-            ax.set_ylabel(ylabel)
-        else:
-            ax.set_ylabel(f"PC2 ({var_ratio[1]:.2%})")
-
-        return fig

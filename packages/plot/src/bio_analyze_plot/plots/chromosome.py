@@ -10,7 +10,7 @@ from matplotlib.figure import Figure
 from .base import BasePlot, save_plot
 
 
-class ChromosomeDistributionPlot(BasePlot):
+class ChromosomePlot(BasePlot):
     """染色体 Reads 覆盖度分布图（Track 风格）。"""
 
     @save_plot

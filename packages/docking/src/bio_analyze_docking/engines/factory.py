@@ -3,6 +3,8 @@ from __future__ import annotations
 from pathlib import Path
 
 from .base import BaseDockingEngine
+from .gnina import GninaEngine
+from .smina import SminaEngine
 from .vina import VinaEngine
 
 
@@ -14,6 +16,8 @@ class DockingEngineFactory:
 
     _engines: dict[str, type[BaseDockingEngine]] = {
         "vina": VinaEngine,
+        "smina": SminaEngine,
+        "gnina": GninaEngine,
     }
 
     @classmethod

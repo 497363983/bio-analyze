@@ -1,31 +1,64 @@
+---
+order: 3
+---
+
 # 快速开始
 
-## 快速开始（开发态）
+本指南将帮助您快速上手 `bio-analyze` 并完成常见的生物信息学任务。
 
-```powershell
-uv venv
-uv pip install -e packages/core -e packages/cli -e packages/transcriptome -e packages/docking
-.\.venv\Scripts\bioanalyse.exe plugins
-```
+## 1. 验证安装
 
-## Docker 环境测试指南 (Running Tests in Docker)
-
-对于 Windows 用户或不想在本地安装复杂依赖的开发者，我们提供了在 Docker 容器中运行测试的便捷方式。该环境会自动挂载本地代码、数据目录 (`data`) 和输出目录 (`output`)，因此：
-
-1. 修改代码后无需重新构建镜像即可测试。
-2. 测试代码可以直接访问 `data` 目录下的文件。
-3. 测试生成的报告或文件可以直接在本地 `output` 目录查看。
-
-**Windows (PowerShell):**
-
-```powershell
-.\run_tests_docker.ps1
-```
-
-**Linux / macOS:**
+首先，确保 `bio-analyze` 已正确安装：
 
 ```bash
-./run_tests_docker.sh
+bio-analyze --version
 ```
 
-这将自动构建测试镜像并运行所有测试用例。
+## 2. 基础用法
+
+### 绘制火山图
+
+可视化差异表达结果是最常见的任务之一。
+
+1. **准备数据**: 包含 `log2FoldChange` 和 `padj` (或 p-value) 列的 CSV 文件。
+2. **运行命令**:
+
+```bash
+bio-analyze plot volcano results.csv --fc-cutoff 1.5 --p-cutoff 0.05
+```
+
+这将在当前目录生成 `volcano.png` (或 PDF)。
+
+### 运行 RNA-Seq 流程
+
+运行完整的 RNA-Seq 分析流程（从原始 Reads 到表达矩阵）：
+
+```bash
+# 初始化新项目配置
+bio-analyze rna-seq init my_project
+
+# 编辑 config.yaml 指定您的 FASTQ 文件和参考基因组
+
+# 运行流程
+bio-analyze rna-seq run --config my_project/config.yaml
+```
+
+## 3. 获取帮助
+
+您随时可以使用 `--help` 参数查看任何模块的可用命令和选项：
+
+```bash
+# 列出所有模块
+bio-analyze --help
+
+# 获取特定模块的帮助 (如 plot)
+bio-analyze plot --help
+
+# 获取特定图表类型的帮助
+bio-analyze plot volcano --help
+```
+
+## 下一步
+
+- 探索 **功能模块** 部分，了解特定工具（绘图、RNA-Seq 等）。
+- 查看 **示例** 以了解更复杂的用例。

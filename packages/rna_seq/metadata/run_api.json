@@ -1,0 +1,150 @@
+{
+  "name": "run",
+  "type": "api",
+  "description": {
+    "zh": "运行 RNA-Seq 分析流程。",
+    "en": "运行 RNA-Seq 分析流程。"
+  },
+  "params": [
+    {
+      "name": "input_dir",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "包含原始 FastQ 文件的目录。",
+        "en": "包含原始 FastQ 文件的目录。"
+      }
+    },
+    {
+      "name": "output_dir",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "分析结果输出目录。",
+        "en": "分析结果输出目录。"
+      }
+    },
+    {
+      "name": "design_file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "实验设计 CSV 文件路径。",
+        "en": "实验设计 CSV 文件路径。"
+      }
+    },
+    {
+      "name": "species",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "物种名称 (例如 \"Homo sapiens\")。",
+        "en": "物种名称 (例如 \"Homo sapiens\")。"
+      }
+    },
+    {
+      "name": "genome_fasta",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "参考基因组 FASTA 文件路径。",
+        "en": "参考基因组 FASTA 文件路径。"
+      }
+    },
+    {
+      "name": "genome_gtf",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "基因组注释 GTF 文件路径。",
+        "en": "基因组注释 GTF 文件路径。"
+      }
+    },
+    {
+      "name": "threads",
+      "type": "int",
+      "required": false,
+      "default": "4",
+      "description": {
+        "zh": "并行线程数 (默认: 4)。",
+        "en": "并行线程数 (默认: 4)。"
+      }
+    },
+    {
+      "name": "skip_qc",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "跳过质量控制步骤。",
+        "en": "跳过质量控制步骤。"
+      }
+    },
+    {
+      "name": "skip_trim",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "跳过修剪步骤。",
+        "en": "跳过修剪步骤。"
+      }
+    },
+    {
+      "name": "sra_ids",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "NCBI SRA Accession ID 列表。",
+        "en": "NCBI SRA Accession ID 列表。"
+      }
+    },
+    {
+      "name": "step",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "仅运行特定步骤。",
+        "en": "仅运行特定步骤。"
+      }
+    },
+    {
+      "name": "qc_params",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "额外的 QC 参数。",
+        "en": "额外的 QC 参数。"
+      }
+    },
+    {
+      "name": "star_align",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "启用 STAR 比对。",
+        "en": "启用 STAR 比对。"
+      }
+    },
+    {
+      "name": "theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": {
+        "zh": "绘图主题。",
+        "en": "绘图主题。"
+      }
+    }
+  ]
+}

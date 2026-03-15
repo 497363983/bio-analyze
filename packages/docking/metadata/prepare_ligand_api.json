@@ -1,0 +1,40 @@
+{
+  "name": "prepare_ligand",
+  "type": "api",
+  "description": {
+    "zh": "准备配体用于对接 (SDF/SMILES -> PDBQT)。\n使用 RDKit 生成 3D 结构，使用 Meeko 转换为 PDBQT 格式。",
+    "en": "准备配体用于对接 (SDF/SMILES -> PDBQT)。\n使用 RDKit 生成 3D 结构，使用 Meeko 转换为 PDBQT 格式。"
+  },
+  "params": [
+    {
+      "name": "input_file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "output_file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "add_hydrogens",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "prepare-ligand",
+  "type": "cli",
+  "description": {
+    "zh": "",
+    "en": ""
+  },
+  "params": [
+    {
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "输入配体文件 (SDF, SMILES, PDB)。",
+        "en": "输入配体文件 (SDF, SMILES, PDB)。"
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "输出 PDBQT 文件。",
+        "en": "输出 PDBQT 文件。"
+      }
+    },
+    {
+      "name": "--add-hydrogens",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": {
+        "zh": "添加氢原子。",
+        "en": "添加氢原子。"
+      }
+    }
+  ]
+}

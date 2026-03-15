@@ -1,0 +1,60 @@
+{
+  "name": "quant",
+  "type": "cli",
+  "description": {
+    "zh": "",
+    "en": ""
+  },
+  "params": [
+    {
+      "name": "-i, --input",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Directory with clean FastQ files.",
+        "en": "Directory with clean FastQ files."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Output directory.",
+        "en": "Output directory."
+      }
+    },
+    {
+      "name": "--fasta",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Genome/Transcriptome FASTA file.",
+        "en": "Genome/Transcriptome FASTA file."
+      }
+    },
+    {
+      "name": "--gtf",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Genome GTF file (optional if FASTA is transcriptome).",
+        "en": "Genome GTF file (optional if FASTA is transcriptome)."
+      }
+    },
+    {
+      "name": "-t, --threads",
+      "type": "int",
+      "required": false,
+      "default": "4",
+      "description": {
+        "zh": "Number of threads.",
+        "en": "Number of threads."
+      }
+    }
+  ]
+}

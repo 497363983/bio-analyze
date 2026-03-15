@@ -14,7 +14,7 @@ hero:
       link: /zh/guide/quick-start
     - theme: alt
       text: 查看 GitHub
-      link: https://github.com/your-repo/bio-analyze
+      link: https://github.com/497363983/bio-analyze
 
 features:
   - title: 🔄 可复现性

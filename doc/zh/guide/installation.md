@@ -1,65 +1,69 @@
+---
+order: 2
+---
 # 安装指南
 
-## 一键安装脚本 (Linux/macOS/WSL)
+`bio-analyze` 是一个功能强大的生物信息学分析工具箱，支持通过 Conda、Pip 或 Docker 进行安装。
 
-如果您不熟悉 Docker，或者希望在本地环境中直接运行工具箱，我们提供了一个自动化安装脚本。该脚本会自动创建 Conda 环境并安装所有必要的依赖。
+## 方法 1: 使用 Conda 安装 (推荐)
 
-### 前置条件
+Conda 是首选的安装方式，因为它可以自动处理复杂的生物信息学软件依赖（如 `samtools`、`star` 等）。
 
-- **操作系统**: Linux (推荐 Ubuntu), macOS, 或 Windows WSL (Windows Subsystem for Linux)。
-- **Conda**: 必须已安装 [Miniconda](https://docs.conda.io/en/latest/miniconda.html) 或 [Mambaforge](https://github.com/conda-forge/miniforge)。
+### 1. 安装 Conda/Mamba
 
-### 运行安装脚本
+首先，确保您已安装 [Miniconda](https://docs.conda.io/en/latest/miniconda.html) 或 [Mambaforge](https://github.com/conda-forge/miniforge)（推荐，速度更快）。
 
-在项目根目录下运行：
+### 2. 创建环境并安装
 
 ```bash
-bash setup.sh
+# 创建名为 bio-analyze 的新环境
+conda create -n bio-analyze -c bioconda -c conda-forge bio-analyze
+
+# 激活环境
+conda activate bio-analyze
 ```
 
-脚本将自动执行以下步骤：
-
-1. 检查 Conda/Mamba 环境。
-2. 配置 Bioconda 等软件源。
-3. 创建名为 `bio_analyse_env` 的虚拟环境。
-4. 安装 `fastp`, `salmon`, `star`, `samtools` 等生物信息学工具。
-5. 安装 `bio-analyse` 工具箱的所有模块。
-6. 安装并配置 `pre-commit` 和 `commitizen`。
-
-### 激活环境
-
-安装完成后，根据提示激活环境即可使用：
+### 3. 验证安装
 
 ```bash
-conda activate bio_analyse_env
-bioanalyze --help
+bio-analyze --version
 ```
 
-## 使用 Docker (推荐)
+## 方法 2: 使用 Pip 安装
 
-为了简化环境配置，特别是复杂的生物信息学工具依赖，我们提供了 Docker 支持。
-
-### 构建镜像
+如果您只需要使用 Python 分析模块（如绘图、统计分析），且已经自行配置好了生物信息学工具环境，可以通过 pip 安装。
 
 ```bash
-docker build -t bio-analyze:latest .
+pip install bio-analyze
 ```
 
-### 运行容器
+> **注意**: 此方法**不会**安装 `star`、`salmon` 等外部二进制依赖。您需要手动确保这些工具在系统 PATH 中。
+
+## 方法 3: 使用 Docker 镜像
+
+如果您不想配置本地环境，可以直接使用我们预构建的 Docker 镜像，其中包含了所有必要的工具。
+
+### 拉取镜像
 
 ```bash
-# 挂载数据目录并运行
-docker run -it --rm -v $(pwd)/data:/data bio-analyze:latest --help
+docker pull bioanalyze/bio-analyze:latest
 ```
 
-或者使用 `docker-compose`:
+### 运行分析
+
+将本地数据目录挂载到容器中（例如将当前目录 `$(pwd)` 挂载到 `/data`）：
 
 ```bash
-docker-compose run --rm bio-analyze --help
+docker run --rm -v $(pwd):/data bioanalyze/bio-analyze:latest \
+    bio-analyze plot volcano /data/results.csv
 ```
 
-### 进入交互式 Shell
+## 常见问题
+
+### 依赖冲突
+
+如果遇到依赖冲突，尝试创建一个干净的环境，或者使用 `mamba` 代替 `conda` 以获得更快更好的依赖解析：
 
 ```bash
-docker run -it --rm --entrypoint bash -v $(pwd)/data:/data bio-analyze:latest
+mamba create -n bio-analyze -c bioconda -c conda-forge bio-analyze
 ```

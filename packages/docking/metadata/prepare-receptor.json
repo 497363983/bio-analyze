@@ -1,0 +1,49 @@
+{
+  "name": "prepare-receptor",
+  "description": {
+    "en": "",
+    "zh": ""
+  },
+  "params": [
+    {
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "输入受体文件 (PDB)。",
+        "zh": "输入受体文件 (PDB)。"
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "输出 PDBQT 文件。",
+        "zh": "输出 PDBQT 文件。"
+      }
+    },
+    {
+      "name": "--add-hydrogens",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": {
+        "en": "添加氢原子。",
+        "zh": "添加氢原子。"
+      }
+    },
+    {
+      "name": "--charge-model",
+      "type": "string",
+      "required": false,
+      "default": "gasteiger",
+      "description": {
+        "en": "电荷模型 (gasteiger, zero 等)。",
+        "zh": "电荷模型 (gasteiger, zero 等)。"
+      }
+    }
+  ]
+}

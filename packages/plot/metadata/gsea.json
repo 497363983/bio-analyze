@@ -1,0 +1,159 @@
+{
+  "name": "gsea",
+  "description": {
+    "en": "",
+    "zh": ""
+  },
+  "params": [
+    {
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Input file path (CSV, TSV, or Excel).",
+        "zh": "Input file path (CSV, TSV, or Excel)."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Output file path.",
+        "zh": "Output file path."
+      }
+    },
+    {
+      "name": "--rank",
+      "type": "string",
+      "required": false,
+      "default": "rank",
+      "description": {
+        "en": "Column name for rank (x-axis).",
+        "zh": "Column name for rank (x-axis)."
+      }
+    },
+    {
+      "name": "--score",
+      "type": "string",
+      "required": false,
+      "default": "running_es",
+      "description": {
+        "en": "Column name for running ES (y-axis).",
+        "zh": "Column name for running ES (y-axis)."
+      }
+    },
+    {
+      "name": "--hit",
+      "type": "string",
+      "required": false,
+      "default": "hit",
+      "description": {
+        "en": "Column name for hit status (0/1 or boolean).",
+        "zh": "Column name for hit status (0/1 or boolean)."
+      }
+    },
+    {
+      "name": "--metric",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Column name for ranking metric (y-axis bottom).",
+        "zh": "Column name for ranking metric (y-axis bottom)."
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": {
+        "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+      }
+    },
+    {
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Plot title.",
+        "zh": "Plot title."
+      }
+    },
+    {
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Sheet name for Excel files.",
+        "zh": "Sheet name for Excel files."
+      }
+    },
+    {
+      "name": "--color",
+      "type": "string",
+      "required": false,
+      "default": "#4DAF4A",
+      "description": {
+        "en": "Color for enrichment score line.",
+        "zh": "Color for enrichment score line."
+      }
+    },
+    {
+      "name": "--hit-color",
+      "type": "string",
+      "required": false,
+      "default": "black",
+      "description": {
+        "en": "Color for hit lines.",
+        "zh": "Color for hit lines."
+      }
+    },
+    {
+      "name": "--nes",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Normalized Enrichment Score.",
+        "zh": "Normalized Enrichment Score."
+      }
+    },
+    {
+      "name": "--pvalue",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "P-value.",
+        "zh": "P-value."
+      }
+    },
+    {
+      "name": "--fdr",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "FDR q-value.",
+        "zh": "FDR q-value."
+      }
+    },
+    {
+      "name": "--show-border",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": {
+        "en": "Show top and right borders.",
+        "zh": "Show top and right borders."
+      }
+    }
+  ]
+}

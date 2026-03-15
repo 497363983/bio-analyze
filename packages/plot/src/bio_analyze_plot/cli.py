@@ -12,8 +12,9 @@ from .plots.heatmap import HeatmapPlot
 from .plots.line import LinePlot
 from .plots.pca import PCAPlot
 from .plots.pie import PiePlot
+from .plots.scatter import ScatterPlot
 from .plots.volcano import VolcanoPlot
-
+from .plots.chromosome import ChromosomePlot
 
 def read_data(input_path: Path, sheet: str | None = None) -> pd.DataFrame:
     """从 CSV、TSV 或 Excel 文件读取数据。"""
@@ -76,11 +77,42 @@ def get_app() -> typer.Typer:
         ),
         title: str = typer.Option(None, help="Plot title."),
         sheet: str = typer.Option(None, help="Sheet name for Excel files."),
+        error_bar_type: str = typer.Option(None, help="Error bar type: SD, SE, CI."),
+        error_bar_ci: float = typer.Option(95, help="Confidence interval size (default: 95)."),
+        error_bar_capsize: float = typer.Option(3.0, help="Error bar capsize (in points)."),
+        markers: bool = typer.Option(False, help="Use default markers for data points."),
+        marker_style: str = typer.Option(None, help="Specific marker symbols (comma-separated, e.g. 'o,s'). Overrides --markers."),
+        dashes: bool = typer.Option(True, help="Use dashes for lines."),
+        smooth: bool = typer.Option(False, help="Enable smooth curve fitting."),
+        smooth_points: int = typer.Option(300, help="Number of points for interpolation."),
     ) -> None:
         """生成折线图。"""
         df = read_data(input_file, sheet=sheet)
+        
+        # Parse markers
+        markers_arg = markers
+        if marker_style:
+            if "," in marker_style:
+                markers_arg = [m.strip() for m in marker_style.split(",")]
+            else:
+                markers_arg = marker_style
+
         plotter = LinePlot(theme=theme)
-        plotter.plot(data=df, x=x, y=y, hue=hue, title=title, output=str(output))
+        plotter.plot(
+            data=df,
+            x=x,
+            y=y,
+            hue=hue,
+            title=title,
+            output=str(output),
+            error_bar_type=error_bar_type,
+            error_bar_ci=error_bar_ci,
+            error_bar_capsize=error_bar_capsize,
+            markers=markers_arg,
+            dashes=dashes,
+            smooth=smooth,
+            smooth_points=smooth_points,
+        )
         typer.echo(f"Saved line plot to {output}")
 
     @app.command("bar")
@@ -243,6 +275,41 @@ def get_app() -> typer.Typer:
         )
         typer.echo(f"Saved PCA plot to {output}")
 
+    @app.command("scatter")
+    def _scatter(
+        input_file: Path = typer.Argument(..., help="Input file path (CSV, TSV, or Excel)."),
+        output: Path = typer.Option(..., "-o", "--output", help="Output file path."),
+        x: str = typer.Option(..., help="Column name for X-axis."),
+        y: str = typer.Option(..., help="Column name for Y-axis."),
+        hue: str = typer.Option(None, help="Grouping column name (hue)."),
+        style: str = typer.Option(None, help="Column name for marker style."),
+        size: str = typer.Option(None, help="Column name for marker size."),
+        theme: str = typer.Option(
+            "nature",
+            help="Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        ),
+        title: str = typer.Option(None, help="Plot title."),
+        add_ellipse: bool = typer.Option(False, help="Draw confidence ellipses for each group."),
+        ellipse_std: float = typer.Option(2.0, help="Standard deviation for confidence ellipses."),
+        sheet: str = typer.Option(None, help="Sheet name for Excel files."),
+    ) -> None:
+        """生成散点图。"""
+        df = read_data(input_file, sheet=sheet)
+        plotter = ScatterPlot(theme=theme)
+        plotter.plot(
+            data=df,
+            x=x,
+            y=y,
+            hue=hue,
+            style=style,
+            size=size,
+            title=title,
+            output=str(output),
+            add_ellipse=add_ellipse,
+            ellipse_std=ellipse_std,
+        )
+        typer.echo(f"Saved scatter plot to {output}")
+
     @app.command("pie")
     def _pie(
         input_file: Path = typer.Argument(..., help="Input file path (CSV, TSV, or Excel)."),
@@ -328,5 +395,36 @@ def get_app() -> typer.Typer:
             show_border=show_border,
         )
         typer.echo(f"Saved GSEA plot to {output}")
+
+    @app.command("chromosome")
+    def _chromosome(
+        input_file: Path = typer.Argument(..., help="Input file path (CSV, TSV, or Excel)."),
+        output: Path = typer.Option(..., "-o", "--output", help="Output file path."),
+        chrom_col: str = typer.Option("chrom", help="Column name for chromosome."),
+        pos_col: str = typer.Option("pos", help="Column name for position."),
+        pos_counts_col: str = typer.Option("pos_counts", help="Column name for positive strand counts."),
+        neg_counts_col: str = typer.Option("neg_counts", help="Column name for negative strand counts."),
+        theme: str = typer.Option(
+            "nature",
+            help="Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        ),
+        title: str = typer.Option(None, help="Plot title."),
+        sheet: str = typer.Option(None, help="Sheet name for Excel files."),
+        max_chroms: int = typer.Option(24, help="Maximum number of chromosomes to display."),
+    ) -> None:
+        """生成染色体覆盖度分布图。"""
+        df = read_data(input_file, sheet=sheet)
+        plotter = ChromosomePlot(theme=theme)
+        plotter.plot(
+            data=df,
+            chrom_col=chrom_col,
+            pos_col=pos_col,
+            pos_counts_col=pos_counts_col,
+            neg_counts_col=neg_counts_col,
+            max_chroms=max_chroms,
+            title=title,
+            output=str(output),
+        )
+        typer.echo(f"Saved chromosome plot to {output}")
 
     return app

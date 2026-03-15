@@ -1,0 +1,70 @@
+{
+  "name": "align",
+  "type": "cli",
+  "description": {
+    "zh": "",
+    "en": ""
+  },
+  "params": [
+    {
+      "name": "-i, --input",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Directory with clean FastQ files.",
+        "en": "Directory with clean FastQ files."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Output directory.",
+        "en": "Output directory."
+      }
+    },
+    {
+      "name": "--fasta",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Genome FASTA file.",
+        "en": "Genome FASTA file."
+      }
+    },
+    {
+      "name": "--gtf",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Genome GTF file.",
+        "en": "Genome GTF file."
+      }
+    },
+    {
+      "name": "-t, --threads",
+      "type": "int",
+      "required": false,
+      "default": "4",
+      "description": {
+        "zh": "Number of threads.",
+        "en": "Number of threads."
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": {
+        "zh": "Plot theme.",
+        "en": "Plot theme."
+      }
+    }
+  ]
+}

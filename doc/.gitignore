@@ -5,3 +5,4 @@ dist-ssr
 cache
 .vitepress/dist
 .vitepress/cache
+public/metadata

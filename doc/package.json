@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Documentation for Bio Analyze",
   "scripts": {
-    "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
+    "collect-params": "node .vitepress/scripts/collect-params.js",
+    "docs:dev": "npm run collect-params && vitepress dev",
+    "docs:build": "npm run collect-params && vitepress build",
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {

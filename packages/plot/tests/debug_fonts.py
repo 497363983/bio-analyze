@@ -1,44 +1,41 @@
-import logging
-
+from matplotlib.font_manager import fontManager
 import matplotlib.pyplot as plt
-from matplotlib import font_manager
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+print("Available fonts:")
+# sorted_fonts = sorted([f.name for f in fontManager.ttflist])
+# for font in sorted_fonts:
+#     print(font)
 
+# Check specifically for Chinese fonts
+chinese_fonts = ["SimHei", "Microsoft YaHei", "SimSun", "Arial Unicode MS", "PingFang SC"]
+print("\nChecking for common Chinese fonts:")
+found_fonts = []
+for font_name in chinese_fonts:
+    try:
+        # Try to find the font
+        font = fontManager.findfont(font_name, fallback_to_default=False)
+        print(f"  [FOUND] {font_name} -> {font}")
+        found_fonts.append(font_name)
+    except ValueError:
+        print(f"  [MISSING] {font_name}")
 
-def check_fonts():
-    # 获取所有可用字体的名称
-    font_names = sorted([f.name for f in font_manager.fontManager.ttflist])
+print(f"\nFound Chinese fonts: {found_fonts}")
 
-    logger.info("Checking for Chinese fonts...")
-    target_fonts = ["SimHei", "Microsoft YaHei", "Arial Unicode MS", "SimSun"]
-    found_fonts = []
-    for font in target_fonts:
-        if font in font_names:
-            logger.info(f"Found font: {font}")
-            found_fonts.append(font)
-        else:
-            logger.info(f"Font not found: {font}")
-
-    # 打印当前�?rcParams
-    logger.info(f"Current font.sans-serif: {plt.rcParams['font.sans-serif']}")
-
-    # 尝试设置字体并绘�?    if found_fonts:
-        plt.rcParams["font.sans-serif"] = found_fonts + plt.rcParams["font.sans-serif"]
-        plt.rcParams["axes.unicode_minus"] = False
-
-        fig, ax = plt.subplots()
-        ax.set_title("中文标题测试")
-        ax.text(0.5, 0.5, "中文文本", ha="center")
-        try:
-            fig.savefig("test_font_check.png")
-            logger.info("Successfully saved test plot.")
-        except Exception as e:
-            logger.error(f"Failed to save plot: {e}")
-    else:
-        logger.warning("No common Chinese fonts found on this system.")
-
-
-if __name__ == "__main__":
-    check_fonts()
+# Test plotting
+if found_fonts:
+    plt.rcParams['font.sans-serif'] = found_fonts
+    plt.rcParams['axes.unicode_minus'] = False
+    
+    fig, ax = plt.subplots()
+    ax.plot([1, 2, 3], [1, 2, 3])
+    ax.set_title("??????")
+    ax.set_xlabel("X?")
+    ax.set_ylabel("Y?")
+    
+    try:
+        fig.savefig("test_font_debug.png")
+        print("\nSaved test_font_debug.png")
+    except Exception as e:
+        print(f"\nFailed to save plot: {e}")
+else:
+    print("\nNo Chinese fonts found, skipping plot test.")

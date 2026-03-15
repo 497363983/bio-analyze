@@ -1,0 +1,109 @@
+{
+  "name": "pca",
+  "description": {
+    "en": "",
+    "zh": ""
+  },
+  "params": [
+    {
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Input file path (CSV, TSV, or Excel).",
+        "zh": "Input file path (CSV, TSV, or Excel)."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Output file path.",
+        "zh": "Output file path."
+      }
+    },
+    {
+      "name": "--hue",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Grouping column name (hue).",
+        "zh": "Grouping column name (hue)."
+      }
+    },
+    {
+      "name": "--index-col",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Column to use as index (e.g. gene names).",
+        "zh": "Column to use as index (e.g. gene names)."
+      }
+    },
+    {
+      "name": "--transpose",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": {
+        "en": "Transpose input data (default: True, assumes Genes x Samples).",
+        "zh": "Transpose input data (default: True, assumes Genes x Samples)."
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": {
+        "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+      }
+    },
+    {
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Plot title.",
+        "zh": "Plot title."
+      }
+    },
+    {
+      "name": "--cluster",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "en": "Perform KMeans clustering.",
+        "zh": "Perform KMeans clustering."
+      }
+    },
+    {
+      "name": "--n-clusters",
+      "type": "int",
+      "required": false,
+      "default": "3",
+      "description": {
+        "en": "Number of clusters for KMeans.",
+        "zh": "Number of clusters for KMeans."
+      }
+    },
+    {
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Sheet name for Excel files.",
+        "zh": "Sheet name for Excel files."
+      }
+    }
+  ]
+}

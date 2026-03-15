@@ -1,0 +1,150 @@
+{
+  "name": "run_batch",
+  "type": "api",
+  "description": {
+    "zh": "对多个受体和/或配体 (M x N) 运行对接。",
+    "en": "对多个受体和/或配体 (M x N) 运行对接。"
+  },
+  "params": [
+    {
+      "name": "receptors",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "受体路径列表或包含受体的目录。",
+        "en": "受体路径列表或包含受体的目录。"
+      }
+    },
+    {
+      "name": "ligands",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "配体路径列表或包含配体的目录。",
+        "en": "配体路径列表或包含配体的目录。"
+      }
+    },
+    {
+      "name": "output_dir",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "基础输出目录。",
+        "en": "基础输出目录。"
+      }
+    },
+    {
+      "name": "center",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "盒子中心 [x, y, z]。",
+        "en": "盒子中心 [x, y, z]。"
+      }
+    },
+    {
+      "name": "size",
+      "type": "float",
+      "required": false,
+      "default": "[20.0, 20.0, 20.0]",
+      "description": {
+        "zh": "盒子大小 [x, y, z]。",
+        "en": "盒子大小 [x, y, z]。"
+      }
+    },
+    {
+      "name": "autobox_ligand",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "用于自动盒计算的配体路径。",
+        "en": "用于自动盒计算的配体路径。"
+      }
+    },
+    {
+      "name": "padding",
+      "type": "float",
+      "required": false,
+      "default": "4.0",
+      "description": {
+        "zh": "自动盒填充。",
+        "en": "自动盒填充。"
+      }
+    },
+    {
+      "name": "exhaustiveness",
+      "type": "int",
+      "required": false,
+      "default": "8",
+      "description": {
+        "zh": "Vina 穷尽性。",
+        "en": "Vina 穷尽性。"
+      }
+    },
+    {
+      "name": "n_poses",
+      "type": "int",
+      "required": false,
+      "default": "9",
+      "description": {
+        "zh": "姿态数量。",
+        "en": "姿态数量。"
+      }
+    },
+    {
+      "name": "summary_filename",
+      "type": "string",
+      "required": false,
+      "default": "docking_summary.csv",
+      "description": {
+        "zh": "摘要文件名（例如 'summary.csv', 'results.xlsx'）或 None 以禁用。",
+        "en": "摘要文件名（例如 'summary.csv', 'results.xlsx'）或 None 以禁用。"
+      }
+    },
+    {
+      "name": "output_docked_lig_recep_struct",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "是否输出对接的复合物结构（PDB 格式，通过 PyMOL）。",
+        "en": "是否输出对接的复合物结构（PDB 格式，通过 PyMOL）。"
+      }
+    },
+    {
+      "name": "n_docked_lig_recep_struct",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "要保存的前几名复合物数量（None=全部）。",
+        "en": "要保存的前几名复合物数量（None=全部）。"
+      }
+    },
+    {
+      "name": "charge_model",
+      "type": "string",
+      "required": false,
+      "default": "gasteiger",
+      "description": {
+        "zh": "受体准备的电荷模型 (例如 'gasteiger', 'zero')。",
+        "en": "受体准备的电荷模型 (例如 'gasteiger', 'zero')。"
+      }
+    },
+    {
+      "name": "engine",
+      "type": "string",
+      "required": false,
+      "default": "vina",
+      "description": {
+        "zh": "对接引擎类型 (例如 'vina', 'gnina')。",
+        "en": "对接引擎类型 (例如 'vina', 'gnina')。"
+      }
+    }
+  ]
+}

@@ -13,7 +13,9 @@ export default defineConfig({
         label: 'On this page'
     },
     logo: '/logo.svg',
-    socialLinks: [],
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/497363983/bio-analyze' }
+    ],
     search: {
       provider: 'local'
     },
@@ -24,4 +26,11 @@ export default defineConfig({
     root: enConfig,
     zh: zhConfig
   },
+  vite: {
+    server: {
+      fs: {
+        allow: ['../packages']
+      }
+    }
+  }
 })

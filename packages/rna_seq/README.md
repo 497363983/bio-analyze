@@ -41,7 +41,7 @@
 使用以下命令启动分析流程：
 
 ```bash
-uv run bioanalyse rna_seq run \
+uv run bioanalyze rna_seq run \
     --input ./raw_data \
     --output ./analysis_results \
     --design ./design.csv \
@@ -54,7 +54,7 @@ uv run bioanalyse rna_seq run \
 如果您没有本地数据，可以直接提供 NCBI SRA Accession ID，工具会自动下载、转换并运行分析。
 
 ```bash
-uv run bioanalyse rna_seq run \
+uv run bioanalyze rna_seq run \
     --sra-id SRR12345678 \
     --sra-id SRR12345679 \
     --output ./analysis_results \
@@ -86,7 +86,7 @@ qc:
 然后运行：
 
 ```bash
-uv run bioanalyse rna_seq run --config config.yaml
+uv run bioanalyze rna_seq run --config config.yaml
 ```
 
 ### 场景 4：分步执行 (Step-by-Step)
@@ -95,39 +95,39 @@ uv run bioanalyse rna_seq run --config config.yaml
 
 #### 1. 下载数据 (download)
 ```bash
-uv run bioanalyse rna_seq download --sra-id SRR123456 -o ./raw_data
+uv run bioanalyze rna_seq download --sra-id SRR123456 -o ./raw_data
 ```
 
 #### 2. 准备参考基因组 (genome)
 ```bash
-uv run bioanalyse rna_seq genome -s "Homo sapiens" -o ./reference
+uv run bioanalyze rna_seq genome -s "Homo sapiens" -o ./reference
 # 或者指定本地文件
-uv run bioanalyse rna_seq genome --fasta genome.fa --gtf genes.gtf -o ./reference
+uv run bioanalyze rna_seq genome --fasta genome.fa --gtf genes.gtf -o ./reference
 ```
 
 #### 3. 质量控制 (qc)
 ```bash
-uv run bioanalyse rna_seq qc -i ./raw_data -o ./qc_results
+uv run bioanalyze rna_seq qc -i ./raw_data -o ./qc_results
 ```
 
 #### 4. 比对 (align) - 可选
 ```bash
-uv run bioanalyse rna_seq align -i ./qc_results -o ./align_results --fasta ./reference/genome.fa --gtf ./reference/genes.gtf
+uv run bioanalyze rna_seq align -i ./qc_results -o ./align_results --fasta ./reference/genome.fa --gtf ./reference/genes.gtf
 ```
 
 #### 5. 定量 (quant)
 ```bash
-uv run bioanalyse rna_seq quant -i ./qc_results -o ./quant_results --fasta ./reference/transcripts.fa
+uv run bioanalyze rna_seq quant -i ./qc_results -o ./quant_results --fasta ./reference/transcripts.fa
 ```
 
 #### 6. 差异表达分析 (de)
 ```bash
-uv run bioanalyse rna_seq de --counts ./quant_results/counts.csv --design design.csv -o ./de_results
+uv run bioanalyze rna_seq de --counts ./quant_results/counts.csv --design design.csv -o ./de_results
 ```
 
 #### 7. 富集分析 (enrich)
 ```bash
-uv run bioanalyse rna_seq enrich --de-results ./de_results/deseq2_results.csv -s "Homo sapiens" -o ./enrich_results
+uv run bioanalyze rna_seq enrich --de-results ./de_results/deseq2_results.csv -s "Homo sapiens" -o ./enrich_results
 ```
 
 ## 📋 命令详解 (Commands)
@@ -217,23 +217,78 @@ uv run bioanalyse rna_seq enrich --de-results ./de_results/deseq2_results.csv -s
 - `--dedup`: 启用去重 (deduplication)。
 - `--poly-g-min-len <INT>`: polyG 尾修剪的最小长度检测阈值。默认 10。
 
-## 📊 输出结果 (Outputs)
+## 📦 Python API
 
-分析完成后，`--output` 目录将包含以下结构：
+### 1. 全流程 (`RNASeqPipeline`)
 
+```python
+from bio_analyze_rna_seq import RNASeqPipeline
+from pathlib import Path
+
+pipeline = RNASeqPipeline(
+    input_dir=Path("./raw_data"),
+    output_dir=Path("./results"),
+    design_file=Path("design.csv"),
+    species="Homo sapiens",
+    threads=8,
+    skip_qc=False
+)
+
+pipeline.run()
 ```
-analysis_results/
-├── raw_data/           # (如果是 SRA 下载模式) 下载并转换的 FastQ 文件
-├── reference/          # 下载或整理的参考基因组文件
-├── qc/                 # fastp 生成的清洗后数据及 QC 报告 (.html/.json)
-├── quant/              # Salmon 定量结果 (counts.csv 为合并后的表达矩阵)
-├── align/              # (可选) STAR 比对结果及染色体分布图
-├── de/                 # 差异表达分析结果 (deseq2_results.csv)
-├── enrichment/         # GO/KEGG 富集分析结果表
-│   └── GSEA/           # GSEA 富集图及结果
-├── report/             # 最终汇总报告
-│   └── report.html     # <--- 请在浏览器中打开此文件查看完整报告，包含 GSEA 图表
-└── logs/               # 运行日志
+
+### 2. SRA 下载 (`SRAManager`)
+
+```python
+from bio_analyze_rna_seq.sra import SRAManager
+from pathlib import Path
+
+manager = SRAManager(output_dir=Path("./raw_data"), threads=4)
+manager.download(["SRR123456", "SRR789012"])
+```
+
+### 3. 定量 (`QuantManager`)
+
+```python
+from bio_analyze_rna_seq.quant import QuantManager
+from pathlib import Path
+
+# reads 字典结构: {sample_name: {"R1": path, "R2": path}}
+reads = {
+    "sample1": {"R1": "sample1_1.fq.gz", "R2": "sample1_2.fq.gz"}
+}
+reference = {
+    "fasta": Path("genome.fa"),
+    "gtf": Path("genes.gtf")
+}
+
+manager = QuantManager(
+    reads=reads,
+    reference=reference,
+    output_dir=Path("./quant_results"),
+    threads=8
+)
+
+# 返回合并后的计数矩阵 (DataFrame)
+counts_df = manager.run()
+```
+
+### 4. 报告生成 (`ReportGenerator`)
+
+```python
+from bio_analyze_rna_seq.report import ReportGenerator
+from pathlib import Path
+
+# 需要传入前面步骤的结果
+generator = ReportGenerator(
+    output_dir=Path("./report"),
+    qc_stats=qc_data,          # from QCNode
+    counts=counts_df,          # from QuantNode
+    de_results=de_df,          # from DENode
+    enrich_results=enrich_dict # from EnrichmentNode
+)
+
+generator.generate()
 ```
 
 ## ⚙️ 环境要求 (Requirements)

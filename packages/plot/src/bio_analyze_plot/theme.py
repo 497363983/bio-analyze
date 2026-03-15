@@ -69,17 +69,58 @@ class PlotTheme:
             rc=final_rc,
         )
         # 显式更新关键字体配置，防止 seaborn 覆盖列表
+        # 注意：matplotlib 2.x/3.x 在某些后端（如 agg）下，如果字体找不到会回退到 DejaVu Sans，导致中文变方框
+        # 我们需要确保这些字体在 rcParams 中被正确设置
         if "font.sans-serif" in self.rc_params:
             plt.rcParams["font.sans-serif"] = self.rc_params["font.sans-serif"]
-            # print(f"DEBUG: Updated font.sans-serif to: {plt.rcParams['font.sans-serif']}")
+        elif "font.sans-serif" in default_rc:
+            plt.rcParams["font.sans-serif"] = default_rc.get("font.sans-serif", CHINESE_SANS_FONTS)
+
         if "font.serif" in self.rc_params:
             plt.rcParams["font.serif"] = self.rc_params["font.serif"]
+        
+        # 解决负号显示问题
+        plt.rcParams["axes.unicode_minus"] = False
         if "axes.unicode_minus" in self.rc_params:
             plt.rcParams["axes.unicode_minus"] = self.rc_params["axes.unicode_minus"]
 
         # 确保 mathtext 配置生效
         if "mathtext.fontset" in final_rc:
             plt.rcParams["mathtext.fontset"] = final_rc["mathtext.fontset"]
+
+        # [Auto-Fix] 尝试注册常见中文字体，防止中文显示为方框
+        # Matplotlib 有时无法自动发现系统安装的中文字体，需要手动添加字体管理器
+        try:
+            from matplotlib.font_manager import fontManager
+            import os
+            
+            # Windows 常见字体路径
+            win_font_paths = [
+                "C:/Windows/Fonts/simhei.ttf",      # 黑体
+                "C:/Windows/Fonts/msyh.ttc",        # 微软雅黑
+                "C:/Windows/Fonts/simsun.ttc",      # 宋体
+            ]
+            
+            # Linux 常见字体路径 (示例)
+            linux_font_paths = [
+                "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf",
+                "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+            ]
+            
+            # Mac 常见字体路径 (示例)
+            mac_font_paths = [
+                "/System/Library/Fonts/PingFang.ttc",
+                "/Library/Fonts/Arial Unicode.ttf",
+            ]
+
+            all_paths = win_font_paths + linux_font_paths + mac_font_paths
+            
+            for fpath in all_paths:
+                if os.path.exists(fpath):
+                    fontManager.addfont(fpath)
+                    # print(f"DEBUG: Added font {fpath}")
+        except Exception:
+            pass
 
     def get_chart_params(self, chart_type: str) -> dict[str, Any]:
         """获取特定图表类型的配置参数。"""
@@ -118,7 +159,6 @@ THEMES = {
         font="sans-serif",
         font_scale=1.0,
         rc_params={
-            "font.family": "sans-serif",
             "font.sans-serif": CHINESE_SANS_FONTS,
             "axes.unicode_minus": False,
             "axes.titlesize": 8,

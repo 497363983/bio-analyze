@@ -63,9 +63,18 @@ RUN conda install -y \
     propka \
     openbabel \
     rdkit \
+    six \
     pymol-open-source \
     gemmi \
     && conda clean -afy
+
+# Install Gnina
+RUN curl -L https://github.com/gnina/gnina/releases/download/v1.0.3/gnina -o /usr/local/bin/gnina && \
+    chmod +x /usr/local/bin/gnina
+
+# Install Smina
+RUN curl -L https://sourceforge.net/projects/smina/files/smina.static/download -o /usr/local/bin/smina && \
+    chmod +x /usr/local/bin/smina
 
 # 安装 uv (已移除，改用 conda 本地构建)
 # RUN pip install uv

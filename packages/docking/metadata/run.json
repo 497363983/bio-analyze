@@ -1,0 +1,169 @@
+{
+  "name": "run",
+  "description": {
+    "en": "",
+    "zh": ""
+  },
+  "params": [
+    {
+      "name": "--config, -c",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "配置文件路径 (JSON/YAML)。",
+        "zh": "配置文件路径 (JSON/YAML)。"
+      }
+    },
+    {
+      "name": "-r, --receptor",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "受体文件/目录 (PDB/PDBQT)。",
+        "zh": "受体文件/目录 (PDB/PDBQT)。"
+      }
+    },
+    {
+      "name": "-l, --ligand",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "配体文件/目录 (SDF/SMILES/PDBQT)。",
+        "zh": "配体文件/目录 (SDF/SMILES/PDBQT)。"
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "输出目录。",
+        "zh": "输出目录。"
+      }
+    },
+    {
+      "name": "--center-x",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "盒子中心 X。",
+        "zh": "盒子中心 X。"
+      }
+    },
+    {
+      "name": "--center-y",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "盒子中心 Y。",
+        "zh": "盒子中心 Y。"
+      }
+    },
+    {
+      "name": "--center-z",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "盒子中心 Z。",
+        "zh": "盒子中心 Z。"
+      }
+    },
+    {
+      "name": "--size-x",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "盒子大小 X。",
+        "zh": "盒子大小 X。"
+      }
+    },
+    {
+      "name": "--size-y",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "盒子大小 Y。",
+        "zh": "盒子大小 Y。"
+      }
+    },
+    {
+      "name": "--size-z",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "盒子大小 Z。",
+        "zh": "盒子大小 Z。"
+      }
+    },
+    {
+      "name": "--autobox-ligand",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "用于定义网格盒子的参考配体 (覆盖 center/size)。",
+        "zh": "用于定义网格盒子的参考配体 (覆盖 center/size)。"
+      }
+    },
+    {
+      "name": "--padding",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "自动盒填充。",
+        "zh": "自动盒填充。"
+      }
+    },
+    {
+      "name": "--exhaustiveness",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "对接穷尽性。",
+        "zh": "对接穷尽性。"
+      }
+    },
+    {
+      "name": "--n-poses",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "生成的姿态数量。",
+        "zh": "生成的姿态数量。"
+      }
+    },
+    {
+      "name": "--charge-model",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "受体准备的电荷模型。",
+        "zh": "受体准备的电荷模型。"
+      }
+    },
+    {
+      "name": "--engine",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "对接引擎 (vina, gnina 等)。",
+        "zh": "对接引擎 (vina, gnina 等)。"
+      }
+    }
+  ]
+}

@@ -4,19 +4,19 @@
 
 ## 前置要求
 
-1.  **安装构建工具**:
-    你需要安装 `conda-build` 来构建包，以及 `anaconda-client` 来上传包。
-    ```bash
-    conda install conda-build anaconda-client
-    ```
+1. **安装构建工具**:
+   你需要安装 `conda-build` 来构建包，以及 `anaconda-client` 来上传包。
 
-2.  **Anaconda 账号**:
-    如果你还没有账号，请在 [Anaconda.org](https://anaconda.org/) 创建一个。
+   ```bash
+   conda install conda-build anaconda-client
+   ```
+2. **Anaconda 账号**:
+   如果你还没有账号，请在 [Anaconda.org](https://anaconda.org/) 创建一个。
+3. **登录**:
 
-3.  **登录**:
-    ```bash
-    anaconda login
-    ```
+   ```bash
+   anaconda login
+   ```
 
 ## 1. 构建包
 

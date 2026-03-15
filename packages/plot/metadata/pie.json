@@ -1,0 +1,119 @@
+{
+  "name": "pie",
+  "description": {
+    "en": "",
+    "zh": ""
+  },
+  "params": [
+    {
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Input file path (CSV, TSV, or Excel).",
+        "zh": "Input file path (CSV, TSV, or Excel)."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Output file path.",
+        "zh": "Output file path."
+      }
+    },
+    {
+      "name": "--x",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Column name for labels (categorical).",
+        "zh": "Column name for labels (categorical)."
+      }
+    },
+    {
+      "name": "--y",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": {
+        "en": "Column name for values (numerical).",
+        "zh": "Column name for values (numerical)."
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": {
+        "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+      }
+    },
+    {
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Plot title.",
+        "zh": "Plot title."
+      }
+    },
+    {
+      "name": "--autopct",
+      "type": "string",
+      "required": false,
+      "default": "%1.1f%%",
+      "description": {
+        "en": "Percentage format.",
+        "zh": "Percentage format."
+      }
+    },
+    {
+      "name": "--startangle",
+      "type": "float",
+      "required": false,
+      "default": "90",
+      "description": {
+        "en": "Start angle.",
+        "zh": "Start angle."
+      }
+    },
+    {
+      "name": "--explode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Explode slices. Can be a column name or comma-separated values.",
+        "zh": "Explode slices. Can be a column name or comma-separated values."
+      }
+    },
+    {
+      "name": "--shadow",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "en": "Show shadow.",
+        "zh": "Show shadow."
+      }
+    },
+    {
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "en": "Sheet name for Excel files.",
+        "zh": "Sheet name for Excel files."
+      }
+    }
+  ]
+}

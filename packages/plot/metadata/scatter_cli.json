@@ -1,0 +1,130 @@
+{
+  "name": "scatter",
+  "type": "cli",
+  "description": {
+    "zh": "",
+    "en": ""
+  },
+  "params": [
+    {
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Input file path (CSV, TSV, or Excel).",
+        "en": "Input file path (CSV, TSV, or Excel)."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Output file path.",
+        "en": "Output file path."
+      }
+    },
+    {
+      "name": "--x",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Column name for X-axis.",
+        "en": "Column name for X-axis."
+      }
+    },
+    {
+      "name": "--y",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Column name for Y-axis.",
+        "en": "Column name for Y-axis."
+      }
+    },
+    {
+      "name": "--hue",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Grouping column name (hue).",
+        "en": "Grouping column name (hue)."
+      }
+    },
+    {
+      "name": "--style",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Column name for marker style.",
+        "en": "Column name for marker style."
+      }
+    },
+    {
+      "name": "--size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Column name for marker size.",
+        "en": "Column name for marker size."
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": {
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+      }
+    },
+    {
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Plot title.",
+        "en": "Plot title."
+      }
+    },
+    {
+      "name": "--add-ellipse",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "Draw confidence ellipses for each group.",
+        "en": "Draw confidence ellipses for each group."
+      }
+    },
+    {
+      "name": "--ellipse-std",
+      "type": "float",
+      "required": false,
+      "default": "2.0",
+      "description": {
+        "zh": "Standard deviation for confidence ellipses.",
+        "en": "Standard deviation for confidence ellipses."
+      }
+    },
+    {
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Sheet name for Excel files.",
+        "en": "Sheet name for Excel files."
+      }
+    }
+  ]
+}

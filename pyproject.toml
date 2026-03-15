@@ -49,6 +49,7 @@ dev = [
     "commitizen",
     "pytest",
     "pytest-cov",
+    "docstring_parser"
 ]
 
 [tool.commitizen]

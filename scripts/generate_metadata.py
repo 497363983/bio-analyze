@@ -1,0 +1,256 @@
+import inspect
+import json
+import importlib.util
+from pathlib import Path
+from typing import Any, Dict, List, Type
+import typer
+from typer.main import get_command
+from docstring_parser import parse as parse_docstring
+
+# We assume this script is run from project root, so pythonpath needs to be set
+from bio_analyze_plot.cli import get_app as get_plot_app
+from bio_analyze_rna_seq.cli import get_app as get_rna_app
+from bio_analyze_docking.cli import get_app as get_docking_app
+
+# Import API classes for plot
+from bio_analyze_plot.plots import (
+    VolcanoPlot, LinePlot, BarPlot, BoxPlot, 
+    HeatmapPlot, PCAPlot, ScatterPlot, PiePlot, 
+    ChromosomePlot, GSEAPlot
+)
+
+# Import API functions/classes for docking (examples)
+from bio_analyze_docking.api import run_docking, run_docking_batch
+from bio_analyze_docking.prep import prepare_ligand, prepare_receptor
+
+# Import API for RNA-seq (examples)
+from bio_analyze_rna_seq.pipeline import RNASeqPipeline
+
+# Define package paths and registries
+PACKAGES_ROOT = Path("packages")
+PACKAGES = {
+    "plot": {
+        "cli_app": get_plot_app(), 
+        "path": PACKAGES_ROOT / "plot",
+        "api": {
+            "volcano": VolcanoPlot.plot,
+            "line": LinePlot.plot,
+            "bar": BarPlot.plot,
+            "box": BoxPlot.plot,
+            "heatmap": HeatmapPlot.plot,
+            "pca": PCAPlot.plot,
+            "scatter": ScatterPlot.plot,
+            "pie": PiePlot.plot,
+            "chromosome": ChromosomePlot.plot,
+            "gsea": GSEAPlot.plot,
+        }
+    },
+    "rna_seq": {
+        "cli_app": get_rna_app(), 
+        "path": PACKAGES_ROOT / "rna_seq",
+        "api": {
+            "run": RNASeqPipeline.run
+        }
+    },
+    "docking": {
+        "cli_app": get_docking_app(), 
+        "path": PACKAGES_ROOT / "docking",
+        "api": {
+            "run": run_docking,
+            "run_batch": run_docking_batch,
+            "prepare_ligand": prepare_ligand,
+            "prepare_receptor": prepare_receptor
+        }
+    },
+}
+
+def get_param_type(param: inspect.Parameter) -> str:
+    """Extract type name from annotation."""
+    if param.annotation == inspect.Parameter.empty:
+        return "any"
+    
+    # Handle Optional[type] or type | None
+    annotation = str(param.annotation)
+    # Simple cleanup for common types
+    if "Path" in annotation: return "path"
+    if "int" in annotation: return "int"
+    if "float" in annotation: return "float"
+    if "bool" in annotation: return "bool"
+    if "str" in annotation: return "string"
+    if "list" in annotation or "List" in annotation: return "list"
+    if "dict" in annotation or "Dict" in annotation: return "dict"
+    if "DataFrame" in annotation: return "DataFrame"
+    
+    return annotation.replace("typing.", "").replace("<class '", "").replace("'>", "")
+
+def extract_i18n_desc(desc: str) -> Dict[str, str]:
+    """
+    Extract bilingual description from a single string.
+    Expects format like:
+    "中文描述 [EN] English description"
+    """
+    if not desc:
+        return {"zh": "", "en": ""}
+        
+    parts = desc.split("[EN]")
+    zh_desc = parts[0].strip()
+    en_desc = parts[1].strip() if len(parts) > 1 else zh_desc
+    
+    return {"zh": zh_desc, "en": en_desc}
+
+def parse_cli_command(command_info: Any, cmd_name: str) -> Dict[str, Any]:
+    """Parse a Typer command to extract metadata."""
+    callback = command_info.callback
+    if not callback:
+        return {"name": cmd_name, "type": "cli", "params": []}
+        
+    sig = inspect.signature(callback)
+    params_list = []
+    
+    for name, param in sig.parameters.items():
+        if param.kind in (inspect.Parameter.VAR_POSITIONAL, inspect.Parameter.VAR_KEYWORD):
+            continue
+            
+        default = param.default
+        help_text = ""
+        param_opts = []
+        
+        if hasattr(default, "help"):
+            help_text = default.help or ""
+        if hasattr(default, "param_decls"):
+            param_opts = default.param_decls
+            
+        real_default = default
+        if hasattr(default, "default"):
+             real_default = default.default
+             if real_default == ...: real_default = None
+              
+        if real_default == inspect.Parameter.empty:
+             real_default = None
+             
+        if param_opts:
+             display_name = ", ".join(param_opts)
+        else:
+             cli_name = name.replace("_", "-")
+             display_name = f"--{cli_name}"
+             
+        type_str = get_param_type(param)
+        required = (default == inspect.Parameter.empty) or (hasattr(default, "default") and default.default == ...)
+        
+        param_entry = {
+            "name": display_name,
+            "type": type_str,
+            "required": required,
+            "default": str(real_default) if real_default is not None else None,
+            "description": extract_i18n_desc(help_text)
+        }
+        params_list.append(param_entry)
+
+    cmd_desc = command_info.help or ""
+    return {
+        "name": cmd_name,
+        "type": "cli",
+        "description": extract_i18n_desc(cmd_desc),
+        "params": params_list
+    }
+
+def parse_api_function(func: Any, name: str) -> Dict[str, Any]:
+    """Parse a Python function or method docstring to extract metadata."""
+    
+    target_func = func
+    doc_str_override = ""
+    
+    # Try to find class from __qualname__
+    qualname = getattr(func, "__qualname__", "")
+    if "." in qualname:
+        cls_name = qualname.split(".")[0]
+        
+        # Hack: for RNASeqPipeline.run, we want RNASeqPipeline.__init__
+        if cls_name == "RNASeqPipeline" and name == "run":
+             from bio_analyze_rna_seq.pipeline import RNASeqPipeline
+             target_func = RNASeqPipeline.__init__
+             # Use the class docstring instead of init docstring for parameter descriptions
+             doc_str_override = inspect.getdoc(RNASeqPipeline) or ""
+        elif "Plot" in cls_name and name == "plot":
+             pass
+
+    sig = inspect.signature(target_func)
+    doc_str = doc_str_override or (inspect.getdoc(target_func) or "")
+    
+    doc = parse_docstring(doc_str)
+    
+    # Map docstring params
+    doc_params = {p.arg_name: p.description for p in doc.params}
+    
+    params_list = []
+    
+    for param_name, param in sig.parameters.items():
+        if param_name in ("self", "cls"):
+            continue
+        if param.kind in (inspect.Parameter.VAR_POSITIONAL, inspect.Parameter.VAR_KEYWORD):
+            continue
+            
+        default = param.default
+        required = default == inspect.Parameter.empty
+        default_val = None if required else default
+        
+        desc = doc_params.get(param_name, "")
+        
+        param_entry = {
+            "name": param_name,
+            "type": get_param_type(param),
+            "required": required,
+            "default": str(default_val) if default_val is not None else None,
+            "description": extract_i18n_desc(desc)
+        }
+        params_list.append(param_entry)
+        
+    func_desc = doc.short_description or ""
+    if doc.long_description:
+        func_desc += "\n" + doc.long_description
+
+    return {
+        "name": name,
+        "type": "api",
+        "description": extract_i18n_desc(func_desc),
+        "params": params_list
+    }
+
+def main():
+    for pkg_name, info in PACKAGES.items():
+        cli_app = info["cli_app"]
+        pkg_path = info["path"]
+        api_registry = info.get("api", {})
+        
+        metadata_dir = pkg_path / "metadata"
+        metadata_dir.mkdir(exist_ok=True)
+        
+        print(f"Processing package: {pkg_name}")
+        
+        # 1. Parse CLI Commands
+        if cli_app:
+            for cmd_info in cli_app.registered_commands:
+                cmd_name = cmd_info.name or cmd_info.callback.__name__.strip("_")
+                if not cmd_name: 
+                    continue
+                    
+                print(f"  - Generating CLI metadata: {cmd_name}")
+                metadata = parse_cli_command(cmd_info, cmd_name)
+                
+                output_file = metadata_dir / f"{cmd_name}_cli.json"
+                with open(output_file, "w", encoding="utf-8") as f:
+                    json.dump(metadata, f, indent=2, ensure_ascii=False)
+                    
+        # 2. Parse API Functions/Classes
+        for api_name, func_or_class in api_registry.items():
+            print(f"  - Generating API metadata: {api_name}")
+            metadata = parse_api_function(func_or_class, api_name)
+            
+            output_file = metadata_dir / f"{api_name}_api.json"
+            with open(output_file, "w", encoding="utf-8") as f:
+                json.dump(metadata, f, indent=2, ensure_ascii=False)
+                
+    print("Done!")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,120 @@
+{
+  "name": "chromosome",
+  "type": "api",
+  "description": {
+    "zh": "绘制 Reads 在染色体上的覆盖度分布图（区分正负链）。",
+    "en": "绘制 Reads 在染色体上的覆盖度分布图（区分正负链）。"
+  },
+  "params": [
+    {
+      "name": "data",
+      "type": "DataFrame",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "包含 bin 统计数据的 DataFrame。\n必需列: chrom, pos (bin start), counts_pos, counts_neg",
+        "en": "包含 bin 统计数据的 DataFrame。\n必需列: chrom, pos (bin start), counts_pos, counts_neg"
+      }
+    },
+    {
+      "name": "chrom_col",
+      "type": "string",
+      "required": false,
+      "default": "chrom",
+      "description": {
+        "zh": "染色体列名。",
+        "en": "染色体列名。"
+      }
+    },
+    {
+      "name": "pos_col",
+      "type": "string",
+      "required": false,
+      "default": "pos",
+      "description": {
+        "zh": "位置列名（bin 起始位）。",
+        "en": "位置列名（bin 起始位）。"
+      }
+    },
+    {
+      "name": "pos_counts_col",
+      "type": "string",
+      "required": false,
+      "default": "counts_pos",
+      "description": {
+        "zh": "正链 Reads 计数列名。",
+        "en": "正链 Reads 计数列名。"
+      }
+    },
+    {
+      "name": "neg_counts_col",
+      "type": "string",
+      "required": false,
+      "default": "counts_neg",
+      "description": {
+        "zh": "负链 Reads 计数列名。",
+        "en": "负链 Reads 计数列名。"
+      }
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "Reads Coverage Distribution on Chromosomes",
+      "description": {
+        "zh": "图表标题。",
+        "en": "图表标题。"
+      }
+    },
+    {
+      "name": "output",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "保存路径。",
+        "en": "保存路径。"
+      }
+    },
+    {
+      "name": "max_chroms",
+      "type": "int",
+      "required": false,
+      "default": "30",
+      "description": {
+        "zh": "最多显示的染色体数量（按长度或名称排序后）。",
+        "en": "最多显示的染色体数量（按长度或名称排序后）。"
+      }
+    },
+    {
+      "name": "bin_size",
+      "type": "int",
+      "required": false,
+      "default": "100000",
+      "description": {
+        "zh": "Bin 大小（用于 X 轴单位换算或标注）。",
+        "en": "Bin 大小（用于 X 轴单位换算或标注）。"
+      }
+    },
+    {
+      "name": "color_pos",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "正链颜色。",
+        "en": "正链颜色。"
+      }
+    },
+    {
+      "name": "color_neg",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "负链颜色。",
+        "en": "负链颜色。"
+      }
+    }
+  ]
+}
