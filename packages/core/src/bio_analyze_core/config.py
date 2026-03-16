@@ -5,6 +5,7 @@ try:
     import tomllib
 except ImportError:
     import tomli as tomllib
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -32,7 +33,7 @@ def _load_toml(path: Path) -> dict[str, Any]:
     return tomllib.loads(path.read_text(encoding="utf-8"))
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True, **({"slots": True} if sys.version_info >= (3, 10) else {}))
 class Settings:
     """
     zh: 全局配置类。

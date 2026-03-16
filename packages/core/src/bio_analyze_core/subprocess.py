@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import subprocess
+import sys
 from collections.abc import Sequence
 from dataclasses import dataclass
 
@@ -8,7 +9,7 @@ from dataclasses import dataclass
 CalledProcessError = subprocess.CalledProcessError
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True, **({"slots": True} if sys.version_info >= (3, 10) else {}))
 class CommandResult:
     """
     zh: 命令执行结果封装类。

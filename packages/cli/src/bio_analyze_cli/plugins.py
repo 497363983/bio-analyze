@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import sys
 from collections.abc import Iterable
 from dataclasses import dataclass
 from importlib.metadata import EntryPoint, entry_points
@@ -10,7 +11,7 @@ import typer
 ENTRYPOINT_GROUP = "bio_analyze.cli"
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True, **({"slots": True} if sys.version_info >= (3, 10) else {}))
 class CliPlugin:
     """
     zh: CLI 插件数据类。

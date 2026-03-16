@@ -82,6 +82,13 @@ jobs:
         pip install -e packages/rna_seq
         pip install -e packages/cli
 
+    - name: Debug Environment
+      shell: bash -el {0}
+      run: |
+        micromamba list
+        python -c "import sys; print(sys.path)"
+        python -c "import numpy; print(f'Numpy file: {numpy.__file__}, version: {numpy.__version__}')" || echo "Numpy import failed"
+
     - name: Run Tests
       shell: bash -el {0}
       run: |
