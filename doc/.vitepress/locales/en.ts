@@ -19,7 +19,15 @@ export const enConfig = {
         text: 'Modules',
         items: getSidebar(docRoot, 'modules', 'Modules')[0]?.items || []
       },
-      { text: 'Developer', link: '/develop/architecture' }
+      {
+        text: 'Developer',
+        items: [
+          { text: 'Architecture', link: '/develop/architecture' },
+          { text: 'Environment', link: '/develop/environment' },
+          { text: 'Code Style', link: '/develop/standards/code-style' },
+          { text: 'Plugin Development', link: '/develop/plugins' }
+        ]
+      }
     ],
     sidebar: {
       '/guide/': getSidebar(docRoot, 'guide', 'Guide'),

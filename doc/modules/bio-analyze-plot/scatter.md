@@ -3,7 +3,7 @@
 
 # Scatter Plot
 
-Display relationship between two variables, supporting confidence ellipses.
+Display relationship between two variables, supporting group coloring, shape mapping, and confidence ellipses.
 
 ## CLI Usage
 
@@ -40,4 +40,3 @@ plotter.plot(
 **plot() Arguments**:
 
 <ParamTable params-path="plot/scatter_api" />
-

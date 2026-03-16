@@ -25,8 +25,7 @@ export const zhConfig = {
           { text: '架构设计', link: '/zh/develop/architecture' },
           { text: '环境搭建', link: '/zh/develop/environment' },
           { text: '代码规范', link: '/zh/develop/standards/code-style' },
-          { text: '插件开发', link: '/zh/develop/plugins' },
-          { text: '核心模块', link: '/zh/develop/modules/core' }
+          { text: '插件开发', link: '/zh/develop/plugins' }
         ]
       }
     ],
