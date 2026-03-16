@@ -15,8 +15,6 @@ sys.modules["pdbfixer"] = MagicMock()
 sys.modules["openmm"] = MagicMock()
 sys.modules["openmm.app"] = MagicMock()
 sys.modules["gemmi"] = MagicMock()
-sys.modules["pandas"] = MagicMock()
-sys.modules["openpyxl"] = MagicMock()
 sys.modules["vina"] = MagicMock()
 sys.modules["pymol"] = MagicMock()
 

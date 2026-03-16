@@ -4,7 +4,7 @@ matplotlib.use("Agg")
 from pathlib import Path
 
 import pandas as pd
-from bio_analyze_plot.plots.chromosome import ChromosomeDistributionPlot
+from bio_analyze_plot.plots.chromosome import ChromosomePlot
 from matplotlib.figure import Figure
 
 

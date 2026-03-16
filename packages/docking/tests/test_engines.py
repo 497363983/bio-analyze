@@ -17,8 +17,6 @@ sys.modules["pdbfixer"] = MagicMock()
 sys.modules["openmm"] = MagicMock()
 sys.modules["openmm.app"] = MagicMock()
 sys.modules["gemmi"] = MagicMock()
-sys.modules["pandas"] = MagicMock()
-sys.modules["openpyxl"] = MagicMock()
 
 from bio_analyze_docking.engines.factory import DockingEngineFactory
 from bio_analyze_docking.engines.vina import VinaEngine

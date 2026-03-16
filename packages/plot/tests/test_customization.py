@@ -4,7 +4,7 @@ matplotlib.use("Agg")
 import numpy as np
 import pandas as pd
 from bio_analyze_plot.plots.bar import BarPlot
-from bio_analyze_plot.plots.chromosome import ChromosomeDistributionPlot
+from bio_analyze_plot.plots.chromosome import ChromosomePlot
 from bio_analyze_plot.plots.pca import PCAPlot
 from bio_analyze_plot.plots.volcano import VolcanoPlot
 
