@@ -63,8 +63,11 @@ class TestSminaEngine(unittest.TestCase):
         # We need to handle the call to exists()
         # The setup mocks it to always return True
         
-        def side_effect(*args, **kwargs):
-            return False
+        def side_effect(path_obj):
+            # Return False only if checking for smina executable
+            if "smina" in str(path_obj):
+                return False
+            return True
 
         self.mock_exists.side_effect = side_effect
         

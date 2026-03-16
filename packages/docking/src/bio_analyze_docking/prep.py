@@ -58,6 +58,7 @@ def prepare_ligand(input_file: Path, output_file: Path, add_hydrogens: bool = Tr
     """
     input_file = Path(input_file)
     output_file = Path(output_file)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
 
     # 1. 读取分子
     mol = None
@@ -149,6 +150,7 @@ def prepare_receptor(
     """
     input_file = Path(input_file)
     output_file = Path(output_file)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
 
     # 检查输入是否已经是 PDBQT
     if input_file.suffix.lower() == ".pdbqt":
