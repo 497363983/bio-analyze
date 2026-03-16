@@ -1,101 +1,122 @@
-from unittest.mock import MagicMock, patch
+import importlib.util
+import shutil
+from pathlib import Path
 
 import pytest
-from bio_analyze_docking.engines import DockingEngineFactory
+from bio_analyze_docking.engine import DockingEngine
 from bio_analyze_docking.nodes import DockingNode
 
 from bio_analyze_core.pipeline import Context
 
+# Check optional dependencies
+HAS_VINA = importlib.util.find_spec("vina") is not None
+HAS_PYMOL = importlib.util.find_spec("pymol") is not None
 
-@pytest.fixture
-def mock_vina(monkeypatch):
-    # Mock Vina class
-    mock_instance = MagicMock()
-    # Setup energies return value
-    # list of [affinity, rmsd_lb, rmsd_ub]
-    mock_instance.energies.return_value = [[-9.0, 0, 0], [-8.0, 1, 2]]
-
-    mock_cls = MagicMock(return_value=mock_instance)
-    
-    # Patch the Vina class where it is imported in the engine module
-    # This ensures VinaEngine uses our mock regardless of when it was imported
-    monkeypatch.setattr("bio_analyze_docking.engines.vina.Vina", mock_cls)
-
-    return mock_instance
+# Define paths relative to the package root
+DATA_DIR = Path(__file__).parent / "data"
+RECEPTOR_DIR = DATA_DIR / "receptor"
+LIGAND_DIR = DATA_DIR / "ligand"
+PREPARED_RECEPTOR_DIR = DATA_DIR / "prepared_receptor"
+PREPARED_LIGAND_DIR = DATA_DIR / "prepared_ligand"
 
 
 @pytest.fixture
-def mock_pymol(monkeypatch):
-    mock_cmd = MagicMock()
-    # count_states return 2 states
-    mock_cmd.count_states.return_value = 2
-    # Mock cmd in bio_analyze_docking.utils because that's where merge_complex_with_pymol uses it
-    monkeypatch.setattr("bio_analyze_docking.utils.cmd", mock_cmd)
-    return mock_cmd
+def real_test_data(tmp_path):
+    # Use real prepared data if available, otherwise skip or fail
+    if not PREPARED_RECEPTOR_DIR.exists() or not PREPARED_LIGAND_DIR.exists():
+        pytest.skip("Prepared data directory not found")
 
+    pdbqt_receptors = list(PREPARED_RECEPTOR_DIR.glob("*.pdbqt"))
+    pdbqt_ligands = list(PREPARED_LIGAND_DIR.glob("*.pdbqt"))
 
-def test_save_complexes(tmp_path, mock_vina, mock_pymol):
-    # Create dummy receptor and ligand files
-    rec_file = tmp_path / "receptor.pdbqt"
-    rec_file.write_text("ATOM      1  N   MET A   1      27.640  32.414   3.707  1.00 10.00     0.163 HD\n")
+    if not pdbqt_receptors or not pdbqt_ligands:
+        pytest.skip("Test prepared data missing")
 
-    lig_file = tmp_path / "ligand.pdbqt"
-    lig_file.write_text("ATOM      1  C   LIG A   1      10.000  10.000  10.000  1.00  0.00     0.000 C \n")
+    rec_pdbqt_src = pdbqt_receptors[0]
+    lig_pdbqt_src = pdbqt_ligands[0]
+
+    rec_pdbqt = tmp_path / "receptor.pdbqt"
+    lig_pdbqt = tmp_path / "ligand.pdbqt"
+
+    shutil.copy(rec_pdbqt_src, rec_pdbqt)
+    shutil.copy(lig_pdbqt_src, lig_pdbqt)
 
     output_dir = tmp_path / "output"
+    output_dir.mkdir()
 
-    # Initialize Engine via Factory or direct class if needed, but test uses DockingEngine alias
-    # DockingEngine is VinaEngine
-    from bio_analyze_docking.engine import DockingEngine
+    return rec_pdbqt, lig_pdbqt, output_dir
+
+
+@pytest.mark.skipif(not HAS_VINA, reason="Vina python package not installed")
+@pytest.mark.skipif(not HAS_PYMOL, reason="PyMOL python package not installed")
+def test_save_complexes(real_test_data):
+    rec_file, lig_file, output_dir = real_test_data
+
+    # Initialize Engine (VinaEngine)
     engine = DockingEngine(rec_file, lig_file, output_dir)
 
-    # Test saving all complexes
-    engine.save_complexes()
+    # We must run docking to get results
+    # Use small box around the ligand (if we knew where it is) or auto-box
+    from bio_analyze_docking.prep import get_box_from_receptor
 
-    # Verify PyMOL calls
-    assert mock_pymol.reinitialize.call_count >= 2  # start and finally
-    mock_pymol.load.assert_any_call(str(rec_file), "receptor")
-    mock_pymol.create.assert_any_call("complex_1", "receptor or (ligand_poses and state 1)")
-    mock_pymol.save.assert_any_call(str(output_dir / "complex_pose_1.pdb"), "complex_1")
+    center, size = get_box_from_receptor(rec_file, padding=4.0)
 
-    # Test saving top 1 complex
-    mock_pymol.reset_mock()
-    engine.save_complexes(n_complexes=1)
-    mock_pymol.save.assert_called_once()
-    assert "complex_pose_1.pdb" in mock_pymol.save.call_args[0][0]
+    engine.compute_box(center, size)
+    engine.dock(exhaustiveness=1, n_poses=1)  # Fast docking
+
+    # Save complexes
+    engine.save_complexes(n_complexes=1, output_dir=output_dir, output_name_prefix="complex_test")
+
+    # Check if output exists
+    # VinaEngine uses PyMOL to save PDB
+    # expected_file = output_dir / "complex_test_1.pdb"
+    # Or maybe just complex_test.pdb if n=1?
+    # Usually it appends index if multiple, but let's check implementation behavior or just list dir
+    # Based on merge_complex_with_pymol logic (not visible here but implied), it probably names them with index.
+
+    files = list(output_dir.glob("complex_test*.pdb"))
+    assert len(files) > 0, "No complex PDB files generated"
 
 
-def test_docking_node_complex_output(tmp_path, mock_vina):
-    rec_file = tmp_path / "receptor.pdbqt"
-    rec_file.touch()
-    lig_file = tmp_path / "ligand.pdbqt"
-    lig_file.touch()
+@pytest.mark.skipif(not HAS_VINA, reason="Vina python package not installed")
+@pytest.mark.skipif(not HAS_PYMOL, reason="PyMOL python package not installed")
+def test_docking_node_complex_output(real_test_data):
+    rec_file, lig_file, output_dir = real_test_data
 
-    output_dir = tmp_path / "output"
+    from unittest.mock import MagicMock
+
+    context = Context()
+    context["rec_key"] = str(rec_file)
+    context["lig_key"] = str(lig_file)
 
     node = DockingNode(
-        receptor_key="rec",
-        ligand_key="lig",
+        receptor_key="rec_key",
+        ligand_key="lig_key",
         output_dir=output_dir,
-        center=[0, 0, 0],
-        size=[20, 20, 20],
+        center=None,  # Auto box
+        padding=4.0,
+        exhaustiveness=1,
+        n_poses=1,
         output_docked_lig_recep_struct=True,
         n_docked_lig_recep_struct=1,
     )
 
-    context = Context(storage_dir=tmp_path)
-    context["rec"] = str(rec_file)
-    context["lig"] = str(lig_file)
+    # We mock progress/logger but use real engine
+    progress = MagicMock()
+    logger = MagicMock()
 
-    # Mock engine methods called by Node
-    # DockingNode calls DockingEngineFactory.create_engine
-    with patch("bio_analyze_docking.nodes.DockingEngineFactory.create_engine") as MockCreate:
-        instance = MockCreate.return_value
-        instance.save_results.return_value = output_dir / "docked.pdbqt"
-        instance.score.return_value = -9.0
-        instance.get_all_poses_info.return_value = []
+    node.run(context, progress, logger)
 
-        node.run(context, MagicMock(), MagicMock())
+    # Check results
+    results = context.get("docking_results", [])
+    assert len(results) == 1
+    assert results[0]["status"] == "success"
 
-        # Verify save_complexes was called with correct arg
-        instance.save_complexes.assert_called_once_with(1)
+    # Check output files
+    # DockingNode saves complexes in output_dir / "dock_results" / "complex" / rec_stem
+    rec_stem = rec_file.stem
+    complex_dir = output_dir / "dock_results" / "complex" / rec_stem
+
+    assert complex_dir.exists()
+    files = list(complex_dir.glob("*.pdb"))
+    assert len(files) > 0

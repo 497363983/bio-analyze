@@ -130,7 +130,12 @@ def test_engine_config(test_data, tmp_path):
     rec, lig, output_dir = test_data
 
     with patch("bio_analyze_docking.cli.run_docking") as mock_run:
-        mock_run.return_value = {}
+        mock_run.return_value = {
+            "best_score": -7.5,
+            "output_file": str(output_dir / "docked.pdbqt"),
+            "box_center": [0, 0, 0],
+            "box_size": [15, 15, 15],
+        }
 
         # Test command line argument
         result = runner.invoke(

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
 
 import gemmi
 
@@ -15,7 +14,7 @@ except ImportError:
 logger = get_logger(__name__)
 
 
-def convert_cif_to_pdb(input_file: Path, output_file: Optional[Path] = None) -> Path:
+def convert_cif_to_pdb(input_file: Path, output_file: Path | None = None) -> Path:
     """
     zh: 将 CIF/mmCIF 文件转换为 PDB 文件。
     en: Convert CIF/mmCIF file to PDB file.
@@ -39,17 +38,14 @@ def convert_cif_to_pdb(input_file: Path, output_file: Optional[Path] = None) -> 
             en: If conversion fails.
     """
     input_file = Path(input_file)
-    if output_file is None:
-        output_file = input_file.parent / f"{input_file.stem}_converted.pdb"
-    else:
-        output_file = Path(output_file)
+    output_file = input_file.parent / f"{input_file.stem}_converted.pdb" if output_file is None else Path(output_file)
 
     logger.info(f"Converting CIF to PDB: {input_file.name}")
     try:
-        doc = gemmi.cif.read(str(input_file))
-        block = doc.sole_block()
-        structure = gemmi.make_structure_from_block(block)
-
+        # doc = gemmi.cif.read(str(input_file))
+        # block = doc.sole_block()
+        # structure = gemmi.make_structure_from_block(block)
+        structure = gemmi.read_structure(str(input_file))
         output_file.parent.mkdir(parents=True, exist_ok=True)
         structure.write_pdb(str(output_file))
         if not output_file.exists():
@@ -58,7 +54,7 @@ def convert_cif_to_pdb(input_file: Path, output_file: Optional[Path] = None) -> 
         return output_file
     except Exception as e:
         logger.error(f"Failed to convert CIF to PDB: {e}")
-        raise RuntimeError(f"CIF conversion failed: {e}")
+        raise RuntimeError(f"CIF conversion failed: {e}") from e
 
 
 def merge_complex_with_pymol(

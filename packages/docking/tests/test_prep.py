@@ -25,8 +25,15 @@ def test_prepare_receptor_cif(output_dir):
     assert len(cif_files) > 0, "No CIF files found for testing"
 
     # Use the first one (e.g. fold_tlr_7...)
-    input_file = cif_files[0]
-    output_file = output_dir / f"{input_file.stem}.pdbqt"
+    input_file_src = cif_files[0]
+
+    # Copy to temp dir with shorter name to avoid path length issues on Windows
+    input_file = output_dir / "test_rec.cif"
+    import shutil
+
+    shutil.copy(input_file_src, input_file)
+
+    output_file = output_dir / "test_rec.pdbqt"
 
     # Run preparation
     result_path = prepare_receptor(
@@ -55,8 +62,14 @@ def test_prepare_receptor_charge_model(output_dir):
     """Test receptor preparation with different charge models."""
     # Use a simpler/smaller CIF if possible, or same one
     cif_files = list(RECEPTOR_DIR.glob("*.cif"))
-    input_file = cif_files[0]
-    output_file = output_dir / f"{input_file.stem}_zero.pdbqt"
+
+    input_file_src = cif_files[0]
+    input_file = output_dir / "test_rec_charge.cif"
+    import shutil
+
+    shutil.copy(input_file_src, input_file)
+
+    output_file = output_dir / "test_rec_charge.pdbqt"
 
     # Run with 'zero' charge model (faster/safer)
     result_path = prepare_receptor(
@@ -70,7 +83,7 @@ def test_prepare_receptor_charge_model(output_dir):
     # Verify charges are zero (last column before element symbol usually)
     # PDBQT format: ... x y z occupancy tempFactor charge element
     # Check a few lines
-    lines = [l for l in content.splitlines() if l.startswith("ATOM")]
+    lines = [li for li in content.splitlines() if li.startswith("ATOM")]
     if lines:
         # PDBQT charge is at column 70-76 (1-based index) -> 69:76
         # Or just parse last float
