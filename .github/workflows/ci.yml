@@ -1,0 +1,88 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Micromamba
+      uses: mamba-org/setup-micromamba@v1
+      with:
+        environment-name: bio-analyze-env
+        create-args: >-
+          python=${{ matrix.python-version }}
+        condarc: |
+          channels:
+            - conda-forge
+            - bioconda
+            - defaults
+          channel_priority: strict
+        init-shell: bash
+        cache-environment: true
+        post-cleanup: 'all'
+
+    - name: Install System Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgl1 libglib2.0-0 fonts-wqy-microhei fonts-wqy-zenhei curl git build-essential
+
+    - name: Install Conda Dependencies
+      shell: bash -el {0}
+      run: |
+        micromamba install -y -n bio-analyze-env \
+          fastp \
+          salmon \
+          fastqc \
+          star \
+          samtools \
+          gffread \
+          sra-tools \
+          pdbfixer \
+          vina \
+          meeko \
+          propka \
+          openbabel \
+          rdkit \
+          six \
+          pymol-open-source \
+          gemmi \
+          pytest \
+          pytest-cov \
+          hatchling
+        
+        micromamba clean -afy
+
+    - name: Install External Binaries (Gnina/Smina)
+      run: |
+        sudo curl -L https://github.com/gnina/gnina/releases/download/v1.0.3/gnina -o /usr/local/bin/gnina
+        sudo chmod +x /usr/local/bin/gnina
+        sudo curl -L https://sourceforge.net/projects/smina/files/smina.static/download -o /usr/local/bin/smina
+        sudo chmod +x /usr/local/bin/smina
+
+    - name: Install Project Packages Locally
+      shell: bash -el {0}
+      run: |
+        # Install packages in editable mode using pip
+        python -m pip install --upgrade pip
+        pip install -e packages/core
+        pip install -e packages/plot
+        pip install -e packages/docking
+        pip install -e packages/rna_seq
+        pip install -e packages/cli
+
+    - name: Run Tests
+      shell: bash -el {0}
+      run: |
+        pytest packages/

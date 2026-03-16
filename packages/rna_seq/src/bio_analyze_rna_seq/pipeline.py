@@ -1,3 +1,4 @@
+from __future__ import annotations
 from pathlib import Path
 
 from bio_analyze_core.logging import get_logger

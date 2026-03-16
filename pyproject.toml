@@ -10,7 +10,7 @@ bio-analyze-plot = { workspace = true }
 
 [tool.ruff]
 line-length = 120
-target-version = "py311"
+target-version = "py39"
 src = ["packages"]
 
 [tool.ruff.lint]

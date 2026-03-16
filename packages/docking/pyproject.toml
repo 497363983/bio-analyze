@@ -7,7 +7,7 @@ name = "bio-analyze-docking"
 version = "0.1.0"
 description = "Molecular docking module for bio-analyze."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [
