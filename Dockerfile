@@ -88,18 +88,12 @@ COPY . .
 # 安装项目包到系统环境 (Conda)
 # 使用 conda build 和 install --use-local 安装本地包
 # 按依赖顺序构建和安装
-RUN conda build conda_recipes/bio-analyze-core -c conda-forge -c bioconda && \
-    conda install --use-local bio-analyze-core && \
-    conda build conda_recipes/bio-analyze-plot -c conda-forge -c bioconda && \
-    conda install --use-local bio-analyze-plot && \
-    conda build conda_recipes/bio-analyze-docking -c conda-forge -c bioconda && \
-    conda install --use-local bio-analyze-docking && \
-    conda build conda_recipes/bio-analyze-rna-seq -c conda-forge -c bioconda && \
-    conda install --use-local bio-analyze-rna-seq && \
-    conda build conda_recipes/bio-analyze-cli -c conda-forge -c bioconda && \
-    conda install --use-local bio-analyze-cli && \
-    conda install pytest pytest-cov && \
-    conda clean -afy
+RUN python -m pip install --upgrade pip && \
+    pip install -e packages/core && \
+    pip install -e packages/plot && \
+    pip install -e packages/docking && \
+    pip install -e packages/rna_seq && \
+    pip install -e packages/cli
 
 # 默认命令
 ENTRYPOINT ["bioanalyze"]

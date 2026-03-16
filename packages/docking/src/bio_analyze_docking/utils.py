@@ -42,11 +42,22 @@ def convert_cif_to_pdb(input_file: Path, output_file: Path | None = None) -> Pat
 
     logger.info(f"Converting CIF to PDB: {input_file.name}")
     try:
-        # doc = gemmi.cif.read(str(input_file))
-        # block = doc.sole_block()
-        # structure = gemmi.make_structure_from_block(block)
-        structure = gemmi.read_structure(str(input_file))
-        
+        structure = None
+        try:
+            structure = gemmi.read_structure(str(input_file))
+        except Exception as e:
+            logger.warning(f"gemmi.read_structure failed: {e}, trying gemmi.cif.read...")
+
+        if structure is None or len(structure) == 0:
+             try:
+                 doc = gemmi.cif.read(str(input_file))
+                 block = doc.sole_block()
+                 structure = gemmi.make_structure_from_block(block)
+             except Exception as e2:
+                 logger.warning(f"gemmi.cif.read failed: {e2}")
+                 if structure is None:
+                     raise e2
+
         # Ensure output directory exists
         output_file.parent.mkdir(parents=True, exist_ok=True)
         
