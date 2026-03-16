@@ -16,7 +16,19 @@ def mock_vina(monkeypatch):
     mock_instance.energies.return_value = [[-9.0, 0, 0], [-8.0, 1, 2]]
 
     mock_cls = MagicMock(return_value=mock_instance)
-    monkeypatch.setattr("bio_analyze_docking.engine.Vina", mock_cls)
+    
+    # We need to mock where Vina is imported/used.
+    # In bio_analyze_docking.engine, Vina is imported from vina.
+    # But since we mock sys.modules['vina'] globally in other tests (or here if needed),
+    # we should check how DockingEngine uses it.
+    
+    # Assuming DockingEngine imports Vina from vina package directly or via engines.vina
+    # Let's mock sys.modules["vina"] if not already mocked
+    import sys
+    if "vina" not in sys.modules or not isinstance(sys.modules["vina"], MagicMock):
+        sys.modules["vina"] = MagicMock()
+        
+    sys.modules["vina"].Vina = mock_cls
 
     return mock_instance
 

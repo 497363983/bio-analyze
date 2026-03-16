@@ -63,16 +63,21 @@ def test_bar_custom_colors():
     assert fig is not None
 
 
-def test_chromosome_custom_labels():
-    df = pd.DataFrame({"chrom": ["chr1", "chr1"], "pos": [100, 200], "counts_pos": [10, 20], "counts_neg": [5, 15]})
-
-    plotter = ChromosomeDistributionPlot()
+def test_chromosome_custom_labels(tmp_path):
+    data = pd.DataFrame({
+        "chrom": ["chr1"] * 10,
+        "pos": range(10),
+        "counts_pos": range(10),
+        "counts_neg": range(10)
+    })
+    plotter = ChromosomePlot()
     fig = plotter.plot(
-        df,
-        label_pos="Positive Strand",
-        label_neg="Negative Strand",
-        color_pos="pink",
-        color_neg="purple",
-        zero_line_kws={"color": "black", "linewidth": 1},
+        data,
+        label_pos="Forward",
+        label_neg="Reverse",
+        output=str(tmp_path / "custom_labels.png")
     )
-    assert fig is not None
+    # Check legend texts
+    texts = [t.get_text() for t in fig.legends[0].get_texts()]
+    assert "Forward" in texts
+    assert "Reverse" in texts
