@@ -102,8 +102,8 @@ def run_docking(
     result_key = "docking_results"
 
     # 添加节点
-    pipeline.add_node(ReceptorPrepNode(receptor, output_dir, rec_key, charge_model=charge_model))
-    pipeline.add_node(LigandPrepNode(ligand, output_dir, lig_key))
+    pipeline.add_node(ReceptorPrepNode(receptor, output_dir, rec_key, charge_model=charge_model, engine_type=engine))
+    pipeline.add_node(LigandPrepNode(ligand, output_dir, lig_key, engine_type=engine))
 
     pipeline.add_node(
         DockingNode(
@@ -262,12 +262,13 @@ def run_docking_batch(
             output_dir=output_dir / "prepared_receptors",
             context_map_key=rec_map_key,
             charge_model=charge_model,
+            engine_type=engine,
         )
     )
 
     pipeline.add_node(
         BatchLigandPrepNode(
-            ligands=unique_ligands, output_dir=output_dir / "prepared_ligands", context_map_key=lig_map_key
+            ligands=unique_ligands, output_dir=output_dir / "prepared_ligands", context_map_key=lig_map_key, engine_type=engine
         )
     )
 

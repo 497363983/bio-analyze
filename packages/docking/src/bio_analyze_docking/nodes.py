@@ -111,10 +111,12 @@ def run_docking_task(
         pair_dir.mkdir(parents=True, exist_ok=True)
 
         # 新的输出结构
-        # 1. 姿态: dock_results/poses/{rec_stem}/{lig_stem}_docked.pdbqt
+        # 1. 姿态: dock_results/poses/{rec_stem}/{lig_stem}_docked{output_ext}
+        engine_cls = DockingEngineFactory.get_engine_class(engine_type)
+        output_ext = engine_cls.get_output_ext()
         poses_dir = output_dir / "dock_results" / "poses" / rec_stem
         poses_dir.mkdir(parents=True, exist_ok=True)
-        poses_filename = f"{lig_stem}_docked.pdbqt"
+        poses_filename = f"{lig_stem}_docked{output_ext}"
 
         # 2. 复合物: dock_results/complex/{rec_stem}/{lig_stem}_docked_complex.pdb
         # 注意: 用户请求了 .pdbqt 后缀，但 PyMOL 默认保存 PDB。
@@ -191,6 +193,7 @@ class ReceptorPrepNode(Node):
         keep_water: bool = False,
         rigid_macrocycles: bool = True,
         charge_model: str = "gasteiger",
+        engine_type: str = "vina",
     ):
         """
         Args:
@@ -215,6 +218,9 @@ class ReceptorPrepNode(Node):
             charge_model (str, optional):
                 zh: Meeko 的电荷模型。默认为 'gasteiger'。
                 en: Charge model for Meeko. Defaults to 'gasteiger'.
+            engine_type (str, optional):
+                zh: 引擎类型。默认为 'vina'。
+                en: Engine type. Defaults to 'vina'.
         """
         super().__init__(f"Prepare Receptor: {receptor_path.name}")
         self.receptor_path = Path(receptor_path)
@@ -224,6 +230,7 @@ class ReceptorPrepNode(Node):
         self.keep_water = keep_water
         self.rigid_macrocycles = rigid_macrocycles
         self.charge_model = charge_model
+        self.engine_type = engine_type
 
     def run(self, context: Context, progress: Progress, logger: Any):
         """
@@ -242,10 +249,12 @@ class ReceptorPrepNode(Node):
                 en: Logger instance.
         """
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        output_path = self.output_dir / f"{self.receptor_path.stem}.pdbqt"
+        engine_cls = DockingEngineFactory.get_engine_class(self.engine_type)
+        output_ext = engine_cls.get_receptor_ext()
+        output_path = self.output_dir / f"{self.receptor_path.stem}{output_ext}"
 
         logger.info(f"准备受体 {self.receptor_path} 到 {output_path}")
-        prepare_receptor(
+        engine_cls.prepare_receptor(
             self.receptor_path,
             output_path,
             ph=self.ph,
@@ -273,6 +282,7 @@ class BatchReceptorPrepNode(Node):
         keep_water: bool = False,
         rigid_macrocycles: bool = True,
         charge_model: str = "gasteiger",
+        engine_type: str = "vina",
     ):
         """
         Args:
@@ -297,6 +307,9 @@ class BatchReceptorPrepNode(Node):
             charge_model (str, optional):
                 zh: Meeko 的电荷模型。默认为 'gasteiger'。
                 en: Charge model for Meeko. Defaults to 'gasteiger'.
+            engine_type (str, optional):
+                zh: 引擎类型。默认为 'vina'。
+                en: Engine type. Defaults to 'vina'.
         """
         super().__init__("Batch Receptor Preparation")
         self.receptors = receptors
@@ -306,6 +319,7 @@ class BatchReceptorPrepNode(Node):
         self.keep_water = keep_water
         self.rigid_macrocycles = rigid_macrocycles
         self.charge_model = charge_model
+        self.engine_type = engine_type
 
     def run(self, context: Context, progress: Progress, logger: Any):
         """
@@ -337,13 +351,16 @@ class BatchReceptorPrepNode(Node):
         if remaining:
             logger.info(f"恢复受体准备。剩余: {len(remaining)}")
 
+            engine_cls = DockingEngineFactory.get_engine_class(self.engine_type)
+            output_ext = engine_cls.get_receptor_ext()
+
             with ProcessPoolExecutor() as executor:
                 future_to_rec = {}
                 for rec in remaining:
-                    output_path = self.output_dir / f"{rec.stem}.pdbqt"
+                    output_path = self.output_dir / f"{rec.stem}{output_ext}"
                     # 将新参数传递给 prepare_receptor
                     future = executor.submit(
-                        prepare_receptor,
+                        engine_cls.prepare_receptor,
                         rec,
                         output_path,
                         add_hydrogens=True,  # 默认
@@ -375,7 +392,7 @@ class LigandPrepNode(Node):
     en: Node for preparing ligand files (SDF/MOL2/PDB -> PDBQT).
     """
 
-    def __init__(self, ligand_path: Path, output_dir: Path, context_key: str):
+    def __init__(self, ligand_path: Path, output_dir: Path, context_key: str, engine_type: str = "vina"):
         """
         Args:
             ligand_path (Path):
@@ -387,11 +404,15 @@ class LigandPrepNode(Node):
             context_key (str):
                 zh: 在上下文中存储输出路径的键。
                 en: Key to store output path in context.
+            engine_type (str, optional):
+                zh: 引擎类型。默认为 'vina'。
+                en: Engine type. Defaults to 'vina'.
         """
         super().__init__(f"Prepare Ligand: {ligand_path.name}")
         self.ligand_path = Path(ligand_path)
         self.output_dir = Path(output_dir)
         self.context_key = context_key
+        self.engine_type = engine_type
 
     def run(self, context: Context, progress: Progress, logger: Any):
         """
@@ -410,10 +431,12 @@ class LigandPrepNode(Node):
                 en: Logger instance.
         """
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        output_path = self.output_dir / f"{self.ligand_path.stem}.pdbqt"
+        engine_cls = DockingEngineFactory.get_engine_class(self.engine_type)
+        output_ext = engine_cls.get_ligand_ext()
+        output_path = self.output_dir / f"{self.ligand_path.stem}{output_ext}"
 
         logger.info(f"准备配体 {self.ligand_path} 到 {output_path}")
-        prepare_ligand(self.ligand_path, output_path)
+        engine_cls.prepare_ligand(self.ligand_path, output_path)
 
         # 将绝对路径存储在上下文中
         context[self.context_key] = str(output_path.resolve())
@@ -425,7 +448,7 @@ class BatchLigandPrepNode(Node):
     en: Node for preparing multiple ligand files with resume support.
     """
 
-    def __init__(self, ligands: list[Path], output_dir: Path, context_map_key: str):
+    def __init__(self, ligands: list[Path], output_dir: Path, context_map_key: str, engine_type: str = "vina"):
         """
         Args:
             ligands (list[Path]):
@@ -437,11 +460,15 @@ class BatchLigandPrepNode(Node):
             context_map_key (str):
                 zh: 在上下文中存储映射 {input_path_str: output_path_str} 的键。
                 en: Key to store map {input_path_str: output_path_str} in context.
+            engine_type (str, optional):
+                zh: 引擎类型。默认为 'vina'。
+                en: Engine type. Defaults to 'vina'.
         """
         super().__init__("Batch Ligand Preparation")
         self.ligands = ligands
         self.output_dir = Path(output_dir)
         self.context_map_key = context_map_key
+        self.engine_type = engine_type
 
     def run(self, context: Context, progress: Progress, logger: Any):
         """
@@ -473,11 +500,14 @@ class BatchLigandPrepNode(Node):
         if remaining:
             logger.info(f"恢复配体准备。剩余: {len(remaining)}")
 
+            engine_cls = DockingEngineFactory.get_engine_class(self.engine_type)
+            output_ext = engine_cls.get_ligand_ext()
+
             with ProcessPoolExecutor() as executor:
                 future_to_lig = {}
                 for lig in remaining:
-                    output_path = self.output_dir / f"{lig.stem}.pdbqt"
-                    future = executor.submit(prepare_ligand, lig, output_path)
+                    output_path = self.output_dir / f"{lig.stem}{output_ext}"
+                    future = executor.submit(engine_cls.prepare_ligand, lig, output_path)
                     future_to_lig[future] = lig
 
                 for i, future in enumerate(as_completed(future_to_lig)):
@@ -577,7 +607,9 @@ class DockingNode(Node):
             engine.compute_box(center, size)
             engine.dock(exhaustiveness=self.exhaustiveness, n_poses=self.n_poses)
 
-            out_file = engine.save_results()
+            engine_cls = DockingEngineFactory.get_engine_class(self.engine_type)
+            output_ext = engine_cls.get_output_ext()
+            out_file = engine.save_results(output_name=f"docked{output_ext}")
 
             if self.output_docked_lig_recep_struct:
                 engine.save_complexes(self.n_docked_lig_recep_struct)

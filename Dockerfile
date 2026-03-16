@@ -46,6 +46,7 @@ RUN conda install -y \
     numpy \
     scipy \
     openpyxl \
+    pytest \
     && conda clean -afy
 
 # Step 2: Install Bio-informatics Tools (Heavy dependencies)

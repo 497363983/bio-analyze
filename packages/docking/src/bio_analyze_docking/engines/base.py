@@ -14,24 +14,24 @@ class BaseDockingEngine(ABC):
     en: All docking engines should inherit from this class and implement abstract methods.
     """
 
-    def __init__(self, receptor_pdbqt: Path, ligand_pdbqt: Path, output_dir: Path):
+    def __init__(self, receptor: Path, ligand: Path, output_dir: Path):
         """
         zh: 初始化对接引擎。
         en: Initialize the docking engine.
 
         Args:
-            receptor_pdbqt (Path):
-                zh: 受体 PDBQT 文件路径
-                en: Path to the receptor PDBQT file
-            ligand_pdbqt (Path):
-                zh: 配体 PDBQT 文件路径
-                en: Path to the ligand PDBQT file
+            receptor (Path):
+                zh: 受体文件路径
+                en: Path to the receptor file
+            ligand (Path):
+                zh: 配体文件路径
+                en: Path to the ligand file
             output_dir (Path):
                 zh: 输出目录路径
                 en: Path to the output directory
         """
-        self.receptor = Path(receptor_pdbqt)
-        self.ligand = Path(ligand_pdbqt)
+        self.receptor = Path(receptor)
+        self.ligand = Path(ligand)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -39,6 +39,48 @@ class BaseDockingEngine(ABC):
             raise FileNotFoundError(f"受体文件未找到: {self.receptor}")
         if not self.ligand.exists():
             raise FileNotFoundError(f"配体文件未找到: {self.ligand}")
+
+    @classmethod
+    def get_receptor_ext(cls) -> str:
+        """
+        zh: 获取引擎期望的受体文件扩展名。
+        en: Get the expected receptor file extension for this engine.
+        """
+        return ".pdbqt"
+
+    @classmethod
+    def get_ligand_ext(cls) -> str:
+        """
+        zh: 获取引擎期望的配体文件扩展名。
+        en: Get the expected ligand file extension for this engine.
+        """
+        return ".pdbqt"
+
+    @classmethod
+    def get_output_ext(cls) -> str:
+        """
+        zh: 获取引擎输出结果的文件扩展名。
+        en: Get the output file extension for this engine.
+        """
+        return ".pdbqt"
+
+    @classmethod
+    def prepare_receptor(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
+        """
+        zh: 准备受体文件以供当前引擎使用。
+        en: Prepare the receptor file for the current engine.
+        """
+        # 默认实现：直接返回输入路径，或由子类覆盖
+        return Path(input_file)
+
+    @classmethod
+    def prepare_ligand(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
+        """
+        zh: 准备配体文件以供当前引擎使用。
+        en: Prepare the ligand file for the current engine.
+        """
+        # 默认实现：直接返回输入路径，或由子类覆盖
+        return Path(input_file)
 
     @abstractmethod
     def compute_box(self, center: list[float], size: list[float]):

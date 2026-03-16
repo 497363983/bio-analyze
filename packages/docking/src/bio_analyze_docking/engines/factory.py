@@ -24,8 +24,19 @@ class DockingEngineFactory:
     }
 
     @classmethod
+    def get_engine_class(cls, engine_type: str) -> type[BaseDockingEngine]:
+        """
+        zh: 获取对接引擎类，而不实例化它。
+        en: Get the docking engine class without instantiating it.
+        """
+        engine_class = cls._engines.get(engine_type.lower())
+        if not engine_class:
+            raise ValueError(f"不支持的对接引擎类型: {engine_type}。可用引擎: {list(cls._engines.keys())}")
+        return engine_class
+
+    @classmethod
     def create_engine(
-        cls, engine_type: str, receptor_pdbqt: Path, ligand_pdbqt: Path, output_dir: Path
+        cls, engine_type: str, receptor: Path, ligand: Path, output_dir: Path
     ) -> BaseDockingEngine:
         """
         zh: 创建一个对接引擎实例。
@@ -35,12 +46,12 @@ class DockingEngineFactory:
             engine_type (str):
                 zh: 引擎类型（例如 "vina"）
                 en: Engine type (e.g., "vina")
-            receptor_pdbqt (Path):
-                zh: 受体 PDBQT 文件路径
-                en: Path to the receptor PDBQT file
-            ligand_pdbqt (Path):
-                zh: 配体 PDBQT 文件路径
-                en: Path to the ligand PDBQT file
+            receptor (Path):
+                zh: 受体文件路径
+                en: Path to the receptor file
+            ligand (Path):
+                zh: 配体文件路径
+                en: Path to the ligand file
             output_dir (Path):
                 zh: 输出目录路径
                 en: Path to the output directory
@@ -55,11 +66,8 @@ class DockingEngineFactory:
                 zh: 如果引擎类型不受支持
                 en: If the engine type is not supported
         """
-        engine_class = cls._engines.get(engine_type.lower())
-        if not engine_class:
-            raise ValueError(f"不支持的对接引擎类型: {engine_type}。可用引擎: {list(cls._engines.keys())}")
-
-        return engine_class(receptor_pdbqt, ligand_pdbqt, output_dir)
+        engine_class = cls.get_engine_class(engine_type)
+        return engine_class(receptor, ligand, output_dir)
 
     @classmethod
     def register_engine(cls, name: str, engine_class: type[BaseDockingEngine]):

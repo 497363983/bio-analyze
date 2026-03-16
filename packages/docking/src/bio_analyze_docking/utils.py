@@ -60,26 +60,44 @@ def convert_cif_to_pdb(input_file: Path, output_file: Path | None = None) -> Pat
 
         # Ensure output directory exists
         output_file.parent.mkdir(parents=True, exist_ok=True)
-        
-        # Check if structure has models/chains
-        if len(structure) == 0:
-            logger.warning(f"Warning: Gemmi read empty structure from {input_file}")
-            
-        # Write PDB string manually to avoid potential C++ file I/O issues in some environments
-        pdb_string = structure.make_pdb_string()
-        
-        if not pdb_string:
-             logger.warning(f"Warning: Gemmi generated empty PDB string for {input_file}")
-             
-        # Ensure pdb_string is str (especially for Mocks in tests)
-        if not isinstance(pdb_string, str):
-            pdb_string = str(pdb_string)
 
-        output_file.write_text(pdb_string)
-        
-        if not output_file.exists():
-            raise RuntimeError(f"Gemmi failed to write PDB file (file missing after write): {output_file}")
-            
+        is_gemmi_success = False
+        if structure is not None and len(structure) > 0:
+            pdb_string = structure.make_pdb_string()
+            if pdb_string and isinstance(pdb_string, str) and len(pdb_string) > 100:
+                output_file.write_text(pdb_string)
+                if output_file.exists() and output_file.stat().st_size > 100:
+                    is_gemmi_success = True
+
+        if not is_gemmi_success:
+            logger.warning(f"Warning: Gemmi read empty structure or failed for {input_file}, trying PyMOL fallback...")
+            if cmd is not None:
+                try:
+                    cmd.reinitialize()
+                    cmd.load(str(input_file), "temp_cif")
+                    cmd.save(str(output_file), "temp_cif")
+                    cmd.delete("temp_cif")
+                    if output_file.exists() and output_file.stat().st_size > 100:
+                        logger.info(f"PyMOL fallback successful for {input_file}")
+                        return output_file
+                except Exception as e_pymol:
+                    logger.warning(f"PyMOL fallback failed: {e_pymol}")
+
+            # Try OpenBabel fallback
+            logger.info(f"Trying OpenBabel fallback for {input_file}...")
+            try:
+                import subprocess
+                subprocess.run(["obabel", "-icif", str(input_file), "-opdb", "-O", str(output_file)], check=True, capture_output=True)
+                if output_file.exists() and output_file.stat().st_size > 100:
+                    logger.info(f"OpenBabel fallback successful for {input_file}")
+                    return output_file
+            except Exception as e_obabel:
+                logger.warning(f"OpenBabel fallback failed: {e_obabel}")
+
+            if output_file.exists():
+                output_file.unlink() # remove if it's a dummy 0-byte file
+            raise RuntimeError(f"All CIF to PDB conversion methods failed for {input_file}")
+
         logger.info(f"Converted CIF to PDB: {output_file} (size: {output_file.stat().st_size} bytes)")
         return output_file
     except Exception as e:

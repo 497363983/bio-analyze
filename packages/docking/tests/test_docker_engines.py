@@ -57,7 +57,7 @@ def test_smina_docking_pipeline(tmp_path):
     assert result["status"] == "success"
     assert "best_score" in result
     # assert "affinity" in result 
-    assert (output_dir / "docking_results" / "docked.pdbqt").exists()
+    assert (output_dir / "docked.pdbqt").exists()
 
 @pytest.mark.skipif(not shutil.which("gnina"), reason="Gnina not installed")
 def test_gnina_docking_pipeline(tmp_path):
@@ -90,4 +90,4 @@ def test_gnina_docking_pipeline(tmp_path):
     # Check for CNN scores if possible, though mock might not return them if binary output is not parsed correctly or different
     # But real binary should output them.
     # Note: Gnina binary output might vary, but our parser handles it.
-    assert (output_dir / "docking_results" / "docked.pdbqt").exists()
+    assert (output_dir / "docked.pdbqt").exists()

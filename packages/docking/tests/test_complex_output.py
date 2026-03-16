@@ -65,11 +65,11 @@ def test_save_complexes(real_test_data):
     engine = DockingEngine(rec_file, lig_file, output_dir)
 
     # We must run docking to get results
-    # Use small box around the ligand (if we knew where it is) or auto-box
-    from bio_analyze_docking.prep import get_box_from_ligand
+    # Wait, using ligand box might be far from the receptor. Let's use receptor box.
+    from bio_analyze_docking.prep import get_box_from_receptor
     
-    # Use ligand for box to ensure Vina finds a pose quickly
-    center, size = get_box_from_ligand(lig_file, padding=10.0)
+    # Use receptor for box to ensure Vina finds a pose quickly since random ligand might be far
+    center, size = get_box_from_receptor(rec_file, padding=10.0)
     
     engine.compute_box(center, size)
     engine.dock(exhaustiveness=1, n_poses=1) # Fast docking
@@ -104,7 +104,7 @@ def test_docking_node_complex_output(real_test_data):
         ligand_key="lig_key",
         output_dir=output_dir,
         center=None,
-        autobox_ligand=lig_file, # Use ligand to box
+        autobox_ligand=None, # Auto-box from receptor
         padding=10.0,
         exhaustiveness=1,
         n_poses=1,
@@ -124,9 +124,8 @@ def test_docking_node_complex_output(real_test_data):
     assert results[0]["status"] == "success"
 
     # Check output files
-    # DockingNode saves complexes in output_dir / "dock_results" / "complex" / rec_stem
-    rec_stem = rec_file.stem
-    complex_dir = output_dir / "dock_results" / "complex" / rec_stem
+    # DockingNode uses save_complexes which by default saves to output_dir
+    complex_dir = output_dir
 
     assert complex_dir.exists()
     files = list(complex_dir.glob("*.pdb"))

@@ -27,7 +27,17 @@ class VinaEngine(BaseDockingEngine):
     en: Vina-based docking engine implementation.
     """
 
-    def __init__(self, receptor_pdbqt: Path, ligand_pdbqt: Path, output_dir: Path):
+    @classmethod
+    def prepare_receptor(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
+        from ..prep import prepare_receptor as prep_rec
+        return prep_rec(input_file, output_file, **kwargs)
+
+    @classmethod
+    def prepare_ligand(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
+        from ..prep import prepare_ligand as prep_lig
+        return prep_lig(input_file, output_file, **kwargs)
+
+    def __init__(self, receptor: Path, ligand: Path, output_dir: Path):
         """
         zh: 初始化 Vina 对接引擎。
         en: Initialize the Vina docking engine.
@@ -38,7 +48,7 @@ class VinaEngine(BaseDockingEngine):
         # if cmd is None:
         #     logger.warning("PyMOL module not found. save_complexes will not work.")
 
-        super().__init__(receptor_pdbqt, ligand_pdbqt, output_dir)
+        super().__init__(receptor, ligand, output_dir)
         self.engine = Vina(sf_name="vina")
 
         # 加载受体
