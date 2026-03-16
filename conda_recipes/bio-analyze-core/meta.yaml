@@ -15,11 +15,11 @@ build:
 
 requirements:
   host:
-    - python >=3.9
+    - python >=3.9,<3.13
     - hatchling
     - pip
   run:
-    - python >=3.9
+    - python >=3.9,<3.13
     - rich >=14.3.3
     - loguru >=0.7.2
     - pyyaml >=6.0

@@ -17,11 +17,11 @@ build:
 
 requirements:
   host:
-    - python >=3.9
+    - python >=3.9,<3.13
     - hatchling
     - pip
   run:
-    - python >=3.9
+    - python >=3.9,<3.13
     - bio-analyze-core >=0.1.0
     - typer >=0.12.0
 

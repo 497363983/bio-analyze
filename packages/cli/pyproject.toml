@@ -7,7 +7,7 @@ name = "bio-analyze-cli"
 version = "0.1.0"
 description = "Unified CLI for the bio-analyze toolbox (plugin-based)."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.9, <3.13"
 license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [
