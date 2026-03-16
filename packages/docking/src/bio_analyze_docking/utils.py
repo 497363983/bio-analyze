@@ -53,12 +53,17 @@ def convert_cif_to_pdb(input_file: Path, output_file: Path | None = None) -> Pat
         # Check if structure has models/chains
         if len(structure) == 0:
             logger.warning(f"Warning: Gemmi read empty structure from {input_file}")
-        
+            
         # Write PDB string manually to avoid potential C++ file I/O issues in some environments
         pdb_string = structure.make_pdb_string()
+        
         if not pdb_string:
              logger.warning(f"Warning: Gemmi generated empty PDB string for {input_file}")
              
+        # Ensure pdb_string is str (especially for Mocks in tests)
+        if not isinstance(pdb_string, str):
+            pdb_string = str(pdb_string)
+
         output_file.write_text(pdb_string)
         
         if not output_file.exists():
