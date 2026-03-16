@@ -223,6 +223,8 @@ class Pipeline:
             for node in self.nodes:
                 if node.name in self._completed_nodes:
                     self.logger.info(f"Skipping completed node: {node.name}")
+                    if hasattr(node, "skip"):
+                        node.skip()
                     continue
 
                 self.logger.info(f"Running node: {node.name}")

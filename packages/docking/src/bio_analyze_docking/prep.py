@@ -168,6 +168,9 @@ def prepare_receptor(
 
     # 1. 使用 PDBFixer 修复 PDB 结构
     logger.info(f"Repairing PDB structure using PDBFixer: {processing_file.name}")
+    if not processing_file.exists():
+        raise RuntimeError(f"Input file for PDBFixer not found: {processing_file}")
+
     try:
         fixer = PDBFixer(filename=str(processing_file))
         fixer.findMissingResidues()
@@ -209,6 +212,9 @@ def prepare_receptor(
 
     # 2. 运行 PropKa 分析和质子化
     # 使用 PropKa 计算 pKa 并写入具有正确质子化的新 PDB
+    if not processing_file.exists():
+        raise RuntimeError(f"Input file for PropKa not found: {processing_file}")
+
     try:
         logger.info(f"Running PropKa analysis for {processing_file.name} at pH {ph}")
 
@@ -247,6 +253,8 @@ def prepare_receptor(
 
     # 3. 使用 Meeko (CLI) 进行准备
     logger.info(f"Preparing receptor using Meeko CLI: {output_file.name}")
+    if not processing_file.exists():
+        raise RuntimeError(f"Input file for Meeko not found: {processing_file}")
 
     def run_openbabel_fallback(error_msg: str) -> bool:
         """Helper to run OpenBabel fallback."""

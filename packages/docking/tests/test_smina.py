@@ -59,10 +59,21 @@ class TestSminaEngine(unittest.TestCase):
 
     def test_initialization_fail(self):
         self.mock_which.return_value = None
-        # Mock cwd check to fail
-        with patch("pathlib.Path.cwd", return_value=Path("/tmp")):
-             with self.assertRaises(RuntimeError):
+        # Mock exists to return False for smina.exe check
+        # We need to handle the call to exists()
+        # The setup mocks it to always return True
+        
+        def side_effect(*args, **kwargs):
+            return False
+
+        self.mock_exists.side_effect = side_effect
+        
+        try:
+            with self.assertRaises(RuntimeError):
                 SminaEngine(self.receptor_path, self.ligand_path, self.output_dir)
+        finally:
+            self.mock_exists.side_effect = None
+            self.mock_exists.return_value = True
 
     def test_compute_box(self):
         engine = SminaEngine(self.receptor_path, self.ligand_path, self.output_dir)

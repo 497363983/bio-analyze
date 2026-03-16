@@ -8,6 +8,18 @@ from bio_analyze_plot.plots.chromosome import ChromosomePlot
 from matplotlib.figure import Figure
 
 
+import pytest
+
+@pytest.fixture
+def mock_data():
+    return pd.DataFrame({
+        "chrom": ["chr1"] * 10 + ["chr2"] * 10,
+        "pos": list(range(10)) + list(range(10)),
+        "counts_pos": list(range(10)) + list(range(10)),
+        "counts_neg": list(range(10)) + list(range(10))
+    })
+
+
 def test_chromosome_plot_generation(mock_data, tmp_path):
     output_file = tmp_path / "chromosome_plot.png"
     plotter = ChromosomePlot()

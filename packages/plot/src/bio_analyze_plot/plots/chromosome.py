@@ -206,8 +206,8 @@ class ChromosomePlot(BasePlot):
         from matplotlib.patches import Patch
 
         legend_elements = [
-            Patch(facecolor=color_pos, label="Strand +"),
-            Patch(facecolor=color_neg, label="Strand -"),
+            Patch(facecolor=color_pos, label=label_pos),
+            Patch(facecolor=color_neg, label=label_neg),
         ]
         fig.legend(handles=legend_elements, loc="upper right", bbox_to_anchor=(0.95, 0.98))
 

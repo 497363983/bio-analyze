@@ -51,6 +51,8 @@ def convert_cif_to_pdb(input_file: Path, output_file: Optional[Path] = None) -> 
         structure = gemmi.make_structure_from_block(block)
 
         structure.write_pdb(str(output_file))
+        if not output_file.exists():
+            raise RuntimeError(f"Gemmi failed to write PDB file: {output_file}")
         logger.info(f"Converted CIF to PDB: {output_file}")
         return output_file
     except Exception as e:

@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock, patch
 
 import pytest
-from bio_analyze_docking.engine import DockingEngine
+from bio_analyze_docking.engines import DockingEngineFactory
 from bio_analyze_docking.nodes import DockingNode
 
 from bio_analyze_core.pipeline import Context
@@ -38,7 +38,8 @@ def mock_pymol(monkeypatch):
     mock_cmd = MagicMock()
     # count_states return 2 states
     mock_cmd.count_states.return_value = 2
-    monkeypatch.setattr("bio_analyze_docking.engine.cmd", mock_cmd)
+    # Mock cmd in bio_analyze_docking.utils because that's where merge_complex_with_pymol uses it
+    monkeypatch.setattr("bio_analyze_docking.utils.cmd", mock_cmd)
     return mock_cmd
 
 
@@ -52,7 +53,9 @@ def test_save_complexes(tmp_path, mock_vina, mock_pymol):
 
     output_dir = tmp_path / "output"
 
-    # Initialize Engine
+    # Initialize Engine via Factory or direct class if needed, but test uses DockingEngine alias
+    # DockingEngine is VinaEngine
+    from bio_analyze_docking.engine import DockingEngine
     engine = DockingEngine(rec_file, lig_file, output_dir)
 
     # Test saving all complexes
@@ -94,8 +97,9 @@ def test_docking_node_complex_output(tmp_path, mock_vina):
     context["lig"] = str(lig_file)
 
     # Mock engine methods called by Node
-    with patch("bio_analyze_docking.nodes.DockingEngine") as MockEngine:
-        instance = MockEngine.return_value
+    # DockingNode calls DockingEngineFactory.create_engine
+    with patch("bio_analyze_docking.nodes.DockingEngineFactory.create_engine") as MockCreate:
+        instance = MockCreate.return_value
         instance.save_results.return_value = output_dir / "docked.pdbqt"
         instance.score.return_value = -9.0
         instance.get_all_poses_info.return_value = []
