@@ -99,7 +99,7 @@ class GninaEngine(BaseDockingEngine):
             str(exhaustiveness),
             "--num_modes",
             str(n_poses),
-            "--min_rmsd",
+            "--min_rmsd_filter", # Gnina uses min_rmsd_filter not min_rmsd
             str(min_rmsd),
             "--out",
             str(self._temp_output_file),
