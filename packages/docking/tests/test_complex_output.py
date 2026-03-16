@@ -8,9 +8,18 @@ from bio_analyze_docking.nodes import DockingNode
 
 from bio_analyze_core.pipeline import Context
 
-# Check optional dependencies
-HAS_VINA = importlib.util.find_spec("vina") is not None
-HAS_PYMOL = importlib.util.find_spec("pymol") is not None
+# Check optional dependencies safely
+try:
+    import vina
+    HAS_VINA = True
+except ImportError:
+    HAS_VINA = False
+
+try:
+    import pymol
+    HAS_PYMOL = True
+except ImportError:
+    HAS_PYMOL = False
 
 # Define paths relative to the package root
 DATA_DIR = Path(__file__).parent / "data"
