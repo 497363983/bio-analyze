@@ -46,11 +46,25 @@ def convert_cif_to_pdb(input_file: Path, output_file: Path | None = None) -> Pat
         # block = doc.sole_block()
         # structure = gemmi.make_structure_from_block(block)
         structure = gemmi.read_structure(str(input_file))
+        
+        # Ensure output directory exists
         output_file.parent.mkdir(parents=True, exist_ok=True)
-        structure.write_pdb(str(output_file))
+        
+        # Check if structure has models/chains
+        if len(structure) == 0:
+            logger.warning(f"Warning: Gemmi read empty structure from {input_file}")
+        
+        # Write PDB string manually to avoid potential C++ file I/O issues in some environments
+        pdb_string = structure.make_pdb_string()
+        if not pdb_string:
+             logger.warning(f"Warning: Gemmi generated empty PDB string for {input_file}")
+             
+        output_file.write_text(pdb_string)
+        
         if not output_file.exists():
-            raise RuntimeError(f"Gemmi failed to write PDB file: {output_file}")
-        logger.info(f"Converted CIF to PDB: {output_file}")
+            raise RuntimeError(f"Gemmi failed to write PDB file (file missing after write): {output_file}")
+            
+        logger.info(f"Converted CIF to PDB: {output_file} (size: {output_file.stat().st_size} bytes)")
         return output_file
     except Exception as e:
         logger.error(f"Failed to convert CIF to PDB: {e}")

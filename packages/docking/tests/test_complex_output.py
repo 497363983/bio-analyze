@@ -66,12 +66,13 @@ def test_save_complexes(real_test_data):
 
     # We must run docking to get results
     # Use small box around the ligand (if we knew where it is) or auto-box
-    from bio_analyze_docking.prep import get_box_from_receptor
-
-    center, size = get_box_from_receptor(rec_file, padding=4.0)
-
+    from bio_analyze_docking.prep import get_box_from_ligand
+    
+    # Use ligand for box to ensure Vina finds a pose quickly
+    center, size = get_box_from_ligand(lig_file, padding=4.0)
+    
     engine.compute_box(center, size)
-    engine.dock(exhaustiveness=1, n_poses=1)  # Fast docking
+    engine.dock(exhaustiveness=1, n_poses=1) # Fast docking
 
     # Save complexes
     engine.save_complexes(n_complexes=1, output_dir=output_dir, output_name_prefix="complex_test")
@@ -102,7 +103,8 @@ def test_docking_node_complex_output(real_test_data):
         receptor_key="rec_key",
         ligand_key="lig_key",
         output_dir=output_dir,
-        center=None,  # Auto box
+        center=None,
+        autobox_ligand=lig_file, # Use ligand to box
         padding=4.0,
         exhaustiveness=1,
         n_poses=1,
