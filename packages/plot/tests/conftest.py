@@ -10,7 +10,6 @@ import pytest
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from bio_analyze_plot import theme
-from pytest_regressions.image_regression import ImageRegressionError
 
 
 
