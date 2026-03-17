@@ -41,7 +41,7 @@ jobs:
             - name: Install System Dependencies
               run: |
                   sudo apt-get update
-                  sudo apt-get install -y libgl1 libglib2.0-0 fonts-wqy-microhei fonts-wqy-zenhei curl git build-essential
+                  sudo apt-get install -y libgl1 libglib2.0-0 fonts-wqy-microhei fonts-wqy-zenhei fonts-dejavu-core fonts-dejavu-extra ttf-mscorefonts-installer curl git build-essential
 
             - name: Install Conda Dependencies
               run: |
