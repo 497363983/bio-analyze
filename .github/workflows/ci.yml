@@ -125,11 +125,11 @@ jobs:
         steps:
             - name: Checkout gh-pages (for history)
               uses: actions/checkout@v4
+              continue-on-error: true
               with:
                 ref: gh-pages
                 path: gh-pages
-                continue-on-error: true
-
+                
             - name: Download Artifacts
               uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
               with:
