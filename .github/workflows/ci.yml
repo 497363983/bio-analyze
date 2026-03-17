@@ -66,6 +66,7 @@ jobs:
                     pytest-cov \
                     pytest-sugar \
                     pytest-clarity \
+                    pytest-timeout \
                     hatchling
 
                   micromamba clean -afy
@@ -87,10 +88,14 @@ jobs:
                   pip install -e packages/docking
                   pip install -e packages/rna_seq
                   pip install -e packages/cli
+            - name: Setup tmate session
+              uses: mxschmitt/action-tmate@v3
+              if: failure()
+
             - name: Run Tests
               shell: bash -el {0}
               run: |
-                  pytest packages --junit-xml pytest.xml
+                  pytest packages -vvs --tb=short --timeout=60 --junit-xml pytest.xml
 
             - name: Upload Test Results
               if: (!cancelled())
