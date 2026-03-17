@@ -7,7 +7,7 @@ name = "bio-analyze-core"
 version = "0.1.0"
 description = "Shared core utilities for the bio-analyze toolbox."
 readme = "README.md"
-requires-python = ">=3.9, =<3.14"
+requires-python = ">=3.9, <=3.14"
 license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [
