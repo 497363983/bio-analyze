@@ -1,0 +1,10 @@
+
+============================================================
+【图像回归失败】
+基准图路径: /tmp/pytest-of-runner/pytest-0/test_pie_plot_explode_list0/test_pie_plot_explode_list.png
+实际图路径: /tmp/pytest-of-runner/pytest-0/test_pie_plot_explode_list0/test_pie_plot_explode_list.obtained.png
+差异图路径: /tmp/pytest-of-runner/pytest-0/test_pie_plot_explode_list0/test_pie_plot_explode_list.obtained_diff.png
+差异像素数: 5245
+============================================================
+
+[Allure Attach] Successfully attached Expected, Actual, and Diff images.

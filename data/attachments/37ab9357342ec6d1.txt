@@ -1,0 +1,10 @@
+
+============================================================
+【图像回归失败】
+基准图路径: /tmp/pytest-of-runner/pytest-0/test_chromosome_plot_max_chrom0/test_chromosome_plot_max_chroms.png
+实际图路径: /tmp/pytest-of-runner/pytest-0/test_chromosome_plot_max_chrom0/test_chromosome_plot_max_chroms.obtained.png
+差异图路径: /tmp/pytest-of-runner/pytest-0/test_chromosome_plot_max_chrom0/test_chromosome_plot_max_chroms.obtained_diff.png
+差异像素数: 42354
+============================================================
+
+[Allure Attach] Successfully attached Expected, Actual, and Diff images.
