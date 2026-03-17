@@ -56,21 +56,46 @@ def check_plot(image_regression):
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_exception_interact(node, call, report):
-    if isinstance(call.excinfo.value, ImageRegressionError):
-        err = call.excinfo.value
-        attach_files = [
-            ("Baseline image", err.expected_filename),
-            ("Actual image", err.actual_filename),
-            ("Pixel difference image", err.diff_filename),
-        ]
-        # 循环附加到Allure报告中
-        for attach_name, file_path in attach_files:
+    """捕获图像回归失败，自动附加差异图到 Allure (兼容所有 pytest-regressions 版本)"""
+    excinfo = call.excinfo
+    if not excinfo:
+        return
+
+    # 稳健判断：不依赖导入，直接检查异常类名
+    exc_type_name = excinfo.typename
+    if "ImageRegressionError" in exc_type_name:
+        err = excinfo.value
+        
+        # 尝试从异常对象中获取图片路径 (兼容不同版本的属性名)
+        # 常见属性名: expected_filename / actual_filename / diff_filename
+        attachments = []
+        
+        # 尝试获取预期图
+        if hasattr(err, "expected_filename"):
+            attachments.append(("1. Baseline image", err.expected_filename))
+        elif hasattr(err, "expected"):
+            attachments.append(("1. Baseline image", err.expected))
+            
+        # 尝试获取实际图
+        if hasattr(err, "actual_filename"):
+            attachments.append(("2. Actual image", err.actual_filename))
+        elif hasattr(err, "actual"):
+            attachments.append(("2. Actual image", err.actual))
+            
+        # 尝试获取差异图
+        if hasattr(err, "diff_filename"):
+            attachments.append(("3. Pixel difference image", err.diff_filename))
+        elif hasattr(err, "diff"):
+            attachments.append(("3. Pixel difference image", err.diff))
+
+        # 执行附加
+        for name, file_path in attachments:
             try:
                 with open(file_path, "rb") as f:
                     allure.attach(
                         f.read(),
-                        name=attach_name,
+                        name=name,
                         attachment_type=allure.attachment_type.PNG
                     )
-            except FileNotFoundError:
+            except (FileNotFoundError, TypeError):
                 continue
