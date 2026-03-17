@@ -1,3 +1,0 @@
-Testing theme: default
-Testing theme: nature
-Testing theme: science
