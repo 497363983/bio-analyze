@@ -66,6 +66,18 @@ class GninaEngine(BaseDockingEngine):
         self._last_n_poses = 9
         self._last_min_rmsd = 1.0
 
+    @classmethod
+    def get_summary_config(cls) -> dict[str, str]:
+        """
+        zh: 获取结果摘要的配置映射 {显示名称: 内部键名}。
+        en: Get the summary configuration map {display_name: internal_key}.
+        """
+        return {
+            "Affinity (kcal/mol)": "affinity",
+            "CNN Score": "cnn_score",
+            "CNN Affinity": "cnn_affinity",
+        }
+
     def compute_box(self, center: list[float], size: list[float]):
         """
         zh: 定义搜索空间（网格盒）。
@@ -226,13 +238,14 @@ class GninaEngine(BaseDockingEngine):
         results = []
         # Gnina 输出格式示例：
         # REMARK VINA RESULT:    -7.8      0.000      0.000
-        # REMARK CNNscore: 0.9876
-        # REMARK CNNaffinity: 8.1234
-        # REMARK minimized affinity -7.82134
+        # REMARK minimizedAffinity -0.00388618582
+        # REMARK CNNscore 0.820904016
+        # REMARK CNNaffinity 3.07161069
 
-        vina_pattern = re.compile(r"REMARK VINA RESULT:\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)")
-        cnn_score_pattern = re.compile(r"REMARK CNNscore:\s+([-\d.]+)")
-        cnn_affinity_pattern = re.compile(r"REMARK CNNaffinity:\s+([-\d.]+)")
+        vina_pattern = re.compile(r"REMARK VINA RESULT:\s+([-\d.eE]+)\s+([-\d.eE]+)\s+([-\d.eE]+)")
+        minimized_affinity_pattern = re.compile(r"REMARK minimizedAffinity\s+([-\d.eE]+)")
+        cnn_score_pattern = re.compile(r"REMARK CNNscore[:\s]+\s*([-\d.eE]+)")
+        cnn_affinity_pattern = re.compile(r"REMARK CNNaffinity[:\s]+\s*([-\d.eE]+)")
 
         try:
             with open(self._temp_output_file, encoding="utf-8") as f:
@@ -255,19 +268,30 @@ class GninaEngine(BaseDockingEngine):
                             current_pose["affinity"] = float(match.group(1))
                             current_pose["rmsd_lb"] = float(match.group(2))
                             current_pose["rmsd_ub"] = float(match.group(3))
+                    
+                    elif line.startswith("REMARK minimizedAffinity"):
+                        match = minimized_affinity_pattern.search(line)
+                        if match:
+                            # 优先使用 minimizedAffinity 作为 affinity，因为它更精确
+                            current_pose["affinity"] = float(match.group(1))
 
-                    elif line.startswith("REMARK CNNscore:"):
+                    elif line.startswith("REMARK CNNscore"):
                         match = cnn_score_pattern.search(line)
                         if match:
                             current_pose["cnn_score"] = float(match.group(1))
 
-                    elif line.startswith("REMARK CNNaffinity:"):
+                    elif line.startswith("REMARK CNNaffinity"):
                         match = cnn_affinity_pattern.search(line)
                         if match:
                             current_pose["cnn_affinity"] = float(match.group(1))
 
                     elif line.startswith("ENDMDL"):
-                        if "affinity" in current_pose:
+                        # 只要有 affinity 或 cnn_score 就认为是有效姿态
+                        if "affinity" in current_pose or "cnn_score" in current_pose:
+                            # 确保 affinity 存在 (如果只有 CNNscore，可能 affinity 为 0 或 None)
+                            if "affinity" not in current_pose:
+                                current_pose["affinity"] = 0.0 # 或者 None
+                            
                             results.append(current_pose)
                             if len(results) >= n_poses:
                                 break

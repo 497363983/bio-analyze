@@ -5,6 +5,7 @@ services:
     container_name: bio-analyze-container
     volumes:
       # 挂载当前目录的数据文件夹到容器内的 /data
+      - ./packages:/app/packages
       - ./data:/data
       # 挂载输出目录
       - ./output:/output

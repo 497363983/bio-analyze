@@ -67,6 +67,17 @@ class SminaEngine(BaseDockingEngine):
         self._last_n_poses = 9
         self._last_min_rmsd = 1.0
 
+    @classmethod
+    def get_summary_config(cls) -> dict[str, str]:
+        """
+        zh: 获取结果摘要的配置映射 {显示名称: 内部键名}。
+        en: Get the summary configuration map {display_name: internal_key}.
+        """
+        return {
+            "minimizedAffinity": "affinity",
+            "Minimized RMSD": "minimized_rmsd",
+        }
+
     def compute_box(self, center: list[float], size: list[float]):
         """
         zh: 定义搜索空间（网格盒）。
@@ -228,37 +239,53 @@ class SminaEngine(BaseDockingEngine):
         results = []
         # REMARK VINA RESULT:    -8.5      0.000      0.000
         # smina 输出格式与 vina 类似
-        # REMARK minimized affinity -8.54848 (kcal/mol)
-        # 或者兼容模式
-        # 让我们检查 smina 的标准输出 PDBQT
+        # REMARK minimizedAffinity -4.50028801
+        # REMARK minimizedRMSD -1
 
-        # 标准 Vina 输出:
-        # REMARK VINA RESULT:    -9.3      0.000      0.000
-
-        # Smina 默认似乎也保持这个格式，或者是:
-        # REMARK minimized affinity <val>
-
-        # 我们可以尝试匹配这两种格式
         vina_pattern = re.compile(r"REMARK VINA RESULT:\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)")
+        minimized_affinity_pattern = re.compile(r"REMARK minimizedAffinity\s+([-\d.]+)")
+        minimized_rmsd_pattern = re.compile(r"REMARK minimizedRMSD\s+([-\d.]+)")
 
         try:
             with open(self._temp_output_file, encoding="utf-8") as f:
-                pose_idx = 1
-                for line in f:
+                lines = f.readlines()
+            
+            current_pose = {}
+            pose_idx = 0
+            in_model = False
+
+            for line in lines:
+                if line.startswith("MODEL"):
+                    pose_idx += 1
+                    current_pose = {"pose": pose_idx}
+                    in_model = True
+
+                elif in_model:
                     if line.startswith("REMARK VINA RESULT:"):
                         match = vina_pattern.search(line)
                         if match:
-                            affinity = float(match.group(1))
-                            rmsd_lb = float(match.group(2))
-                            rmsd_ub = float(match.group(3))
+                            current_pose["affinity"] = float(match.group(1))
+                            current_pose["rmsd_lb"] = float(match.group(2))
+                            current_pose["rmsd_ub"] = float(match.group(3))
+                    
+                    elif line.startswith("REMARK minimizedAffinity"):
+                        match = minimized_affinity_pattern.search(line)
+                        if match:
+                            # 优先使用 minimizedAffinity
+                            current_pose["affinity"] = float(match.group(1))
+                    
+                    elif line.startswith("REMARK minimizedRMSD"):
+                        match = minimized_rmsd_pattern.search(line)
+                        if match:
+                            current_pose["minimized_rmsd"] = float(match.group(1))
 
-                            results.append(
-                                {"pose": pose_idx, "affinity": affinity, "rmsd_lb": rmsd_lb, "rmsd_ub": rmsd_ub}
-                            )
-                            pose_idx += 1
-
+                    elif line.startswith("ENDMDL"):
+                        if "affinity" in current_pose:
+                            results.append(current_pose)
                             if len(results) >= n_poses:
                                 break
+                        in_model = False
+                        
         except Exception as e:
             logger.error(f"解析 Smina 结果文件失败: {e}")
             return []

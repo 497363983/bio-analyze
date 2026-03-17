@@ -82,6 +82,18 @@ class BaseDockingEngine(ABC):
         # 默认实现：直接返回输入路径，或由子类覆盖
         return Path(input_file)
 
+    @classmethod
+    def get_summary_config(cls) -> dict[str, str]:
+        """
+        zh: 获取结果摘要的配置映射 {显示名称: 内部键名}。
+        en: Get the summary configuration map {display_name: internal_key}.
+        """
+        return {
+            "Affinity (kcal/mol)": "affinity",
+            "RMSD l.b.": "rmsd_lb",
+            "RMSD u.b.": "rmsd_ub",
+        }
+
     @abstractmethod
     def compute_box(self, center: list[float], size: list[float]):
         """

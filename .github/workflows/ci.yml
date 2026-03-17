@@ -76,6 +76,7 @@ jobs:
                   sudo chmod +x /usr/local/bin/smina
 
             - name: Install Project Packages Locally
+              shell: bash -el {0}
               run: |
                   # Install packages in editable mode using pip
                   python -m pip install --upgrade pip
@@ -85,6 +86,7 @@ jobs:
                   pip install -e packages/rna_seq
                   pip install -e packages/cli
             - name: Run Tests
+              shell: bash -el {0}
               run: |
                   pytest packages --junit-xml pytest.xml
 

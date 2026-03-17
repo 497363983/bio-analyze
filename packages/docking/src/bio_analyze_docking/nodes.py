@@ -874,56 +874,58 @@ class ResultSummaryNode(Node):
             logger.warning("未找到可汇总的对接结果。")
             return
 
-        # 扁平化 DataFrame 的结果
+        # 收集所有结果数据
         data = []
+        # 收集所有可能的引擎列，保持出现顺序
+        all_engine_columns = {}  # {display_name: key}
+
         for res in results:
-            if res.get("status") != "success":
-                data.append(
-                    {
-                        "Receptor": res.get("receptor"),
-                        "Ligand": res.get("ligand"),
-                        "Status": res.get("status"),
-                        "Error": res.get("error"),
-                        "Affinity (kcal/mol)": None,
-                        "RMSD l.b.": None,
-                        "RMSD u.b.": None,
-                        "Box Center X": None,
-                        "Box Center Y": None,
-                        "Box Center Z": None,
-                        "Box Size X": None,
-                        "Box Size Y": None,
-                        "Box Size Z": None,
-                        "Output File": None,
-                    }
-                )
-                continue
+            row = {
+                "Receptor": res.get("receptor"),
+                "Ligand": res.get("ligand"),
+                "Status": res.get("status"),
+                "Error": res.get("error"),
+            }
 
-            # 获取最佳姿态（姿态 1）
-            poses = res.get("poses", [])
-            best_pose = poses[0] if poses else {}
-
-            # 获取 Box 信息
+            # 获取 Box 信息 (总是存在)
             center = res.get("box_center", [None, None, None])
             size = res.get("box_size", [None, None, None])
+            
+            row["Box Center X"] = center[0]
+            row["Box Center Y"] = center[1]
+            row["Box Center Z"] = center[2]
+            row["Box Size X"] = size[0]
+            row["Box Size Y"] = size[1]
+            row["Box Size Z"] = size[2]
+            row["Output File"] = res.get("output_file")
 
-            data.append(
-                {
-                    "Receptor": res.get("receptor"),
-                    "Ligand": res.get("ligand"),
-                    "Status": "Success",
-                    "Error": None,
-                    "Affinity (kcal/mol)": best_pose.get("affinity"),
-                    "RMSD l.b.": best_pose.get("rmsd_lb"),
-                    "RMSD u.b.": best_pose.get("rmsd_ub"),
-                    "Box Center X": center[0],
-                    "Box Center Y": center[1],
-                    "Box Center Z": center[2],
-                    "Box Size X": size[0],
-                    "Box Size Y": size[1],
-                    "Box Size Z": size[2],
-                    "Output File": res.get("output_file"),
-                }
-            )
+            if res.get("status") == "success":
+                # 获取引擎类型和配置
+                engine_type = res.get("engine_type", "vina")
+                try:
+                    engine_cls = DockingEngineFactory.get_engine_class(engine_type)
+                    config = engine_cls.get_summary_config()
+                except Exception:
+                    # 回退到默认
+                    config = {
+                        "Affinity (kcal/mol)": "affinity",
+                        "RMSD l.b.": "rmsd_lb",
+                        "RMSD u.b.": "rmsd_ub",
+                    }
+                
+                # 更新全局列集合
+                for display_name, key in config.items():
+                    all_engine_columns[display_name] = key
+
+                # 获取最佳姿态（姿态 1）
+                poses = res.get("poses", [])
+                best_pose = poses[0] if poses else {}
+
+                # 填充引擎特定列
+                for display_name, key in config.items():
+                    row[display_name] = best_pose.get(key)
+            
+            data.append(row)
 
         if not data:
             logger.warning("没有提取到用于汇总的数据。")
@@ -931,26 +933,23 @@ class ResultSummaryNode(Node):
 
         df = pd.DataFrame(data)
 
-        # 确保列顺序，如果需要的话
-        desired_columns = [
-            "Receptor",
-            "Ligand",
-            "Status",
-            "Error",
-            "Affinity (kcal/mol)",
-            "RMSD l.b.",
-            "RMSD u.b.",
-            "Box Center X",
-            "Box Center Y",
-            "Box Center Z",
-            "Box Size X",
-            "Box Size Y",
-            "Box Size Z",
-            "Output File",
+        # 构建最终列顺序
+        base_columns = ["Receptor", "Ligand", "Status", "Error"]
+        box_columns = [
+            "Box Center X", "Box Center Y", "Box Center Z",
+            "Box Size X", "Box Size Y", "Box Size Z",
+            "Output File"
         ]
+        
+        # 引擎列 (使用字典键来去重并保持顺序)
+        engine_columns = list(all_engine_columns.keys())
+        
+        desired_columns = base_columns + engine_columns + box_columns
 
-        # 仅选择存在的列（防止 data 为空时导致的问题，尽管我们已经检查过 data）
-        # 如果 df 是空的，to_csv 会写一个空文件或只有标题
+        # 确保 DataFrame 包含所有 desired_columns (填充 NaN)
+        for col in desired_columns:
+            if col not in df.columns:
+                df[col] = None
 
         self.output_path.parent.mkdir(parents=True, exist_ok=True)
 
