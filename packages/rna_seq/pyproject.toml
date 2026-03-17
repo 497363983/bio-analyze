@@ -7,7 +7,7 @@ name = "bio-analyze-rna-seq"
 version = "0.1.0"
 description = "Transcriptomics analysis module for bio-analyze."
 readme = "README.md"
-requires-python = ">=3.9, <3.13"
+requires-python = ">=3.9, =<3.14"
 license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [

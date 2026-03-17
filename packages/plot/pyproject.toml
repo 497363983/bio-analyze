@@ -7,7 +7,7 @@ name = "bio-analyze-plot"
 version = "0.1.0"
 description = "Publication-ready plotting module for bio-analyze."
 readme = "README.md"
-requires-python = ">=3.9, <3.13"
+requires-python = ">=3.9, =<3.14"
 license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [

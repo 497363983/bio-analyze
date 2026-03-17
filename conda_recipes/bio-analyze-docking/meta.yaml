@@ -33,7 +33,7 @@ requirements:
     - vina >=1.2.0
     - rdkit >=2024.03.1
     - pymol-open-source >=2.5.0
-    - openbabel >=3.1.0
+    - openbabel-wheel
 
 test:
   imports:
