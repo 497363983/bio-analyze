@@ -1,0 +1,8 @@
+p-value annotation legend:
+      ns: 5.00e-02 < p <= 1.00e+00
+       *: 1.00e-02 < p <= 5.00e-02
+      **: 1.00e-03 < p <= 1.00e-02
+     ***: 1.00e-04 < p <= 1.00e-03
+    ****: p <= 1.00e-04
+
+A vs. B: t-test independent samples, P_val:7.503e-07 t=-7.385e+00

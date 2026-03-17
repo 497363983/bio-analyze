@@ -1,0 +1,2 @@
+Running failing_node...                                            0% -:--:--
+Running node2...                                            0% -:--:--
