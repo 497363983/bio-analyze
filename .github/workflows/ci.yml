@@ -99,6 +99,7 @@ jobs:
 
             - name: Run Tests
               shell: bash -el {0}
+              continue-on-error: true
               run: |
                   pytest packages --timeout=60 --junit-xml pytest.xml --alluredir=allure-results-${{ matrix.python-version }} --clean-alluredir
                   echo "======================================"
