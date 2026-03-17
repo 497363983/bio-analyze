@@ -1,11 +1,9 @@
-from pathlib import Path
-
 import pandas as pd
 from bio_analyze_plot.plots.volcano import VolcanoPlot
 from matplotlib.figure import Figure
 
 
-def test_volcano_plot_generation():
+def test_volcano_plot_generation(check_plot, tmp_path):
     # Mock data
     data = pd.DataFrame(
         {
@@ -15,13 +13,11 @@ def test_volcano_plot_generation():
         }
     )
 
-    output_dir = Path(__file__).parent / "output"
-    output_dir.mkdir(exist_ok=True)
-    output_file = output_dir / "volcano.png"
+    output_file = tmp_path / "volcano.png"
 
     plotter = VolcanoPlot(theme="nature")
     fig = plotter.plot(data=data, x="log2FoldChange", y="pvalue", output=str(output_file))
 
-    assert isinstance(fig, Figure)
     assert output_file.exists()
     assert output_file.stat().st_size > 0
+    check_plot(fig)

@@ -25,7 +25,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest"]
+dev = [
+    "pytest",
+    "pytest-regressions",
+]
 
 [project.entry-points."bio_analyze.cli"]
 plot = "bio_analyze_plot.cli:get_app"

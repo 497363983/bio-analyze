@@ -1,11 +1,9 @@
-from pathlib import Path
-
 import pandas as pd
 from bio_analyze_plot.plots.line import LinePlot
 from matplotlib.figure import Figure
 
 
-def test_line_plot_generation():
+def test_line_plot_generation(check_plot, tmp_path):
     # Mock data
     data = pd.DataFrame(
         {
@@ -15,12 +13,10 @@ def test_line_plot_generation():
         }
     )
 
-    output_dir = Path(__file__).parent / "output"
-    output_dir.mkdir(exist_ok=True)
-    output_file = output_dir / "line.png"
+    output_file = tmp_path / "line.png"
 
     plotter = LinePlot(theme="science")
     fig = plotter.plot(data=data, x="time", y="value", hue="group", output=str(output_file))
 
-    assert isinstance(fig, Figure)
     assert output_file.exists()
+    check_plot(fig)

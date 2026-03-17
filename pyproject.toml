@@ -51,7 +51,8 @@ dev = [
     "pytest-cov",
     "docstring_parser",
     "pytest-sugar",
-    "pytest-clarity"
+    "pytest-clarity",
+    "pytest-regressions"
 ]
 
 [tool.commitizen]

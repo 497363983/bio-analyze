@@ -1,31 +1,24 @@
-import matplotlib
-
-matplotlib.use("Agg")
-from pathlib import Path
-
 import pandas as pd
 from bio_analyze_plot.plots.box import BoxPlot
 from matplotlib.figure import Figure
 
 
-def test_box_plot_generation():
+def test_box_plot_generation(check_plot, tmp_path):
     # Mock data
     data = pd.DataFrame(
         {"group": ["A"] * 10 + ["B"] * 10, "value": [10 + i for i in range(10)] + [20 + i for i in range(10)]}
     )
 
-    output_dir = Path(__file__).parent / "output"
-    output_dir.mkdir(exist_ok=True)
-    output_file = output_dir / "box.png"
+    output_file = tmp_path / "box.png"
 
     plotter = BoxPlot(theme="default")
     fig = plotter.plot(data=data, x="group", y="value", output=str(output_file))
 
-    assert isinstance(fig, Figure)
     assert output_file.exists()
+    check_plot(fig)
 
 
-def test_box_plot_significance():
+def test_box_plot_significance(check_plot, tmp_path):
     # Mock data with significant difference
     data = pd.DataFrame(
         {
@@ -34,9 +27,7 @@ def test_box_plot_significance():
         }
     )
 
-    output_dir = Path(__file__).parent / "output"
-    output_dir.mkdir(exist_ok=True)
-    output_file = output_dir / "box_significance.png"
+    output_file = tmp_path / "box_significance.png"
 
     plotter = BoxPlot(theme="nature")
     fig = plotter.plot(
@@ -48,11 +39,11 @@ def test_box_plot_significance():
         output=str(output_file),
     )
 
-    assert isinstance(fig, Figure)
     assert output_file.exists()
+    check_plot(fig)
 
 
-def test_box_plot_swarm():
+def test_box_plot_swarm(check_plot, tmp_path):
     # Mock data with significant difference
     data = pd.DataFrame(
         {
@@ -61,9 +52,7 @@ def test_box_plot_swarm():
         }
     )
 
-    output_dir = Path(__file__).parent / "output"
-    output_dir.mkdir(exist_ok=True)
-    output_file = output_dir / "box_swarm.png"
+    output_file = tmp_path / "box_swarm.png"
 
     plotter = BoxPlot(theme="nature")
     fig = plotter.plot(
@@ -74,5 +63,5 @@ def test_box_plot_swarm():
         output=str(output_file),
     )
 
-    assert isinstance(fig, Figure)
     assert output_file.exists()
+    check_plot(fig)

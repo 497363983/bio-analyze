@@ -1,17 +1,12 @@
-from pathlib import Path
-
-import matplotlib
 import numpy as np
 import pandas as pd
 from bio_analyze_plot.plots.pca import PCAPlot
 from matplotlib.figure import Figure
 
-matplotlib.use("Agg")
 
-
-def test_pca_plot():
+def test_pca_plot(check_plot, tmp_path):
     # Create dummy expression data: 100 genes x 6 samples
-    np.random.seed(42)
+    # Seed is handled by conftest.py
     data = np.random.rand(100, 6)
     # Add some structure: first 3 samples similar, last 3 similar
     data[:, 0:3] += 2
@@ -19,9 +14,7 @@ def test_pca_plot():
     df = pd.DataFrame(data, columns=["S1", "S2", "S3", "S4", "S5", "S6"])
     df.index.name = "Gene"
 
-    output_dir = Path(__file__).parent / "output"
-    output_dir.mkdir(exist_ok=True)
-    output_file = output_dir / "pca.png"
+    output_file = tmp_path / "pca.png"
 
     # Groups
     groups = ["Control"] * 3 + ["Treated"] * 3
@@ -35,11 +28,11 @@ def test_pca_plot():
         output=str(output_file),
     )
 
-    assert isinstance(fig, Figure)
     assert output_file.exists()
+    check_plot(fig)
 
 
-def test_pca_plot_tidy():
+def test_pca_plot_tidy(check_plot, tmp_path):
     # Test tidy format (Samples x Genes) with hue column
     data = {
         "Gene1": np.random.rand(10),
@@ -48,8 +41,7 @@ def test_pca_plot_tidy():
     }
     df = pd.DataFrame(data)
 
-    output_dir = Path(__file__).parent / "output"
-    output_file = output_dir / "pca_tidy.png"
+    output_file = tmp_path / "pca_tidy.png"
 
     plotter = PCAPlot(theme="nature")
     fig = plotter.plot(
@@ -60,5 +52,5 @@ def test_pca_plot_tidy():
         output=str(output_file),
     )
 
-    assert isinstance(fig, Figure)
     assert output_file.exists()
+    check_plot(fig)

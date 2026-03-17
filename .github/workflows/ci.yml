@@ -67,6 +67,7 @@ jobs:
                     pytest-sugar \
                     pytest-clarity \
                     pytest-timeout \
+                    pytest-regressions \
                     hatchling
 
                   micromamba clean -afy

@@ -1,12 +1,12 @@
-from pathlib import Path
-
 import numpy as np
 import pandas as pd
+import pytest
 from bio_analyze_plot.plots.gsea import GSEAPlot
 from matplotlib.figure import Figure
 
 
-def test_gsea_plot_generation():
+@pytest.fixture
+def gsea_data():
     # Mock data for GSEA
     # 100 genes
     ranks = np.arange(100)
@@ -18,16 +18,14 @@ def test_gsea_plot_generation():
     # Metric: decreasing
     metric = np.linspace(5, -5, 100)
 
-    data = pd.DataFrame({"rank": ranks, "running_es": es, "hit": hits, "metric": metric})
+    return pd.DataFrame({"rank": ranks, "running_es": es, "hit": hits, "metric": metric})
 
-    output_dir = Path(__file__).parent / "output"
-    output_dir.mkdir(exist_ok=True)
 
-    # Test 1: With metric and stats
-    output_file = output_dir / "gsea_with_metric.png"
+def test_gsea_with_metric(gsea_data, check_plot, tmp_path):
+    output_file = tmp_path / "gsea_with_metric.png"
     plotter = GSEAPlot(theme="nature")
     fig = plotter.plot(
-        data=data,
+        data=gsea_data,
         rank="rank",
         score="running_es",
         hit="hit",
@@ -37,31 +35,35 @@ def test_gsea_plot_generation():
         pvalue=0.001,
         fdr=0.005,
     )
-
-    assert isinstance(fig, Figure)
     assert output_file.exists()
-    assert output_file.stat().st_size > 0
+    check_plot(fig)
 
-    # Test 2: Without metric
-    output_file_no_metric = output_dir / "gsea_no_metric.png"
-    fig2 = plotter.plot(data=data, rank="rank", score="running_es", hit="hit", output=str(output_file_no_metric))
 
-    assert isinstance(fig2, Figure)
-    assert output_file_no_metric.exists()
-    assert output_file_no_metric.stat().st_size > 0
+def test_gsea_no_metric(gsea_data, check_plot, tmp_path):
+    output_file = tmp_path / "gsea_no_metric.png"
+    plotter = GSEAPlot(theme="nature")
+    fig = plotter.plot(
+        data=gsea_data,
+        rank="rank",
+        score="running_es",
+        hit="hit",
+        output=str(output_file)
+    )
+    assert output_file.exists()
+    check_plot(fig)
 
-    # Test 3: No borders
-    output_file_no_border = output_dir / "gsea_no_border.png"
-    fig3 = plotter.plot(
-        data=data,
+
+def test_gsea_no_border(gsea_data, check_plot, tmp_path):
+    output_file = tmp_path / "gsea_no_border.png"
+    plotter = GSEAPlot(theme="nature")
+    fig = plotter.plot(
+        data=gsea_data,
         rank="rank",
         score="running_es",
         hit="hit",
         metric="metric",
-        output=str(output_file_no_border),
+        output=str(output_file),
         show_border=False,
     )
-
-    assert isinstance(fig3, Figure)
-    assert output_file_no_border.exists()
-    assert output_file_no_border.stat().st_size > 0
+    assert output_file.exists()
+    check_plot(fig)
