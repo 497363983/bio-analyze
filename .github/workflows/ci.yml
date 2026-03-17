@@ -4,6 +4,8 @@ permissions:
     contents: write
     checks: write
     pull-requests: write
+    pages: write
+    id-token: write
 
 on:
     push:
@@ -144,38 +146,38 @@ jobs:
               uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
               with:
                   name: allure-results-3.9
-                  path: merged-results/3.9
+                  path: allure-results
             
             - name: Download Allure Results(3.10)
               uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
               with:
                   name: allure-results-3.10
-                  path: merged-results/3.10
+                  path: allure-results
             
             - name: Download Allure Results(3.11)
               uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
               with:
                   name: allure-results-3.11
-                  path: merged-results/3.11
+                  path: allure-results
             
             - name: Download Allure Results(3.12)
               uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
               with:
                   name: allure-results-3.12
-                  path: merged-results/3.12
+                  path: allure-results
 
             - name: Copy History Trend
               run: |
                 if [ -d "gh-pages/history" ]; then
-                  mkdir -p merged-results/history
-                  cp -r gh-pages/history/* merged-results/history/
+                  mkdir -p allure-results/history
+                  cp -r gh-pages/history/* allure-results/history/
                 fi
 
             - name: Upload Merged Results
               uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
               with:
                   name: allure-results-merged
-                  path: merged-results
+                  path: allure-results
     deploy-report:
         name: "Deploy Allure Report"
         needs: publish-test-results
@@ -192,12 +194,12 @@ jobs:
               uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
               with:
                   name: allure-results-merged
-                  path: merged-results
+                  path: allure-results
 
             - name: Generate Allure Report
               uses: simple-elf/allure-report-action@master
               with:
-                  allure-results: merged-results
+                  allure-results: allure-results
                   allure-report: allure-report
             - name: Deploy to GitHub Pages
               id: deployment
