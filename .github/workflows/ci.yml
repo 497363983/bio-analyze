@@ -89,7 +89,7 @@ jobs:
             - name: Run Tests
               shell: bash -el {0}
               run: |
-                  pytest packages/ --junitxml=pytest.xml
+                  pytest packages --junitxml pytest.xml
 
             - name: Upload Test Results
               if: (!cancelled())
