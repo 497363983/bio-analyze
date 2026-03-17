@@ -95,7 +95,7 @@ jobs:
             - name: Run Tests
               shell: bash -el {0}
               run: |
-                  pytest packages -vvs --tb=short --timeout=60 --junit-xml pytest.xml
+                  pytest packages --timeout=60 --junit-xml pytest.xml
 
             - name: Upload Test Results
               if: (!cancelled())
