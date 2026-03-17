@@ -52,7 +52,8 @@ dev = [
     "docstring_parser",
     "pytest-sugar",
     "pytest-clarity",
-    "pytest-regressions"
+    "pytest-regressions",
+    "allure-pytest"
 ]
 
 [tool.commitizen]

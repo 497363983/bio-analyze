@@ -10,6 +10,8 @@ import pytest
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from bio_analyze_plot import theme
+from pytest_regressions.image_regression import ImageRegressionError
+
 
 
 @pytest.fixture(autouse=True)
@@ -51,3 +53,24 @@ def check_plot(image_regression):
         plt.close(fig)
 
     return _check
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_exception_interact(node, call, report):
+    if isinstance(call.excinfo.value, ImageRegressionError):
+        err = call.excinfo.value
+        attach_files = [
+            ("Baseline image", err.expected_filename),
+            ("Actual image", err.actual_filename),
+            ("Pixel difference image", err.diff_filename),
+        ]
+        # 循环附加到Allure报告中
+        for attach_name, file_path in attach_files:
+            try:
+                with open(file_path, "rb") as f:
+                    allure.attach(
+                        f.read(),
+                        name=attach_name,
+                        attachment_type=allure.attachment_type.PNG
+                    )
+            except FileNotFoundError:
+                continue

@@ -28,6 +28,8 @@ dependencies = [
 dev = [
     "pytest",
     "pytest-regressions",
+    "allure-pytest",
+    "pillow"
 ]
 
 [project.entry-points."bio_analyze.cli"]

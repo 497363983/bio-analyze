@@ -62,12 +62,6 @@ jobs:
                     six \
                     pymol-open-source \
                     gemmi \
-                    pytest \
-                    pytest-cov \
-                    pytest-sugar \
-                    pytest-clarity \
-                    pytest-timeout \
-                    pytest-regressions \
                     hatchling
 
                   micromamba clean -afy
@@ -89,6 +83,14 @@ jobs:
                   pip install -e packages/docking
                   pip install -e packages/rna_seq
                   pip install -e packages/cli
+                  pip install pytest \
+                    pytest-cov \
+                    pytest-sugar \
+                    pytest-clarity \
+                    pytest-timeout \
+                    pytest-regressions \
+                    allure-pytest \
+                    pillow
             - name: Setup tmate session
               uses: mxschmitt/action-tmate@v3
               if: failure()
@@ -96,7 +98,7 @@ jobs:
             - name: Run Tests
               shell: bash -el {0}
               run: |
-                  pytest packages --timeout=60 --junit-xml pytest.xml
+                  pytest packages --timeout=60 --junit-xml pytest.xml --alluredir=allure-results-${{ matrix.python-version }} --clean-alluredir
 
             - name: Upload Test Results
               if: (!cancelled())
@@ -104,6 +106,14 @@ jobs:
               with:
                   name: Test Results (Python ${{ matrix.python-version }})
                   path: pytest.xml
+
+            - name: Upload Allure Results
+              if: (!cancelled())
+              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              with:
+                  name: allure-results-${{ matrix.python-version }}
+                  path: allure-results-${{ matrix.python-version }}
+                  retention-days: 7
 
     publish-test-results:
         name: "Publish Tests Results"
@@ -113,6 +123,13 @@ jobs:
         if: (!cancelled())
 
         steps:
+            - name: Checkout gh-pages (for history)
+              uses: actions/checkout@v4
+              with:
+                ref: gh-pages
+                path: gh-pages
+                continue-on-error: true
+
             - name: Download Artifacts
               uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
               with:
@@ -122,3 +139,69 @@ jobs:
               uses: EnricoMi/publish-unit-test-result-action@v2
               with:
                   files: "artifacts/**/*.xml"
+
+            - name: Download Allure Results(3.9)
+              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              with:
+                  name: allure-results-3.9
+                  path: merged-results/3.9
+            
+            - name: Download Allure Results(3.10)
+              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              with:
+                  name: allure-results-3.10
+                  path: merged-results/3.10
+            
+            - name: Download Allure Results(3.11)
+              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              with:
+                  name: allure-results-3.11
+                  path: merged-results/3.11
+            
+            - name: Download Allure Results(3.12)
+              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              with:
+                  name: allure-results-3.12
+                  path: merged-results/3.12
+
+            - name: Copy History Trend
+              run: |
+                if [ -d "gh-pages/history" ]; then
+                  mkdir -p merged-results/history
+                  cp -r gh-pages/history/* merged-results/history/
+                fi
+
+            - name: Upload Merged Results
+              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              with:
+                  name: allure-results-merged
+                  path: merged-results
+    deploy-report:
+        name: "Deploy Allure Report"
+        needs: publish-test-results
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deploy.outputs.page_url }}
+
+        if: (!cancelled())
+
+        steps:
+
+            - name: Download Merged Results
+              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              with:
+                  name: allure-results-merged
+                  path: merged-results
+
+            - name: Generate Allure Report
+              uses: simple-elf/allure-report-action@master
+              with:
+                  allure-results: merged-results
+                  allure-report: allure-report
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: peaceiris/actions-gh-pages@v4
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_dir: allure-report
