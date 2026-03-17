@@ -53,48 +53,55 @@ def check_plot(image_regression):
 
     return _check
 
-@pytest.hookimpl(tryfirst=True)
-def pytest_exception_interact(node, call, report):
-    """捕获图像回归失败，自动附加差异图到 Allure (兼容所有 pytest-regressions 版本)"""
-    excinfo = call.excinfo
-    if not excinfo:
-        return
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    """
+    终极解决方案：
+    1. 监听测试用例是否失败
+    2. 如果失败，直接去测试目录下扫盘
+    3. 把所有看起来像是差异图的文件都附加到 Allure
+    """
+    outcome = yield
+    report = outcome.get_result()
 
-    # 稳健判断：不依赖导入，直接检查异常类名
-    exc_type_name = excinfo.typename
-    if "ImageRegressionError" in exc_type_name:
-        err = excinfo.value
-        
-        # 尝试从异常对象中获取图片路径 (兼容不同版本的属性名)
-        # 常见属性名: expected_filename / actual_filename / diff_filename
-        attachments = []
-        
-        # 尝试获取预期图
-        if hasattr(err, "expected_filename"):
-            attachments.append(("1. Baseline image", err.expected_filename))
-        elif hasattr(err, "expected"):
-            attachments.append(("1. Baseline image", err.expected))
-            
-        # 尝试获取实际图
-        if hasattr(err, "actual_filename"):
-            attachments.append(("2. Actual image", err.actual_filename))
-        elif hasattr(err, "actual"):
-            attachments.append(("2. Actual image", err.actual))
-            
-        # 尝试获取差异图
-        if hasattr(err, "diff_filename"):
-            attachments.append(("3. Pixel difference image", err.diff_filename))
-        elif hasattr(err, "diff"):
-            attachments.append(("3. Pixel difference image", err.diff))
+    # 仅在测试执行阶段失败时触发
+    if report.when == "call" and report.failed:
+        # 获取当前测试文件所在的文件夹路径
+        test_file_path = item.fspath
+        test_dir = str(test_file_path.dirname)
+        test_name = test_file_path.purebasename  # 测试文件名（不含.py）
 
-        # 执行附加
-        for name, file_path in attachments:
-            try:
-                with open(file_path, "rb") as f:
-                    allure.attach(
-                        f.read(),
-                        name=name,
-                        attachment_type=allure.attachment_type.PNG
+        print(f"[Allure Attach] Test failed. Scanning for images in: {test_dir}")
+
+        # 定义要扫描的图片后缀
+        image_exts = (".png", ".jpg", ".jpeg")
+        
+        # 定义 pytest-regressions 常见的差异图命名关键词
+        # 它通常会生成类似 test_name.expected.png, test_name.actual.png, test_name.diff.png
+        keywords = ["expected", "actual", "diff", "difference"]
+
+        # 开始遍历目录
+        if os.path.exists(test_dir):
+            for filename in os.listdir(test_dir):
+                # 1. 先判断是不是图片
+                if filename.lower().endswith(image_exts):
+                    
+                    # 2. 再判断文件名是否包含测试名或关键词 (避免把项目里无关的图也挂上去)
+                    is_relevant = (
+                        test_name in filename 
+                        or any(kw in filename.lower() for kw in keywords)
                     )
-            except (FileNotFoundError, TypeError):
-                continue
+
+                    if is_relevant:
+                        file_path = os.path.join(test_dir, filename)
+                        try:
+                            with open(file_path, "rb") as f:
+                                # 附加图片
+                                allure.attach(
+                                    f.read(),
+                                    name=filename,
+                                    attachment_type=allure.attachment_type.PNG
+                                )
+                            print(f"[Allure Attach] Success: {filename}")
+                        except Exception as e:
+                            print(f"[Allure Attach] Failed to attach {filename}: {e}")
