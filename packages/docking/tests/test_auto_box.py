@@ -143,10 +143,6 @@ def test_docking_node_auto_box(test_data):
     # NO MOCKING of DockingEngineFactory. Use the real one.
     # This requires 'vina' (or configured engine) to be installed in the environment.
 
-    # Ensure vina is available (skip if not, though user said use docker so it should be)
-    if not shutil.which("vina"):
-        pytest.skip("Vina not installed")
-
     node.run(context, progress, logger)
 
     # Check results in context

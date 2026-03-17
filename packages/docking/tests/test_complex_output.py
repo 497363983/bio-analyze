@@ -1,4 +1,3 @@
-import importlib.util
 import shutil
 from pathlib import Path
 
@@ -11,12 +10,14 @@ from bio_analyze_core.pipeline import Context
 # Check optional dependencies safely
 try:
     import vina
+
     HAS_VINA = True
 except ImportError:
     HAS_VINA = False
 
 try:
     import pymol
+
     HAS_PYMOL = True
 except ImportError:
     HAS_PYMOL = False
@@ -56,8 +57,6 @@ def real_test_data(tmp_path):
     return rec_pdbqt, lig_pdbqt, output_dir
 
 
-@pytest.mark.skipif(not HAS_VINA, reason="Vina python package not installed")
-@pytest.mark.skipif(not HAS_PYMOL, reason="PyMOL python package not installed")
 def test_save_complexes(real_test_data):
     rec_file, lig_file, output_dir = real_test_data
 
@@ -67,12 +66,12 @@ def test_save_complexes(real_test_data):
     # We must run docking to get results
     # Wait, using ligand box might be far from the receptor. Let's use receptor box.
     from bio_analyze_docking.prep import get_box_from_receptor
-    
+
     # Use receptor for box to ensure Vina finds a pose quickly since random ligand might be far
     center, size = get_box_from_receptor(rec_file, padding=10.0)
-    
+
     engine.compute_box(center, size)
-    engine.dock(exhaustiveness=1, n_poses=1) # Fast docking
+    engine.dock(exhaustiveness=1, n_poses=1)  # Fast docking
 
     # Save complexes
     engine.save_complexes(n_complexes=1, output_dir=output_dir, output_name_prefix="complex_test")
@@ -88,8 +87,6 @@ def test_save_complexes(real_test_data):
     assert len(files) > 0, "No complex PDB files generated"
 
 
-@pytest.mark.skipif(not HAS_VINA, reason="Vina python package not installed")
-@pytest.mark.skipif(not HAS_PYMOL, reason="PyMOL python package not installed")
 def test_docking_node_complex_output(real_test_data):
     rec_file, lig_file, output_dir = real_test_data
 
@@ -104,7 +101,7 @@ def test_docking_node_complex_output(real_test_data):
         ligand_key="lig_key",
         output_dir=output_dir,
         center=None,
-        autobox_ligand=None, # Auto-box from receptor
+        autobox_ligand=None,  # Auto-box from receptor
         padding=10.0,
         exhaustiveness=1,
         n_poses=1,

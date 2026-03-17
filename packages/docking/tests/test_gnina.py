@@ -2,7 +2,6 @@ import shutil
 import unittest
 from pathlib import Path
 
-import pytest
 from bio_analyze_docking.engines.factory import DockingEngineFactory
 from bio_analyze_docking.engines.gnina import GninaEngine
 
@@ -50,13 +49,11 @@ class TestGninaEngine(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             GninaEngine(self.receptor_path, self.ligand_path, self.output_dir)
 
-    @pytest.mark.skipif(not shutil.which("gnina"), reason="Gnina not installed")
     def test_initialization(self):
         engine = GninaEngine(self.receptor_path, self.ligand_path, self.output_dir)
         self.assertIsInstance(engine, GninaEngine)
         self.assertTrue(engine.gnina_executable)
 
-    @pytest.mark.skipif(not shutil.which("gnina"), reason="Gnina not installed")
     def test_compute_box(self):
         engine = GninaEngine(self.receptor_path, self.ligand_path, self.output_dir)
         center = [10.0, 10.0, 10.0]
@@ -65,7 +62,6 @@ class TestGninaEngine(unittest.TestCase):
         self.assertEqual(engine.box_center, center)
         self.assertEqual(engine.box_size, size)
 
-    @pytest.mark.skipif(not shutil.which("gnina"), reason="Gnina not installed")
     def test_dock(self):
         engine = GninaEngine(self.receptor_path, self.ligand_path, self.output_dir)
         center = [10.0, 10.0, 10.0]
@@ -78,7 +74,6 @@ class TestGninaEngine(unittest.TestCase):
             # Gnina might fail due to invalid input files
             print(f"Gnina failed as expected (invalid input): {e}")
 
-    @pytest.mark.skipif(not shutil.which("gnina"), reason="Gnina not installed")
     def test_factory_create_gnina(self):
         engine = DockingEngineFactory.create_engine("gnina", self.receptor_path, self.ligand_path, self.output_dir)
         self.assertIsInstance(engine, GninaEngine)

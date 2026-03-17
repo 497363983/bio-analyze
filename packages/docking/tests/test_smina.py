@@ -2,7 +2,6 @@ import shutil
 import unittest
 from pathlib import Path
 
-import pytest
 from bio_analyze_docking.engines.factory import DockingEngineFactory
 from bio_analyze_docking.engines.smina import SminaEngine
 
@@ -50,13 +49,11 @@ class TestSminaEngine(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             SminaEngine(self.receptor_path, self.ligand_path, self.output_dir)
 
-    @pytest.mark.skipif(not shutil.which("smina"), reason="Smina not installed")
     def test_initialization(self):
         engine = SminaEngine(self.receptor_path, self.ligand_path, self.output_dir)
         self.assertIsInstance(engine, SminaEngine)
         self.assertTrue(engine.smina_executable)
 
-    @pytest.mark.skipif(not shutil.which("smina"), reason="Smina not installed")
     def test_compute_box(self):
         engine = SminaEngine(self.receptor_path, self.ligand_path, self.output_dir)
         center = [10.0, 10.0, 10.0]
@@ -65,7 +62,6 @@ class TestSminaEngine(unittest.TestCase):
         self.assertEqual(engine.box_center, center)
         self.assertEqual(engine.box_size, size)
 
-    @pytest.mark.skipif(not shutil.which("smina"), reason="Smina not installed")
     def test_dock(self):
         # We need real PDBQT files for smina to run without error,
         # or we accept that it might fail with "Parse error" but not "Executable not found"
@@ -85,7 +81,6 @@ class TestSminaEngine(unittest.TestCase):
             # But it shouldn't be "command not found"
             print(f"Smina failed as expected (invalid input): {e}")
 
-    @pytest.mark.skipif(not shutil.which("smina"), reason="Smina not installed")
     def test_factory_create_smina(self):
         engine = DockingEngineFactory.create_engine("smina", self.receptor_path, self.ligand_path, self.output_dir)
         self.assertIsInstance(engine, SminaEngine)
