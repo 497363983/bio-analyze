@@ -3,6 +3,7 @@ import matplotlib
 # Set backend to Agg before importing pyplot to avoid GUI dependencies
 matplotlib.use("Agg")
 
+import os
 import io
 import random
 import numpy as np
@@ -10,6 +11,7 @@ import pytest
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from bio_analyze_plot import theme
+import allure
 
 
 
