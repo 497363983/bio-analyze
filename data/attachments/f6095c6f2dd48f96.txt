@@ -1,0 +1,467 @@
+14:38:26 | INFO | Converting CIF to PDB: test_rec_charge.cif
+14:38:26 | WARNING | Warning: Gemmi read empty structure or failed for /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge.cif, trying PyMOL fallback...
+14:38:26 | INFO | PyMOL fallback successful for /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge.cif
+14:38:26 | INFO | Repairing PDB structure using PDBFixer: test_rec_charge_converted.pdb
+14:38:28 | INFO | Fixed PDB saved to: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge_fixed.pdb
+14:38:28 | INFO | Running PropKa analysis for test_rec_charge_fixed.pdb at pH 7.4
+14:38:28 | ERROR | PropKa analysis failed for test_rec_charge.cif: cannot unpack non-iterable Options object. Proceeding with previous file.
+14:38:28 | INFO | Preparing receptor using Meeko CLI: test_rec_charge.pdbqt
+14:38:42 | ERROR | Meeko CLI failed with exit code 1
+14:38:42 | ERROR | Meeko CLI stderr: No template matched for residue_key='A:82'
+tried 3 templates for residue_key='A:82'excess_H_ok=False
+VAL        heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess=set()
+NVAL       heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={4}
+CVAL       heavy_miss=1 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:82
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=101, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=101, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=101, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+No template matched for residue_key='A:209'
+tried 3 templates for residue_key='A:209'excess_H_ok=False
+LEU        heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess=set()
+NLEU       heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={4}
+CLEU       heavy_miss=1 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:209
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=230, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=230, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=230, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=264, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=264, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=264, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=271, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=271, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=271, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=353, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=353, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=353, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD13', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD13', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD13', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=391, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=391, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=391, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=405, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=405, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=405, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG11', resName='VAL', resNum=449, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG11', resName='VAL', resNum=449, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG11', resName='VAL', resNum=449, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=469, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=469, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=469, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=502, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=502, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=502, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='THR', resNum=537, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='THR', resNum=537, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='THR', resNum=537, icode='', chain='A') 
+
+No template matched for residue_key='A:550'
+tried 3 templates for residue_key='A:550'excess_H_ok=False
+ILE        heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess=set()
+NILE       heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={4}
+CILE       heavy_miss=1 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:550
+No template matched for residue_key='A:585'
+tried 3 templates for residue_key='A:585'excess_H_ok=False
+ILE        heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess=set()
+NILE       heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={4}
+CILE       heavy_miss=1 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:585
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=586, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=586, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=586, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=590, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=590, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=590, icode='', chain='A') 
+
+No template matched for residue_key='A:672'
+tried 3 templates for residue_key='A:672'excess_H_ok=False
+LEU        heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess=set()
+NLEU       heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={4}
+CLEU       heavy_miss=1 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:672
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=697, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=697, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=697, icode='', chain='A') 
+
+matched with excess inter-residue bond(s): A:710
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=764, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=764, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=764, icode='', chain='A') 
+
+matched with excess inter-residue bond(s): A:793
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 1139, in from_pdb_string
+    polymer = cls(
+              ^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 931, in __init__
+    padded_mols = self._build_padded_mols(self.monomers, bonds, padders)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 1801, in _build_padded_mols
+    raise RuntimeError(err_msg)
+RuntimeError: Expected 6 paddings for (A:710, A:793) with bonds [(18, 1), (19, 1), (20, 1)], but got 0
+
+
+14:38:42 | WARNING | Meeko CLI failed (Exit code 1: No template matched for residue_key='A:82'
+tried 3 templates for residue_key='A:82'excess_H_ok=False
+VAL        heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess=set()
+NVAL       heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={4}
+CVAL       heavy_miss=1 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:82
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=101, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=101, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=101, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=173, icode='', chain='A') 
+
+No template matched for residue_key='A:209'
+tried 3 templates for residue_key='A:209'excess_H_ok=False
+LEU        heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess=set()
+NLEU       heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={4}
+CLEU       heavy_miss=1 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:209
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=230, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=230, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=230, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=264, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=264, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=264, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=271, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=271, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=271, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=353, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=353, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='ILE', resNum=353, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD13', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD13', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD13', resName='LEU', resNum=356, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=391, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=391, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=391, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=405, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=405, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=405, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG11', resName='VAL', resNum=449, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG11', resName='VAL', resNum=449, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG11', resName='VAL', resNum=449, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=469, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=469, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=469, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=502, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=502, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=502, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='THR', resNum=537, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='THR', resNum=537, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='THR', resNum=537, icode='', chain='A') 
+
+No template matched for residue_key='A:550'
+tried 3 templates for residue_key='A:550'excess_H_ok=False
+ILE        heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess=set()
+NILE       heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={4}
+CILE       heavy_miss=1 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:550
+No template matched for residue_key='A:585'
+tried 3 templates for residue_key='A:585'excess_H_ok=False
+ILE        heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess=set()
+NILE       heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={4}
+CILE       heavy_miss=1 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:585
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=586, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=586, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=586, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=590, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=590, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=590, icode='', chain='A') 
+
+No template matched for residue_key='A:672'
+tried 3 templates for residue_key='A:672'excess_H_ok=False
+LEU        heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess=set()
+NLEU       heavy_miss=0 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={4}
+CLEU       heavy_miss=1 heavy_excess=0 H_excess=[-1, -1] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:672
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=697, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=697, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HG21', resName='VAL', resNum=697, icode='', chain='A') 
+
+matched with excess inter-residue bond(s): A:710
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=764, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=764, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD21', resName='LEU', resNum=764, icode='', chain='A') 
+
+matched with excess inter-residue bond(s): A:793
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 1139, in from_pdb_string
+    polymer = cls(
+              ^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 931, in __init__
+    padded_mols = self._build_padded_mols(self.monomers, bonds, padders)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 1801, in _build_padded_mols
+    raise RuntimeError(err_msg)
+RuntimeError: Expected 6 paddings for (A:710, A:793) with bonds [(18, 1), (19, 1), (20, 1)], but got 0
+
+), attempting fallback to OpenBabel...
+14:38:42 | INFO | Using OpenBabel Python bindings for fallback.
+14:38:43 | INFO | OpenBabel fallback successful: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge.pdbqt
