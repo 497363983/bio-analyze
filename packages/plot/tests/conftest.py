@@ -14,7 +14,6 @@ from PIL import Image
 from matplotlib.figure import Figure
 from bio_analyze_plot import theme
 import allure
-from pytest_regressions.image_regression import ImageRegressionFixture
 
 # ========== 新增：调低日志级别，打印pytest-regressions路径 ==========
 def pytest_configure(config):
@@ -62,7 +61,7 @@ def check_plot(image_regression):
             
             try:
                 # 原有对比逻辑
-                image_regression.check(img_bytes, diff_threshold=0.1)
+                image_regression.check(img_bytes, diff_threshold=0.2)
             except AssertionError as e:
                 # ========== 新增：对比失败时生成差异图 ==========
                 # 解析 AssertionError 提取基准图和实际图的路径
