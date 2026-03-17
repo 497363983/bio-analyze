@@ -64,6 +64,8 @@ jobs:
                     gemmi \
                     pytest \
                     pytest-cov \
+                    pytest-sugar \
+                    pytest-clarity \
                     hatchling
 
                   micromamba clean -afy

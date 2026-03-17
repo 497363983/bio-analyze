@@ -33,11 +33,13 @@ class SminaEngine(BaseDockingEngine):
     @classmethod
     def prepare_receptor(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
         from ..prep import prepare_receptor as prep_rec
+
         return prep_rec(input_file, output_file, **kwargs)
 
     @classmethod
     def prepare_ligand(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
         from ..prep import prepare_ligand as prep_lig
+
         return prep_lig(input_file, output_file, **kwargs)
 
     def __init__(self, receptor: Path, ligand: Path, output_dir: Path):
@@ -121,7 +123,7 @@ class SminaEngine(BaseDockingEngine):
             str(exhaustiveness),
             "--num_modes",
             str(n_poses),
-            "--min_rmsd_filter", # Smina uses min_rmsd_filter not min_rmsd
+            "--min_rmsd_filter",  # Smina uses min_rmsd_filter not min_rmsd
             str(min_rmsd),
             "--out",
             str(self._temp_output_file),
@@ -249,7 +251,7 @@ class SminaEngine(BaseDockingEngine):
         try:
             with open(self._temp_output_file, encoding="utf-8") as f:
                 lines = f.readlines()
-            
+
             current_pose = {}
             pose_idx = 0
             in_model = False
@@ -267,13 +269,13 @@ class SminaEngine(BaseDockingEngine):
                             current_pose["affinity"] = float(match.group(1))
                             current_pose["rmsd_lb"] = float(match.group(2))
                             current_pose["rmsd_ub"] = float(match.group(3))
-                    
+
                     elif line.startswith("REMARK minimizedAffinity"):
                         match = minimized_affinity_pattern.search(line)
                         if match:
                             # 优先使用 minimizedAffinity
                             current_pose["affinity"] = float(match.group(1))
-                    
+
                     elif line.startswith("REMARK minimizedRMSD"):
                         match = minimized_rmsd_pattern.search(line)
                         if match:
@@ -285,7 +287,7 @@ class SminaEngine(BaseDockingEngine):
                             if len(results) >= n_poses:
                                 break
                         in_model = False
-                        
+
         except Exception as e:
             logger.error(f"解析 Smina 结果文件失败: {e}")
             return []

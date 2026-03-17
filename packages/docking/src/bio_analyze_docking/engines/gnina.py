@@ -33,11 +33,13 @@ class GninaEngine(BaseDockingEngine):
     @classmethod
     def prepare_receptor(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
         from ..prep import prepare_receptor as prep_rec
+
         return prep_rec(input_file, output_file, **kwargs)
 
     @classmethod
     def prepare_ligand(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
         from ..prep import prepare_ligand as prep_lig
+
         return prep_lig(input_file, output_file, **kwargs)
 
     def __init__(self, receptor: Path, ligand: Path, output_dir: Path):
@@ -121,7 +123,7 @@ class GninaEngine(BaseDockingEngine):
             str(exhaustiveness),
             "--num_modes",
             str(n_poses),
-            "--min_rmsd_filter", # Gnina uses min_rmsd_filter not min_rmsd
+            "--min_rmsd_filter",  # Gnina uses min_rmsd_filter not min_rmsd
             str(min_rmsd),
             "--out",
             str(self._temp_output_file),
@@ -268,7 +270,7 @@ class GninaEngine(BaseDockingEngine):
                             current_pose["affinity"] = float(match.group(1))
                             current_pose["rmsd_lb"] = float(match.group(2))
                             current_pose["rmsd_ub"] = float(match.group(3))
-                    
+
                     elif line.startswith("REMARK minimizedAffinity"):
                         match = minimized_affinity_pattern.search(line)
                         if match:
@@ -290,8 +292,8 @@ class GninaEngine(BaseDockingEngine):
                         if "affinity" in current_pose or "cnn_score" in current_pose:
                             # 确保 affinity 存在 (如果只有 CNNscore，可能 affinity 为 0 或 None)
                             if "affinity" not in current_pose:
-                                current_pose["affinity"] = 0.0 # 或者 None
-                            
+                                current_pose["affinity"] = 0.0  # 或者 None
+
                             results.append(current_pose)
                             if len(results) >= n_poses:
                                 break

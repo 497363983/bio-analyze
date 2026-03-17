@@ -49,7 +49,9 @@ dev = [
     "commitizen",
     "pytest",
     "pytest-cov",
-    "docstring_parser"
+    "docstring_parser",
+    "pytest-sugar",
+    "pytest-clarity"
 ]
 
 [tool.commitizen]

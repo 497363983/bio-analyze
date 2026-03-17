@@ -11,7 +11,7 @@ from bio_analyze_core.pipeline import Context, Node, Progress
 from bio_analyze_core.utils import safe_save_json
 
 from .engines import DockingEngineFactory
-from .prep import get_box_from_ligand, get_box_from_receptor, prepare_ligand, prepare_receptor
+from .prep import get_box_from_ligand, get_box_from_receptor
 
 
 def run_docking_task(
@@ -890,7 +890,7 @@ class ResultSummaryNode(Node):
             # 获取 Box 信息 (总是存在)
             center = res.get("box_center", [None, None, None])
             size = res.get("box_size", [None, None, None])
-            
+
             row["Box Center X"] = center[0]
             row["Box Center Y"] = center[1]
             row["Box Center Z"] = center[2]
@@ -912,7 +912,7 @@ class ResultSummaryNode(Node):
                         "RMSD l.b.": "rmsd_lb",
                         "RMSD u.b.": "rmsd_ub",
                     }
-                
+
                 # 更新全局列集合
                 for display_name, key in config.items():
                     all_engine_columns[display_name] = key
@@ -924,7 +924,7 @@ class ResultSummaryNode(Node):
                 # 填充引擎特定列
                 for display_name, key in config.items():
                     row[display_name] = best_pose.get(key)
-            
+
             data.append(row)
 
         if not data:
@@ -936,14 +936,18 @@ class ResultSummaryNode(Node):
         # 构建最终列顺序
         base_columns = ["Receptor", "Ligand", "Status", "Error"]
         box_columns = [
-            "Box Center X", "Box Center Y", "Box Center Z",
-            "Box Size X", "Box Size Y", "Box Size Z",
-            "Output File"
+            "Box Center X",
+            "Box Center Y",
+            "Box Center Z",
+            "Box Size X",
+            "Box Size Y",
+            "Box Size Z",
+            "Output File",
         ]
-        
+
         # 引擎列 (使用字典键来去重并保持顺序)
         engine_columns = list(all_engine_columns.keys())
-        
+
         desired_columns = base_columns + engine_columns + box_columns
 
         # 确保 DataFrame 包含所有 desired_columns (填充 NaN)

@@ -19,5 +19,5 @@ services:
       - LANG=C.UTF-8
       - LC_ALL=C.UTF-8
     # 保持容器运行以便进入调试，或者作为服务运行
-    # entrypoint: ["tail", "-f", "/dev/null"] 
+    # entrypoint: ["tail", "-f", "/dev/null"]
     # 默认使用 Dockerfile 的 ENTRYPOINT (bio-cli)
