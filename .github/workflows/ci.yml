@@ -101,6 +101,19 @@ jobs:
               shell: bash -el {0}
               run: |
                   pytest packages --timeout=60 --junit-xml pytest.xml --alluredir=allure-results-${{ matrix.python-version }} --clean-alluredir
+                  echo "======================================"
+                  echo "【DEBUG 1】当前工作目录在哪里？"
+                  pwd
+                  
+                  echo "======================================"
+                  echo "【DEBUG 2】测试目录里有什么？（重点看有没有 .png）"
+                  ls -la packages/plot/tests/ || true
+                  
+                  echo "======================================"
+                  echo "【DEBUG 3】递归查找整个仓库所有的 PNG 图片"
+                  find . -name "*.png" -type f || true
+                  
+                  echo "======================================"
 
             - name: Upload Test Results
               if: (!cancelled())
