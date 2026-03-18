@@ -232,6 +232,7 @@ class Pipeline:
 
                 try:
                     node.run(self.context, progress, self.logger)
+                    progress.update(percentage=100)
                     self._completed_nodes.append(node.name)
                     self._save_state()
                 except Exception as e:

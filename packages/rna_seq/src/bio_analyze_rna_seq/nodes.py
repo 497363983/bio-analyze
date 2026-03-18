@@ -100,8 +100,17 @@ class SRADownloadNode(Node):
                 )
 
                 # We need to process one by one to support checkpointing
-                for sra_id in remaining_sra_ids:
+                total_sra = len(context.sra_ids)
+                current_completed = len(downloaded_sra_ids)
+                
+                for i, sra_id in enumerate(remaining_sra_ids):
                     logger.info(f"Processing {sra_id}...")
+                    
+                    progress.update(
+                        f"Downloading {sra_id} ({current_completed + i + 1}/{total_sra})",
+                        percentage=((current_completed + i + 1) / total_sra) * 100
+                    )
+                    
                     sra_mgr.process_single_sra(sra_id)
 
                     downloaded_sra_ids.append(sra_id)

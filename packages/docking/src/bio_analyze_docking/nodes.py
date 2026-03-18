@@ -373,7 +373,10 @@ class BatchReceptorPrepNode(Node):
 
                 for i, future in enumerate(as_completed(future_to_rec)):
                     rec = future_to_rec[future]
-                    progress.update(f"已准备受体 {rec.name} ({i+1}/{len(remaining)})")
+                    progress.update(
+                        f"已准备受体 {rec.name} ({i+1}/{len(remaining)})",
+                        percentage=((i + 1) / len(remaining)) * 100,
+                    )
                     try:
                         output_file = future.result()
                         prep_map[str(rec)] = str(output_file.resolve())
@@ -512,7 +515,10 @@ class BatchLigandPrepNode(Node):
 
                 for i, future in enumerate(as_completed(future_to_lig)):
                     lig = future_to_lig[future]
-                    progress.update(f"已准备配体 {lig.name} ({i+1}/{len(remaining)})")
+                    progress.update(
+                        f"已准备配体 {lig.name} ({i+1}/{len(remaining)})",
+                        percentage=((i + 1) / len(remaining)) * 100,
+                    )
                     try:
                         output_file = future.result()
                         prep_map[str(lig)] = str(output_file.resolve())
@@ -804,7 +810,10 @@ class BatchDockingNode(Node):
             for i, future in enumerate(as_completed(future_to_key)):
                 key = future_to_key[future]
                 completed_count += 1
-                progress.update(f"对接完成 ({completed_count}/{total_tasks})")
+                progress.update(
+                    f"对接完成 ({completed_count}/{total_tasks})",
+                    percentage=(completed_count / total_tasks) * 100,
+                )
 
                 try:
                     result = future.result()
