@@ -34,16 +34,16 @@ logger = get_logger(__name__)
 
 def prepare_ligand(input_file: Path, output_file: Path, add_hydrogens: bool = True) -> Path:
     """
-    zh: 准备配体用于对接 (SDF/SMILES -> PDBQT)。
-    en: Prepare ligand for docking (SDF/SMILES -> PDBQT).
+    zh: 准备配体用于对接 (SDF/SMILES/CIF -> PDBQT)。
+    en: Prepare ligand for docking (SDF/SMILES/CIF -> PDBQT).
 
     使用 RDKit 生成 3D 结构，使用 Meeko 转换为 PDBQT 格式。
     Uses RDKit to generate 3D structure, and Meeko to convert to PDBQT format.
 
     Args:
         input_file (Path):
-            zh: 输入配体文件路径 (SDF, MOL2, PDB, SMI)。
-            en: Path to input ligand file (SDF, MOL2, PDB, SMI).
+            zh: 输入配体文件路径 (SDF, MOL2, PDB, SMI, CIF)。
+            en: Path to input ligand file (SDF, MOL2, PDB, SMI, CIF).
         output_file (Path):
             zh: 输出 PDBQT 文件路径。
             en: Path to output PDBQT file.
@@ -75,6 +75,18 @@ def prepare_ligand(input_file: Path, output_file: Path, add_hydrogens: bool = Tr
         mol = Chem.MolFromPDBFile(str(input_file))
     elif ext == ".mol2":
         mol = Chem.MolFromMol2File(str(input_file))
+    elif ext == ".cif":
+        # CIF 支持：先转换为 PDB，再用 RDKit 读取
+        temp_pdb_file = output_file.parent / f"{input_file.stem}_temp_converted.pdb"
+        try:
+            convert_cif_to_pdb(input_file, temp_pdb_file)
+            mol = Chem.MolFromPDBFile(str(temp_pdb_file))
+        finally:
+            if temp_pdb_file.exists():
+                try:
+                    temp_pdb_file.unlink()
+                except Exception:
+                    pass
 
     if mol is None:
         raise ValueError(f"Could not read ligand from {input_file}")

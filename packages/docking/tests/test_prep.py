@@ -1,4 +1,5 @@
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 from bio_analyze_docking.prep import get_box_from_ligand, prepare_ligand, prepare_receptor
@@ -127,6 +128,41 @@ def test_prepare_ligand_smiles(output_dir):
     content = result_path.read_text()
     assert "ROOT" in content
     assert "ATOM" in content
+
+
+@pytest.mark.skipif(not DATA_DIR.exists(), reason="Data directory not found")
+def test_prepare_ligand_cif(output_dir):
+    """Test preparing a ligand from CIF format (with mocked conversion)."""
+    input_cif = output_dir / "test_lig.cif"
+    input_cif.touch()  # Create dummy CIF
+    
+    output_file = output_dir / "test_lig.pdbqt"
+    
+    # Valid PDB content for Methane (CH4)
+    valid_pdb_content = """CRYST1   10.000   10.000   10.000  90.00  90.00  90.00 P 1           1
+ATOM      1  C   LIG     1       0.000   0.000   0.000  1.00  0.00           C  
+ATOM      2  H   LIG     1       0.629   0.629   0.629  1.00  0.00           H  
+ATOM      3  H   LIG     1      -0.629  -0.629   0.629  1.00  0.00           H  
+ATOM      4  H   LIG     1      -0.629   0.629  -0.629  1.00  0.00           H  
+ATOM      5  H   LIG     1       0.629  -0.629  -0.629  1.00  0.00           H  
+TER       6      LIG     1
+END
+"""
+
+    def mock_convert(input_file, output_file=None):
+        if output_file is None:
+             output_file = input_file.parent / f"{input_file.stem}_converted.pdb"
+        output_file.write_text(valid_pdb_content)
+        return output_file
+
+    with patch("bio_analyze_docking.prep.convert_cif_to_pdb", side_effect=mock_convert) as mock_conv:
+        result_path = prepare_ligand(input_cif, output_file)
+        
+        assert mock_conv.called
+        assert result_path.exists()
+        assert result_path.stat().st_size > 0
+        content = result_path.read_text()
+        assert "ATOM" in content
 
 
 @pytest.mark.skipif(not DATA_DIR.exists(), reason="Data directory not found")
