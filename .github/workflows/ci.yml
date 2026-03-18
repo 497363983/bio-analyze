@@ -15,14 +15,29 @@ on:
 
 jobs:
     test:
-        runs-on: ubuntu-latest
+        runs-on: ${{ matrix.os }}
         strategy:
             matrix:
+                os: [ubuntu-latest, macos-13, windows-latest]
                 python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
             fail-fast: false
 
         steps:
             - uses: actions/checkout@v4
+
+            - name: Determine OS Specifics
+              shell: bash
+              run: |
+                  COMMON="pdbfixer vina meeko propka rdkit six pymol-open-source gemmi hatchling"
+                  LINUX_MAC="fastp salmon fastqc star samtools gffread sra-tools"
+                  
+                  if [ "$RUNNER_OS" == "Linux" ]; then
+                      echo "BIO_PKGS=$COMMON $LINUX_MAC" >> $GITHUB_ENV
+                  elif [ "$RUNNER_OS" == "macOS" ]; then
+                      echo "BIO_PKGS=$COMMON $LINUX_MAC" >> $GITHUB_ENV
+                  elif [ "$RUNNER_OS" == "Windows" ]; then
+                      echo "BIO_PKGS=$COMMON" >> $GITHUB_ENV
+                  fi
 
             - name: Set up Micromamba
               uses: mamba-org/setup-micromamba@v2
@@ -30,6 +45,7 @@ jobs:
                   environment-name: bio-analyze-env
                   create-args: >-
                       python=${{ matrix.python-version }}
+                      ${{ env.BIO_PKGS }}
                   condarc: |
                       channels:
                         - conda-forge
@@ -41,38 +57,29 @@ jobs:
                   post-cleanup: "all"
 
             - name: Install System Dependencies
+              if: runner.os == 'Linux'
               run: |
                   sudo apt-get update
                   sudo apt-get install -y libgl1 libglib2.0-0 fonts-wqy-microhei fonts-wqy-zenhei fonts-dejavu-core fonts-dejavu-extra ttf-mscorefonts-installer curl git build-essential
 
             - name: Install Conda Dependencies
               run: |
-                  micromamba install -y -n bio-analyze-env \
-                    fastp \
-                    salmon \
-                    fastqc \
-                    star \
-                    samtools \
-                    gffread \
-                    sra-tools \
-                    pdbfixer \
-                    vina \
-                    meeko \
-                    propka \
-                    rdkit \
-                    six \
-                    pymol-open-source \
-                    gemmi \
-                    hatchling
-
-                  micromamba clean -afy
+                  # Dependencies are now installed via create-args in setup-micromamba step
+                  micromamba list
 
             - name: Install External Binaries (Gnina/Smina)
+              shell: bash
               run: |
-                  sudo curl -L https://github.com/gnina/gnina/releases/download/v1.0.3/gnina -o /usr/local/bin/gnina
-                  sudo chmod +x /usr/local/bin/gnina
-                  sudo curl -L https://sourceforge.net/projects/smina/files/smina.static/download -o /usr/local/bin/smina
-                  sudo chmod +x /usr/local/bin/smina
+                  if [ "$RUNNER_OS" == "Linux" ]; then
+                      sudo curl -L https://github.com/gnina/gnina/releases/download/v1.0.3/gnina -o /usr/local/bin/gnina
+                      sudo chmod +x /usr/local/bin/gnina
+                      sudo curl -L https://sourceforge.net/projects/smina/files/smina.static/download -o /usr/local/bin/smina
+                      sudo chmod +x /usr/local/bin/smina
+                  elif [ "$RUNNER_OS" == "macOS" ]; then
+                      sudo curl -L https://sourceforge.net/projects/smina/files/smina.osx/download -o /usr/local/bin/smina
+                      sudo chmod +x /usr/local/bin/smina
+                  fi
+
 
             - name: Install Project Packages Locally
               shell: bash -el {0}
@@ -92,9 +99,6 @@ jobs:
                     pytest-regressions \
                     allure-pytest \
                     pillow
-            - name: Setup tmate session
-              uses: mxschmitt/action-tmate@v3
-              if: failure()
 
             - name: Run Tests
               shell: bash -el {0}
@@ -103,16 +107,16 @@ jobs:
 
             - name: Upload Test Results
               if: (!cancelled())
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@v4
               with:
-                  name: Test Results (Python ${{ matrix.python-version }})
+                  name: Test Results (${{ matrix.os }} - ${{ matrix.python-version }})
                   path: pytest.xml
 
             - name: Upload Allure Results
               if: (!cancelled())
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@v4
               with:
-                  name: allure-results-${{ matrix.python-version }}
+                  name: allure-results-${{ matrix.os }}-${{ matrix.python-version }}
                   path: allure-results-${{ matrix.python-version }}
                   retention-days: 7
 
@@ -131,40 +135,25 @@ jobs:
                 ref: gh-pages
                 path: gh-pages
                 
-            - name: Download Artifacts
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+            - name: Download Test Results
+              uses: actions/download-artifact@v4
               with:
+                  pattern: Test Results*
                   path: artifacts
+                  merge-multiple: true
 
             - name: Publish Test Results
               uses: EnricoMi/publish-unit-test-result-action@v2
               with:
                   files: "artifacts/**/*.xml"
 
-            - name: Download Allure Results(3.9)
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+            - name: Download Allure Results
+              uses: actions/download-artifact@v4
               with:
-                  name: allure-results-3.9
+                  pattern: allure-results-*
                   path: allure-results
+                  merge-multiple: true
             
-            - name: Download Allure Results(3.10)
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
-              with:
-                  name: allure-results-3.10
-                  path: allure-results
-            
-            - name: Download Allure Results(3.11)
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
-              with:
-                  name: allure-results-3.11
-                  path: allure-results
-            
-            - name: Download Allure Results(3.12)
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
-              with:
-                  name: allure-results-3.12
-                  path: allure-results
-
             - name: Copy History Trend
               run: |
                 if [ -d "gh-pages/history" ]; then
@@ -173,7 +162,7 @@ jobs:
                 fi
 
             - name: Upload Merged Results
-              uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+              uses: actions/upload-artifact@v4
               with:
                   name: allure-results-merged
                   path: allure-results
@@ -190,12 +179,13 @@ jobs:
         steps:
 
             - name: Download Merged Results
-              uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+              uses: actions/download-artifact@v4
               with:
                   name: allure-results-merged
                   path: allure-results
 
             - name: Generate Allure Report
+
               uses: simple-elf/allure-report-action@master
               with:
                   allure-results: allure-results
