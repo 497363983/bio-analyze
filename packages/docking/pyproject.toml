@@ -11,7 +11,7 @@ requires-python = ">=3.9, <3.15"
 license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [
-    "bio-analyze-core>=0.1.0",
+    "bio-analyze-core>=0.1.0a0",
     "numpy>=1.20.0",
     "meeko>=0.5.1",
     # "vina>=1.2.0; sys_platform != 'win32'", # Provided by Conda

@@ -11,7 +11,7 @@ requires-python = ">=3.9, <3.15"
 license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [
-    "bio-analyze-core>=0.1.0",
+    "bio-analyze-core>=0.1.0a0",
     "matplotlib>=3.8.0",
     "seaborn>=0.13.0",
     "pandas>=2.0.0",
