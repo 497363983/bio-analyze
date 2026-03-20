@@ -27,9 +27,17 @@ jobs:
           IFS='/' read -r _ PKG_NAME TAG_VERSION <<< "$TAG_NAME"
           VERSION=${TAG_VERSION#v}
 
+          # Check if this is a prerelease (contains -, a, b, rc, etc.)
+          if [[ "$VERSION" =~ [a-zA-Z-] ]]; then
+            PRERELEASE="true"
+          else
+            PRERELEASE="false"
+          fi
+
           echo "PACKAGE_NAME=${PKG_NAME}" >> $GITHUB_ENV
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
-          echo "Parsed Package: $PKG_NAME, Version: $VERSION"
+          echo "PRERELEASE=${PRERELEASE}" >> $GITHUB_ENV
+          echo "Parsed Package: $PKG_NAME, Version: $VERSION, Prerelease: $PRERELEASE"
 
       - name: Set up uv
         uses: astral-sh/setup-uv@v5
@@ -84,5 +92,6 @@ jobs:
         with:
           body_path: release_notes.md
           name: ${{ env.PACKAGE_NAME }} v${{ env.VERSION }}
+          prerelease: ${{ env.PRERELEASE == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
