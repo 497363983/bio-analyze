@@ -2,8 +2,8 @@
   "name": "prepare_ligand",
   "type": "api",
   "description": {
-    "zh": "准备配体用于对接 (SDF/SMILES -> PDBQT)。",
-    "en": "Prepare ligand for docking (SDF/SMILES -> PDBQT).\n\n使用 RDKit 生成 3D 结构，使用 Meeko 转换为 PDBQT 格式。\nUses RDKit to generate 3D structure, and Meeko to convert to PDBQT format."
+    "zh": "准备配体用于对接 (SDF/SMILES/CIF -> PDBQT)。",
+    "en": "Prepare ligand for docking (SDF/SMILES/CIF -> PDBQT).\n\n使用 RDKit 生成 3D 结构，使用 Meeko 转换为 PDBQT 格式。\nUses RDKit to generate 3D structure, and Meeko to convert to PDBQT format."
   },
   "params": [
     {
@@ -12,8 +12,8 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输入配体文件路径 (SDF, MOL2, PDB, SMI)。",
-        "en": "Path to input ligand file (SDF, MOL2, PDB, SMI)."
+        "zh": "输入配体文件路径 (SDF, MOL2, PDB, SMI, CIF)。",
+        "en": "Path to input ligand file (SDF, MOL2, PDB, SMI, CIF)."
       }
     },
     {

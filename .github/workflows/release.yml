@@ -63,7 +63,10 @@ jobs:
           uv version ${{ env.VERSION }}
 
           cd ../../
-          uv run cz changelog --unreleased-version "packages/${{ env.PACKAGE_NAME }}/v${{ env.VERSION }}" --file-name packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --incremental
+
+          # Generate changelog for this specific package using git-cliff
+          # Use --include-path to only include commits that touched this package's directory
+          uvx git-cliff --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased
 
           git add packages/${{ env.PACKAGE_NAME }}/pyproject.toml packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md
           if ! git diff --staged --quiet; then

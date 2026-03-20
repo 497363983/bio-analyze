@@ -53,138 +53,115 @@ Convert SDF/SMILES/PDB files to PDBQT format, automatically generating 3D confor
 uv run bioanalyze docking prepare-ligand ligand.sdf -o ligand.pdbqt
 ```
 
-### 3. Run Docking (Run Docking)
+### 3. Run Docking
 
-<ParamTable params-path="docking/run_cli" />
+The `run` command has been refactored into engine-specific subcommands (`vina`, `smina`, `gnina`, `haddock`) to provide more accurate parameters for each engine.
 
-#### Scenario A: Single Docking
+#### Vina Engine (`run vina`)
+The default AutoDock Vina engine.
+<ParamTable params-path="docking/run_vina_cli" />
 
 ```bash
-uv run bioanalyze docking run \
+# Single Docking
+uv run bioanalyze docking run vina \
     --receptor receptor.pdbqt \
     --ligand ligand.pdbqt \
     --output ./results \
     --center-x 10.5 --center-y 20.0 --center-z 30.0 \
     --size-x 20 --size-y 20 --size-z 20
-```
 
-#### Scenario B: Batch Docking
-
-Simply specify `--receptor` or `--ligand` as a directory, and the program will automatically scan all supported files in the directory and perform pairwise docking.
-
-```bash
-uv run bioanalyze docking run \
+# Batch Docking
+uv run bioanalyze docking run vina \
     --receptor ./receptors_dir \
     --ligand ./ligands_dir \
     --output ./batch_results \
-    --padding 4.0  # Automatically calculate box based on receptor and add 4.0A padding on all sides
-```
-
-**Batch Docking Output Structure:**
-
-```
-batch_results/
-├── dock_results/
-│   ├── poses/          # Docking poses (PDBQT)
-│   │   └── receptor_name/
-│   │       └── ligand_name_docked.pdbqt
-│   └── complex/        # (Optional) Complex structure (PDB)
-├── docking_summary.csv # Summary table (contains Affinity, RMSD, etc.)
-├── logs/               # Independent logs for each task
-└── configs.json        # Run configuration record
-```
-
-#### Scenario C: Autobox based on Reference Ligand
-
-Use co-crystallized ligand to automatically determine docking center and range.
-
-```bash
-uv run bioanalyze docking run \
-    --receptor receptor.pdbqt \
-    --ligand ligand.pdbqt \
-    --output ./results \
-    --autobox-ligand reference_ligand.sdf \
     --padding 4.0
 ```
 
-#### Scenario D: Using Configuration File
-
-Manage complex parameters via `config.json` or `config.yaml`:
-
-```json
-{
-  "receptor": "./receptors_dir",
-  "ligand": "./ligands_dir",
-  "output_dir": "./results",
-  "exhaustiveness": 8,
-  "n_poses": 9,
-  "engine": "vina" // or "smina", "gnina"
-}
-```
+#### Smina Engine (`run smina`)
+<ParamTable params-path="docking/run_smina_cli" />
 
 ```bash
-uv run bioanalyze docking run --config config.json
+uv run bioanalyze docking run smina --receptor rec.pdbqt --ligand lig.pdbqt -o ./results
 ```
 
-#### Scenario E: Using Smina or Gnina Engine
-
-If `smina` or `gnina` is installed in the system PATH, enable it via the `--engine` parameter:
+#### Gnina Engine (`run gnina`)
+<ParamTable params-path="docking/run_gnina_cli" />
 
 ```bash
-uv run bioanalyze docking run \
-    --receptor receptor.pdbqt \
-    --ligand ligand.pdbqt \
-    --output ./results \
-    --engine gnina
+uv run bioanalyze docking run gnina --receptor rec.pdbqt --ligand lig.pdbqt -o ./results
+```
+
+#### HADDOCK Engine (`run haddock`)
+Information-driven flexible docking. Note that HADDOCK does not require box parameters (`center`, `size`).
+<ParamTable params-path="docking/run_haddock_cli" />
+
+```bash
+uv run bioanalyze docking run haddock --receptor rec.pdb --ligand lig.pdb -o ./results --n-poses 10
+
+# Use custom HADDOCK3 configuration
+uv run bioanalyze docking run haddock --receptor rec.pdb --ligand lig.pdb -o ./results --haddock-config custom.cfg
+```
+
+#### Using Configuration File
+You can manage complex parameters via `config.json` or `config.yaml` for any subcommand:
+```bash
+uv run bioanalyze docking run vina --config config.json
 ```
 
 ## 📦 Python API
 
-### 1. Single Docking (`run_docking`)
+### 1. Engine-Specific Single Docking
+
+The API provides specific functions for each engine to ensure type safety and correct parameters.
 
 ```python
-from bio_analyze_docking import run_docking
+from bio_analyze_docking import run_vina, run_haddock
 from pathlib import Path
 
-result = run_docking(
-    receptor=Path("receptor.pdb"),       # Support PDB/PDBQT/CIF
-    ligand=Path("ligand.sdf"),           # Support SDF/MOL2/PDB/SMILES
-    output_dir=Path("./results"),
-    center=[10.5, 20.0, 30.0],           # Box center [x, y, z]
-    size=[20.0, 20.0, 20.0],             # Box size [x, y, z]
-    exhaustiveness=8,                    # Search exhaustiveness (default 8)
-    n_poses=9,                           # Number of output poses
-    output_docked_lig_recep_struct=True, # Whether to save complex PDB (requires PyMOL)
-    charge_model="gasteiger"             # Charge model
-)
-
-print(f"Best Score: {result['best_score']}")
-```
-
-**Parameters**:
-
-<ParamTable params-path="docking/run_api" />
-
-### 2. Batch Docking (`run_docking_batch`)
-
-```python
-from bio_analyze_docking import run_docking_batch
-from pathlib import Path
-
-results = run_docking_batch(
-    receptors=Path("./receptors_dir"),  # Receptor directory
-    ligands=Path("./ligands_dir"),      # Ligand directory
-    output_dir=Path("./batch_results"),
-    padding=4.0,                        # Auto box padding
+# Vina Example
+vina_res = run_vina(
+    receptor=Path("receptor.pdb"),
+    ligand=Path("ligand.sdf"),
+    output_dir=Path("./results_vina"),
+    center=[10.5, 20.0, 30.0],
+    size=[20.0, 20.0, 20.0],
     exhaustiveness=8
 )
 
-# results is a list containing results of each docking task
+# HADDOCK Example (No box parameters required)
+haddock_res = run_haddock(
+    receptor=Path("protein.pdb"),
+    ligand=Path("ligand.pdb"),
+    output_dir=Path("./results_haddock"),
+    n_poses=10
+)
 ```
 
-**Parameters**:
+**Parameters (Vina):**
+<ParamTable params-path="docking/run_vina_api" />
 
-<ParamTable params-path="docking/run_batch_api" />
+**Parameters (Haddock):**
+<ParamTable params-path="docking/run_haddock_api" />
+
+### 2. Batch Docking
+
+Similarly, there are specific batch functions for each engine (`run_vina_batch`, `run_haddock_batch`, etc.).
+
+```python
+from bio_analyze_docking import run_vina_batch
+from pathlib import Path
+
+results = run_vina_batch(
+    receptors=Path("./receptors_dir"),
+    ligands=Path("./ligands_dir"),
+    output_dir=Path("./batch_results"),
+    padding=4.0
+)
+```
+
+**Parameters (Vina Batch):**
+<ParamTable params-path="docking/run_vina_batch_api" />
 
 ### 3. Underlying Components (Components)
 

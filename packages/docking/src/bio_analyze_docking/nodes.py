@@ -28,6 +28,7 @@ def run_docking_task(
     n_docked_lig_recep_struct: int | None = None,
     engine_type: str = "vina",
     padding: float = 4.0,  # 添加 padding 参数以防自动计算
+    haddock_config: Path | None = None,
 ) -> dict:
     """
     zh: 并行对接执行的辅助函数。
@@ -137,7 +138,10 @@ def run_docking_task(
 
         engine = DockingEngineFactory.create_engine(engine_type, rec_path, lig_path, pair_dir)
         engine.compute_box(center, size)
-        engine.dock(exhaustiveness=exhaustiveness, n_poses=n_poses)
+        if engine_type == "haddock":
+            engine.dock(exhaustiveness=exhaustiveness, n_poses=n_poses, haddock_config=haddock_config)
+        else:
+            engine.dock(exhaustiveness=exhaustiveness, n_poses=n_poses)
 
         # 保存姿态到新路径
         out_file = engine.save_results(output_name=poses_filename, output_dir=poses_dir)
@@ -231,6 +235,8 @@ class ReceptorPrepNode(Node):
         self.rigid_macrocycles = rigid_macrocycles
         self.charge_model = charge_model
         self.engine_type = engine_type
+        self.boxes = boxes
+        self.haddock_config = haddock_config
 
     def run(self, context: Context, progress: Progress, logger: Any):
         """
@@ -551,6 +557,8 @@ class DockingNode(Node):
         output_docked_lig_recep_struct: bool = False,
         n_docked_lig_recep_struct: int | None = None,
         engine_type: str = "vina",
+        boxes: dict | None = None,
+        haddock_config: Path | None = None,
     ):
         """
         Args:
@@ -582,6 +590,8 @@ class DockingNode(Node):
         self.output_docked_lig_recep_struct = output_docked_lig_recep_struct
         self.n_docked_lig_recep_struct = n_docked_lig_recep_struct
         self.engine_type = engine_type
+        self.boxes = boxes
+        self.haddock_config = haddock_config
 
     def run(self, context: Context, progress: Progress, logger: Any):
         rec_prep = context.get(self.receptor_key)
@@ -675,6 +685,8 @@ class BatchDockingNode(Node):
         output_docked_lig_recep_struct: bool = False,
         n_docked_lig_recep_struct: int | None = None,
         engine_type: str = "vina",
+        boxes: dict | None = None,
+        haddock_config: Path | None = None,
     ):
         """
         Args:
@@ -710,6 +722,8 @@ class BatchDockingNode(Node):
         self.output_docked_lig_recep_struct = output_docked_lig_recep_struct
         self.n_docked_lig_recep_struct = n_docked_lig_recep_struct
         self.engine_type = engine_type
+        self.boxes = boxes
+        self.haddock_config = haddock_config
 
     def run(self, context: Context, progress: Progress, logger: Any):
         rec_map = context.get(self.context_key_receptors, {})
@@ -804,6 +818,7 @@ class BatchDockingNode(Node):
                     self.n_docked_lig_recep_struct,
                     self.engine_type,
                     self.padding,  # 传递 padding
+                    self.haddock_config,
                 )
                 future_to_key[future] = key
 

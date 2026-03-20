@@ -43,8 +43,8 @@ RUN conda install -y \
     seaborn \
     scikit-learn \
     pandas \
-    numpy \
     scipy \
+    numpy==1.20.3 \
     openpyxl \
     pytest \
     && conda clean -afy
@@ -62,7 +62,6 @@ RUN conda install -y \
     vina \
     meeko \
     propka \
-    openbabel \
     rdkit \
     six \
     pymol-open-source \
@@ -94,7 +93,8 @@ RUN python -m pip install --upgrade pip && \
     pip install -e packages/plot && \
     pip install -e packages/docking && \
     pip install -e packages/rna_seq && \
-    pip install -e packages/cli
+    pip install -e packages/cli && \
+    pip install haddock3
 
 # 默认命令
 ENTRYPOINT ["bioanalyze"]

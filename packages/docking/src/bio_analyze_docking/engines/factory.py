@@ -4,6 +4,7 @@ from pathlib import Path
 
 from .base import BaseDockingEngine
 from .gnina import GninaEngine
+from .haddock import HaddockEngine
 from .smina import SminaEngine
 from .vina import VinaEngine
 
@@ -21,6 +22,7 @@ class DockingEngineFactory:
         "vina": VinaEngine,
         "smina": SminaEngine,
         "gnina": GninaEngine,
+        "haddock": HaddockEngine,
     }
 
     @classmethod
@@ -35,9 +37,7 @@ class DockingEngineFactory:
         return engine_class
 
     @classmethod
-    def create_engine(
-        cls, engine_type: str, receptor: Path, ligand: Path, output_dir: Path
-    ) -> BaseDockingEngine:
+    def create_engine(cls, engine_type: str, receptor: Path, ligand: Path, output_dir: Path) -> BaseDockingEngine:
         """
         zh: 创建一个对接引擎实例。
         en: Create a docking engine instance.

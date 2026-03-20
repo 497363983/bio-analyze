@@ -30,11 +30,13 @@ class VinaEngine(BaseDockingEngine):
     @classmethod
     def prepare_receptor(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
         from ..prep import prepare_receptor as prep_rec
+
         return prep_rec(input_file, output_file, **kwargs)
 
     @classmethod
     def prepare_ligand(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
         from ..prep import prepare_ligand as prep_lig
+
         return prep_lig(input_file, output_file, **kwargs)
 
     def __init__(self, receptor: Path, ligand: Path, output_dir: Path):
@@ -75,7 +77,7 @@ class VinaEngine(BaseDockingEngine):
         logger.info(f"计算 Vina 映射 (中心={center}, 尺寸={size})...")
         self.engine.compute_vina_maps(center=center, box_size=size)
 
-    def dock(self, exhaustiveness: int = 8, n_poses: int = 9, min_rmsd: float = 1.0):
+    def dock(self, exhaustiveness: int = 8, n_poses: int = 9, min_rmsd: float = 1.0, timeout: float = 3600):
         """
         zh: 执行对接。
         en: Perform docking.

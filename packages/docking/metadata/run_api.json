@@ -138,12 +138,22 @@
     },
     {
       "name": "engine",
-      "type": "string",
+      "type": "Literal['vina', 'smina', 'gnina', 'haddock']",
       "required": false,
       "default": "vina",
       "description": {
-        "zh": "对接引擎类型 (例如 'vina', 'gnina')。",
-        "en": "Docking engine type (e.g. 'vina', 'gnina')."
+        "zh": "对接引擎类型 (例如 'vina', 'gnina', 'haddock')。",
+        "en": "Docking engine type (e.g. 'vina', 'gnina', 'haddock')."
+      }
+    },
+    {
+      "name": "haddock_config",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "",
+        "en": ""
       }
     }
   ]

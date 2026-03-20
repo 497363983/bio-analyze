@@ -61,7 +61,7 @@ def test_json_config(test_data, tmp_path):
             "box_size": [15, 15, 15],
         }
 
-        result = runner.invoke(app, ["run", "--config", str(config_file)])
+        result = runner.invoke(app, ["run", "vina", "--config", str(config_file)])
 
         assert result.exit_code == 0
         mock_run.assert_called_once()
@@ -98,7 +98,7 @@ def test_yaml_config(test_data, tmp_path):
         }
 
         # 命令行参数覆盖配置文件
-        result = runner.invoke(app, ["run", "--config", str(config_file), "--exhaustiveness", "4"])
+        result = runner.invoke(app, ["run", "vina", "--config", str(config_file), "--exhaustiveness", "4"])
 
         assert result.exit_code == 0
         call_kwargs = mock_run.call_args.kwargs
@@ -109,7 +109,7 @@ def test_yaml_config(test_data, tmp_path):
 
 def test_missing_config_file(tmp_path):
     config_file = tmp_path / "non_existent.json"
-    result = runner.invoke(app, ["run", "--config", str(config_file)])
+    result = runner.invoke(app, ["run", "vina", "--config", str(config_file)])
     assert result.exit_code == 1
     # typer 可能会捕获 stderr
     # 我们在 CLI 中使用 typer.echo(..., err=True)
@@ -121,7 +121,7 @@ def test_missing_config_file(tmp_path):
 def test_invalid_config_format(tmp_path):
     config_file = tmp_path / "config.txt"
     config_file.touch()
-    result = runner.invoke(app, ["run", "--config", str(config_file)])
+    result = runner.invoke(app, ["run", "vina", "--config", str(config_file)])
     assert result.exit_code == 1
     assert "Error loading config" in result.output
 
@@ -142,14 +142,13 @@ def test_engine_config(test_data, tmp_path):
             app,
             [
                 "run",
+                "gnina",
                 "--receptor",
                 str(rec),
                 "--ligand",
                 str(lig),
                 "--output",
                 str(output_dir),
-                "--engine",
-                "gnina",
             ],
         )
 
@@ -168,7 +167,109 @@ def test_engine_config(test_data, tmp_path):
         with open(config_file, "w") as f:
             json.dump(config, f)
 
-        result = runner.invoke(app, ["run", "--config", str(config_file)])
+        result = runner.invoke(app, ["run", "smina", "--config", str(config_file)])
         assert result.exit_code == 0
         call_kwargs = mock_run.call_args.kwargs
         assert call_kwargs["engine"] == "smina"
+
+
+def test_boxes_config_single(test_data, tmp_path):
+    rec, lig, output_dir = test_data
+    config_file = tmp_path / "config_boxes.json"
+
+    config = {
+        "receptor": str(rec),
+        "ligand": str(lig),
+        "output_dir": str(output_dir),
+        "center_x": 0.0,
+        "center_y": 0.0,
+        "center_z": 0.0,
+        "size_x": 10.0,
+        "size_y": 10.0,
+        "size_z": 10.0,
+        "boxes": {
+            rec.name: {
+                "center_x": 5.0,
+                "center_y": 5.0,
+                "center_z": 5.0,
+                "size_x": 15.0,
+                "size_y": 15.0,
+                "size_z": 15.0,
+            }
+        },
+    }
+
+    with open(config_file, "w") as f:
+        json.dump(config, f)
+
+    with patch("bio_analyze_docking.cli.run_docking") as mock_run:
+        mock_run.return_value = {
+            "best_score": -7.5,
+            "output_file": str(output_dir / "docked.pdbqt"),
+            "box_center": [5, 5, 5],
+            "box_size": [15, 15, 15],
+        }
+
+        result = runner.invoke(app, ["run", "vina", "--config", str(config_file)])
+
+        assert result.exit_code == 0
+        mock_run.assert_called_once()
+        call_kwargs = mock_run.call_args.kwargs
+
+        assert call_kwargs["center"] == [5.0, 5.0, 5.0]
+        assert call_kwargs["size"] == [15.0, 15.0, 15.0]
+
+
+def test_boxes_config_batch(test_data, tmp_path):
+    rec, lig, output_dir = test_data
+
+    # Create directories for batch
+    rec_dir = tmp_path / "receptors"
+    rec_dir.mkdir()
+    lig_dir = tmp_path / "ligands"
+    lig_dir.mkdir()
+
+    rec1 = rec_dir / "rec1.pdbqt"
+    rec1.write_text("ATOM")
+    rec2 = rec_dir / "rec2.pdbqt"
+    rec2.write_text("ATOM")
+
+    lig1 = lig_dir / "lig1.pdbqt"
+    lig1.write_text("ATOM")
+
+    config_file = tmp_path / "config_boxes_batch.json"
+
+    boxes_dict = {
+        "rec1.pdbqt": {
+            "center_x": 1.0,
+            "center_y": 2.0,
+            "center_z": 3.0,
+            "size_x": 10.0,
+            "size_y": 10.0,
+            "size_z": 10.0,
+        },
+        "rec2": {
+            "center_x": 4.0,
+            "center_y": 5.0,
+            "center_z": 6.0,
+            "size_x": 20.0,
+            "size_y": 20.0,
+            "size_z": 20.0,
+        },
+    }
+
+    config = {"receptor": str(rec_dir), "ligand": str(lig_dir), "output_dir": str(output_dir), "boxes": boxes_dict}
+
+    with open(config_file, "w") as f:
+        json.dump(config, f)
+
+    with patch("bio_analyze_docking.cli.run_docking_batch") as mock_run_batch:
+        mock_run_batch.return_value = []
+
+        result = runner.invoke(app, ["run", "vina", "--config", str(config_file)])
+
+        assert result.exit_code == 0
+        mock_run_batch.assert_called_once()
+        call_kwargs = mock_run_batch.call_args.kwargs
+
+        assert call_kwargs["boxes"] == boxes_dict

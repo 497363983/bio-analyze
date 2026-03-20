@@ -76,7 +76,7 @@ def mock_docking_engines(request, monkeypatch):
             },
         )()
 
-    def mock_vina_dock(self, exhaustiveness=8, n_poses=9, min_rmsd=1.0):
+    def mock_vina_dock(self, exhaustiveness=8, n_poses=9, min_rmsd=1.0, timeout=3600):
         pass  # Do nothing
 
     def mock_vina_save_results(self, output_name="docked.pdbqt", output_dir=None):

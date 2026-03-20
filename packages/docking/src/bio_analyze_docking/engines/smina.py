@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import re
 import shutil
-import subprocess
 from pathlib import Path
 from typing import Any, Optional
 
 from bio_analyze_core.logging import get_logger
+from bio_analyze_core.subprocess import CalledProcessError
+from bio_analyze_core.subprocess import run as run_command
 
 from ..utils import merge_complex_with_pymol
 from .base import BaseDockingEngine
@@ -89,7 +90,7 @@ class SminaEngine(BaseDockingEngine):
         self.box_center = center
         self.box_size = size
 
-    def dock(self, exhaustiveness: int = 8, n_poses: int = 9, min_rmsd: float = 1.0):
+    def dock(self, exhaustiveness: int = 8, n_poses: int = 9, min_rmsd: float = 1.0, timeout: float = 3600):
         """
         zh: 执行对接。
         en: Perform docking.
@@ -144,11 +145,14 @@ class SminaEngine(BaseDockingEngine):
         logger.info(f"执行 Smina 命令: {' '.join(cmd_args)}")
 
         try:
-            result = subprocess.run(cmd_args, capture_output=True, text=True, check=True, encoding="utf-8")
+            result = run_command(cmd_args, capture_output=True, text=True, check=True, timeout=timeout)
             logger.debug(f"Smina 输出:\n{result.stdout}")
-        except subprocess.CalledProcessError as e:
+        except CalledProcessError as e:
             logger.error(f"Smina 执行失败: {e.stderr}")
             raise RuntimeError(f"Smina 对接失败: {e.stderr}")
+        except Exception as e:
+            logger.error(f"Smina 执行异常: {e}")
+            raise RuntimeError(f"Smina 对接异常: {e}")
 
     def save_results(self, output_name: str = "docked.pdbqt", output_dir: Optional[Path] = None) -> Path:
         """

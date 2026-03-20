@@ -100,7 +100,9 @@ def test_cli_default_box(test_data):
         }
 
         # 运行 CLI，不提供盒子参数
-        result = runner.invoke(app, ["run", "--receptor", str(rec), "--ligand", str(lig), "--output", str(output_dir)])
+        result = runner.invoke(
+            app, ["run", "vina", "--receptor", str(rec), "--ligand", str(lig), "--output", str(output_dir)]
+        )
 
         assert result.exit_code == 0
         assert "Docking box will be calculated from receptor" in result.output

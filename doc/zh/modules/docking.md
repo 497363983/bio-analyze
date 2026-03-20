@@ -55,136 +55,113 @@ uv run bioanalyze docking prepare-ligand ligand.sdf -o ligand.pdbqt
 
 ### 3. 运行对接 (Run Docking)
 
-<ParamTable params-path="docking/run_cli" />
+`run` 命令已重构为引擎特定的子命令（`vina`, `smina`, `gnina`, `haddock`），以便为每个引擎提供准确的参数选项。
 
-#### 场景 A：单次对接 (Single Docking)
+#### Vina 引擎 (`run vina`)
+默认的 AutoDock Vina 引擎。
+<ParamTable params-path="docking/run_vina_cli" />
 
 ```bash
-uv run bioanalyze docking run \
+# 单次对接
+uv run bioanalyze docking run vina \
     --receptor receptor.pdbqt \
     --ligand ligand.pdbqt \
     --output ./results \
     --center-x 10.5 --center-y 20.0 --center-z 30.0 \
     --size-x 20 --size-y 20 --size-z 20
-```
 
-#### 场景 B：批量对接 (Batch Docking)
-
-只需指定 `--receptor` 或 `--ligand` 为目录，程序会自动扫描目录下所有支持的文件并进行两两对接。
-
-```bash
-uv run bioanalyze docking run \
+# 批量对接
+uv run bioanalyze docking run vina \
     --receptor ./receptors_dir \
     --ligand ./ligands_dir \
     --output ./batch_results \
-    --padding 4.0  # 基于受体自动计算盒子，并在四周增加 4.0A 的缓冲
-```
-
-**批量对接输出结构：**
-
-```
-batch_results/
-├── dock_results/
-│   ├── poses/          # 对接构象 (PDBQT)
-│   │   └── receptor_name/
-│   │       └── ligand_name_docked.pdbqt
-│   └── complex/        # (可选) 复合物结构 (PDB)
-├── docking_summary.csv # 汇总表格 (包含 Affinity, RMSD 等)
-├── logs/               # 每个任务的独立日志
-└── configs.json        # 运行配置记录
-```
-
-#### 场景 C：基于参考配体的 Autobox
-
-使用共晶配体自动确定对接中心和范围。
-
-```bash
-uv run bioanalyze docking run \
-    --receptor receptor.pdbqt \
-    --ligand ligand.pdbqt \
-    --output ./results \
-    --autobox-ligand reference_ligand.sdf \
     --padding 4.0
 ```
 
-#### 场景 D：使用配置文件
-
-通过 `config.json` 或 `config.yaml` 管理复杂参数：
-
-```json
-{
-  "receptor": "./receptors_dir",
-  "ligand": "./ligands_dir",
-  "output_dir": "./results",
-  "exhaustiveness": 8,
-  "n_poses": 9,
-  "engine": "vina" // or "smina", "gnina"
-}
-```
+#### Smina 引擎 (`run smina`)
+<ParamTable params-path="docking/run_smina_cli" />
 
 ```bash
-uv run bioanalyze docking run --config config.json
+uv run bioanalyze docking run smina --receptor rec.pdbqt --ligand lig.pdbqt -o ./results
 ```
 
-#### 场景 E：使用 Smina 或 Gnina 引擎
-
-如果系统 PATH 中安装了 `smina` 或 `gnina`，可通过 `--engine` 参数启用：
+#### Gnina 引擎 (`run gnina`)
+<ParamTable params-path="docking/run_gnina_cli" />
 
 ```bash
-uv run bioanalyze docking run \
-    --receptor receptor.pdbqt \
-    --ligand ligand.pdbqt \
-    --output ./results \
-    --engine gnina
+uv run bioanalyze docking run gnina --receptor rec.pdbqt --ligand lig.pdbqt -o ./results
+```
+
+#### HADDOCK 引擎 (`run haddock`)
+数据驱动的柔性对接。注意 HADDOCK 不需要提供盒子参数（`center`, `size`）。
+<ParamTable params-path="docking/run_haddock_cli" />
+
+```bash
+uv run bioanalyze docking run haddock --receptor rec.pdb --ligand lig.pdb -o ./results --n-poses 10
+
+# 使用自定义 HADDOCK3 配置文件
+uv run bioanalyze docking run haddock --receptor rec.pdb --ligand lig.pdb -o ./results --haddock-config custom.cfg
+```
+
+#### 使用配置文件
+您可以通过 `config.json` 或 `config.yaml` 为任何子命令管理复杂参数：
+```bash
+uv run bioanalyze docking run vina --config config.json
 ```
 
 ## 📦 Python API
 
-### 1. 单次对接 (`run_docking`)
+### 1. 特定引擎的单次对接
+
+API 为每个引擎提供了特定的函数，以确保类型安全和参数的准确性。
 
 ```python
-from bio_analyze_docking import run_docking
+from bio_analyze_docking import run_vina, run_haddock
 from pathlib import Path
 
-result = run_docking(
-    receptor=Path("receptor.pdb"),       # 支持 PDB/PDBQT/CIF
-    ligand=Path("ligand.sdf"),           # 支持 SDF/MOL2/PDB/SMILES
-    output_dir=Path("./results"),
-    center=[10.5, 20.0, 30.0],           # 盒子中心 [x, y, z]
-    size=[20.0, 20.0, 20.0],             # 盒子大小 [x, y, z]
-    exhaustiveness=8,                    # 搜索穷尽度 (默认 8)
-    n_poses=9,                           # 输出构象数
-    output_docked_lig_recep_struct=True, # 是否保存复合物 PDB (需要 PyMOL)
-    charge_model="gasteiger"             # 电荷模型
-)
-
-print(f"Best Score: {result['best_score']}")
-```
-
-**参数**:
-
-<ParamTable params-path="docking/run_api" />
-
-### 2. 批量对接 (`run_docking_batch`)
-
-```python
-from bio_analyze_docking import run_docking_batch
-from pathlib import Path
-
-results = run_docking_batch(
-    receptors=Path("./receptors_dir"),  # 受体目录
-    ligands=Path("./ligands_dir"),      # 配体目录
-    output_dir=Path("./batch_results"),
-    padding=4.0,                        # 自动 Box 填充大小
+# Vina 示例
+vina_res = run_vina(
+    receptor=Path("receptor.pdb"),
+    ligand=Path("ligand.sdf"),
+    output_dir=Path("./results_vina"),
+    center=[10.5, 20.0, 30.0],
+    size=[20.0, 20.0, 20.0],
     exhaustiveness=8
 )
 
-# results 是一个列表，包含每个对接任务的结果
+# HADDOCK 示例 (无需盒子参数)
+haddock_res = run_haddock(
+    receptor=Path("protein.pdb"),
+    ligand=Path("ligand.pdb"),
+    output_dir=Path("./results_haddock"),
+    n_poses=10
+)
 ```
 
-**参数**:
+**参数 (Vina):**
+<ParamTable params-path="docking/run_vina_api" />
 
-<ParamTable params-path="docking/run_batch_api" />
+**参数 (Haddock):**
+<ParamTable params-path="docking/run_haddock_api" />
+
+### 2. 特定引擎的批量对接
+
+类似地，为每个引擎提供了特定的批量处理函数（如 `run_vina_batch`, `run_haddock_batch` 等）。
+
+```python
+from bio_analyze_docking import run_vina_batch
+from pathlib import Path
+
+results = run_vina_batch(
+    receptors=Path("./receptors_dir"),
+    ligands=Path("./ligands_dir"),
+    output_dir=Path("./batch_results"),
+    padding=4.0
+)
+```
+
+**参数 (Vina Batch):**
+<ParamTable params-path="docking/run_vina_batch_api" />
 
 ### 3. 底层组件 (Components)
 

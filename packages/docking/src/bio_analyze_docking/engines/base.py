@@ -111,7 +111,7 @@ class BaseDockingEngine(ABC):
         pass
 
     @abstractmethod
-    def dock(self, exhaustiveness: int = 8, n_poses: int = 9, min_rmsd: float = 1.0):
+    def dock(self, exhaustiveness: int = 8, n_poses: int = 9, min_rmsd: float = 1.0, timeout: float = 3600):
         """
         zh: 执行对接。
         en: Perform docking.
@@ -126,6 +126,9 @@ class BaseDockingEngine(ABC):
             min_rmsd (float, optional):
                 zh: 最小 RMSD 阈值
                 en: Minimum RMSD threshold
+            timeout (float, optional):
+                zh: 超时时间（秒）
+                en: Timeout in seconds
         """
         pass
 

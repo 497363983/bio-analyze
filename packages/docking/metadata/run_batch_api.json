@@ -102,8 +102,8 @@
       "required": false,
       "default": "docking_summary.csv",
       "description": {
-        "zh": "摘要文件名（例如 'summary.csv', 'results.xlsx'）或 None 以禁用。",
-        "en": "Summary filename (e.g. 'summary.csv', 'results.xlsx') or None to disable."
+        "zh": "摘要文件名。",
+        "en": "Summary filename."
       }
     },
     {
@@ -112,8 +112,8 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "是否输出对接的复合物结构（PDB 格式，通过 PyMOL）。",
-        "en": "Whether to output docked complex structures (PDB format, via PyMOL)."
+        "zh": "是否保存复合物结构（PDB 格式，通过 PyMOL）。",
+        "en": "Whether to save complex structure (PDB format, via PyMOL)."
       }
     },
     {
@@ -122,8 +122,8 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "要保存的前几名复合物数量（None=全部）。",
-        "en": "Number of top complexes to save (None=All)."
+        "zh": "要保存的复合物数量。",
+        "en": "Number of complexes to save."
       }
     },
     {
@@ -138,12 +138,32 @@
     },
     {
       "name": "engine",
-      "type": "string",
+      "type": "Literal['vina', 'smina', 'gnina', 'haddock']",
       "required": false,
       "default": "vina",
       "description": {
-        "zh": "对接引擎类型 (例如 'vina', 'gnina')。",
-        "en": "Docking engine type (e.g. 'vina', 'gnina')."
+        "zh": "对接引擎类型 (例如 'vina', 'gnina', 'haddock')。",
+        "en": "Docking engine type (e.g. 'vina', 'gnina', 'haddock')."
+      }
+    },
+    {
+      "name": "boxes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "针对特定受体的盒子配置字典。",
+        "en": "Dictionary of box configurations for specific receptors."
+      }
+    },
+    {
+      "name": "haddock_config",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "",
+        "en": ""
       }
     }
   ]

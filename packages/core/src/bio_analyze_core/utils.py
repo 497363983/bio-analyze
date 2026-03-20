@@ -6,11 +6,16 @@ from typing import Any, Union
 
 import yaml
 
+try:
+    import tomllib  # Python 3.11+
+except ImportError:
+    import tomli as tomllib  # For Python < 3.11
+
 
 def load_config(config_path: Union[str, Path]) -> dict[str, Any]:
     """
-    zh: 加载 JSON 或 YAML 配置文件。
-    en: Load JSON or YAML configuration file.
+    zh: 加载 JSON, YAML 或 TOML 配置文件。
+    en: Load JSON, YAML, or TOML configuration file.
 
     Args:
         config_path (Union[str, Path]):
@@ -41,8 +46,11 @@ def load_config(config_path: Union[str, Path]) -> dict[str, Any]:
     elif suffix in [".yaml", ".yml"]:
         with open(path, encoding="utf-8") as f:
             return yaml.safe_load(f)
+    elif suffix in [".toml"]:
+        with open(path, "rb") as f:
+            return tomllib.load(f)
     else:
-        raise ValueError(f"Unsupported configuration format: {suffix}. Use .json or .yaml/.yml")
+        raise ValueError(f"Unsupported configuration format: {suffix}. Use .json, .yaml/.yml or .toml")
 
 
 def ensure_dir(path: Union[str, Path]) -> Path:

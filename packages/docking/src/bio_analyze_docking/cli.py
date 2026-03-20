@@ -82,98 +82,28 @@ def get_app() -> typer.Typer:
         prepare_ligand(input_file, output_file, add_hydrogens=add_hydrogens)
         typer.echo(f"Ligand prepared: {output_file}")
 
-    @app.command("run")
-    def _run(
-        config_file: Optional[Path] = typer.Option(
-            None, "--config", "-c", help="zh: 配置文件路径 (JSON/YAML)。\nen: Path to config file (JSON/YAML)."
-        ),
-        receptor: Optional[Path] = typer.Option(
-            None, "-r", "--receptor", help="zh: 受体文件/目录 (PDB/PDBQT)。\nen: Receptor file/directory (PDB/PDBQT)."
-        ),
-        ligand: Optional[Path] = typer.Option(
-            None,
-            "-l",
-            "--ligand",
-            help="zh: 配体文件/目录 (SDF/SMILES/PDBQT)。\nen: Ligand file/directory (SDF/SMILES/PDBQT).",
-        ),
-        output_dir: Optional[Path] = typer.Option(None, "-o", "--output", help="zh: 输出目录。\nen: Output directory."),
-        center_x: Optional[float] = typer.Option(None, help="zh: 盒子中心 X。\nen: Box center X."),
-        center_y: Optional[float] = typer.Option(None, help="zh: 盒子中心 Y。\nen: Box center Y."),
-        center_z: Optional[float] = typer.Option(None, help="zh: 盒子中心 Z。\nen: Box center Z."),
-        size_x: Optional[float] = typer.Option(None, help="zh: 盒子大小 X。\nen: Box size X."),
-        size_y: Optional[float] = typer.Option(None, help="zh: 盒子大小 Y。\nen: Box size Y."),
-        size_z: Optional[float] = typer.Option(None, help="zh: 盒子大小 Z。\nen: Box size Z."),
-        autobox_ligand: Optional[Path] = typer.Option(
-            None,
-            help="zh: 用于定义网格盒子的参考配体 (覆盖 center/size)。\nen: Reference ligand for defining grid box (overrides center/size).",
-        ),
-        padding: Optional[float] = typer.Option(None, help="zh: 自动盒填充。\nen: Autobox padding."),
-        exhaustiveness: Optional[int] = typer.Option(None, help="zh: 对接穷尽性。\nen: Docking exhaustiveness."),
-        n_poses: Optional[int] = typer.Option(None, help="zh: 生成的姿态数量。\nen: Number of poses to generate."),
-        charge_model: Optional[str] = typer.Option(
-            None, "--charge-model", help="zh: 受体准备的电荷模型。\nen: Charge model for receptor preparation."
-        ),
-        engine: Optional[str] = typer.Option(
-            None, "--engine", help="zh: 对接引擎 (vina, gnina 等)。\nen: Docking engine (vina, gnina, etc.)."
-        ),
-    ) -> None:
-        """
-        zh: 运行分子对接流程。
-        en: Run molecular docking pipeline.
+    run_app = typer.Typer(help="zh: 运行分子对接流程。\nen: Run molecular docking pipeline.")
+    app.add_typer(run_app, name="run")
 
-        支持单个文件对接或批量对接（如果提供了目录）。
-        支持通过 --config 加载 JSON/YAML 配置文件，命令行参数优先级更高。
-
-        Args:
-            config_file (Optional[Path], optional):
-                zh: 配置文件路径。
-                en: Configuration file path.
-            receptor (Optional[Path], optional):
-                zh: 受体文件或目录路径。
-                en: Receptor file or directory path.
-            ligand (Optional[Path], optional):
-                zh: 配体文件或目录路径。
-                en: Ligand file or directory path.
-            output_dir (Optional[Path], optional):
-                zh: 结果输出目录。
-                en: Results output directory.
-            center_x (Optional[float], optional):
-                zh: 搜索空间中心 X 坐标。
-                en: Search space center X coordinate.
-            center_y (Optional[float], optional):
-                zh: 搜索空间中心 Y 坐标。
-                en: Search space center Y coordinate.
-            center_z (Optional[float], optional):
-                zh: 搜索空间中心 Z 坐标。
-                en: Search space center Z coordinate.
-            size_x (Optional[float], optional):
-                zh: 搜索空间 X 轴尺寸 (Angstroms)。
-                en: Search space size in X dimension (Angstroms).
-            size_y (Optional[float], optional):
-                zh: 搜索空间 Y 轴尺寸 (Angstroms)。
-                en: Search space size in Y dimension (Angstroms).
-            size_z (Optional[float], optional):
-                zh: 搜索空间 Z 轴尺寸 (Angstroms)。
-                en: Search space size in Z dimension (Angstroms).
-            autobox_ligand (Optional[Path], optional):
-                zh: 参考配体路径，用于自动确定搜索空间。
-                en: Reference ligand path for automatically determining search space.
-            padding (Optional[float], optional):
-                zh: 自动计算盒子时的边缘填充 (Angstroms)。
-                en: Padding for autobox calculation (Angstroms).
-            exhaustiveness (Optional[int], optional):
-                zh: 搜索穷尽性 (默认 8)。值越大越慢但可能更准确。
-                en: Search exhaustiveness (default 8). Higher values are slower but potentially more accurate.
-            n_poses (Optional[int], optional):
-                zh: 保留的最佳姿态数量。
-                en: Number of top poses to keep.
-            charge_model (Optional[str], optional):
-                zh: 受体预处理电荷模型。
-                en: Receptor preprocessing charge model.
-            engine (Optional[str], optional):
-                zh: 对接引擎 ('vina', 'smina', 'gnina')。
-                en: Docking engine ('vina', 'smina', 'gnina').
-        """
+    def _execute_docking_cli(
+        engine: str,
+        config_file: Optional[Path],
+        receptor: Optional[Path],
+        ligand: Optional[Path],
+        output_dir: Optional[Path],
+        center_x: Optional[float] = None,
+        center_y: Optional[float] = None,
+        center_z: Optional[float] = None,
+        size_x: Optional[float] = None,
+        size_y: Optional[float] = None,
+        size_z: Optional[float] = None,
+        autobox_ligand: Optional[Path] = None,
+        padding: Optional[float] = 4.0,
+        exhaustiveness: Optional[int] = 8,
+        n_poses: Optional[int] = 9,
+        charge_model: Optional[str] = "gasteiger",
+        haddock_config: Optional[Path] = None,
+    ):
         # 1. 加载配置
         config = {}
         if config_file:
@@ -185,7 +115,6 @@ def get_app() -> typer.Typer:
                 raise typer.Exit(code=1)
 
         # 2. 合并参数 (命令行 > 配置文件 > 默认值)
-        # 辅助函数：获取最终值
         def get_param(cli_val, config_key, default=None):
             if cli_val is not None:
                 return cli_val
@@ -193,7 +122,6 @@ def get_app() -> typer.Typer:
                 return config[config_key]
             return default
 
-        # 解析路径参数 (需要转换为 Path 对象)
         p_receptor = get_param(receptor, "receptor")
         p_ligand = get_param(ligand, "ligand")
         p_output_dir = get_param(output_dir, "output_dir")
@@ -208,29 +136,19 @@ def get_app() -> typer.Typer:
         if p_autobox_ligand:
             p_autobox_ligand = Path(p_autobox_ligand)
 
-        # 必需参数检查
         if not p_receptor or not p_ligand or not p_output_dir:
             typer.echo(
                 "Error: Missing required arguments: --receptor, --ligand, or --output (or in config file).", err=True
             )
             raise typer.Exit(code=1)
 
-        # 解析其他参数
         p_center_x = get_param(center_x, "center_x")
         p_center_y = get_param(center_y, "center_y")
         p_center_z = get_param(center_z, "center_z")
 
-        # 盒子大小默认值处理 (如果 config 中没有，默认为 20.0)
-        # 注意：如果我们要支持自动计算盒子，这里的默认值可能会干扰判断
-        # 如果 CLI 没有提供，config 也没有，我们应该允许它是 None
         p_size_x = get_param(size_x, "size_x")
         p_size_y = get_param(size_y, "size_y")
         p_size_z = get_param(size_z, "size_z")
-
-        # 只有在提供了 center 但没提供 size 的情况下，才使用默认值 20.0？
-        # 或者，如果用户想要自动盒子，他们就不应该提供 size。
-        # 让我们保持逻辑：如果提供了 center，必须有 size (或者默认 20)。
-        # 如果没提供 center，也没 autobox_ligand，那么就是全受体对接，此时 size 应该也是自动计算的。
 
         if p_center_x is not None:
             p_size_x = p_size_x if p_size_x is not None else 20.0
@@ -241,11 +159,13 @@ def get_app() -> typer.Typer:
         p_exhaustiveness = get_param(exhaustiveness, "exhaustiveness", 8)
         p_n_poses = get_param(n_poses, "n_poses", 9)
         p_charge_model = get_param(charge_model, "charge_model", "gasteiger")
-        p_engine = get_param(engine, "engine", "vina")
+        p_haddock_config = get_param(haddock_config, "haddock_config")
+
+        if p_haddock_config:
+            p_haddock_config = Path(p_haddock_config)
 
         p_output_dir.mkdir(parents=True, exist_ok=True)
 
-        # 确定 Box 参数
         center = None
         size = None
 
@@ -257,16 +177,14 @@ def get_app() -> typer.Typer:
         elif p_center_x is not None and p_center_y is not None and p_center_z is not None:
             center = [float(p_center_x), float(p_center_y), float(p_center_z)]
         else:
-            # 如果都没有提供，run_docking 将自动根据受体计算盒子
-            if not p_autobox_ligand:
+            if not p_autobox_ligand and engine != "haddock":
                 typer.echo("Info: No box parameters provided. Docking box will be calculated from receptor.", err=True)
-                # raise typer.Exit(code=1) # 不再抛出错误
 
-        # 检查批量模式
         is_batch = p_receptor.is_dir() or p_ligand.is_dir()
+        p_boxes = get_param(None, "boxes", {})
 
         if is_batch:
-            typer.echo("Running in batch mode...")
+            typer.echo(f"Running {engine} in batch mode...")
             results = run_docking_batch(
                 receptors=p_receptor,
                 ligands=p_ligand,
@@ -278,20 +196,28 @@ def get_app() -> typer.Typer:
                 exhaustiveness=int(p_exhaustiveness),
                 n_poses=int(p_n_poses),
                 charge_model=p_charge_model,
-                engine=p_engine,
+                engine=engine,
+                boxes=p_boxes,
+                haddock_config=p_haddock_config,
             )
-
-            # 打印摘要
             typer.echo(f"\nBatch docking completed. Processed {len(results)} pairs.")
             success_count = sum(1 for r in results if r.get("status") == "success")
             typer.echo(f"Successful: {success_count}/{len(results)}")
-
             summary_file = p_output_dir / "docking_summary.csv"
             typer.echo(f"Summary saved to: {summary_file}")
-
         else:
-            # 单次运行
-            typer.echo("Running single docking...")
+            typer.echo(f"Running {engine} single docking...")
+            if p_receptor and p_boxes:
+                box_config = p_boxes.get(p_receptor.name) or p_boxes.get(p_receptor.stem)
+                if box_config:
+                    if "center_x" in box_config and "center_y" in box_config and "center_z" in box_config:
+                        center = [
+                            float(box_config["center_x"]),
+                            float(box_config["center_y"]),
+                            float(box_config["center_z"]),
+                        ]
+                    if "size_x" in box_config and "size_y" in box_config and "size_z" in box_config:
+                        size = [float(box_config["size_x"]), float(box_config["size_y"]), float(box_config["size_z"])]
 
             try:
                 res = run_docking(
@@ -305,18 +231,196 @@ def get_app() -> typer.Typer:
                     exhaustiveness=int(p_exhaustiveness),
                     n_poses=int(p_n_poses),
                     charge_model=p_charge_model,
-                    engine=p_engine,
+                    engine=engine,
+                    haddock_config=p_haddock_config,
                 )
                 typer.echo("Docking completed successfully!")
-                typer.echo(f"Best Score: {res['best_score']} kcal/mol")
+                typer.echo(f"Best Score: {res['best_score']}")
                 typer.echo(f"Output saved to: {res['output_file']}")
                 if res.get("box_center"):
                     typer.echo(f"Box Center: {res['box_center']}")
                     typer.echo(f"Box Size:   {res['box_size']}")
-
             except Exception as e:
                 typer.echo(f"Error: {e}", err=True)
                 raise typer.Exit(code=1)
+
+    @run_app.command("vina")
+    def run_vina_cmd(
+        config_file: Optional[Path] = typer.Option(
+            None, "--config", "-c", help="zh: 配置文件路径。\nen: Config file path."
+        ),
+        receptor: Optional[Path] = typer.Option(
+            None, "-r", "--receptor", help="zh: 受体文件/目录。\nen: Receptor file/dir."
+        ),
+        ligand: Optional[Path] = typer.Option(None, "-l", "--ligand", help="zh: 配体文件/目录。\nen: Ligand file/dir."),
+        output_dir: Optional[Path] = typer.Option(None, "-o", "--output", help="zh: 输出目录。\nen: Output dir."),
+        center_x: Optional[float] = typer.Option(None, help="zh: 盒子中心 X。\nen: Box center X."),
+        center_y: Optional[float] = typer.Option(None, help="zh: 盒子中心 Y。\nen: Box center Y."),
+        center_z: Optional[float] = typer.Option(None, help="zh: 盒子中心 Z。\nen: Box center Z."),
+        size_x: Optional[float] = typer.Option(None, help="zh: 盒子大小 X。\nen: Box size X."),
+        size_y: Optional[float] = typer.Option(None, help="zh: 盒子大小 Y。\nen: Box size Y."),
+        size_z: Optional[float] = typer.Option(None, help="zh: 盒子大小 Z。\nen: Box size Z."),
+        autobox_ligand: Optional[Path] = typer.Option(None, help="zh: 参考配体。\nen: Reference ligand."),
+        padding: Optional[float] = typer.Option(None, help="zh: 自动盒填充。\nen: Autobox padding."),
+        exhaustiveness: Optional[int] = typer.Option(None, help="zh: 对接穷尽性。\nen: Exhaustiveness."),
+        n_poses: Optional[int] = typer.Option(None, help="zh: 生成的姿态数量。\nen: Number of poses."),
+        charge_model: Optional[str] = typer.Option(None, "--charge-model", help="zh: 电荷模型。\nen: Charge model."),
+    ) -> None:
+        """
+        zh: 使用 Vina 引擎运行分子对接。
+        en: Run molecular docking using Vina engine.
+        """
+        _execute_docking_cli(
+            "vina",
+            config_file,
+            receptor,
+            ligand,
+            output_dir,
+            center_x,
+            center_y,
+            center_z,
+            size_x,
+            size_y,
+            size_z,
+            autobox_ligand,
+            padding,
+            exhaustiveness,
+            n_poses,
+            charge_model,
+        )
+
+    @run_app.command("smina")
+    def run_smina_cmd(
+        config_file: Optional[Path] = typer.Option(
+            None, "--config", "-c", help="zh: 配置文件路径。\nen: Config file path."
+        ),
+        receptor: Optional[Path] = typer.Option(
+            None, "-r", "--receptor", help="zh: 受体文件/目录。\nen: Receptor file/dir."
+        ),
+        ligand: Optional[Path] = typer.Option(None, "-l", "--ligand", help="zh: 配体文件/目录。\nen: Ligand file/dir."),
+        output_dir: Optional[Path] = typer.Option(None, "-o", "--output", help="zh: 输出目录。\nen: Output dir."),
+        center_x: Optional[float] = typer.Option(None, help="zh: 盒子中心 X。\nen: Box center X."),
+        center_y: Optional[float] = typer.Option(None, help="zh: 盒子中心 Y。\nen: Box center Y."),
+        center_z: Optional[float] = typer.Option(None, help="zh: 盒子中心 Z。\nen: Box center Z."),
+        size_x: Optional[float] = typer.Option(None, help="zh: 盒子大小 X。\nen: Box size X."),
+        size_y: Optional[float] = typer.Option(None, help="zh: 盒子大小 Y。\nen: Box size Y."),
+        size_z: Optional[float] = typer.Option(None, help="zh: 盒子大小 Z。\nen: Box size Z."),
+        autobox_ligand: Optional[Path] = typer.Option(None, help="zh: 参考配体。\nen: Reference ligand."),
+        padding: Optional[float] = typer.Option(None, help="zh: 自动盒填充。\nen: Autobox padding."),
+        exhaustiveness: Optional[int] = typer.Option(None, help="zh: 对接穷尽性。\nen: Exhaustiveness."),
+        n_poses: Optional[int] = typer.Option(None, help="zh: 生成的姿态数量。\nen: Number of poses."),
+        charge_model: Optional[str] = typer.Option(None, "--charge-model", help="zh: 电荷模型。\nen: Charge model."),
+    ) -> None:
+        """
+        zh: 使用 Smina 引擎运行分子对接。
+        en: Run molecular docking using Smina engine.
+        """
+        _execute_docking_cli(
+            "smina",
+            config_file,
+            receptor,
+            ligand,
+            output_dir,
+            center_x,
+            center_y,
+            center_z,
+            size_x,
+            size_y,
+            size_z,
+            autobox_ligand,
+            padding,
+            exhaustiveness,
+            n_poses,
+            charge_model,
+        )
+
+    @run_app.command("gnina")
+    def run_gnina_cmd(
+        config_file: Optional[Path] = typer.Option(
+            None, "--config", "-c", help="zh: 配置文件路径。\nen: Config file path."
+        ),
+        receptor: Optional[Path] = typer.Option(
+            None, "-r", "--receptor", help="zh: 受体文件/目录。\nen: Receptor file/dir."
+        ),
+        ligand: Optional[Path] = typer.Option(None, "-l", "--ligand", help="zh: 配体文件/目录。\nen: Ligand file/dir."),
+        output_dir: Optional[Path] = typer.Option(None, "-o", "--output", help="zh: 输出目录。\nen: Output dir."),
+        center_x: Optional[float] = typer.Option(None, help="zh: 盒子中心 X。\nen: Box center X."),
+        center_y: Optional[float] = typer.Option(None, help="zh: 盒子中心 Y。\nen: Box center Y."),
+        center_z: Optional[float] = typer.Option(None, help="zh: 盒子中心 Z。\nen: Box center Z."),
+        size_x: Optional[float] = typer.Option(None, help="zh: 盒子大小 X。\nen: Box size X."),
+        size_y: Optional[float] = typer.Option(None, help="zh: 盒子大小 Y。\nen: Box size Y."),
+        size_z: Optional[float] = typer.Option(None, help="zh: 盒子大小 Z。\nen: Box size Z."),
+        autobox_ligand: Optional[Path] = typer.Option(None, help="zh: 参考配体。\nen: Reference ligand."),
+        padding: Optional[float] = typer.Option(None, help="zh: 自动盒填充。\nen: Autobox padding."),
+        exhaustiveness: Optional[int] = typer.Option(None, help="zh: 对接穷尽性。\nen: Exhaustiveness."),
+        n_poses: Optional[int] = typer.Option(None, help="zh: 生成的姿态数量。\nen: Number of poses."),
+        charge_model: Optional[str] = typer.Option(None, "--charge-model", help="zh: 电荷模型。\nen: Charge model."),
+    ) -> None:
+        """
+        zh: 使用 Gnina 引擎运行分子对接。
+        en: Run molecular docking using Gnina engine.
+        """
+        _execute_docking_cli(
+            "gnina",
+            config_file,
+            receptor,
+            ligand,
+            output_dir,
+            center_x,
+            center_y,
+            center_z,
+            size_x,
+            size_y,
+            size_z,
+            autobox_ligand,
+            padding,
+            exhaustiveness,
+            n_poses,
+            charge_model,
+        )
+
+    @run_app.command("haddock")
+    def run_haddock_cmd(
+        config_file: Optional[Path] = typer.Option(
+            None, "--config", "-c", help="zh: 配置文件路径。\nen: Config file path."
+        ),
+        receptor: Optional[Path] = typer.Option(
+            None, "-r", "--receptor", help="zh: 受体文件/目录。\nen: Receptor file/dir."
+        ),
+        ligand: Optional[Path] = typer.Option(None, "-l", "--ligand", help="zh: 配体文件/目录。\nen: Ligand file/dir."),
+        output_dir: Optional[Path] = typer.Option(None, "-o", "--output", help="zh: 输出目录。\nen: Output dir."),
+        n_poses: Optional[int] = typer.Option(None, help="zh: 采样的姿态数量。\nen: Number of poses to sample."),
+        charge_model: Optional[str] = typer.Option(None, "--charge-model", help="zh: 电荷模型。\nen: Charge model."),
+        haddock_config: Optional[Path] = typer.Option(
+            None,
+            "--haddock-config",
+            help="zh: 自定义 HADDOCK3 配置文件路径。\nen: Custom HADDOCK3 configuration file path.",
+        ),
+    ) -> None:
+        """
+        zh: 使用 HADDOCK 引擎运行分子对接。
+        en: Run molecular docking using HADDOCK engine.
+        """
+        # Haddock 不使用 Box 参数，也不使用 exhaustiveness
+        _execute_docking_cli(
+            "haddock",
+            config_file,
+            receptor,
+            ligand,
+            output_dir,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            100,
+            n_poses,
+            charge_model,
+            haddock_config,
+        )
 
     localize_app(app, detect_language())
     return app

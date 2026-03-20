@@ -31,7 +31,18 @@ sys.modules["jinja2"] = MagicMock()
 sys.modules["genomepy"] = MagicMock()
 
 # Import API functions/classes for docking (examples)
-from bio_analyze_docking.api import run_docking, run_docking_batch  # noqa: E402
+from bio_analyze_docking.api import (  # noqa: E402
+    run_docking,
+    run_docking_batch,
+    run_gnina,
+    run_gnina_batch,
+    run_haddock,
+    run_haddock_batch,
+    run_smina,
+    run_smina_batch,
+    run_vina,
+    run_vina_batch,
+)
 from bio_analyze_docking.cli import get_app as get_docking_app  # noqa: E402
 from bio_analyze_docking.prep import prepare_ligand, prepare_receptor  # noqa: E402
 
@@ -86,6 +97,14 @@ PACKAGES = {
         "api": {
             "run": run_docking,
             "run_batch": run_docking_batch,
+            "run_vina": run_vina,
+            "run_smina": run_smina,
+            "run_gnina": run_gnina,
+            "run_haddock": run_haddock,
+            "run_vina_batch": run_vina_batch,
+            "run_smina_batch": run_smina_batch,
+            "run_gnina_batch": run_gnina_batch,
+            "run_haddock_batch": run_haddock_batch,
             "prepare_ligand": prepare_ligand,
             "prepare_receptor": prepare_receptor,
         },
@@ -233,6 +252,32 @@ def parse_api_function(func: Any, name: str) -> dict[str, Any]:
     return {"name": name, "type": "api", "description": extract_i18n_desc(func_desc), "params": params_list}
 
 
+def process_cli_app(cli_app: Any, metadata_dir: Path, prefix: str = ""):
+    if not cli_app:
+        return
+
+    # Process direct commands
+    for cmd_info in cli_app.registered_commands:
+        cmd_name = cmd_info.name or cmd_info.callback.__name__.strip("_")
+        if not cmd_name:
+            continue
+
+        full_cmd_name = f"{prefix}{cmd_name}"
+        print(f"  - Generating CLI metadata: {full_cmd_name}")
+        metadata = parse_cli_command(cmd_info, full_cmd_name)
+
+        output_file = metadata_dir / f"{full_cmd_name}_cli.json"
+        with open(output_file, "w", encoding="utf-8") as f:
+            json.dump(metadata, f, indent=2, ensure_ascii=False)
+
+    # Process sub-groups
+    for group_info in getattr(cli_app, "registered_groups", []):
+        group_name = group_info.name
+        if group_info.typer_instance:
+            new_prefix = f"{prefix}{group_name}_" if group_name else prefix
+            process_cli_app(group_info.typer_instance, metadata_dir, new_prefix)
+
+
 def main():
     for pkg_name, info in PACKAGES.items():
         cli_app = info["cli_app"]
@@ -245,18 +290,7 @@ def main():
         print(f"Processing package: {pkg_name}")
 
         # 1. Parse CLI Commands
-        if cli_app:
-            for cmd_info in cli_app.registered_commands:
-                cmd_name = cmd_info.name or cmd_info.callback.__name__.strip("_")
-                if not cmd_name:
-                    continue
-
-                print(f"  - Generating CLI metadata: {cmd_name}")
-                metadata = parse_cli_command(cmd_info, cmd_name)
-
-                output_file = metadata_dir / f"{cmd_name}_cli.json"
-                with open(output_file, "w", encoding="utf-8") as f:
-                    json.dump(metadata, f, indent=2, ensure_ascii=False)
+        process_cli_app(cli_app, metadata_dir)
 
         # 2. Parse API Functions/Classes
         for api_name, func_or_class in api_registry.items():
