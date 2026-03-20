@@ -54,12 +54,12 @@ jobs:
       - name: Build Package
         run: |
           cd packages/${{ env.PACKAGE_NAME }}
-          uv build
+          uv build --out-dir dist
 
       - name: Publish to PyPI
         run: |
           cd packages/${{ env.PACKAGE_NAME }}
-          uv publish --trusted-publishing always
+          uv publish dist/* --trusted-publishing always
 
       - name: Commit and Push Version Bump
         run: |
