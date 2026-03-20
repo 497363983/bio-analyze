@@ -62,9 +62,12 @@ jobs:
           cd packages/${{ env.PACKAGE_NAME }}
           uv version ${{ env.VERSION }}
 
-          git add pyproject.toml
+          cd ../../
+          uv run cz changelog --unreleased-version "packages/${{ env.PACKAGE_NAME }}/v${{ env.VERSION }}" --file-name packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --incremental
+
+          git add packages/${{ env.PACKAGE_NAME }}/pyproject.toml packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md
           if ! git diff --staged --quiet; then
-            git commit -m "chore(release): bump ${{ env.PACKAGE_NAME }} version to ${{ env.VERSION }}"
+            git commit -m "chore(release): bump ${{ env.PACKAGE_NAME }} version to ${{ env.VERSION }} and update changelog"
             git push origin main
           else
             echo "No changes to commit."
