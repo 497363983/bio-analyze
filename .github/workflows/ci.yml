@@ -10,9 +10,10 @@ permissions:
 on:
     push:
         branches: [main, master]
+        tags:
+            - 'packages/*/v*'
     pull_request:
         branches: [main, master]
-    workflow_call:
 
 jobs:
     test:
