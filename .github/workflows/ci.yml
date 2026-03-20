@@ -183,9 +183,6 @@ jobs:
         name: "Deploy Allure Report"
         needs: publish-test-results
         runs-on: ubuntu-latest
-        environment:
-            name: github-pages
-            url: ${{ steps.deploy.outputs.page_url }}
 
         if: (!cancelled())
 
