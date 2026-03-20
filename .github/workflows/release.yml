@@ -74,10 +74,10 @@ jobs:
 
           # Generate changelog for this specific package using git-cliff
           # Use --include-path to only include commits that touched this package's directory
-          uvx git-cliff --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased
+          uvx git-cliff --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased --repository "https://github.com/${{ github.repository }}"
 
           # Generate release notes for GitHub Release
-          uvx git-cliff --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --unreleased --strip all > release_notes.md
+          uvx git-cliff --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --unreleased --strip all --repository "https://github.com/${{ github.repository }}" > release_notes.md
 
           git add packages/${{ env.PACKAGE_NAME }}/pyproject.toml packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md
           if ! git diff --staged --quiet; then

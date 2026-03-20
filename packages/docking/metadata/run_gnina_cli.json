@@ -1,0 +1,160 @@
+{
+  "name": "run_gnina",
+  "type": "cli",
+  "description": {
+    "zh": "",
+    "en": ""
+  },
+  "params": [
+    {
+      "name": "--config, -c",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "配置文件路径。",
+        "en": "Config file path."
+      }
+    },
+    {
+      "name": "-r, --receptor",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "受体文件/目录。",
+        "en": "Receptor file/dir."
+      }
+    },
+    {
+      "name": "-l, --ligand",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "配体文件/目录。",
+        "en": "Ligand file/dir."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "输出目录。",
+        "en": "Output dir."
+      }
+    },
+    {
+      "name": "--center-x",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "盒子中心 X。",
+        "en": "Box center X."
+      }
+    },
+    {
+      "name": "--center-y",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "盒子中心 Y。",
+        "en": "Box center Y."
+      }
+    },
+    {
+      "name": "--center-z",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "盒子中心 Z。",
+        "en": "Box center Z."
+      }
+    },
+    {
+      "name": "--size-x",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "盒子大小 X。",
+        "en": "Box size X."
+      }
+    },
+    {
+      "name": "--size-y",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "盒子大小 Y。",
+        "en": "Box size Y."
+      }
+    },
+    {
+      "name": "--size-z",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "盒子大小 Z。",
+        "en": "Box size Z."
+      }
+    },
+    {
+      "name": "--autobox-ligand",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "参考配体。",
+        "en": "Reference ligand."
+      }
+    },
+    {
+      "name": "--padding",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "自动盒填充。",
+        "en": "Autobox padding."
+      }
+    },
+    {
+      "name": "--exhaustiveness",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "对接穷尽性。",
+        "en": "Exhaustiveness."
+      }
+    },
+    {
+      "name": "--n-poses",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "生成的姿态数量。",
+        "en": "Number of poses."
+      }
+    },
+    {
+      "name": "--charge-model",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "电荷模型。",
+        "en": "Charge model."
+      }
+    }
+  ]
+}

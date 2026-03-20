@@ -1,0 +1,80 @@
+{
+  "name": "run_haddock",
+  "type": "cli",
+  "description": {
+    "zh": "",
+    "en": ""
+  },
+  "params": [
+    {
+      "name": "--config, -c",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "配置文件路径。",
+        "en": "Config file path."
+      }
+    },
+    {
+      "name": "-r, --receptor",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "受体文件/目录。",
+        "en": "Receptor file/dir."
+      }
+    },
+    {
+      "name": "-l, --ligand",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "配体文件/目录。",
+        "en": "Ligand file/dir."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "输出目录。",
+        "en": "Output dir."
+      }
+    },
+    {
+      "name": "--n-poses",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "采样的姿态数量。",
+        "en": "Number of poses to sample."
+      }
+    },
+    {
+      "name": "--charge-model",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "电荷模型。",
+        "en": "Charge model."
+      }
+    },
+    {
+      "name": "--haddock-config",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "自定义 HADDOCK3 配置文件路径。",
+        "en": "Custom HADDOCK3 configuration file path."
+      }
+    }
+  ]
+}

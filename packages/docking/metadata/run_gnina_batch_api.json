@@ -1,0 +1,150 @@
+{
+  "name": "run_gnina_batch",
+  "type": "api",
+  "description": {
+    "zh": "使用 Gnina 引擎批量运行对接流程。",
+    "en": "Run batch docking pipeline using Gnina engine."
+  },
+  "params": [
+    {
+      "name": "receptors",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "受体目录或文件。",
+        "en": "Receptors directory or file."
+      }
+    },
+    {
+      "name": "ligands",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "配体目录或文件。",
+        "en": "Ligands directory or file."
+      }
+    },
+    {
+      "name": "output_dir",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "输出目录。",
+        "en": "Output directory."
+      }
+    },
+    {
+      "name": "center",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "搜索空间中心点坐标 [x, y, z]。如果为 None，则根据 autobox_ligand 或 receptor 自动计算。",
+        "en": "Center of search space [x, y, z]. If None, automatically calculated."
+      }
+    },
+    {
+      "name": "size",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "搜索空间大小 [x, y, z] (Angstroms)。",
+        "en": "Size of search space [x, y, z] in Angstroms."
+      }
+    },
+    {
+      "name": "autobox_ligand",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "用于自动计算搜索盒子的参考配体。",
+        "en": "Reference ligand for automatically calculating search box."
+      }
+    },
+    {
+      "name": "padding",
+      "type": "float",
+      "required": false,
+      "default": "4.0",
+      "description": {
+        "zh": "自动计算盒子时的额外扩展空间 (Angstroms)。",
+        "en": "Padding added to auto-calculated box (Angstroms)."
+      }
+    },
+    {
+      "name": "exhaustiveness",
+      "type": "int",
+      "required": false,
+      "default": "8",
+      "description": {
+        "zh": "搜索详尽程度。",
+        "en": "Exhaustiveness of the global search."
+      }
+    },
+    {
+      "name": "n_poses",
+      "type": "int",
+      "required": false,
+      "default": "9",
+      "description": {
+        "zh": "输出的最大构象数量。",
+        "en": "Maximum number of poses to output."
+      }
+    },
+    {
+      "name": "summary_filename",
+      "type": "string",
+      "required": false,
+      "default": "docking_summary.csv",
+      "description": {
+        "zh": "摘要结果文件名。",
+        "en": "Summary results filename."
+      }
+    },
+    {
+      "name": "output_docked_lig_recep_struct",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "是否输出对接后的受体-配体复合物结构。",
+        "en": "Whether to output docked receptor-ligand complex structure."
+      }
+    },
+    {
+      "name": "n_docked_lig_recep_struct",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "要输出的复合物结构数量 (如果为 None，则输出全部)。",
+        "en": "Number of complex structures to output."
+      }
+    },
+    {
+      "name": "charge_model",
+      "type": "string",
+      "required": false,
+      "default": "gasteiger",
+      "description": {
+        "zh": "受体准备时的电荷模型。",
+        "en": "Charge model for receptor preparation."
+      }
+    },
+    {
+      "name": "boxes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "针对特定受体的盒子配置字典。",
+        "en": "Box configuration dictionary for specific receptors."
+      }
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "name": "run_haddock_batch",
+  "type": "api",
+  "description": {
+    "zh": "使用 HADDOCK 引擎批量运行对接流程。",
+    "en": "Run batch docking pipeline using HADDOCK engine."
+  },
+  "params": [
+    {
+      "name": "receptors",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "受体目录或文件。",
+        "en": "Receptors directory or file."
+      }
+    },
+    {
+      "name": "ligands",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "配体目录或文件。",
+        "en": "Ligands directory or file."
+      }
+    },
+    {
+      "name": "output_dir",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "输出目录。",
+        "en": "Output directory."
+      }
+    },
+    {
+      "name": "n_poses",
+      "type": "int",
+      "required": false,
+      "default": "10",
+      "description": {
+        "zh": "采样的构象数量。",
+        "en": "Number of poses to sample."
+      }
+    },
+    {
+      "name": "summary_filename",
+      "type": "string",
+      "required": false,
+      "default": "docking_summary.csv",
+      "description": {
+        "zh": "摘要结果文件名。",
+        "en": "Summary results filename."
+      }
+    },
+    {
+      "name": "output_docked_lig_recep_struct",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "是否输出对接后的受体-配体复合物结构。",
+        "en": "Whether to output docked receptor-ligand complex structure."
+      }
+    },
+    {
+      "name": "n_docked_lig_recep_struct",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "要输出的复合物结构数量 (如果为 None，则输出全部)。",
+        "en": "Number of complex structures to output."
+      }
+    },
+    {
+      "name": "charge_model",
+      "type": "string",
+      "required": false,
+      "default": "gasteiger",
+      "description": {
+        "zh": "受体准备时的电荷模型。",
+        "en": "Charge model for receptor preparation."
+      }
+    },
+    {
+      "name": "haddock_config",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "自定义 HADDOCK3 配置文件路径。",
+        "en": "Path to custom HADDOCK3 configuration file."
+      }
+    }
+  ]
+}
