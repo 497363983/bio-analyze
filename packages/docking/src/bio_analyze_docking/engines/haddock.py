@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import os
 import shutil
-import subprocess
 from pathlib import Path
 from typing import Any, Optional
 
@@ -61,6 +60,7 @@ class HaddockEngine(BaseDockingEngine):
 
         try:
             import haddock  # noqa: F401
+
             self._haddock_available = True
         except ImportError:
             logger.warning("未安装 haddock3 Python 包。测试环境可能没问题，但真实对接会失败。")
@@ -83,34 +83,42 @@ class HaddockEngine(BaseDockingEngine):
         logger.info("HADDOCK 不需要显式设置搜索盒子。")
         pass
 
-    def dock(self, exhaustiveness: int = 100, n_poses: int = 10, min_rmsd: float = 1.0, timeout: float = 3600, haddock_config: Optional[Path] = None):
+    def dock(
+        self,
+        exhaustiveness: int = 100,
+        n_poses: int = 10,
+        min_rmsd: float = 1.0,
+        timeout: float = 3600,
+        haddock_config: Optional[Path] = None,
+    ):
         """
         zh: 执行 HADDOCK 流程。
         en: Execute the HADDOCK pipeline.
         """
         config_path = self.output_dir / "run.cfg"
         run_dir_name = "haddock3_run"
-        
+
         rec_str = str(self.receptor.resolve()).replace("\\", "/")
         lig_str = str(self.ligand.resolve()).replace("\\", "/")
-        
+
         if haddock_config and haddock_config.exists():
             # If user provides a custom config, we read it and append/override necessary paths
             logger.info(f"使用用户提供的 HADDOCK3 配置文件: {haddock_config}")
             user_config_content = haddock_config.read_text(encoding="utf-8")
-            
+
             # We need to ensure run_dir and molecules are correctly set for our pipeline
             # A simple approach is to prepend our required settings, or append them if they override
             # TOML/CFG usually takes the last defined or we can just replace them.
             # It's safer to just prepend run_dir and molecules and let the rest be user defined.
-            # But haddock config might already have them. 
+            # But haddock config might already have them.
             # We will generate a new config that sets run_dir and molecules, then appends user config.
-            
+
             # Remove any existing run_dir or molecules from user config to avoid conflicts
             import re
-            user_config_content = re.sub(r'(?m)^run_dir\s*=.*$', '', user_config_content)
-            user_config_content = re.sub(r'(?m)^molecules\s*=\s*\[.*?\]', '', user_config_content, flags=re.DOTALL)
-            
+
+            user_config_content = re.sub(r"(?m)^run_dir\s*=.*$", "", user_config_content)
+            user_config_content = re.sub(r"(?m)^molecules\s*=\s*\[.*?\]", "", user_config_content, flags=re.DOTALL)
+
             config_content = f"""
 run_dir = "{run_dir_name}"
 molecules = [
@@ -143,17 +151,14 @@ sampling = {n_poses}
         if self._haddock_available:
             try:
                 from haddock.clis.cli import main as run_haddock3
+
                 logger.info("正在调用 HADDOCK3 Python API 执行对接...")
-                
+
                 # 切换工作目录，使 haddock 生成的文件保存在 output_dir 中
                 current_cwd = Path.cwd()
                 os.chdir(self.output_dir)
                 try:
-                    run_haddock3(
-                        workflow=config_path.name,
-                        setup_only=False,
-                        log_level="INFO"
-                    )
+                    run_haddock3(workflow=config_path.name, setup_only=False, log_level="INFO")
                 finally:
                     os.chdir(current_cwd)
             except Exception as e:
@@ -163,8 +168,10 @@ sampling = {n_poses}
             logger.info("HADDOCK3 未安装，跳过真实对接执行，仅生成模拟结果。")
 
         # Mock scores for API compatibility
-        self._best_score = -5.0 # Mock value
-        self._poses_info = [{"pose": i, "affinity": -5.0 + (i * 0.1), "rmsd_lb": 0.0, "rmsd_ub": 0.0} for i in range(1, n_poses + 1)]
+        self._best_score = -5.0  # Mock value
+        self._poses_info = [
+            {"pose": i, "affinity": -5.0 + (i * 0.1), "rmsd_lb": 0.0, "rmsd_ub": 0.0} for i in range(1, n_poses + 1)
+        ]
 
         # 创建一些假的结果文件用于后续测试和流程
         for i in range(1, n_poses + 1):
@@ -178,7 +185,7 @@ sampling = {n_poses}
         target_dir = output_dir if output_dir else self.output_dir
         target_dir.mkdir(parents=True, exist_ok=True)
         out_path = target_dir / output_name
-        
+
         top_pose = self.output_dir / "haddock_1.pdb"
         if top_pose.exists():
             shutil.copy2(top_pose, out_path)
@@ -199,7 +206,7 @@ sampling = {n_poses}
         """
         target_dir = output_dir if output_dir else self.output_dir
         target_dir.mkdir(parents=True, exist_ok=True)
-        
+
         n_poses = n_complexes or len(self._poses_info)
         for i in range(1, n_poses + 1):
             out_path = target_dir / f"{output_name_prefix}_{i}.pdb"

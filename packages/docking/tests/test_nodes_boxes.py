@@ -40,7 +40,13 @@ def test_batch_docking_node_with_boxes(tmp_path):
     # We patch run_docking_task inside nodes.py to capture the center and size
     with patch("bio_analyze_docking.nodes.run_docking_task") as mock_task:
         # Mock the result of the task to avoid exceptions
-        mock_task.return_value = {"status": "success", "receptor": "rec1", "ligand": "lig1", "box_center": [0,0,0], "box_size": [0,0,0]}
+        mock_task.return_value = {
+            "status": "success",
+            "receptor": "rec1",
+            "ligand": "lig1",
+            "box_center": [0, 0, 0],
+            "box_size": [0, 0, 0],
+        }
 
         # Call the batch pipeline
         results = run_docking_batch(
