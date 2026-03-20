@@ -68,6 +68,9 @@ jobs:
           # Use --include-path to only include commits that touched this package's directory
           uvx git-cliff --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased
 
+          # Generate release notes for GitHub Release
+          uvx git-cliff --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --unreleased --strip all > release_notes.md
+
           git add packages/${{ env.PACKAGE_NAME }}/pyproject.toml packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md
           if ! git diff --staged --quiet; then
             git commit -m "chore(release): bump ${{ env.PACKAGE_NAME }} version to ${{ env.VERSION }} and update changelog"
@@ -75,3 +78,11 @@ jobs:
           else
             echo "No changes to commit."
           fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: release_notes.md
+          name: ${{ env.PACKAGE_NAME }} v${{ env.VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
