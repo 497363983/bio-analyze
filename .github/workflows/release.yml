@@ -1,0 +1,71 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'packages/*/v*'
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    name: Build and Publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Parse Tag
+        id: parse_tag
+        run: |
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          IFS='/' read -r _ PKG_NAME TAG_VERSION <<< "$TAG_NAME"
+          VERSION=${TAG_VERSION#v}
+
+          echo "PACKAGE_NAME=${PKG_NAME}" >> $GITHUB_ENV
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+          echo "Parsed Package: $PKG_NAME, Version: $VERSION"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Bump Version
+        run: |
+          cd packages/${{ env.PACKAGE_NAME }}
+          uv version ${{ env.VERSION }}
+
+      - name: Build Package
+        run: |
+          cd packages/${{ env.PACKAGE_NAME }}
+          uv build
+
+      - name: Publish to PyPI
+        run: |
+          cd packages/${{ env.PACKAGE_NAME }}
+          uv publish --trusted-publishing always
+
+      - name: Commit and Push Version Bump
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git restore packages/${{ env.PACKAGE_NAME }}/pyproject.toml
+
+          git fetch origin main
+          git checkout main
+
+          cd packages/${{ env.PACKAGE_NAME }}
+          uv version ${{ env.VERSION }}
+
+          git add pyproject.toml
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(release): bump ${{ env.PACKAGE_NAME }} version to ${{ env.VERSION }}"
+            git push origin main
+          else
+            echo "No changes to commit."
+          fi
