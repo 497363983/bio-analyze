@@ -10,8 +10,12 @@ permissions:
   id-token: write
 
 jobs:
+  test:
+    uses: ./.github/workflows/ci.yml
+
   release:
     name: Build and Publish
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
