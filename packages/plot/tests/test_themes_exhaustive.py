@@ -79,3 +79,7 @@ def test_all_themes_all_plots(test_data):
         fig = plotter.plot(data=df_pca, transpose=True, output=str(out))
         assert isinstance(fig, Figure)
         assert out.exists()
+
+        import matplotlib.pyplot as plt
+
+        plt.close("all")

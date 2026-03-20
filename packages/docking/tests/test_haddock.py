@@ -5,10 +5,14 @@ import pytest
 from bio_analyze_docking.engines.haddock import HaddockEngine
 
 # Mock haddock module so we don't need it installed to run tests
-mock_haddock = MagicMock()
-sys.modules["haddock"] = mock_haddock
-sys.modules["haddock.clis"] = MagicMock()
-sys.modules["haddock.clis.cli"] = MagicMock()
+try:
+    import haddock
+    import haddock.clis.cli  # noqa: F401
+except ImportError:
+    mock_haddock = MagicMock()
+    sys.modules["haddock"] = mock_haddock
+    sys.modules["haddock.clis"] = MagicMock()
+    sys.modules["haddock.clis.cli"] = MagicMock()
 
 
 @pytest.fixture
@@ -38,14 +42,21 @@ def test_haddock_dock_custom_config(mock_run_haddock3, mock_haddock_env):
     rec, lig, out_dir = mock_haddock_env
 
     custom_cfg = out_dir / "custom.cfg"
-    custom_cfg.write_text("[topoaa]\\n[rigidbody]\\nsampling=20", encoding="utf-8")
+    custom_cfg.write_text("[topoaa]\n[rigidbody]\nsampling=20", encoding="utf-8")
 
-    engine = HaddockEngine(rec, lig, out_dir)
-    engine._haddock_available = True
+    # Force mock sys.modules during this test so it works even if haddock is installed
+    with patch.dict(
+        "sys.modules", {"haddock": MagicMock(), "haddock.clis": MagicMock(), "haddock.clis.cli": MagicMock()}
+    ):
+        # We need to apply the mock_run_haddock3 to our newly forced module
+        sys.modules["haddock.clis.cli"].main = mock_run_haddock3
 
-    engine.dock(n_poses=1, haddock_config=custom_cfg)
+        engine = HaddockEngine(rec, lig, out_dir)
+        engine._haddock_available = True
 
-    assert mock_run_haddock3.call_count == 1
+        engine.dock(n_poses=1, haddock_config=custom_cfg)
+
+        assert mock_run_haddock3.call_count == 1
 
     # Check if config was generated using custom content
     generated_cfg = out_dir / "run.cfg"

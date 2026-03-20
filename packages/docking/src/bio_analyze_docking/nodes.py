@@ -235,8 +235,6 @@ class ReceptorPrepNode(Node):
         self.rigid_macrocycles = rigid_macrocycles
         self.charge_model = charge_model
         self.engine_type = engine_type
-        self.boxes = boxes
-        self.haddock_config = haddock_config
 
     def run(self, context: Context, progress: Progress, logger: Any):
         """
@@ -802,6 +800,18 @@ class BatchDockingNode(Node):
         with ProcessPoolExecutor() as executor:
             future_to_key = {}
             for key, rec, lig, rec_prep, lig_prep in tasks:
+                task_center = center
+                task_size = size
+                if self.boxes:
+                    if rec.name in self.boxes:
+                        box_info = self.boxes[rec.name]
+                        task_center = [box_info["center_x"], box_info["center_y"], box_info["center_z"]]
+                        task_size = [box_info["size_x"], box_info["size_y"], box_info["size_z"]]
+                    elif rec.stem in self.boxes:
+                        box_info = self.boxes[rec.stem]
+                        task_center = [box_info["center_x"], box_info["center_y"], box_info["center_z"]]
+                        task_size = [box_info["size_x"], box_info["size_y"], box_info["size_z"]]
+
                 # 如果 center 是 None，run_docking_task 需要知道如何处理
                 future = executor.submit(
                     run_docking_task,
@@ -810,8 +820,8 @@ class BatchDockingNode(Node):
                     self.output_dir,
                     rec.name,
                     lig.name,
-                    center,  # 可能为 None
-                    size,  # 可能为 None
+                    task_center,  # 可能为 None
+                    task_size,  # 可能为 None
                     self.exhaustiveness,
                     self.n_poses,
                     self.output_docked_lig_recep_struct,
