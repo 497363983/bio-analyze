@@ -1,0 +1,2 @@
+13:02:30 | INFO | Running node: node1
+13:02:30 | INFO | Running node: node2
