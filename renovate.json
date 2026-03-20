@@ -1,6 +1,37 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ]
+    "config:recommended",
+    ":dependencyDashboard"
+  ],
+  "platformAutomerge": true,
+  "automerge": true,
+  "automergeType": "pr",
+  "automergeStrategy": "squash",
+   "packageRules": [
+    {
+      "description": "Auto merge patch update",
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "description": "Minor and major update need manual review",
+      "matchUpdateTypes": ["minor", "major"],
+      "automerge": false
+    },
+    {
+      "description": "Auto merge devDependencies minor and patch update",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash",
+      "labels": ["dependencies", "renovate", "test"]
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["dependencies", "renovate", "security", "vulnerability", "urgent"]
+  },
+  "commitMessagePrefix": "chore(deps):"
 }
