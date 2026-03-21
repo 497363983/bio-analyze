@@ -1,1 +1,0 @@
-10:49:50 | INFO | Converting ligand to PDBQT: test_lig.pdbqt
