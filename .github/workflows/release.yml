@@ -107,6 +107,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: packages/${{ env.PACKAGE_NAME }}/v${{ env.VERSION }}
           body_path: release_notes.md
           name: ${{ env.PACKAGE_NAME }} v${{ env.VERSION }}
           prerelease: ${{ env.PRERELEASE == 'true' }}
