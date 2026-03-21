@@ -1,5 +1,7 @@
 # bio-analyze-plot
 
+[![PyPI Version](https://img.shields.io/pypi/v/bio-analyze-plot?label=PyPI&include_prereleases&sort=semver&logo=python)](https://pypi.org/project/bio-analyze-plot/)
+
 **bio-analyze-plot** is the professional plotting module in the `bio-analyze` toolbox. Built on `matplotlib` and `seaborn`, it aims to generate publication-ready statistical charts and supports one-click switching between journal themes like `Nature` and `Science`.
 
 ## ✨ Features

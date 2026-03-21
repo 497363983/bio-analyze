@@ -1,5 +1,7 @@
 # bio-analyze-docking
 
+[![PyPI Version](https://img.shields.io/pypi/v/bio-analyze-docking?label=PyPI&include_prereleases&sort=semver&logo=python)](https://pypi.org/project/bio-analyze-docking/)
+
 An automated molecular docking module based on Vina, providing a full-pipeline solution from receptor/ligand preparation to docking simulation and result summarization. Supports both single docking and high-throughput batch docking.
 
 ## ✨ Features

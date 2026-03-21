@@ -95,3 +95,47 @@ from bio_analyze_core.utils import load_config
 config = load_config("config.yaml")
 print(config["input_dir"])
 ```
+
+### 5. Sequence Processing (`sequence` Submodule)
+
+Provides a comprehensive set of functions for processing biological sequences (DNA/RNA/Protein). It acts as a lightweight alternative to larger bioinformatics libraries, using Python standard library implementations with optional `Biopython` acceleration when available.
+
+#### Features
+
+- **Validation**: Check if sequences are valid DNA, RNA, or Protein (supports strict mode and IUPAC ambiguous bases).
+- **Format Parsing**: Read and write FASTA and FASTQ files efficiently using Python generators.
+- **Basic Manipulations**: Calculate reverse complements, standard complements, and GC content.
+- **Translation & Transcription**: Transcribe DNA to RNA, reverse transcribe, and translate nucleic acids to proteins using standard codon tables.
+- **Search & Alignment**:
+  - `search_sequence`: Find sub-sequences supporting exact matches and IUPAC ambiguity.
+  - `run_blast`: Perform sequence alignments. Supports **online NCBI BLAST** (via Biopython) and a **custom local Smith-Waterman algorithm** against local FASTA databases (no external CLI tools required).
+
+#### Python API
+
+```python
+from bio_analyze_core.sequence import (
+    is_valid_dna,
+    reverse_complement,
+    read_fasta,
+    run_blast
+)
+
+# 1. Validation and Manipulation
+if is_valid_dna("ATGCGT"):
+    rev_comp = reverse_complement("ATGCGT")
+    print(f"Reverse complement: {rev_comp}")
+
+# 2. Reading FASTA files efficiently
+for header, seq in read_fasta("genome.fasta"):
+    print(f"Read {header} with length {len(seq)}")
+
+# 3. Local BLAST (Internal Smith-Waterman Engine)
+# No need to install external blast+ tools
+blast_results = run_blast(
+    query_sequence={"my_query": "ATGCGTATGC"},
+    local=True,
+    local_db_path="local_database.fasta",
+    evalue=10.0
+)
+print(blast_results["my_query"])
+```
