@@ -1,5 +1,7 @@
 # bio-analyze
 
+[![CI](https://github.com/497363983/bio-analyze/actions/workflows/ci.yml/badge.svg)](https://github.com/497363983/bio-analyze/actions/workflows/ci.yml)
+
 A toolbox for common bioinformatics analysis tasks, organized as a monorepo with multiple independent modules, accessible through a unified CLI and Python API.
 
 ## Monorepo Structure
