@@ -53,7 +53,7 @@ def test_json_config(test_data, tmp_path):
     # 更好的方式：mock run_docking
     from unittest.mock import patch
 
-    with patch("bio_analyze_docking.cli.run_docking") as mock_run:
+    with patch("bio_analyze_docking.commands.utils.run_docking") as mock_run:
         mock_run.return_value = {
             "best_score": -7.5,
             "output_file": str(output_dir / "docked.pdbqt"),
@@ -89,7 +89,7 @@ def test_yaml_config(test_data, tmp_path):
     with open(config_file, "w") as f:
         yaml.dump(config, f)
 
-    with patch("bio_analyze_docking.cli.run_docking") as mock_run:
+    with patch("bio_analyze_docking.commands.utils.run_docking") as mock_run:
         mock_run.return_value = {
             "best_score": -6.0,
             "output_file": str(output_dir / "docked.pdbqt"),
@@ -129,7 +129,7 @@ def test_invalid_config_format(tmp_path):
 def test_engine_config(test_data, tmp_path):
     rec, lig, output_dir = test_data
 
-    with patch("bio_analyze_docking.cli.run_docking") as mock_run:
+    with patch("bio_analyze_docking.commands.utils.run_docking") as mock_run:
         mock_run.return_value = {
             "best_score": -7.5,
             "output_file": str(output_dir / "docked.pdbqt"),
@@ -202,7 +202,7 @@ def test_boxes_config_single(test_data, tmp_path):
     with open(config_file, "w") as f:
         json.dump(config, f)
 
-    with patch("bio_analyze_docking.cli.run_docking") as mock_run:
+    with patch("bio_analyze_docking.commands.utils.run_docking") as mock_run:
         mock_run.return_value = {
             "best_score": -7.5,
             "output_file": str(output_dir / "docked.pdbqt"),
@@ -263,7 +263,7 @@ def test_boxes_config_batch(test_data, tmp_path):
     with open(config_file, "w") as f:
         json.dump(config, f)
 
-    with patch("bio_analyze_docking.cli.run_docking_batch") as mock_run_batch:
+    with patch("bio_analyze_docking.commands.utils.run_docking_batch") as mock_run_batch:
         mock_run_batch.return_value = []
 
         result = runner.invoke(app, ["run", "vina", "--config", str(config_file)])
