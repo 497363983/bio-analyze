@@ -83,6 +83,7 @@ jobs:
           if [ "${{ env.PRERELEASE }}" = "false" ]; then
             # For formal releases, combine all commits since the last formal release
             # This generates a single changelog entry containing all commits from alpha/beta/rc versions
+            # NOTE: Do not pass --repository URL here; git-cliff should use local git context in Actions.
             uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased --ignore-tags ".*-(alpha|beta|rc).*"
 
             # Generate release notes for GitHub Release ignoring prerelease tags
