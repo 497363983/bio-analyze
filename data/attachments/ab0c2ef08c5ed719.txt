@@ -1,0 +1,98 @@
+10:03:07 | INFO | Converting CIF to PDB: test_rec_charge.cif
+10:03:07 | WARNING | Warning: Gemmi read empty structure or failed for /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge.cif, trying PyMOL fallback...
+10:03:07 | INFO | PyMOL fallback successful for /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge.cif
+10:03:07 | INFO | Repairing PDB structure using PDBFixer: test_rec_charge_converted.pdb
+10:03:11 | INFO | Fixed PDB saved to: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge_fixed.pdb
+10:03:11 | INFO | Running PropKa analysis for test_rec_charge_fixed.pdb at pH 7.4
+10:03:11 | ERROR | PropKa analysis failed for test_rec_charge.cif: cannot unpack non-iterable Options object. Proceeding with previous file.
+10:03:11 | INFO | Preparing receptor using Meeko CLI: test_rec_charge.pdbqt
+10:03:27 | ERROR | Command failed with exit code 1 after 15.77s: /home/runner/micromamba/envs/bio-analyze-env/bin/python3.11 -m meeko.cli.mk_prepare_receptor --read_pdb /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge_fixed.pdb --write_pdbqt /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge.pdbqt --charge_model zero
+10:03:27 | ERROR | Meeko CLI failed with exit code 1
+10:03:27 | ERROR | Meeko CLI stdout: 
+Error: Creation of data structure for receptor failed.
+
+Details:
+- Template matching failed for: ['A:710']
+These residues can be ignored with option allow_bad_res.
+
+Recommendations:
+1. (for batch processing) Use -a/--allow_bad_res to automatically remove residues
+that do not match templates, and --default_altloc to set
+a default altloc variant. Use these at your own risk.
+
+2. (processing individual structure) Inspecting and fixing the input structure is recommended.
+Use --wanted_altloc to set variants for specific residues.
+
+
+10:03:27 | ERROR | Meeko CLI stderr: WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB1', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB2', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB3', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB1', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB2', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB3', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB1', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB2', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB3', resName='ALA', resNum=14, icode='', chain='A') 
+
+No template matched for residue_key='A:710'
+tried 3 templates for residue_key='A:710'excess_H_ok=False
+ARG        heavy_miss=0 heavy_excess=0 H_excess=[21] bond_miss=set() bond_excess={18}
+NARG       heavy_miss=0 heavy_excess=0 H_excess=[23] bond_miss=set() bond_excess={4, 20}
+CARG       heavy_miss=1 heavy_excess=0 H_excess=[22] bond_miss=set() bond_excess={1, 19}
+
+matched with excess inter-residue bond(s): A:710
+matched with excess inter-residue bond(s): A:793
+10:03:27 | WARNING | Meeko CLI failed (Exit code 1: WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB1', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB2', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB3', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB1', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB2', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB3', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB1', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB2', resName='ALA', resNum=14, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HB3', resName='ALA', resNum=14, icode='', chain='A') 
+
+No template matched for residue_key='A:710'
+tried 3 templates for residue_key='A:710'excess_H_ok=False
+ARG        heavy_miss=0 heavy_excess=0 H_excess=[21] bond_miss=set() bond_excess={18}
+NARG       heavy_miss=0 heavy_excess=0 H_excess=[23] bond_miss=set() bond_excess={4, 20}
+CARG       heavy_miss=1 heavy_excess=0 H_excess=[22] bond_miss=set() bond_excess={1, 19}
+
+matched with excess inter-residue bond(s): A:710
+matched with excess inter-residue bond(s): A:793), attempting fallback to OpenBabel...
+10:03:27 | INFO | Using OpenBabel Python bindings for fallback.
+10:03:27 | INFO | OpenBabel fallback successful: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge.pdbqt

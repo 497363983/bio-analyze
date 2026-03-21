@@ -1,0 +1,9 @@
+10:02:50 | INFO | Running node: Batch Receptor Preparation
+10:02:50 | INFO | 恢复受体准备。剩余: 2
+10:02:50 | INFO | Running node: Batch Ligand Preparation
+10:02:50 | INFO | 恢复配体准备。剩余: 1
+10:02:50 | INFO | Running node: Batch Docking
+10:02:50 | INFO | 开始批量对接。总计: 2, 已完成: 0
+10:02:50 | INFO | 已保存受体配置到: /tmp/pytest-of-runner/pytest-0/test_batch_docking_node_with_b0/output/configs.json
+10:02:50 | INFO | Running node: Generate Docking Summary
+10:02:50 | INFO | 正在将汇总写入 /tmp/pytest-of-runner/pytest-0/test_batch_docking_node_with_b0/output/docking_summary.csv (格式: csv)
