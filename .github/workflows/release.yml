@@ -83,16 +83,16 @@ jobs:
           if [ "${{ env.PRERELEASE }}" = "false" ]; then
             # For formal releases, combine all commits since the last formal release
             # This generates a single changelog entry containing all commits from alpha/beta/rc versions
-            uvx git-cliff --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased --repository "https://github.com/${{ github.repository }}" --ignore-tags ".*-(alpha|beta|rc).*"
+            uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased --repository "https://github.com/${{ github.repository }}" --ignore-tags ".*-(alpha|beta|rc).*"
 
             # Generate release notes for GitHub Release ignoring prerelease tags
-            uvx git-cliff --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --unreleased --strip all --repository "https://github.com/${{ github.repository }}" --ignore-tags ".*-(alpha|beta|rc).*" > release_notes.md
+            uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --unreleased --strip all --repository "https://github.com/${{ github.repository }}" --ignore-tags ".*-(alpha|beta|rc).*" > release_notes.md
           else
             # For prereleases, generate normal incremental changelog
-            uvx git-cliff --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased --repository "https://github.com/${{ github.repository }}"
+            uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased --repository "https://github.com/${{ github.repository }}"
 
             # Generate release notes for GitHub Release
-            uvx git-cliff --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --unreleased --strip all --repository "https://github.com/${{ github.repository }}" > release_notes.md
+            uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --unreleased --strip all --repository "https://github.com/${{ github.repository }}" > release_notes.md
           fi
 
           git add packages/${{ env.PACKAGE_NAME }}/pyproject.toml packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md
