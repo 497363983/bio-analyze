@@ -1,1 +1,0 @@
-02:18:04 | INFO | Processing sample: sample1
