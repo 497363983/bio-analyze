@@ -24,7 +24,7 @@ jobs:
             fail-fast: false
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
 
             - name: Set up Micromamba
               uses: mamba-org/setup-micromamba@v2
@@ -127,7 +127,7 @@ jobs:
 
         steps:
             - name: Checkout gh-pages (for history)
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
               continue-on-error: true
               with:
                 ref: gh-pages
