@@ -1,0 +1,92 @@
+09:56:09 | INFO | Converting CIF to PDB: test_rec.cif
+09:56:09 | WARNING | Warning: Gemmi read empty structure or failed for /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.cif, trying PyMOL fallback...
+09:56:09 | INFO | PyMOL fallback successful for /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.cif
+09:56:09 | INFO | Repairing PDB structure using PDBFixer: test_rec_converted.pdb
+09:56:12 | INFO | Fixed PDB saved to: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb
+09:56:12 | INFO | Running PropKa analysis for test_rec_fixed.pdb at pH 7.4
+09:56:12 | ERROR | PropKa analysis failed for test_rec.cif: cannot unpack non-iterable Options object. Proceeding with previous file.
+09:56:12 | INFO | Preparing receptor using Meeko CLI: test_rec.pdbqt
+09:56:27 | ERROR | Command failed with exit code 1 after 14.69s: /home/runner/micromamba/envs/bio-analyze-env/bin/python3.11 -m meeko.cli.mk_prepare_receptor --read_pdb /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb --write_pdbqt /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt --charge_model gasteiger
+09:56:27 | ERROR | Meeko CLI failed with exit code 1
+09:56:27 | ERROR | Meeko CLI stderr: matched with excess inter-residue bond(s): A:710
+matched with excess inter-residue bond(s): A:733
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE21', resName='GLN', resNum=763, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE22', resName='GLN', resNum=763, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE21', resName='GLN', resNum=763, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE22', resName='GLN', resNum=763, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE21', resName='GLN', resNum=763, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE22', resName='GLN', resNum=763, icode='', chain='A') 
+
+matched with excess inter-residue bond(s): A:793
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 1139, in from_pdb_string
+    polymer = cls(
+              ^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 927, in __init__
+    _bonds[key] = [(invmap1[b[0]], invmap2[b[1]]) for b in bond_list]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 927, in <listcomp>
+    _bonds[key] = [(invmap1[b[0]], invmap2[b[1]]) for b in bond_list]
+                                   ~~~~~~~^^^^^^
+KeyError: 14
+09:56:27 | WARNING | Meeko CLI failed (Exit code 1: matched with excess inter-residue bond(s): A:710
+matched with excess inter-residue bond(s): A:733
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE21', resName='GLN', resNum=763, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE22', resName='GLN', resNum=763, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE21', resName='GLN', resNum=763, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE22', resName='GLN', resNum=763, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE21', resName='GLN', resNum=763, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE22', resName='GLN', resNum=763, icode='', chain='A') 
+
+matched with excess inter-residue bond(s): A:793
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 1139, in from_pdb_string
+    polymer = cls(
+              ^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 927, in __init__
+    _bonds[key] = [(invmap1[b[0]], invmap2[b[1]]) for b in bond_list]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/meeko/polymer.py", line 927, in <listcomp>
+    _bonds[key] = [(invmap1[b[0]], invmap2[b[1]]) for b in bond_list]
+                                   ~~~~~~~^^^^^^
+KeyError: 14), attempting fallback to OpenBabel...
+09:56:27 | INFO | Using OpenBabel Python bindings for fallback.
+09:56:28 | INFO | OpenBabel fallback successful: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt
