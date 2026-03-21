@@ -1,31 +1,31 @@
 # bio-analyze-rna-seq
 
-**bio-analyze-rna-seq** 是 `bio-analyze` 工具箱中的转录组分析专用模块。它提供了一套从原始测序数据到最终可视化报告的自动化全流程解决方案。
+**bio-analyze-rna-seq** is the dedicated transcriptome analysis module in the `bio-analyze` toolbox. It provides a fully automated end-to-end pipeline solution from raw sequencing data to the final visualization report.
 
-## ✨ 核心特性 (Features)
+## ✨ Features
 
-- **全自动工作流**：一键完成从 FastQ 到 HTML 报告的所有步骤。
-- **配置灵活**：支持命令行参数，也支持通过 JSON/YAML 配置文件管理参数。
-- **模块化执行**：支持单独运行分析流程中的特定步骤（如仅运行 QC 或定量）。
-- **SRA 自动下载**：支持直接输入 NCBI SRA Accession ID，自动下载数据并转换为 FASTQ 格式。
-- **质量控制 (QC)**：使用 `FastQC` 生成专业质控报告，并集成 `fastp` 进行高效的数据修剪和过滤。
-- **极速定量**：使用 `Salmon` 进行基于伪比对（Pseudo-alignment）的转录本定量，速度极快且准确。
-- **差异表达分析**：基于 Python 原生实现的 `PyDESeq2`，提供稳健的差异基因筛选。
-- **富集分析**：使用 `GSEApy` 自动进行 GO (Gene Ontology) 和 KEGG 通路富集分析，以及 GSEA (Gene Set Enrichment Analysis)。
-- **可视化报告**：生成交互式 HTML 报告，包含 PCA 图、火山图、热图、富集分析结果及 GSEA 富集图。
-- **自动参考基因组**：只需指定物种名称（如 "Homo sapiens"），即可自动下载并构建索引。
+- **Fully Automated Workflow**: One-click execution of all steps from FastQ to HTML report.
+- **Flexible Configuration**: Supports command-line arguments as well as JSON/YAML configuration files.
+- **Modular Execution**: Supports running specific steps of the analysis pipeline independently (e.g., only running QC or quantification).
+- **Auto SRA Download**: Supports direct input of NCBI SRA Accession IDs, automatically downloading and converting data to FASTQ format.
+- **Quality Control (QC)**: Uses `FastQC` to generate professional QC reports and integrates `fastp` for efficient data trimming and filtering.
+- **Ultra-fast Quantification**: Uses `Salmon` for pseudo-alignment-based transcript quantification, which is extremely fast and accurate.
+- **Differential Expression Analysis**: Based on a native Python implementation of `PyDESeq2`, providing robust differential gene screening.
+- **Enrichment Analysis**: Automatically performs GO (Gene Ontology) and KEGG pathway enrichment analysis, as well as GSEA (Gene Set Enrichment Analysis) using `GSEApy`.
+- **Visualization Report**: Generates an interactive HTML report including PCA plots, volcano plots, heatmaps, enrichment analysis results, and GSEA plots.
+- **Auto Reference Genome**: Simply specify the species name (e.g., "Homo sapiens") to automatically download and build the index.
 
-## 🚀 快速开始 (Usage)
+## 🚀 Quick Start
 
-### 场景 1：使用本地数据
+### Scenario 1: Using Local Data
 
-#### 1. 准备数据
+#### 1. Prepare Data
 
-将所有的 FastQ 文件（`.fastq.gz` 或 `.fq.gz`）放入一个文件夹中。支持双端（`_R1`/`_R2` 或 `_1`/`_2`）和单端测序数据。
+Place all FastQ files (`.fastq.gz` or `.fq.gz`) into a single folder. Both paired-end (`_R1`/`_R2` or `_1`/`_2`) and single-end sequencing data are supported.
 
-#### 2. 准备实验设计文件 (Design File)
+#### 2. Prepare Design File
 
-创建一个 CSV 文件（例如 `design.csv`），定义样本与实验条件的关系。必须包含 `sample` 和 `condition` 两列：
+Create a CSV file (e.g., `design.csv`) to define the relationship between samples and experimental conditions. It must contain two columns: `sample` and `condition`:
 
 | sample  | condition |
 | :------ | :-------- |
@@ -34,11 +34,11 @@
 | sample3 | treated   |
 | sample4 | treated   |
 
-> **注意**：`sample` 列的名称必须与 FastQ 文件名对应（不含后缀和 `_R1`/`_R2` 部分）。
+> **Note**: The names in the `sample` column must match the FastQ filenames (excluding the extension and the `_R1`/`_R2` part).
 
-#### 3. 运行分析
+#### 3. Run Analysis
 
-使用以下命令启动分析流程：
+Start the analysis pipeline using the following command:
 
 ```bash
 uv run bioanalyze rna_seq run \
@@ -49,9 +49,9 @@ uv run bioanalyze rna_seq run \
     --threads 8
 ```
 
-### 场景 2：直接使用 SRA ID
+### Scenario 2: Direct Use of SRA IDs
 
-如果您没有本地数据，可以直接提供 NCBI SRA Accession ID，工具会自动下载、转换并运行分析。
+If you don't have local data, you can directly provide NCBI SRA Accession IDs. The tool will automatically download, convert, and run the analysis.
 
 ```bash
 uv run bioanalyze rna_seq run \
@@ -62,11 +62,11 @@ uv run bioanalyze rna_seq run \
     --species "Homo sapiens"
 ```
 
-> **注意**：下载的数据将保存在 `--output` 指定目录下的 `raw_data` 子目录中。
+> **Note**: Downloaded data will be saved in the `raw_data` subdirectory under the specified `--output` directory.
 
-### 场景 3：使用配置文件 (JSON/YAML)
+### Scenario 3: Using a Configuration File (JSON/YAML)
 
-为了简化长命令行，您可以将参数写入配置文件（如 `config.yaml`）：
+To simplify long commands, you can write parameters into a configuration file (e.g., `config.yaml`):
 
 ```yaml
 input_dir: "./raw_data"
@@ -76,150 +76,150 @@ species: "Homo sapiens"
 threads: 8
 skip_qc: false
 
-# 高级 QC 配置 (可选)
+# Advanced QC Configuration (Optional)
 qc:
   qualified_quality_phred: 20
   length_required: 30
   dedup: true
 ```
 
-然后运行：
+Then run:
 
 ```bash
 uv run bioanalyze rna_seq run --config config.yaml
 ```
 
-### 场景 4：分步执行 (Step-by-Step)
+### Scenario 4: Step-by-Step Execution
 
-您可以使用独立的子命令来运行分析流程中的特定步骤，这提供了更大的灵活性。
+You can use standalone subcommands to run specific steps in the analysis pipeline, providing greater flexibility.
 
-#### 1. 下载数据 (download)
+#### 1. Download Data (`download`)
 ```bash
 uv run bioanalyze rna_seq download --sra-id SRR123456 -o ./raw_data
 ```
 
-#### 2. 准备参考基因组 (genome)
+#### 2. Prepare Reference Genome (`genome`)
 ```bash
 uv run bioanalyze rna_seq genome -s "Homo sapiens" -o ./reference
-# 或者指定本地文件
+# Or specify local files
 uv run bioanalyze rna_seq genome --fasta genome.fa --gtf genes.gtf -o ./reference
 ```
 
-#### 3. 质量控制 (qc)
+#### 3. Quality Control (`qc`)
 ```bash
 uv run bioanalyze rna_seq qc -i ./raw_data -o ./qc_results
 ```
 
-#### 4. 比对 (align) - 可选
+#### 4. Alignment (`align`) - Optional
 ```bash
 uv run bioanalyze rna_seq align -i ./qc_results -o ./align_results --fasta ./reference/genome.fa --gtf ./reference/genes.gtf
 ```
 
-#### 5. 定量 (quant)
+#### 5. Quantification (`quant`)
 ```bash
 uv run bioanalyze rna_seq quant -i ./qc_results -o ./quant_results --fasta ./reference/transcripts.fa
 ```
 
-#### 6. 差异表达分析 (de)
+#### 6. Differential Expression Analysis (`de`)
 ```bash
 uv run bioanalyze rna_seq de --counts ./quant_results/counts.csv --design design.csv -o ./de_results
 ```
 
-#### 7. 富集分析 (enrich)
+#### 7. Enrichment Analysis (`enrich`)
 ```bash
 uv run bioanalyze rna_seq enrich --de-results ./de_results/deseq2_results.csv -s "Homo sapiens" -o ./enrich_results
 ```
 
-## 📋 命令详解 (Commands)
+## 📋 Command Details
 
-### `run` (全流程)
-运行完整的 RNA-Seq 分析流程。
+### `run` (Full Pipeline)
+Runs the complete RNA-Seq analysis pipeline.
 
 ### `download`
-从 NCBI SRA 下载数据并转换为 FastQ 格式。
-- `--sra-id`: SRA Accession ID。
-- `-o, --output`: 输出目录。
+Downloads data from NCBI SRA and converts it to FastQ format.
+- `--sra-id`: SRA Accession ID.
+- `-o, --output`: Output directory.
 
 ### `genome`
-准备参考基因组（下载或索引）。
-- `-s, --species`: 物种名称。
-- `--fasta`: 本地 FASTA 文件。
-- `--gtf`: 本地 GTF 文件。
+Prepares the reference genome (downloads or indexes).
+- `-s, --species`: Species name.
+- `--fasta`: Local FASTA file.
+- `--gtf`: Local GTF file.
 
 ### `qc`
-运行质控和修剪。
-- `-i, --input`: 输入目录。
-- `-o, --output`: 输出目录。
-- `--skip-trim`: 跳过修剪。
+Runs quality control and trimming.
+- `-i, --input`: Input directory.
+- `-o, --output`: Output directory.
+- `--skip-trim`: Skip trimming.
 
 ### `align`
-运行 STAR 比对。
-- `-i, --input`: Clean reads 目录。
-- `--fasta`: 基因组 FASTA。
-- `--gtf`: 基因组 GTF。
+Runs STAR alignment.
+- `-i, --input`: Clean reads directory.
+- `--fasta`: Genome FASTA.
+- `--gtf`: Genome GTF.
 
 ### `quant`
-运行 Salmon 定量。
-- `-i, --input`: Clean reads 目录。
-- `--fasta`: 转录本/基因组 FASTA。
+Runs Salmon quantification.
+- `-i, --input`: Clean reads directory.
+- `--fasta`: Transcript/Genome FASTA.
 
 ### `de`
-运行 DESeq2 差异表达分析。
-- `--counts`: 计数矩阵 CSV。
-- `--design`: 设计矩阵 CSV。
+Runs DESeq2 differential expression analysis.
+- `--counts`: Count matrix CSV.
+- `--design`: Design matrix CSV.
 
 ### `enrich`
-运行 GO/KEGG 富集分析。
-- `--de-results`: DESeq2 结果 CSV。
-- `-s, --species`: 物种名称。
+Runs GO/KEGG enrichment analysis.
+- `--de-results`: DESeq2 results CSV.
+- `-s, --species`: Species name.
 
 ### `gsea`
-运行 GSEA 富集分析。
-- `--de-results`: DESeq2 结果 CSV。
-- `-s, --species`: 物种名称。
-- `--gene-sets`: 基因集库名称（默认: KEGG_2021_Human）。
-- `--ranking-metric`: 排序指标（默认: auto）。
+Runs GSEA enrichment analysis.
+- `--de-results`: DESeq2 results CSV.
+- `-s, --species`: Species name.
+- `--gene-sets`: Gene sets library name (Default: KEGG_2021_Human).
+- `--ranking-metric`: Ranking metric (Default: auto).
 
-## 📋 run 命令参数详解
+## 📋 `run` Command Parameters Detail
 
-- `-c, --config <FILE>`: **(可选)** JSON/YAML 配置文件路径。如果提供，文件中的参数将作为默认值。
-- `--step <STR>`: **(可选)** 仅运行特定步骤 (`download`, `reference`, `qc`, `quant`, `de`, `enrichment`, `report`)。默认运行所有步骤。
-- `-i, --input <DIR>`: **(可选)** 包含原始 FastQ 文件的目录路径。如果未提供 `--sra-id`，则此参数为必选。
-- `--sra-id <STR>`: **(可选)** NCBI SRA Accession ID (例如 `SRR123456`)。可以多次使用以指定多个 ID。
-- `-o, --output <DIR>`: **(必选)** 分析结果输出目录。
-- `-d, --design <FILE>`: **(必选)** 实验设计 CSV 文件路径。
-- `-s, --species <STR>`: **(可选)** 物种名称（例如 "Homo sapiens", "Mus musculus"）。用于自动下载参考基因组和富集分析。
-- `--genome-fasta <FILE>`: **(可选)** 本地参考基因组 FASTA 文件路径（覆盖 `--species`）。
-- `--genome-gtf <FILE>`: **(可选)** 本地基因组注释 GTF 文件路径（覆盖 `--species`）。
-- `-t, --threads <INT>`: **(可选)** 并行线程数 (默认: 4)。
-- `--skip-qc`: 跳过质量控制步骤。
-- `--skip-trim`: 跳过修剪步骤（仅做 QC）。
-- `--star-align`: 启用 STAR 比对并生成染色体分布图。
-- `--theme <STR>`: 指定绘图主题 (默认: `default`, 可选: `nature`, `science` 等)。
+- `-c, --config <FILE>`: **(Optional)** JSON/YAML configuration file path. If provided, parameters in the file will serve as defaults.
+- `--step <STR>`: **(Optional)** Run only a specific step (`download`, `reference`, `qc`, `quant`, `de`, `enrichment`, `report`). Runs all steps by default.
+- `-i, --input <DIR>`: **(Optional)** Directory path containing raw FastQ files. Mandatory if `--sra-id` is not provided.
+- `--sra-id <STR>`: **(Optional)** NCBI SRA Accession ID (e.g., `SRR123456`). Can be used multiple times to specify multiple IDs.
+- `-o, --output <DIR>`: **(Mandatory)** Output directory for analysis results.
+- `-d, --design <FILE>`: **(Mandatory)** Path to the experimental design CSV file.
+- `-s, --species <STR>`: **(Optional)** Species name (e.g., "Homo sapiens", "Mus musculus"). Used for automatic reference genome download and enrichment analysis.
+- `--genome-fasta <FILE>`: **(Optional)** Local reference genome FASTA file path (overrides `--species`).
+- `--genome-gtf <FILE>`: **(Optional)** Local genome annotation GTF file path (overrides `--species`).
+- `-t, --threads <INT>`: **(Optional)** Number of parallel threads (Default: 4).
+- `--skip-qc`: Skip the quality control step.
+- `--skip-trim`: Skip the trimming step (perform QC only).
+- `--star-align`: Enable STAR alignment and generate chromosome distribution plots.
+- `--theme <STR>`: Specify the plotting theme (Default: `default`, Options: `nature`, `science`, etc.).
 
-### 🔧 高级质控参数 (QC Options)
+### 🔧 Advanced QC Options
 
-这些参数将直接传递给 `fastp` 用于数据清洗：
+These parameters are passed directly to `fastp` for data cleaning:
 
-- `--qualified-quality-phred <INT>`: 碱基质量值阈值 (Phred)。默认 15 (Q15)。
-- `--unqualified-percent-limit <INT>`: 允许的低质量碱基百分比限制 (0-100)。默认 40 (40%)。
-- `--n-base-limit <INT>`: 允许的 N 碱基数量限制。默认 5。
-- `--length-required <INT>`: 长度过滤阈值，短于此长度的 reads 将被丢弃。默认 15。
-- `--max-len1 <INT>`: Read1 的最大长度限制，超过部分将被修剪。默认 0 (不限制)。
-- `--max-len2 <INT>`: Read2 的最大长度限制，超过部分将被修剪。默认 0 (不限制)。
-- `--adapter-sequence <STR>`: Read1 的接头序列。未提供则自动检测。
-- `--adapter-sequence-r2 <STR>`: Read2 的接头序列。未提供则自动检测。
-- `--trim-front1 <INT>`: Read1 5' 端修剪碱基数。
-- `--trim-tail1 <INT>`: Read1 3' 端修剪碱基数。
-- `--cut-right`: 启用滑动窗口从 3' 端修剪 (cut_right)。
-- `--cut-window-size <INT>`: cut_right 的窗口大小。默认 4。
-- `--cut-mean-quality <INT>`: cut_right 的平均质量阈值。默认 20。
-- `--dedup`: 启用去重 (deduplication)。
-- `--poly-g-min-len <INT>`: polyG 尾修剪的最小长度检测阈值。默认 10。
+- `--qualified-quality-phred <INT>`: Base quality value threshold (Phred). Default 15 (Q15).
+- `--unqualified-percent-limit <INT>`: Allowed percentage of low-quality bases (0-100). Default 40 (40%).
+- `--n-base-limit <INT>`: Allowed number of N bases. Default 5.
+- `--length-required <INT>`: Length filtering threshold; reads shorter than this will be discarded. Default 15.
+- `--max-len1 <INT>`: Maximum length limit for Read1; excess parts will be trimmed. Default 0 (no limit).
+- `--max-len2 <INT>`: Maximum length limit for Read2; excess parts will be trimmed. Default 0 (no limit).
+- `--adapter-sequence <STR>`: Adapter sequence for Read1. Automatically detected if not provided.
+- `--adapter-sequence-r2 <STR>`: Adapter sequence for Read2. Automatically detected if not provided.
+- `--trim-front1 <INT>`: Number of bases to trim from the 5' end of Read1.
+- `--trim-tail1 <INT>`: Number of bases to trim from the 3' end of Read1.
+- `--cut-right`: Enable sliding window trimming from the 3' end.
+- `--cut-window-size <INT>`: Window size for cut_right. Default 4.
+- `--cut-mean-quality <INT>`: Mean quality threshold for cut_right. Default 20.
+- `--dedup`: Enable deduplication.
+- `--poly-g-min-len <INT>`: Minimum length detection threshold for polyG tail trimming. Default 10.
 
 ## 📦 Python API
 
-### 1. 全流程 (`RNASeqPipeline`)
+### 1. Full Pipeline (`RNASeqPipeline`)
 
 ```python
 from bio_analyze_rna_seq import RNASeqPipeline
@@ -237,7 +237,7 @@ pipeline = RNASeqPipeline(
 pipeline.run()
 ```
 
-### 2. SRA 下载 (`SRAManager`)
+### 2. SRA Download (`SRAManager`)
 
 ```python
 from bio_analyze_rna_seq.sra import SRAManager
@@ -247,13 +247,13 @@ manager = SRAManager(output_dir=Path("./raw_data"), threads=4)
 manager.download(["SRR123456", "SRR789012"])
 ```
 
-### 3. 定量 (`QuantManager`)
+### 3. Quantification (`QuantManager`)
 
 ```python
 from bio_analyze_rna_seq.quant import QuantManager
 from pathlib import Path
 
-# reads 字典结构: {sample_name: {"R1": path, "R2": path}}
+# reads dictionary structure: {sample_name: {"R1": path, "R2": path}}
 reads = {
     "sample1": {"R1": "sample1_1.fq.gz", "R2": "sample1_2.fq.gz"}
 }
@@ -269,17 +269,17 @@ manager = QuantManager(
     threads=8
 )
 
-# 返回合并后的计数矩阵 (DataFrame)
+# Returns the merged count matrix (DataFrame)
 counts_df = manager.run()
 ```
 
-### 4. 报告生成 (`ReportGenerator`)
+### 4. Report Generation (`ReportGenerator`)
 
 ```python
 from bio_analyze_rna_seq.report import ReportGenerator
 from pathlib import Path
 
-# 需要传入前面步骤的结果
+# Needs results from previous steps
 generator = ReportGenerator(
     output_dir=Path("./report"),
     qc_stats=qc_data,          # from QCNode
@@ -291,19 +291,19 @@ generator = ReportGenerator(
 generator.generate()
 ```
 
-## ⚙️ 环境要求 (Requirements)
+## ⚙️ Requirements
 
-本模块依赖以下外部工具，请确保它们已安装并在系统 PATH 中可用：
+This module depends on the following external tools. Please ensure they are installed and available in the system PATH:
 
-1. **fastp**: (必须) 用于数据修剪和基本 QC。
-2. **salmon**: (必须) 用于定量。
-3. **fastqc**: (可选) 用于生成详细质量控制报告。如果未安装，将仅使用 fastp 进行 QC。
-4. **STAR**: (可选) 如果启用 `--star-align`，用于比对和染色体分布分析。
-5. **samtools**: (可选) 如果启用 `--star-align`，用于 BAM 文件索引和统计。
-6. **gffread**: (可选) 如果提供基因组 FASTA+GTF 但没有转录本 FASTA，用于提取转录本序列。
-7. **sra-tools**: (可选) 如果使用 `--sra-id` 功能，必须安装 (包含 `prefetch` 和 `fasterq-dump`)。
+1. **fastp**: (Required) For data trimming and basic QC.
+2. **salmon**: (Required) For quantification.
+3. **fastqc**: (Optional) For generating detailed quality control reports. If not installed, only fastp will be used for QC.
+4. **STAR**: (Optional) For alignment and chromosome distribution analysis if `--star-align` is enabled.
+5. **samtools**: (Optional) For BAM file indexing and statistics if `--star-align` is enabled.
+6. **gffread**: (Optional) For extracting transcript sequences if genome FASTA+GTF is provided but transcript FASTA is not.
+7. **sra-tools**: (Optional) Required if using the `--sra-id` feature (includes `prefetch` and `fasterq-dump`).
 
-可以通过 `conda` 或 `mamba` 快速安装这些依赖：
+You can quickly install these dependencies via `conda` or `mamba`:
 
 ```bash
 conda install -c bioconda fastp salmon fastqc star samtools gffread sra-tools

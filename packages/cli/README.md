@@ -1,74 +1,74 @@
 # bio-analyze-cli
 
-**bio-analyze-cli** 是 BioAnalyze 工具箱的统一命令行入口。它负责动态发现和加载各功能模块（如 `rna-seq`, `docking`, `plot` 等），并提供统一的 CLI 体验。
+**bio-analyze-cli** is the unified command-line entry point for the BioAnalyze toolbox. It is responsible for dynamically discovering and loading various functional modules (such as `rna-seq`, `docking`, `plot`, etc.) and providing a unified CLI experience.
 
-## 🚀 核心功能
+## 🚀 Core Features
 
-- **插件式架构**：基于 `entry points` 机制，自动发现已安装的 `bio-analyze-*` 模块（例如 `bio-analyze-docking`, `bio-analyze-plot`）。
-- **统一配置**：支持全局配置文件加载和日志管理。
-- **脚手架工具**：内置 `create` 命令，快速生成新工具或绘图主题的模版。
+- **Plugin Architecture**: Based on the `entry points` mechanism, it automatically discovers installed `bio-analyze-*` modules (e.g., `bio-analyze-docking`, `bio-analyze-plot`).
+- **Unified Configuration**: Supports global configuration file loading and log management.
+- **Scaffolding Tool**: Built-in `create` command to quickly generate templates for new tools or plotting themes.
 
-## 🛠️ 常用命令
+## 🛠️ Common Commands
 
-### 1. 基础命令
+### 1. Basic Commands
 
 ```bash
-# 查看帮助
+# View help
 bioanalyze --help
 
-# 查看已安装插件
+# View installed plugins
 bioanalyze plugins
 ```
 
-### 2. 调用子模块
+### 2. Invoking Submodules
 
-一旦安装了对应的功能模块包，即可通过 `bioanalyze` 直接调用：
+Once the corresponding functional module package is installed, it can be directly invoked via `bioanalyze`:
 
 ```bash
-# 运行 RNA-Seq 流程
+# Run RNA-Seq pipeline
 bioanalyze rna_seq run --input ./data --output ./results
 
-# 运行分子对接
+# Run molecular docking
 bioanalyze docking run --receptor rec.pdb --ligand lig.sdf
 
-# 运行绘图工具
+# Run plotting tools
 bioanalyze plot volcano results.csv
 ```
 
-### 3. 创建新项目/模版
+### 3. Creating New Projects/Templates
 
-使用 `create` 命令可以快速生成标准的项目结构。
+Use the `create` command to quickly generate a standard project structure.
 
-**交互式创建：**
+**Interactive Creation:**
 
 ```bash
 bioanalyze create
 ```
 
-（随后根据提示选择类型和输入名称）
+(Then follow the prompts to select the type and enter the name)
 
-**快速创建新工具：**
+**Quickly Create a New Tool:**
 
 ```bash
 bioanalyze create tool --name my-new-tool
 ```
 
-这将在 `packages/my-new-tool` 下生成一个新的分析模块模版。
+This will generate a new analysis module template under `packages/my-new-tool`.
 
-**快速创建绘图主题：**
+**Quickly Create a Plotting Theme:**
 
 ```bash
 bioanalyze create theme --name my-company-theme
 ```
 
-这将在当前目录下生成一个名为 `my-company-theme` 的 Python 包，您可以修改其中的 `__init__.py` 来定制 `bio-plot` 的样式。
+This will generate a Python package named `my-company-theme` in the current directory. You can modify its `__init__.py` to customize the styles for `bio-plot`.
 
-## 🔧 开发指南
+## 🔧 Development Guide
 
-### 添加新模块
+### Adding a New Module
 
-1. 使用 `bioanalyze create tool` 创建模版。
-2. 在 `pyproject.toml` 中配置 `[project.entry-points."bio_analyze.plugins"]`。
-3. 实现 `get_app()` 函数返回 `typer.Typer` 实例。
-4. 运行 `uv sync` 安装新模块。
-5. 现在可以通过 `bioanalyze <tool-name>` 调用您的新工具了。
+1. Use `bioanalyze create tool` to create a template.
+2. Configure `[project.entry-points."bio_analyze.plugins"]` in `pyproject.toml`.
+3. Implement the `get_app()` function to return a `typer.Typer` instance.
+4. Run `uv sync` to install the new module.
+5. You can now invoke your new tool via `bioanalyze <tool-name>`.

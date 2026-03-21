@@ -1,19 +1,19 @@
 # bio-analyze-docking
 
-基于 Vina 的自动化分子对接模块，提供从受体/配体准备到对接模拟及结果汇总的全流程解决方案。支持单次对接与高通量批量对接。
+An automated molecular docking module based on Vina, providing a full-pipeline solution from receptor/ligand preparation to docking simulation and result summarization. Supports both single docking and high-throughput batch docking.
 
-## ✨ 核心特性 (Features)
+## ✨ Features
 
-- **批量处理 (Batch Processing)**：支持指定目录进行多对多（M个受体 x N个配体）的批量对接，自动处理任务调度。
-- **断点续传 (Resumable)**：批量任务支持断点续传，意外中断后再次运行可跳过已完成的任务。
-- **广泛格式支持**：
-  - **受体**：支持 `.pdb`, `.cif`, `.mmcif` (自动转换为 PDB)。
-  - **配体**：支持 `.sdf`, `.mol2`, `.pdb`, `.smi` (SMILES)。
-- **结果汇总**：自动生成 `docking_summary.csv`，包含结合能、RMSD 及盒子参数。
-- **复合物生成**：可选生成对接后的受体-配体复合物结构（PDB格式），便于 PyMOL 查看。
-- **自动化准备**：集成 `Meeko` 和 `PDBFixer`，自动处理受体质子化、补全缺失原子及配体 PDBQT 转换。
+- **Batch Processing**: Supports multi-to-multi (M receptors x N ligands) batch docking by specifying directories, automatically handling task scheduling.
+- **Resumable**: Batch tasks support resuming; if interrupted, restarting will skip already completed tasks.
+- **Wide Format Support**:
+  - **Receptor**: Supports `.pdb`, `.cif`, `.mmcif` (automatically converted to PDB).
+  - **Ligand**: Supports `.sdf`, `.mol2`, `.pdb`, `.smi` (SMILES).
+- **Result Summarization**: Automatically generates `docking_summary.csv`, containing binding affinities, RMSD, and box parameters.
+- **Complex Generation**: Optionally generates the docked receptor-ligand complex structure (PDB format) for easy viewing in PyMOL.
+- **Automated Preparation**: Integrates `Meeko` and `PDBFixer` to automatically handle receptor protonation, missing atom completion, and ligand PDBQT conversion.
 
-## 🔧 依赖工具 (Dependencies)
+## 🔧 Dependencies
 
 - **AutoDock Vina** (via Python `vina` package)
 - **Smina** (Advanced fork of Vina, must be installed in PATH)
@@ -24,31 +24,31 @@
 - **Gemmi** (CIF/mmCIF support)
 - **PDBFixer** (Receptor repair)
 
-## 🚀 使用方法 (Usage)
+## 🚀 Usage
 
-### 1. 准备受体 (Receptor Preparation)
+### 1. Receptor Preparation
 
-将 PDB/CIF 文件转换为 PDBQT 格式，自动添加极性氢。
+Converts PDB/CIF files to PDBQT format, automatically adding polar hydrogens.
 
 ```bash
-# 单个文件
+# Single file
 uv run bioanalyze docking prepare-receptor receptor.pdb -o receptor.pdbqt
 
-# 支持 CIF 格式
+# CIF format support
 uv run bioanalyze docking prepare-receptor structure.cif -o structure.pdbqt
 ```
 
-### 2. 准备配体 (Ligand Preparation)
+### 2. Ligand Preparation
 
-将 SDF/SMILES/PDB 文件转换为 PDBQT 格式，自动生成 3D 构象并处理柔性键。
+Converts SDF/SMILES/PDB files to PDBQT format, automatically generating 3D conformations and handling flexible bonds.
 
 ```bash
 uv run bioanalyze docking prepare-ligand ligand.sdf -o ligand.pdbqt
 ```
 
-### 3. 运行对接 (Run Docking)
+### 3. Run Docking
 
-#### 场景 A：单次对接 (Single Docking)
+#### Scenario A: Single Docking
 
 ```bash
 uv run bioanalyze docking run \
@@ -59,35 +59,35 @@ uv run bioanalyze docking run \
     --size-x 20 --size-y 20 --size-z 20
 ```
 
-#### 场景 B：批量对接 (Batch Docking)
+#### Scenario B: Batch Docking
 
-只需将 `--receptor` 或 `--ligand` 指定为目录，程序将自动扫描目录下的所有支持文件并进行两两对接。
+Simply specify `--receptor` or `--ligand` as directories, and the program will automatically scan for all supported files and perform pairwise docking.
 
 ```bash
 uv run bioanalyze docking run \
     --receptor ./receptors_dir \
     --ligand ./ligands_dir \
     --output ./batch_results \
-    --padding 4.0  # 自动根据受体计算盒子，并在四周增加 4.0A 的填充
+    --padding 4.0  # Automatically calculate the box based on the receptor and add 4.0A padding
 ```
 
-**批量对接输出结构：**
+**Batch Docking Output Structure:**
 
 ```
 batch_results/
 ├── dock_results/
-│   ├── poses/          # 对接姿态 (PDBQT)
+│   ├── poses/          # Docked poses (PDBQT)
 │   │   └── receptor_name/
 │   │       └── ligand_name_docked.pdbqt
-│   └── complex/        # (可选) 复合物结构 (PDB)
-├── docking_summary.csv # 汇总表格 (包含 Affinity, RMSD 等)
-├── logs/               # 每个任务的独立日志
-└── configs.json        # 运行配置记录
+│   └── complex/        # (Optional) Complex structures (PDB)
+├── docking_summary.csv # Summary table (contains Affinity, RMSD, etc.)
+├── logs/               # Independent logs for each task
+└── configs.json        # Run configuration record
 ```
 
-#### 场景 C：基于参考配体自动定义盒子 (Autobox)
+#### Scenario C: Autoboxing based on Reference Ligand
 
-使用共晶配体自动确定对接中心和范围。
+Use a co-crystallized ligand to automatically determine the docking center and extent.
 
 ```bash
 uv run bioanalyze docking run \
@@ -98,9 +98,9 @@ uv run bioanalyze docking run \
     --padding 4.0
 ```
 
-#### 场景 D：使用配置文件
+#### Scenario D: Using a Configuration File
 
-通过 `config.json` 或 `config.yaml` 管理复杂参数：
+Manage complex parameters via `config.json` or `config.yaml`:
 
 ```json
 {
@@ -117,9 +117,9 @@ uv run bioanalyze docking run \
 uv run bioanalyze docking run --config config.json
 ```
 
-#### 场景 E：使用 Smina 或 Gnina 引擎
+#### Scenario E: Using Smina or Gnina Engine
 
-如果系统 PATH 中安装了 `smina` 或 `gnina`，可以通过 `--engine` 参数启用：
+If `smina` or `gnina` is installed in the system PATH, you can enable them via the `--engine` parameter:
 
 ```bash
 uv run bioanalyze docking run \
@@ -131,87 +131,87 @@ uv run bioanalyze docking run \
 
 ## 📦 Python API
 
-### 1. 单次对接 (`run_docking`)
+### 1. Single Docking (`run_docking`)
 
 ```python
 from bio_analyze_docking import run_docking
 from pathlib import Path
 
 result = run_docking(
-    receptor=Path("receptor.pdb"),       # 支持 PDB/PDBQT/CIF
-    ligand=Path("ligand.sdf"),           # 支持 SDF/MOL2/PDB/SMILES
+    receptor=Path("receptor.pdb"),       # Supports PDB/PDBQT/CIF
+    ligand=Path("ligand.sdf"),           # Supports SDF/MOL2/PDB/SMILES
     output_dir=Path("./results"),
-    center=[10.5, 20.0, 30.0],           # 盒子中心 [x, y, z]
-    size=[20.0, 20.0, 20.0],             # 盒子大小 [x, y, z]
-    exhaustiveness=8,                    # 搜索穷尽性 (默认 8)
-    n_poses=9,                           # 输出姿态数量
-    output_docked_lig_recep_struct=True, # 是否保存复合物 PDB (需要 PyMOL)
-    charge_model="gasteiger"             # 电荷模型
+    center=[10.5, 20.0, 30.0],           # Box center [x, y, z]
+    size=[20.0, 20.0, 20.0],             # Box size [x, y, z]
+    exhaustiveness=8,                    # Search exhaustiveness (default 8)
+    n_poses=9,                           # Number of poses to output
+    output_docked_lig_recep_struct=True, # Whether to save complex PDB (requires PyMOL)
+    charge_model="gasteiger"             # Charge model
 )
 
 print(f"Best Score: {result['best_score']}")
 ```
 
-**参数说明:**
+**Parameters:**
 
-- `receptor`: 受体文件路径 (PDB/PDBQT/CIF/MMCIF)。
-- `ligand`: 配体文件路径 (SDF/MOL2/PDB/SMILES)。
-- `output_dir`: 输出目录。
-- `center`: 盒子中心 `[x, y, z]`。
-- `size`: 盒子大小 `[x, y, z]` (默认 `[20, 20, 20]`)。
-- `autobox_ligand`: (可选) 用于自动定义盒子的参考配体路径 (覆盖 `center` 和 `size`)。
-- `padding`: (可选) 自动盒子填充 (Angstrom)。
-- `exhaustiveness`: Vina 搜索穷尽性 (默认 8)。
-- `n_poses`: 生成的姿态数量 (默认 9)。
-- `output_docked_lig_recep_struct`: 是否生成复合物 PDB 文件 (默认 False)。
-- `charge_model`: 受体准备时的电荷模型 (默认 'gasteiger')。
+- `receptor`: Receptor file path (PDB/PDBQT/CIF/MMCIF).
+- `ligand`: Ligand file path (SDF/MOL2/PDB/SMILES).
+- `output_dir`: Output directory.
+- `center`: Box center `[x, y, z]`.
+- `size`: Box size `[x, y, z]` (default `[20, 20, 20]`).
+- `autobox_ligand`: (Optional) Reference ligand path for automatic box definition (overrides `center` and `size`).
+- `padding`: (Optional) Automatic box padding (Angstroms).
+- `exhaustiveness`: Vina search exhaustiveness (default 8).
+- `n_poses`: Number of poses to generate (default 9).
+- `output_docked_lig_recep_struct`: Whether to generate complex PDB files (default False).
+- `charge_model`: Charge model used during receptor preparation (default 'gasteiger').
 
-### 2. 批量对接 (`run_docking_batch`)
+### 2. Batch Docking (`run_docking_batch`)
 
 ```python
 from bio_analyze_docking import run_docking_batch
 from pathlib import Path
 
 results = run_docking_batch(
-    receptors=Path("./receptors_dir"),  # 受体目录
-    ligands=Path("./ligands_dir"),      # 配体目录
+    receptors=Path("./receptors_dir"),  # Receptor directory
+    ligands=Path("./ligands_dir"),      # Ligand directory
     output_dir=Path("./batch_results"),
-    padding=4.0,                        # 自动盒子填充
+    padding=4.0,                        # Auto box padding
     exhaustiveness=8
 )
 
-# results 是包含每个对接任务结果的列表
+# results is a list containing the results of each docking task
 ```
 
-**参数说明:**
+**Parameters:**
 
-- `receptors`: 受体目录路径或文件列表。
-- `ligands`: 配体目录路径或文件列表。
-- `output_dir`: 基础输出目录。
-- `summary_filename`: 汇总文件名 (默认 "docking_summary.csv")。
-- 其他参数同 `run_docking`。
+- `receptors`: Receptor directory path or list of files.
+- `ligands`: Ligand directory path or list of files.
+- `output_dir`: Base output directory.
+- `summary_filename`: Summary file name (default "docking_summary.csv").
+- Other parameters are the same as `run_docking`.
 
-### 3. 底层组件 (Components)
+### 3. Underlying Components
 
-您也可以单独使用底层的准备和引擎类：
+You can also use the underlying preparation and engine classes independently:
 
 ```python
 from bio_analyze_docking import prepare_receptor, prepare_ligand, DockingEngine
 
-# 准备文件
+# Prepare files
 rec_pdbqt = prepare_receptor("protein.pdb", "protein.pdbqt")
 lig_pdbqt = prepare_ligand("ligand.sdf", "ligand.pdbqt")
 
-# 初始化引擎
+# Initialize engine
 engine = DockingEngine(rec_pdbqt, lig_pdbqt, output_dir=Path("./out"))
 
-# 计算盒子
+# Compute box
 engine.compute_box(center=[0, 0, 0], size=[20, 20, 20])
 
-# 运行对接
+# Run docking
 engine.dock()
 
-# 保存结果
+# Save results
 engine.save_results("docked.pdbqt")
 print(f"Best affinity: {engine.score()}")
 ```

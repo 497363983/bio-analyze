@@ -1,104 +1,104 @@
 # bio-analyze
 
-一个面向常用生物信息学分析任务的工具箱，采用 monorepo 组织多个独立模块，最终可通过统一 CLI 与 Python API 调用。
+A toolbox for common bioinformatics analysis tasks, organized as a monorepo with multiple independent modules, accessible through a unified CLI and Python API.
 
-## Monorepo 结构
+## Monorepo Structure
 
-- `packages/core`：公共能力（配置、日志、IO、运行外部命令、资源管理等）
-- `packages/cli`：统一命令行入口，支持插件式加载各模块子命令
-- `packages/*`：各分析工具模块（例如 rna-seq、docking），每个模块是独立可发布包
+- `packages/core`: Common utilities (configuration, logging, I/O, external command execution, resource management)
+- `packages/cli`: Unified command-line entry point with plugin support for loading module subcommands
+- `packages/*`: Various analysis tool modules (e.g., rna-seq, docking), each as an independently publishable package
 
-## 📦 已有模块列表 (Modules)
+## 📦 Available Modules
 
-目前工具箱包含以下核心模块，每个模块均可独立使用或通过 CLI 调用：
+The toolbox currently includes the following core modules, each can be used independently or through the CLI:
 
-| 模块名称                 | 路径                 | 功能简介                                                                                         | 核心特点                                         |
+| Module Name              | Path                 | Description                                                                                      | Key Features                                      |
 | :----------------------- | :------------------- | :----------------------------------------------------------------------------------------------- | :----------------------------------------------- |
-| 🧬**RNA-Seq 分析** | `packages/rna_seq` | SRA 下载、质控 (FastQC/fastp)、比对 (STAR)、定量 (Salmon)、差异表达 (DESeq2)、富集分析 (GO/KEGG) | 全自动流水线，一键生成 HTML 报告，自动参考基因组 |
-| 📊**绘图工具**     | `packages/plot`    | 火山图、热图、PCA、柱状图（带误差棒/显著性标记）、折线图、饼图、染色体覆盖度图                   | Nature/Science 主题，支持中文，发表级质量        |
-| 🧪**分子对接**     | `packages/docking` | 受体/配体准备、对接模拟配置及运行                                                                | 简化对接流程，提供统一的命令行接口               |
-| 🛠️**核心组件**   | `packages/core`    | 日志管理、配置加载、子进程管理、文件 IO                                                          | 为所有模块提供底层通用能力支持                   |
-| 🖥️**命令行入口** | `packages/cli`     | 统一 CLI 框架，插件加载，模板创建                                                                | 提供 `bioanalyze` 主命令，支持插件扩展         |
+| 🧬**RNA-Seq Analysis** | `packages/rna_seq` | SRA download, QC (FastQC/fastp), alignment (STAR), quantification (Salmon), differential expression (DESeq2), enrichment analysis (GO/KEGG) | Fully automated pipeline, one-click HTML report generation, automatic reference genome |
+| 📊**Plotting Tools**     | `packages/plot`    | Volcano plots, heatmaps, PCA, bar charts (with error bars/significance markers), line plots, pie charts, chromosome coverage plots | Nature/Science themes, Chinese support, publication quality |
+| 🧪**Molecular Docking** | `packages/docking` | Receptor/ligand preparation, docking simulation configuration and execution                     | Simplified docking workflow, unified CLI interface |
+| 🛠️**Core Components** | `packages/core`    | Log management, configuration loading, subprocess management, file I/O                          | Provides underlying common capabilities for all modules |
+| 🖥️**CLI Entry Point** | `packages/cli`     | Unified CLI framework, plugin loading, template creation                                         | Provides `bioanalyze` main command with plugin extension support |
 
-## 设计原则
+## Design Principles
 
-- 模块独立发布、按需安装：每个工具模块是独立分发包，通过 entry points 注册 CLI 子命令
-- 通用逻辑抽离：跨模块复用的功能统一沉淀到 `core`
-- CLI 与 Python API 并行：同一能力既可命令行调用也可作为库导入
+- **Independent module publishing, on-demand installation**: Each tool module is an independent distributable package, registering CLI subcommands via entry points
+- **Common logic extraction**: Cross-module reusable functionality is unified in `core`
+- **CLI and Python API parallel**: Same capabilities can be called via command line or imported as a library
 
-## 快速开始（开发态）
+## Quick Start (Development Mode)
 
 ```powershell
 uv venv
 uv pip install -e packages/core -e packages/cli -e packages/transcriptome -e packages/docking
-.\.venv\Scripts\bioanalyse.exe plugins
+.venv\Scripts\bioanalyze.exe plugins
 ```
 
-## 开发环境设置 (Development Setup)
+## Development Environment Setup
 
-为了保证代码质量和提交规范，本项目配置了 `pre-commit` 和 `commitizen`。
+To ensure code quality and commit standards, this project is configured with `pre-commit` and `commitizen`.
 
-### 1. 安装开发工具
+### 1. Install Development Tools
 
-请确保在虚拟环境中安装了 `pre-commit`：
+Make sure `pre-commit` is installed in your virtual environment:
 
 ```bash
 uv pip install pre-commit commitizen
 ```
 
-### 2. 启用 Git Hooks
+### 2. Enable Git Hooks
 
-在项目根目录下运行：
+Run in the project root directory:
 
 ```bash
 pre-commit install
 pre-commit install --hook-type commit-msg
 ```
 
-### 3. 代码检查与提交
+### 3. Code Checking and Committing
 
-- **自动检查**：每次 `git commit` 时会自动运行代码格式化和检查。
-- **手动检查**：运行 `pre-commit run --all-files` 检查所有文件。
-- **规范提交**：建议使用 `cz commit` 来生成符合 Conventional Commits 规范的提交信息。
+- **Automatic checks**: Code formatting and checking runs automatically on each `git commit`
+- **Manual checks**: Run `pre-commit run --all-files` to check all files
+- **Standardized commits**: Use `cz commit` to generate commit messages following Conventional Commits specification
 
-## 使用脚本一键安装 (Linux/macOS/WSL)
+## One-Click Installation Script (Linux/macOS/WSL)
 
-如果您不熟悉 Docker，或者希望在本地环境中直接运行工具箱，我们提供了一个自动化安装脚本。该脚本会自动创建 Conda 环境并安装所有必要的依赖。
+If you're not familiar with Docker or want to run the toolbox directly in your local environment, we provide an automated installation script. This script will automatically create a Conda environment and install all necessary dependencies.
 
-### 前置条件
+### Prerequisites
 
-- **操作系统**: Linux (推荐 Ubuntu), macOS, 或 Windows WSL (Windows Subsystem for Linux)。
-- **Conda**: 必须已安装 [Miniconda](https://docs.conda.io/en/latest/miniconda.html) 或 [Mambaforge](https://github.com/conda-forge/miniforge)。
+- **Operating System**: Linux (Ubuntu recommended), macOS, or Windows WSL (Windows Subsystem for Linux)
+- **Conda**: Must have [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Mambaforge](https://github.com/conda-forge/miniforge) installed
 
-### 运行安装脚本
+### Run Installation Script
 
-在项目根目录下运行：
+Run in the project root directory:
 
 ```bash
 bash setup.sh
 ```
 
-脚本将自动执行以下步骤：
+The script will automatically execute the following steps:
 
-1. 检查 Conda/Mamba 环境。
-2. 配置 Bioconda 等软件源。
-3. 创建名为 `bio_analyse_env` 的虚拟环境。
-4. 安装 `fastp`, `salmon`, `star`, `samtools` 等生物信息学工具。
-5. 安装 `bio-analyse` 工具箱的所有模块。
-6. 安装并配置 `pre-commit` 和 `commitizen`。
+1. Check Conda/Mamba environment
+2. Configure software sources including Bioconda
+3. Create a virtual environment named `bio_analyse_env`
+4. Install bioinformatics tools like `fastp`, `salmon`, `star`, `samtools`
+5. Install all modules of the `bio-analyze` toolbox
+6. Install and configure `pre-commit` and `commitizen`
 
-### 激活环境
+### Activate Environment
 
-安装完成后，根据提示激活环境即可使用：
+After installation completes, activate the environment as prompted:
 
 ```bash
 conda activate bio_analyse_env
 bioanalyze --help
 ```
 
-### 开发环境安装 (install.sh / install.bat)
+### Development Environment Installation (install.sh / install.bat)
 
-如果您已经有环境或只想安装 Python 依赖（包括开发工具），可以使用安装脚本：
+If you already have an environment or only want to install Python dependencies (including development tools), use the installation script:
 
 **Linux / macOS / WSL:**
 
@@ -112,49 +112,49 @@ bash install.sh
 install.bat
 ```
 
-此脚本会：
+This script will:
 
-1. 检测并安装 `uv`（如果未安装）。
-2. 创建 `.venv` 虚拟环境（如果不存在）。
-3. 安装所有模块及 `pre-commit`, `commitizen`。
-4. 自动配置 Git hooks。
+1. Detect and install `uv` (if not installed)
+2. Create `.venv` virtual environment (if it doesn't exist)
+3. Install all modules plus `pre-commit` and `commitizen`
+4. Automatically configure Git hooks
 
-## 使用 Docker (推荐)
+## Using Docker (Recommended)
 
-为了简化环境配置，特别是复杂的生物信息学工具依赖，我们提供了 Docker 支持。
+To simplify environment configuration, especially for complex bioinformatics tool dependencies, we provide Docker support.
 
-### 构建镜像
+### Build Image
 
 ```bash
 docker build -t bio-analyze:latest .
 ```
 
-### 运行容器
+### Run Container
 
 ```bash
-# 挂载数据目录并运行
+# Mount data directory and run
 docker run -it --rm -v $(pwd)/data:/data bio-analyze:latest --help
 ```
 
-或者使用 `docker-compose`:
+Or use `docker-compose`:
 
 ```bash
 docker-compose run --rm bio-analyze --help
 ```
 
-### 进入交互式 Shell
+### Interactive Shell Access
 
 ```bash
 docker run -it --rm --entrypoint bash -v $(pwd)/data:/data bio-analyze:latest
 ```
 
-### Docker 环境测试指南 (Running Tests in Docker)
+### Docker Environment Testing Guide
 
-对于 Windows 用户或不想在本地安装复杂依赖的开发者，我们提供了在 Docker 容器中运行测试的便捷方式。该环境会自动挂载本地代码、数据目录 (`data`) 和输出目录 (`output`)，因此：
+For Windows users or developers who don't want to install complex dependencies locally, we provide a convenient way to run tests in Docker containers. The environment automatically mounts local code, data directory (`data`), and output directory (`output`), so:
 
-1. 修改代码后无需重新构建镜像即可测试。
-2. 测试代码可以直接访问 `data` 目录下的文件。
-3. 测试生成的报告或文件可以直接在本地 `output` 目录查看。
+1. Code modifications can be tested without rebuilding the image
+2. Test code can directly access files in the `data` directory
+3. Test-generated reports or files can be directly viewed in the local `output` directory
 
 **Windows (PowerShell):**
 
@@ -168,21 +168,21 @@ docker run -it --rm --entrypoint bash -v $(pwd)/data:/data bio-analyze:latest
 ./run_tests_docker.sh
 ```
 
-这将自动构建测试镜像并运行所有测试用例。
+This will automatically build the test image and run all test cases.
 
-## 新增一个工具模块（约定）
+## Adding a New Tool Module (Conventions)
 
-1. 在 `packages/<module>/` 下创建独立包（`pyproject.toml` + `src/`）
-2. 依赖公共模块：`bio-analyze-core`
-3. 注册 CLI 插件入口：
+1. Create an independent package under `packages/<module>/` (`pyproject.toml` + `src/`)
+2. Depend on the common module: `bio-analyze-core`
+3. Register CLI plugin entry point:
 
 ```toml
 [project.entry-points."bio_analyze.cli"]
 <module> = "bio_analyze.<module>.cli:get_app"
 ```
 
-4. 在 `bio_analyze.<module>.cli` 中实现 `get_app()` 并返回 `typer.Typer`
+4. Implement `get_app()` in `bio_analyze.<module>.cli` and return a `typer.Typer` instance
 
-## 许可证 (License)
+## License
 
-本项目采用 [GPL-3.0](LICENSE) 开源协议。
+This project is licensed under the [GPL-3.0](LICENSE) open source license.
