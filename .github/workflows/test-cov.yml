@@ -82,7 +82,8 @@ jobs:
                     pytest-clarity \
                     pytest-timeout \
                     pytest-regressions \
-                    pillow
+                    pillow \
+                    allure-pytest
 
             - name: Run Tests with Coverage
               shell: bash -el {0}
