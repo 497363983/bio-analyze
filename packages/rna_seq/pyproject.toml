@@ -12,7 +12,7 @@ license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [
     "bio-analyze-core>=0.1.0a0",
-    "bio-analyze-plot>=0.1.0",
+    "bio-analyze-plot>=0.1.0a0",
     "pandas>=2.0.0",
     "numpy>=1.20.0",
     "scipy>=1.10.0",
