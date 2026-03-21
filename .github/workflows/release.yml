@@ -78,6 +78,7 @@ jobs:
 
           # Generate changelog for this specific package using git-cliff
           # Use --include-path to only include commits that touched this package's directory
+          touch packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md
           uvx git-cliff --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased --repository "https://github.com/${{ github.repository }}"
 
           # Generate release notes for GitHub Release
