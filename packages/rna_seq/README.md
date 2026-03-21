@@ -1,5 +1,7 @@
 # bio-analyze-rna-seq
 
+[![codecov](https://codecov.io/gh/497363983/bio-analyze/graph/badge.svg?token=I78TXQBORK&component=rna_seq)](https://codecov.io/gh/497363983/bio-analyze)
+
 **bio-analyze-rna-seq** is the dedicated transcriptome analysis module in the `bio-analyze` toolbox. It provides a fully automated end-to-end pipeline solution from raw sequencing data to the final visualization report.
 
 ## ✨ Features
