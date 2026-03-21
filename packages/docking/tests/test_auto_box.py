@@ -91,7 +91,7 @@ def test_cli_default_box(test_data):
     rec, lig, output_dir = test_data
 
     # Mock run_docking to avoid actual execution
-    with patch("bio_analyze_docking.cli.run_docking") as mock_run:
+    with patch("bio_analyze_docking.commands.utils.run_docking") as mock_run:
         mock_run.return_value = {
             "best_score": -5.0,
             "output_file": str(output_dir / "docked.pdbqt"),
