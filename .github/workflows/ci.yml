@@ -94,9 +94,6 @@ jobs:
                     pytest-regressions \
                     allure-pytest \
                     pillow
-            - name: Setup tmate session
-              uses: mxschmitt/action-tmate@v3
-              if: failure()
 
             - name: Run Tests
               shell: bash -el {0}
