@@ -1,0 +1,28 @@
+11:31:57 | ERROR | Command timed out after 0.50s: /home/runner/micromamba/envs/bio-analyze-env/bin/python3.11 -c import time; time.sleep(2)
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=4, microseconds=570515), 'exception': None, 'extra': {'name': 'bio_analyze_core.subprocess'}, 'file': (name='subprocess.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/subprocess.py'), 'function': 'run', 'level': (name='ERROR', no=40, icon='❌'), 'line': 121, 'message': 'Command timed out after 0.50s: /home/runner/micromamba/envs/bio-analyze-env/bin/python3.11 -c import time; time.sleep(2)', 'module': 'subprocess', 'name': 'bio_analyze_core.subprocess', 'process': (id=4572, name='MainProcess'), 'thread': (id=140173841184576, name='MainThread'), 'time': datetime(2026, 3, 21, 11, 31, 57, 687120, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/subprocess.py", line 109, in run
+    completed = subprocess.run(
+                ^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/subprocess.py", line 2116, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/subprocess.py", line 1253, in _check_timeout
+    raise TimeoutExpired(
+subprocess.TimeoutExpired: Command '['/home/runner/micromamba/envs/bio-analyze-env/bin/python3.11', '-c', 'import time; time.sleep(2)']' timed out after 0.5 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
