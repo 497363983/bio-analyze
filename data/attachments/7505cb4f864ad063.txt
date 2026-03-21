@@ -1,0 +1,2 @@
+03:25:41 | INFO | Calculated box from receptor: center=[ -7.2675  -4.304  -19.7635], size=[130.701  94.37  161.241]
+03:25:41 | INFO | Calculated box from receptor: center=[ -7.2675  -4.304  -19.7635], size=[130.701  94.37  161.241]
