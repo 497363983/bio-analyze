@@ -98,8 +98,26 @@ jobs:
             - name: Run Tests
               shell: bash -el {0}
               run: |
-                  pytest packages --timeout=60 --junit-xml pytest.xml --alluredir=allure-results-${{ matrix.python-version }} --clean-alluredir
-
+                  pytest \ 
+                    packages \
+                    --timeout=60 \
+                    --junit-xml pytest.xml \
+                    --alluredir=allure-results-${{ matrix.python-version }} 
+                    --clean-alluredir
+                    --cov=packages/cli/src/bio_analyse_cli \
+                    --cov=packages/core/src/bio_analyse_core \
+                    --cov=packages/core/src/bio_analyse_docking \
+                    --cov=packages/core/src/bio_analyse_plot \
+                    --cov=packages/core/src/bio_analyse_rna_seq \
+                    --cov-report=term \
+                    --cov-report=xml:coverage.xml
+            - name: Upload to Codecov
+              uses: codecov/codecov-action@v4
+              with:
+                  token: ${{ secrets.CODECOV_TOKEN }} # Codecov Token（需在 GitHub Secrets 配置）
+                  files: ./coverage.xml # 覆盖率报告文件
+                  flags: unittests # 可选：标记报告类型
+                  name: Python ${{ matrix.python-version }} Coverage
             - name: Upload Test Results
               if: (!cancelled())
               uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
