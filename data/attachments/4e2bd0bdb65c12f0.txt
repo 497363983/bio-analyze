@@ -1,2 +1,0 @@
-Successfully created theme package 'test-theme' at /tmp/pytest-of-runner/pytest-0/test_theme_template_create0/output/test-theme
-To use it: `pip install -e test-theme` then `bioanalyze plot ... --theme test_theme`

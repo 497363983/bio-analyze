@@ -1,1 +1,0 @@
-Error: Directory /tmp/pytest-of-runner/pytest-0/test_tool_template_create_exis0/output/packages/test_tool already exists.
