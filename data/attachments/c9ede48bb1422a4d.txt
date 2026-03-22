@@ -1,0 +1,20 @@
+05:24:21 | INFO | 设置 Gnina 搜索盒子 (中心=[10.0, 10.0, 10.0], 尺寸=[20.0, 20.0, 20.0])...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=6, microseconds=703841), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.gnina'}, 'file': (name='gnina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/gnina.py'), 'function': 'compute_box', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 89, 'message': '设置 Gnina 搜索盒子 (中心=[10.0, 10.0, 10.0], 尺寸=[20.0, 20.0, 20.0])...', 'module': 'gnina', 'name': 'bio_analyze_docking.engines.gnina', 'process': (id=4610, name='MainProcess'), 'thread': (id=140448682673984, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 24, 21, 390834, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:24:21 | INFO | 执行 Gnina 命令: /mock/path/to/gnina --receptor receptor.pdbqt --ligand ligand.pdbqt --center_x 10.0 --center_y 10.0 --center_z 10.0 --size_x 20.0 --size_y 20.0 --size_z 20.0 --exhaustiveness 1 --num_modes 1 --min_rmsd_filter 1.0 --out output/gnina_out.pdbqt --cpu 4
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=6, microseconds=704279), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.gnina'}, 'file': (name='gnina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/gnina.py'), 'function': 'dock', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 145, 'message': '执行 Gnina 命令: /mock/path/to/gnina --receptor receptor.pdbqt --ligand ligand.pdbqt --center_x 10.0 --center_y 10.0 --center_z 10.0 --size_x 20.0 --size_y 20.0 --size_z 20.0 --exhaustiveness 1 --num_modes 1 --min_rmsd_filter 1.0 --out output/gnina_out.pdbqt --cpu 4', 'module': 'gnina', 'name': 'bio_analyze_docking.engines.gnina', 'process': (id=4610, name='MainProcess'), 'thread': (id=140448682673984, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 24, 21, 391272, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---

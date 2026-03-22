@@ -1,0 +1,7 @@
+05:24:15 | INFO | Running node: node1
+05:24:15 | INFO | Running node: failing_node
+05:24:15 | ERROR | Node failing_node failed: Crash!
+05:24:15 | INFO | Loaded state from /tmp/pytest-of-runner/pytest-0/test_pipeline_persistence_and_0/resume_state.json
+05:24:15 | INFO | Skipping completed node: node1
+05:24:15 | INFO | Running node: failing_node
+05:24:15 | INFO | Running node: node2
