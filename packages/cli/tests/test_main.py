@@ -29,8 +29,6 @@ def test_root_callback_config_annotation_compatible():
     hints = typing.get_type_hints(callback)
     assert hints["config"] == typing.Optional[Path]
 
-
-
 @patch.object(main_module, "load_settings")
 @patch.object(main_module, "setup_logging")
 def test_root_callback(mock_setup_logging, mock_load_settings):
