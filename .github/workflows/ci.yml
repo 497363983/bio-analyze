@@ -112,7 +112,7 @@ jobs:
                     --cov-report=term \
                     --cov-report=xml:coverage.xml
             - name: Upload to Codecov
-              uses: codecov/codecov-action@v4
+              uses: codecov/codecov-action@v5
               with:
                   token: ${{ secrets.CODECOV_TOKEN }} # Codecov Token（需在 GitHub Secrets 配置）
                   files: ./coverage.xml # 覆盖率报告文件
