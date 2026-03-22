@@ -1,0 +1,10 @@
+04:19:07 | INFO | 设置 Smina 搜索盒子 (中心=[10.0, 10.0, 10.0], 尺寸=[20.0, 20.0, 20.0])...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=31, microseconds=355228), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.smina'}, 'file': (name='smina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/smina.py'), 'function': 'compute_box', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 89, 'message': '设置 Smina 搜索盒子 (中心=[10.0, 10.0, 10.0], 尺寸=[20.0, 20.0, 20.0])...', 'module': 'smina', 'name': 'bio_analyze_docking.engines.smina', 'process': (id=4633, name='MainProcess'), 'thread': (id=140410956801856, name='MainThread'), 'time': datetime(2026, 3, 22, 4, 19, 7, 96298, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
