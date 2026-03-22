@@ -1,0 +1,2 @@
+Successfully created tool 'test_tool' at /tmp/pytest-of-runner/pytest-0/test_tool_template_create0/output/packages/test_tool
+Don't forget to run `uv sync` to install the new package!

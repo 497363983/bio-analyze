@@ -1,0 +1,10 @@
+04:14:30 | INFO | Calculated box: center=[0.52355 3.34465 0.02725], size=[ 7.9457 10.6975  4.0703]
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=46, microseconds=348056), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'get_box_from_ligand', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 456, 'message': 'Calculated box: center=[0.52355 3.34465 0.02725], size=[ 7.9457 10.6975  4.0703]', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4632, name='MainProcess'), 'thread': (id=139881793271616, name='MainThread'), 'time': datetime(2026, 3, 22, 4, 14, 30, 911795, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---

@@ -1,0 +1,1 @@
+Error: Directory /tmp/pytest-of-runner/pytest-0/test_theme_template_create_exi0/output/test-theme already exists.
