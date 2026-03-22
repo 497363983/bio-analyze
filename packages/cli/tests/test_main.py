@@ -2,7 +2,8 @@ from unittest.mock import MagicMock, patch
 
 from typer.testing import CliRunner
 
-from bio_analyze_cli.main import app, create_app, main
+from bio_analyze_cli.main import app, create_app
+from bio_analyze_cli.main import main as main_func
 from bio_analyze_cli.plugins import CliPlugin
 
 runner = CliRunner()
@@ -65,7 +66,7 @@ def test_main_function(mock_detect_language, mock_localize_app, mock_app):
     mock_detect_language.return_value = "zh"
 
     # 执行主函数
-    main()
+    main_func()
 
     # 验证国际化和应用启动调用
     mock_detect_language.assert_called_once()
