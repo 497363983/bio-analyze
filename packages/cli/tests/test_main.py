@@ -19,6 +19,7 @@ def test_create_app():
     assert "create" in registered_commands
 
 
+
 @patch("bio_analyze_cli.main.load_settings")
 @patch("bio_analyze_cli.main.setup_logging")
 def test_root_callback(mock_setup_logging, mock_load_settings):
