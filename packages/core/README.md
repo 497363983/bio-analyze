@@ -1,6 +1,7 @@
 # bio-analyze-core
 
 [![PyPI Version](https://img.shields.io/pypi/v/bio-analyze-core?label=PyPI&include_prereleases&sort=semver&logo=python)](https://pypi.org/project/bio-analyze-core/)
+[![codecov](https://codecov.io/gh/497363983/bio-analyze/graph/badge.svg?token=I78TXQBORK&component=core)](https://codecov.io/gh/497363983/bio-analyze)
 
 Shared core utilities for the toolbox: provides reusable capabilities (configuration, logging, I/O, external command execution, etc.) for various analysis modules and the CLI.
 

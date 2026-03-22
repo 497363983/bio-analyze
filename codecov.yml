@@ -1,0 +1,33 @@
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 1%
+
+component_management:
+  default_rules:  # default rules that will be inherited by all components
+    statuses:
+      - type: project # in this case every component that doens't have a status defined will have a project type one
+        target: auto
+  individual_components:
+    - component_id: core
+      name: core
+      paths:
+        - packages/core/**
+    - component_id: plot
+      name: plot
+      paths:
+        - packages/plot/**
+    - component_id: docking
+      name: docking
+      paths:
+        - packages/docking/**
+    - component_id: rna_seq
+      name: rna_seq
+      paths:
+        - packages/rna_seq/**
+    - component_id: cli
+      name: cli
+      paths:
+        - packages/cli/**

@@ -1,5 +1,7 @@
 # bio-analyze-cli
 
+[![codecov](https://codecov.io/gh/497363983/bio-analyze/graph/badge.svg?token=I78TXQBORK&component=cli)](https://codecov.io/gh/497363983/bio-analyze)
+
 **bio-analyze-cli** is the unified command-line entry point for the BioAnalyze toolbox. It is responsible for dynamically discovering and loading various functional modules (such as `rna-seq`, `docking`, `plot`, etc.) and providing a unified CLI experience.
 
 ## 🚀 Core Features

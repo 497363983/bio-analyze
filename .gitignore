@@ -25,3 +25,4 @@ uv.lock
 output
 .trae/
 *.xml
+.coverage
