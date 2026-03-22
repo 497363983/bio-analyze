@@ -1,6 +1,8 @@
 # bio-analyze-cli
 
+[![PyPI Version](https://img.shields.io/pypi/v/bio-analyze-core?label=PyPI&include_prereleases&sort=semver&logo=python)](https://pypi.org/project/bio-analyze-cli/)
 [![codecov](https://codecov.io/gh/497363983/bio-analyze/graph/badge.svg?token=I78TXQBORK&component=cli)](https://codecov.io/gh/497363983/bio-analyze)
+![Python Version](https://img.shields.io/pypi/pyversions/bio-analyze-cli.svg)
 
 **bio-analyze-cli** is the unified command-line entry point for the BioAnalyze toolbox. It is responsible for dynamically discovering and loading various functional modules (such as `rna-seq`, `docking`, `plot`, etc.) and providing a unified CLI experience.
 
