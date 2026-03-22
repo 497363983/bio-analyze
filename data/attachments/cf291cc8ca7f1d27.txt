@@ -1,0 +1,29 @@
+04:59:41 | INFO | Running node: long_node
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=4, microseconds=16882), 'exception': None, 'extra': {'name': 'checkpoint_pipeline'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: long_node', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4527, name='MainProcess'), 'thread': (id=140321271351104, name='MainThread'), 'time': datetime(2026, 3, 22, 4, 59, 41, 595203, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+04:59:41 | ERROR | Node long_node failed: Crash after checkpoint
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=4, microseconds=17801), 'exception': None, 'extra': {'name': 'checkpoint_pipeline'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='ERROR', no=40, icon='❌'), 'line': 239, 'message': 'Node long_node failed: Crash after checkpoint', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4527, name='MainProcess'), 'thread': (id=140321271351104, name='MainThread'), 'time': datetime(2026, 3, 22, 4, 59, 41, 596122, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py", line 234, in run
+    node.run(self.context, progress, self.logger)
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/core/tests/test_pipeline.py", line 121, in run
+    raise RuntimeError("Crash after checkpoint")
+RuntimeError: Crash after checkpoint
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
