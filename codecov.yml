@@ -14,20 +14,20 @@ component_management:
     - component_id: core
       name: core
       paths:
-        - packages/core/**
+        - packages/core/src/bio_analyze_core
     - component_id: plot
       name: plot
       paths:
-        - packages/plot/**
+        - packages/plot/src/bio_analyze_plot
     - component_id: docking
       name: docking
       paths:
-        - packages/docking/**
+        - packages/docking/src/bio_analyze_docking
     - component_id: rna_seq
       name: rna_seq
       paths:
-        - packages/rna_seq/**
+        - packages/rna_seq/src/bio_analyze_rna_seq
     - component_id: cli
       name: cli
       paths:
-        - packages/cli/**
+        - packages/cli/src/bio_analyze_cli
