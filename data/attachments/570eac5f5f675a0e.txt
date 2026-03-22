@@ -1,0 +1,460 @@
+05:05:53 | INFO | Running node: Batch Receptor Preparation
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=785847), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: Batch Receptor Preparation', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4608, name='MainProcess'), 'thread': (id=139759082309440, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 5, 53, 859368, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 恢复受体准备。剩余: 3
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=786536), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 356, 'message': '恢复受体准备。剩余: 3', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139759082309440, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 5, 53, 860057, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | Running node: Batch Ligand Preparation
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=790746), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: Batch Ligand Preparation', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4608, name='MainProcess'), 'thread': (id=139759082309440, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 5, 53, 864267, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 恢复配体准备。剩余: 3
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=791442), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 508, 'message': '恢复配体准备。剩余: 3', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139759082309440, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 5, 53, 864963, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | Running node: Batch Docking
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=794706), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: Batch Docking', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4608, name='MainProcess'), 'thread': (id=139759082309440, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 5, 53, 868227, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 开始批量对接。总计: 9, 已完成: 0
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=795333), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 740, 'message': '开始批量对接。总计: 9, 已完成: 0', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139759082309440, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 5, 53, 868854, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | Calculated box: center=[0.52355 3.34465 0.02725], size=[13.9457 16.6975 10.0703]
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=796231), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'get_box_from_ligand', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 456, 'message': 'Calculated box: center=[0.52355 3.34465 0.02725], size=[13.9457 16.6975 10.0703]', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4608, name='MainProcess'), 'thread': (id=139759082309440, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 5, 53, 869752, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 开始对接任务: fold_tlr_7_scophthalmus_maximus_model_0.cif + AAAAMM.xaa.sdf
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=810222), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_7_scophthalmus_maximus_model_0_AAAAMM.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 96, 'message': '开始对接任务: fold_tlr_7_scophthalmus_maximus_model_0.cif + AAAAMM.xaa.sdf', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757682157248, name='ThreadPoolExecutor-2_3'), 'time': datetime(2026, 3, 22, 5, 5, 53, 883743, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_7_scophthalmus_maximus_model_0_AAAAMM.xaa.log
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=820061), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_7_scophthalmus_maximus_model_0_AAAAMM.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 97, 'message': '日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_7_scophthalmus_maximus_model_0_AAAAMM.xaa.log', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757682157248, name='ThreadPoolExecutor-2_3'), 'time': datetime(2026, 3, 22, 5, 5, 53, 893582, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 开始对接任务: fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0.cif + AAAAMN.xaa.sdf
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=821272), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAMN.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 96, 'message': '开始对接任务: fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0.cif + AAAAMN.xaa.sdf', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757799597760, name='ThreadPoolExecutor-2_1'), 'time': datetime(2026, 3, 22, 5, 5, 53, 894793, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+05:05:53 | INFO | 开始对接任务: fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0.cif + AAAAMM.xaa.sdf
+ValueError: I/O operation on closed file.
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=831737), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAMM.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 96, 'message': '开始对接任务: fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0.cif + AAAAMM.xaa.sdf', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757698938560, name='ThreadPoolExecutor-2_0'), 'time': datetime(2026, 3, 22, 5, 5, 53, 905258, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+--- End of logging error ---
+05:05:53 | INFO | 日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAMN.xaa.log
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=841211), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAMN.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 97, 'message': '日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAMN.xaa.log', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757799597760, name='ThreadPoolExecutor-2_1'), 'time': datetime(2026, 3, 22, 5, 5, 53, 914732, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAMM.xaa.log
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=842244), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAMM.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 97, 'message': '日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAMM.xaa.log', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757698938560, name='ThreadPoolExecutor-2_0'), 'time': datetime(2026, 3, 22, 5, 5, 53, 915765, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+--- End of logging error ---
+05:05:53 | INFO | 开始对接任务: fold_tlr_7_scophthalmus_maximus_model_0.cif + AAAAMN.xaa.sdf
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=843588), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_7_scophthalmus_maximus_model_0_AAAAMN.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 96, 'message': '开始对接任务: fold_tlr_7_scophthalmus_maximus_model_0.cif + AAAAMN.xaa.sdf', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757665375936, name='ThreadPoolExecutor-2_4'), 'time': datetime(2026, 3, 22, 5, 5, 53, 917109, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 开始对接任务: fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0.cif + AAAAML.xaa.sdf
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=853019), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAML.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 96, 'message': '开始对接任务: fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0.cif + AAAAML.xaa.sdf', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757816379072, name='ThreadPoolExecutor-2_2'), 'time': datetime(2026, 3, 22, 5, 5, 53, 926540, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+05:05:53 | INFO | 日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_7_scophthalmus_maximus_model_0_AAAAMN.xaa.log
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=853659), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_7_scophthalmus_maximus_model_0_AAAAMN.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 97, 'message': '日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_7_scophthalmus_maximus_model_0_AAAAMN.xaa.log', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757665375936, name='ThreadPoolExecutor-2_4'), 'time': datetime(2026, 3, 22, 5, 5, 53, 927180, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAML.xaa.log
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=854664), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAML.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 97, 'message': '日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAML.xaa.log', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757816379072, name='ThreadPoolExecutor-2_2'), 'time': datetime(2026, 3, 22, 5, 5, 53, 928185, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+--- End of logging error ---
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 开始对接任务: fold_tlr_7_scophthalmus_maximus_model_0.cif + AAAAML.xaa.sdf
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=867270), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_7_scophthalmus_maximus_model_0_AAAAML.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 96, 'message': '开始对接任务: fold_tlr_7_scophthalmus_maximus_model_0.cif + AAAAML.xaa.sdf', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757363394240, name='ThreadPoolExecutor-2_5'), 'time': datetime(2026, 3, 22, 5, 5, 53, 940791, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_7_scophthalmus_maximus_model_0_AAAAML.xaa.log
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=877219), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_7_scophthalmus_maximus_model_0_AAAAML.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 97, 'message': '日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_7_scophthalmus_maximus_model_0_AAAAML.xaa.log', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757363394240, name='ThreadPoolExecutor-2_5'), 'time': datetime(2026, 3, 22, 5, 5, 53, 950740, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_7_scophthalmus_maximus_model_0...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=878907), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.vina'}, 'file': (name='vina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/vina.py'), 'function': 'save_complexes', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 140, 'message': '保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_7_scophthalmus_maximus_model_0...', 'module': 'vina', 'name': 'bio_analyze_docking.engines.vina', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757682157248, name='ThreadPoolExecutor-2_3'), 'time': datetime(2026, 3, 22, 5, 5, 53, 952428, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+05:05:53 | INFO | 保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=879473), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.vina'}, 'file': (name='vina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/vina.py'), 'function': 'save_complexes', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 140, 'message': '保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0...', 'module': 'vina', 'name': 'bio_analyze_docking.engines.vina', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757799597760, name='ThreadPoolExecutor-2_1'), 'time': datetime(2026, 3, 22, 5, 5, 53, 952994, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 开始对接任务: fold_tlr_9_scophthalmus_maximus_model_0.cif + AAAAMM.xaa.sdf
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=880193), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_9_scophthalmus_maximus_model_0_AAAAMM.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 96, 'message': '开始对接任务: fold_tlr_9_scophthalmus_maximus_model_0.cif + AAAAMM.xaa.sdf', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757329831616, name='ThreadPoolExecutor-2_6'), 'time': datetime(2026, 3, 22, 5, 5, 53, 953714, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_7_scophthalmus_maximus_model_0...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=886011), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.vina'}, 'file': (name='vina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/vina.py'), 'function': 'save_complexes', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 140, 'message': '保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_7_scophthalmus_maximus_model_0...', 'module': 'vina', 'name': 'bio_analyze_docking.engines.vina', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757665375936, name='ThreadPoolExecutor-2_4'), 'time': datetime(2026, 3, 22, 5, 5, 53, 959532, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+05:05:53 | INFO | 保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=891325), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.vina'}, 'file': (name='vina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/vina.py'), 'function': 'save_complexes', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 140, 'message': '保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0...', 'module': 'vina', 'name': 'bio_analyze_docking.engines.vina', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757698938560, name='ThreadPoolExecutor-2_0'), 'time': datetime(2026, 3, 22, 5, 5, 53, 964846, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+05:05:53 | INFO | 开始对接任务: fold_tlr_9_scophthalmus_maximus_model_0.cif + AAAAMN.xaa.sdf
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=892424), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_9_scophthalmus_maximus_model_0_AAAAMN.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 96, 'message': '开始对接任务: fold_tlr_9_scophthalmus_maximus_model_0.cif + AAAAMN.xaa.sdf', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757078177472, name='ThreadPoolExecutor-2_7'), 'time': datetime(2026, 3, 22, 5, 5, 53, 965945, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+--- End of logging error ---
+05:05:53 | INFO | 日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_9_scophthalmus_maximus_model_0_AAAAMM.xaa.log
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=893617), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_9_scophthalmus_maximus_model_0_AAAAMM.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 97, 'message': '日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_9_scophthalmus_maximus_model_0_AAAAMM.xaa.log', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757329831616, name='ThreadPoolExecutor-2_6'), 'time': datetime(2026, 3, 22, 5, 5, 53, 967138, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_9_scophthalmus_maximus_model_0_AAAAMN.xaa.log
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=894167), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_9_scophthalmus_maximus_model_0_AAAAMN.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 97, 'message': '日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_9_scophthalmus_maximus_model_0_AAAAMN.xaa.log', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757078177472, name='ThreadPoolExecutor-2_7'), 'time': datetime(2026, 3, 22, 5, 5, 53, 967688, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+05:05:53 | INFO | 对接成功。最佳评分: -3.565
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=894488), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAMN.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 159, 'message': '对接成功。最佳评分: -3.565', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757799597760, name='ThreadPoolExecutor-2_1'), 'time': datetime(2026, 3, 22, 5, 5, 53, 968009, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+05:05:53 | INFO | 对接成功。最佳评分: -3.565
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=895442), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAMM.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 159, 'message': '对接成功。最佳评分: -3.565', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757698938560, name='ThreadPoolExecutor-2_0'), 'time': datetime(2026, 3, 22, 5, 5, 53, 968963, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+--- End of logging error ---
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 对接成功。最佳评分: -3.565
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=896770), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_7_scophthalmus_maximus_model_0_AAAAMM.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 159, 'message': '对接成功。最佳评分: -3.565', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757682157248, name='ThreadPoolExecutor-2_3'), 'time': datetime(2026, 3, 22, 5, 5, 53, 970291, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_7_scophthalmus_maximus_model_0...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=897623), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.vina'}, 'file': (name='vina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/vina.py'), 'function': 'save_complexes', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 140, 'message': '保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_7_scophthalmus_maximus_model_0...', 'module': 'vina', 'name': 'bio_analyze_docking.engines.vina', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757363394240, name='ThreadPoolExecutor-2_5'), 'time': datetime(2026, 3, 22, 5, 5, 53, 971144, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+--- End of logging error ---
+05:05:53 | INFO | 对接成功。最佳评分: -3.565
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=898612), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_7_scophthalmus_maximus_model_0_AAAAMN.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 159, 'message': '对接成功。最佳评分: -3.565', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757665375936, name='ThreadPoolExecutor-2_4'), 'time': datetime(2026, 3, 22, 5, 5, 53, 972133, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=901095), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.vina'}, 'file': (name='vina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/vina.py'), 'function': 'save_complexes', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 140, 'message': '保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0...', 'module': 'vina', 'name': 'bio_analyze_docking.engines.vina', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757816379072, name='ThreadPoolExecutor-2_2'), 'time': datetime(2026, 3, 22, 5, 5, 53, 974616, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 对接成功。最佳评分: -3.565
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=903013), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_7_scophthalmus_maximus_model_0_AAAAML.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 159, 'message': '对接成功。最佳评分: -3.565', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757363394240, name='ThreadPoolExecutor-2_5'), 'time': datetime(2026, 3, 22, 5, 5, 53, 976534, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+05:05:53 | INFO | 对接成功。最佳评分: -3.565
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=903715), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0_AAAAML.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 159, 'message': '对接成功。最佳评分: -3.565', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757816379072, name='ThreadPoolExecutor-2_2'), 'time': datetime(2026, 3, 22, 5, 5, 53, 977236, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_9_scophthalmus_maximus_model_0...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=906092), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.vina'}, 'file': (name='vina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/vina.py'), 'function': 'save_complexes', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 140, 'message': '保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_9_scophthalmus_maximus_model_0...', 'module': 'vina', 'name': 'bio_analyze_docking.engines.vina', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757078177472, name='ThreadPoolExecutor-2_7'), 'time': datetime(2026, 3, 22, 5, 5, 53, 979613, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_9_scophthalmus_maximus_model_0...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=906241), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.vina'}, 'file': (name='vina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/vina.py'), 'function': 'save_complexes', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 140, 'message': '保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_9_scophthalmus_maximus_model_0...', 'module': 'vina', 'name': 'bio_analyze_docking.engines.vina', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757329831616, name='ThreadPoolExecutor-2_6'), 'time': datetime(2026, 3, 22, 5, 5, 53, 979762, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 对接成功。最佳评分: -3.565
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=907740), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_9_scophthalmus_maximus_model_0_AAAAMN.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 159, 'message': '对接成功。最佳评分: -3.565', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757078177472, name='ThreadPoolExecutor-2_7'), 'time': datetime(2026, 3, 22, 5, 5, 53, 981261, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 对接成功。最佳评分: -3.565
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=908796), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_9_scophthalmus_maximus_model_0_AAAAMM.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 159, 'message': '对接成功。最佳评分: -3.565', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757329831616, name='ThreadPoolExecutor-2_6'), 'time': datetime(2026, 3, 22, 5, 5, 53, 982317, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 开始对接任务: fold_tlr_9_scophthalmus_maximus_model_0.cif + AAAAML.xaa.sdf
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=925452), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_9_scophthalmus_maximus_model_0_AAAAML.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 96, 'message': '开始对接任务: fold_tlr_9_scophthalmus_maximus_model_0.cif + AAAAML.xaa.sdf', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757799597760, name='ThreadPoolExecutor-2_1'), 'time': datetime(2026, 3, 22, 5, 5, 53, 998973, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:53 | INFO | 日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_9_scophthalmus_maximus_model_0_AAAAML.xaa.log
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=925932), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_9_scophthalmus_maximus_model_0_AAAAML.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 97, 'message': '日志文件: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/logs/fold_tlr_9_scophthalmus_maximus_model_0_AAAAML.xaa.log', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757799597760, name='ThreadPoolExecutor-2_1'), 'time': datetime(2026, 3, 22, 5, 5, 53, 999453, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:54 | INFO | 保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_9_scophthalmus_maximus_model_0...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=927192), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.vina'}, 'file': (name='vina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/vina.py'), 'function': 'save_complexes', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 140, 'message': '保存 1 个对接复合物 (PDB 格式) 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/dock_results/complex/fold_tlr_9_scophthalmus_maximus_model_0...', 'module': 'vina', 'name': 'bio_analyze_docking.engines.vina', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757799597760, name='ThreadPoolExecutor-2_1'), 'time': datetime(2026, 3, 22, 5, 5, 54, 713, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:54 | INFO | 对接成功。最佳评分: -3.565
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=927702), 'exception': None, 'extra': {'name': 'docking_task.fold_tlr_9_scophthalmus_maximus_model_0_AAAAML.xaa'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run_docking_task', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 159, 'message': '对接成功。最佳评分: -3.565', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139757799597760, name='ThreadPoolExecutor-2_1'), 'time': datetime(2026, 3, 22, 5, 5, 54, 1223, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:54 | INFO | 已保存受体配置到: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/configs.json
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=931228), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 885, 'message': '已保存受体配置到: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/configs.json', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139759082309440, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 5, 54, 4749, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:54 | INFO | Running node: Generate Docking Summary
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=932768), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: Generate Docking Summary', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4608, name='MainProcess'), 'thread': (id=139759082309440, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 5, 54, 6289, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+05:05:54 | INFO | 正在将汇总写入 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/summary.csv (格式: csv)
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=934343), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 994, 'message': '正在将汇总写入 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina/summary.csv (格式: csv)', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4608, name='MainProcess'), 'thread': (id=139759082309440, name='MainThread'), 'time': datetime(2026, 3, 22, 5, 5, 54, 7864, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
