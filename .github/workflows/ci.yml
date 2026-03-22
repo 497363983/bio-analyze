@@ -98,12 +98,12 @@ jobs:
             - name: Run Tests
               shell: bash -el {0}
               run: |
-                  pytest \ 
-                    packages \
+                  pytest \
+                    packages/*/tests \
                     --timeout=60 \
                     --junit-xml pytest.xml \
-                    --alluredir=allure-results-${{ matrix.python-version }} 
-                    --clean-alluredir
+                    --alluredir=allure-results-${{ matrix.python-version }} \
+                    --clean-alluredir \
                     --cov=packages/cli/src/bio_analyse_cli \
                     --cov=packages/core/src/bio_analyse_core \
                     --cov=packages/core/src/bio_analyse_docking \
