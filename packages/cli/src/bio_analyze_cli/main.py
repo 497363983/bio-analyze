@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Optional
 
 import typer
 
@@ -25,7 +26,7 @@ def create_app() -> typer.Typer:
 
     @app.callback()
     def _root(
-        config: Path | None = typer.Option(
+        config: Optional[Path] = typer.Option(  # noqa: UP045 - Python 3.9 compatibility for runtime type-hint evaluation in Typer
             None,
             "--config",
             envvar="BIO_ANALYSE_CONFIG",

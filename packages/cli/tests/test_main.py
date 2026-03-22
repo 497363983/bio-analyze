@@ -1,4 +1,6 @@
 import importlib
+import typing
+from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 from typer.testing import CliRunner
@@ -19,6 +21,13 @@ def test_create_app():
     registered_commands = [cmd.name for cmd in new_app.registered_commands]
     assert "plugins" in registered_commands
     assert "create" in registered_commands
+
+
+def test_root_callback_config_annotation_compatible():
+    """测试 root 回调注解可被类型系统正确解析（兼容 Python 3.9）。"""
+    callback = create_app().registered_callback.callback
+    hints = typing.get_type_hints(callback)
+    assert hints["config"] == typing.Optional[Path]
 
 
 
