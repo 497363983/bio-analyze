@@ -1,0 +1,79 @@
+08:13:15 | INFO | Running node: node1
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=3, microseconds=490706), 'exception': None, 'extra': {'name': 'resume_pipeline'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: node1', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4607, name='MainProcess'), 'thread': (id=139823204181824, name='MainThread'), 'time': datetime(2026, 3, 24, 8, 13, 15, 816418, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:13:15 | INFO | Running node: failing_node
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=3, microseconds=491534), 'exception': None, 'extra': {'name': 'resume_pipeline'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: failing_node', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4607, name='MainProcess'), 'thread': (id=139823204181824, name='MainThread'), 'time': datetime(2026, 3, 24, 8, 13, 15, 817246, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:13:15 | ERROR | Node failing_node failed: Crash!
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=3, microseconds=492115), 'exception': None, 'extra': {'name': 'resume_pipeline'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='ERROR', no=40, icon='❌'), 'line': 239, 'message': 'Node failing_node failed: Crash!', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4607, name='MainProcess'), 'thread': (id=139823204181824, name='MainThread'), 'time': datetime(2026, 3, 24, 8, 13, 15, 817827, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py", line 234, in run
+    node.run(self.context, progress, self.logger)
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/core/tests/test_pipeline.py", line 54, in run
+    raise RuntimeError("Crash!")
+RuntimeError: Crash!
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:13:15 | INFO | Loaded state from /tmp/pytest-of-runner/pytest-0/test_pipeline_persistence_and_0/resume_state.json
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=3, microseconds=494854), 'exception': None, 'extra': {'name': 'resume_pipeline'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': '_load_state', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 196, 'message': 'Loaded state from /tmp/pytest-of-runner/pytest-0/test_pipeline_persistence_and_0/resume_state.json', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4607, name='MainProcess'), 'thread': (id=139823204181824, name='MainThread'), 'time': datetime(2026, 3, 24, 8, 13, 15, 820566, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:13:15 | INFO | Skipping completed node: node1
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=3, microseconds=495558), 'exception': None, 'extra': {'name': 'resume_pipeline'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 225, 'message': 'Skipping completed node: node1', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4607, name='MainProcess'), 'thread': (id=139823204181824, name='MainThread'), 'time': datetime(2026, 3, 24, 8, 13, 15, 821270, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:13:15 | INFO | Running node: failing_node
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=3, microseconds=495897), 'exception': None, 'extra': {'name': 'resume_pipeline'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: failing_node', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4607, name='MainProcess'), 'thread': (id=139823204181824, name='MainThread'), 'time': datetime(2026, 3, 24, 8, 13, 15, 821609, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:13:15 | INFO | Running node: node2
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=3, microseconds=496607), 'exception': None, 'extra': {'name': 'resume_pipeline'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: node2', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4607, name='MainProcess'), 'thread': (id=139823204181824, name='MainThread'), 'time': datetime(2026, 3, 24, 8, 13, 15, 822319, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
