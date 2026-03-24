@@ -10,6 +10,7 @@
 - **中文注释**：代码注释全中文，便于开发者阅读和二次开发。
 - **LaTeX 支持**：自动解析坐标轴标签中的 LaTeX 公式（如 `$y = \sin(x)$`）。
 - **统一 CLI**：所有图表均可通过统一的命令行接口调用。
+- **MSA 颜色自定义**：MSA 图支持自定义碱基/氨基酸颜色映射（例如 `{"A": "#000000"}`），满足个性化配色需求。
 
 ## 🎨 主题定制 (Themes)
 
@@ -43,6 +44,32 @@ bio-analyze plot volcano result.csv --theme science
 ```
 
 使用: `bio-analyze plot volcano ... --theme ./my_theme.json`
+
+还可以在主题文件中通过 `chart_specific_params` 配置各图参数：
+
+```json
+{
+  "name": "custom_with_chart_params",
+  "chart_specific_params": {
+    "msa": {
+      "seq_type": "aa",
+      "show_logo": false,
+      "bases_per_line": 60,
+      "rc_params": {
+        "axes.facecolor": "#f7f7f7"
+      },
+      "base_colors": {
+        "A": "#111111",
+        "-": "#f8f8f8"
+      }
+    }
+  }
+}
+```
+
+`chart_specific_params` 当前支持的图表键包括：`bar`、`box`、`chromosome`、`gsea`、`heatmap`、`line`、`msa`、`pca`、`pie`、`scatter`、`tree`、`volcano`。
+
+完整的“按图类型参数清单”请见：[主题图表参数总览](./theme-chart-specific-params.md)。
 
 ## 💻 开发 (Development)
 

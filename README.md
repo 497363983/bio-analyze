@@ -18,8 +18,9 @@ The toolbox currently includes the following core modules, each can be used inde
 | Module Name              | Path                 | Description                                                                                      | Key Features                                      |
 | :----------------------- | :------------------- | :----------------------------------------------------------------------------------------------- | :----------------------------------------------- |
 | 🧬**RNA-Seq Analysis** | `packages/rna_seq` | SRA download, QC (FastQC/fastp), alignment (STAR), quantification (Salmon), differential expression (DESeq2), enrichment analysis (GO/KEGG) | Fully automated pipeline, one-click HTML report generation, automatic reference genome |
-| 📊**Plotting Tools**     | `packages/plot`    | Volcano plots, heatmaps, PCA, bar charts (with error bars/significance markers), line plots, pie charts, chromosome coverage plots | Nature/Science themes, Chinese support, publication quality |
+| 📊**Plotting Tools**     | `packages/plot`    | Volcano plots, heatmaps, PCA, bar charts (with error bars/significance markers), line plots, pie charts, chromosome coverage plots, MSA plots, phylogenetic trees | Nature/Science themes, Chinese support, publication quality |
 | 🧪**Molecular Docking** | `packages/docking` | Receptor/ligand preparation, docking simulation configuration and execution                     | Simplified docking workflow, unified CLI interface |
+| 🧬**MSA & Phylogeny** | `packages/msa`     | Multiple Sequence Alignment (MAFFT, MUSCLE, Python), Phylogenetic tree construction (Distance-based, FastTree) | Seamless integration with external tools, pure Python fallback, automated tree building |
 | 🛠️**Core Components** | `packages/core`    | Log management, configuration loading, subprocess management, file I/O                          | Provides underlying common capabilities for all modules |
 | 🖥️**CLI Entry Point** | `packages/cli`     | Unified CLI framework, plugin loading, template creation                                         | Provides `bioanalyze` main command with plugin extension support |
 
@@ -33,7 +34,7 @@ The toolbox currently includes the following core modules, each can be used inde
 
 ```powershell
 uv venv
-uv pip install -e packages/core -e packages/cli -e packages/transcriptome -e packages/docking
+uv pip install -e packages/core -e packages/cli -e packages/transcriptome -e packages/docking -e packages/msa -e packages/plot
 .venv\Scripts\bioanalyze.exe plugins
 ```
 

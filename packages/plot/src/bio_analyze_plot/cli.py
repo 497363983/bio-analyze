@@ -14,6 +14,8 @@ from .commands.pca import pca_cmd
 from .commands.pie import pie_cmd
 from .commands.scatter import scatter_cmd
 from .commands.volcano import volcano_cmd
+from .commands.msa import msa_cmd
+from .commands.tree import tree_cmd
 
 
 def get_app() -> typer.Typer:
@@ -29,6 +31,8 @@ def get_app() -> typer.Typer:
     app.command("pie")(pie_cmd)
     app.command("gsea")(gsea_cmd)
     app.command("chromosome")(chromosome_cmd)
+    app.command("msa")(msa_cmd)
+    app.command("tree")(tree_cmd)
 
     localize_app(app, detect_language())
     return app

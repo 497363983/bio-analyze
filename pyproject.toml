@@ -7,6 +7,7 @@ bio-analyze-cli = { workspace = true }
 bio-analyze-rna-seq = { workspace = true }
 bio-analyze-docking = { workspace = true }
 bio-analyze-plot = { workspace = true }
+bio-analyze-msa = { workspace = true }
 
 [tool.ruff]
 line-length = 120
@@ -29,7 +30,7 @@ select = [
 ignore = ["RUF003", "RUF002", "B008"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["bio_analyze_core", "bio_analyze_cli", "bio_analyze_rna_seq", "docking", "bio_plot"]
+known-first-party = ["bio_analyze_core", "bio_analyze_cli", "bio_analyze_rna_seq", "docking", "bio_plot", "bio_analyze_msa"]
 
 [tool.ruff.format]
 quote-style = "double"

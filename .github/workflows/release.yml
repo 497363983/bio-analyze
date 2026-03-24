@@ -1,115 +1,121 @@
 name: Publish to PyPI
 
 on:
-  workflow_run:
-    workflows: ["CI"]
-    types:
-      - completed
+    push:
+        branches: [main]
+        tags:
+            - "packages/*/v*"
+    pull_request:
+        branches: [main]
+    workflow_run:
+        workflows: ["CI"]
+        types:
+            - completed
 
 permissions:
-  contents: write
-  id-token: write
+    contents: write
+    id-token: write
 
 jobs:
-  release:
-    name: Build and Publish
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' && startsWith(github.event.workflow_run.head_branch, 'packages/') && contains(github.event.workflow_run.head_branch, '/v') }}
+    release:
+        name: Build and Publish
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' && startsWith(github.event.workflow_run.head_branch, 'packages/') && contains(github.event.workflow_run.head_branch, '/v') }}
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.workflow_run.head_sha }}
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+                  ref: ${{ github.event.workflow_run.head_sha }}
 
-      - name: Parse Tag
-        id: parse_tag
-        run: |
-          # In a workflow_run event triggered by a tag, head_branch contains the tag name
-          TAG_NAME="${{ github.event.workflow_run.head_branch }}"
-          IFS='/' read -r _ PKG_NAME TAG_VERSION <<< "$TAG_NAME"
-          VERSION=${TAG_VERSION#v}
+            - name: Parse Tag
+              id: parse_tag
+              run: |
+                  # In a workflow_run event triggered by a tag, head_branch contains the tag name
+                  TAG_NAME="${{ github.event.workflow_run.head_branch }}"
+                  IFS='/' read -r _ PKG_NAME TAG_VERSION <<< "$TAG_NAME"
+                  VERSION=${TAG_VERSION#v}
 
-          # Check if this is a prerelease (contains -, a, b, rc, etc.)
-          if [[ "$VERSION" =~ [a-zA-Z-] ]]; then
-            PRERELEASE="true"
-          else
-            PRERELEASE="false"
-          fi
+                  # Check if this is a prerelease (contains -, a, b, rc, etc.)
+                  if [[ "$VERSION" =~ [a-zA-Z-] ]]; then
+                    PRERELEASE="true"
+                  else
+                    PRERELEASE="false"
+                  fi
 
-          echo "PACKAGE_NAME=${PKG_NAME}" >> $GITHUB_ENV
-          echo "VERSION=${VERSION}" >> $GITHUB_ENV
-          echo "PRERELEASE=${PRERELEASE}" >> $GITHUB_ENV
-          echo "Parsed Package: $PKG_NAME, Version: $VERSION, Prerelease: $PRERELEASE"
+                  echo "PACKAGE_NAME=${PKG_NAME}" >> $GITHUB_ENV
+                  echo "VERSION=${VERSION}" >> $GITHUB_ENV
+                  echo "PRERELEASE=${PRERELEASE}" >> $GITHUB_ENV
+                  echo "Parsed Package: $PKG_NAME, Version: $VERSION, Prerelease: $PRERELEASE"
 
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v7
+            - name: Set up uv
+              uses: astral-sh/setup-uv@v7
 
-      - name: Bump Version
-        run: |
-          cd packages/${{ env.PACKAGE_NAME }}
-          uv version ${{ env.VERSION }}
+            - name: Bump Version
+              run: |
+                  cd packages/${{ env.PACKAGE_NAME }}
+                  uv version ${{ env.VERSION }}
 
-      - name: Build Package
-        run: |
-          cd packages/${{ env.PACKAGE_NAME }}
-          uv build --out-dir dist
+            - name: Build Package
+              run: |
+                  cd packages/${{ env.PACKAGE_NAME }}
+                  uv build --out-dir dist
 
-      - name: Publish to PyPI
-        run: |
-          cd packages/${{ env.PACKAGE_NAME }}
-          uv publish dist/* --trusted-publishing always
+            - name: Publish to PyPI
+              run: |
+                  cd packages/${{ env.PACKAGE_NAME }}
+                  uv publish dist/* --trusted-publishing always
 
-      - name: Commit and Push Version Bump
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            - name: Commit and Push Version Bump
+              run: |
+                  git config --global user.name "github-actions[bot]"
+                  git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git restore packages/${{ env.PACKAGE_NAME }}/pyproject.toml
+                  git restore packages/${{ env.PACKAGE_NAME }}/pyproject.toml
 
-          git fetch origin main
-          git checkout main
+                  git fetch origin main
+                  git checkout main
 
-          cd packages/${{ env.PACKAGE_NAME }}
-          uv version ${{ env.VERSION }}
+                  cd packages/${{ env.PACKAGE_NAME }}
+                  uv version ${{ env.VERSION }}
 
-          cd ../../
+                  cd ../../
 
-          # Generate changelog for this specific package using git-cliff
-          # Use --include-path to only include commits that touched this package's directory
-          touch packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md
+                  # Generate changelog for this specific package using git-cliff
+                  # Use --include-path to only include commits that touched this package's directory
+                  touch packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md
 
-          if [ "${{ env.PRERELEASE }}" = "false" ]; then
-            # For formal releases, combine all commits since the last formal release
-            # This generates a single changelog entry containing all commits from alpha/beta/rc versions
-            # NOTE: Do not pass --repository URL here; git-cliff should use local git context in Actions.
-            uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased --ignore-tags ".*-(alpha|beta|rc).*"
+                  if [ "${{ env.PRERELEASE }}" = "false" ]; then
+                    # For formal releases, combine all commits since the last formal release
+                    # This generates a single changelog entry containing all commits from alpha/beta/rc versions
+                    # NOTE: Do not pass --repository URL here; git-cliff should use local git context in Actions.
+                    uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased --ignore-tags ".*-(alpha|beta|rc).*"
 
-            # Generate release notes for GitHub Release ignoring prerelease tags
-            uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --unreleased --strip all --ignore-tags ".*-(alpha|beta|rc).*" > release_notes.md
-          else
-            # For prereleases, generate normal incremental changelog
-            uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased
+                    # Generate release notes for GitHub Release ignoring prerelease tags
+                    uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --unreleased --strip all --ignore-tags ".*-(alpha|beta|rc).*" > release_notes.md
+                  else
+                    # For prereleases, generate normal incremental changelog
+                    uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --prepend packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md --unreleased
 
-            # Generate release notes for GitHub Release
-            uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --unreleased --strip all > release_notes.md
-          fi
+                    # Generate release notes for GitHub Release
+                    uvx git-cliff@latest --config cliff.toml --include-path "packages/${{ env.PACKAGE_NAME }}/**" --tag "v${{ env.VERSION }}" --unreleased --strip all > release_notes.md
+                  fi
 
-          git add packages/${{ env.PACKAGE_NAME }}/pyproject.toml packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md
-          if ! git diff --staged --quiet; then
-            git commit -m "chore(release): bump ${{ env.PACKAGE_NAME }} version to ${{ env.VERSION }} and update changelog"
-            git push origin main
-          else
-            echo "No changes to commit."
-          fi
+                  git add packages/${{ env.PACKAGE_NAME }}/pyproject.toml packages/${{ env.PACKAGE_NAME }}/CHANGELOG.md
+                  if ! git diff --staged --quiet; then
+                    git commit -m "chore(release): bump ${{ env.PACKAGE_NAME }} version to ${{ env.VERSION }} and update changelog"
+                    git push origin main
+                  else
+                    echo "No changes to commit."
+                  fi
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: packages/${{ env.PACKAGE_NAME }}/v${{ env.VERSION }}
-          body_path: release_notes.md
-          name: ${{ env.PACKAGE_NAME }} v${{ env.VERSION }}
-          prerelease: ${{ env.PRERELEASE == 'true' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2
+              with:
+                  tag_name: packages/${{ env.PACKAGE_NAME }}/v${{ env.VERSION }}
+                  body_path: release_notes.md
+                  name: ${{ env.PACKAGE_NAME }} v${{ env.VERSION }}
+                  prerelease: ${{ env.PRERELEASE == 'true' }}
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -33,28 +33,25 @@ def save_plot(func: F) -> F:
 
     @functools.wraps(func)
     def wrapper(*args: Any, **kwargs: Any) -> Any:
-        # 检查 kwargs 中是否有 'output'
         output = kwargs.pop("output", None)
+        plotter = args[0] if args else None
+        chart_type = plotter.infer_chart_type() if isinstance(plotter, BasePlot) else None
+        rc_params = plotter.get_chart_rc_params(chart_type) if chart_type and isinstance(plotter, BasePlot) else {}
+        if rc_params:
+            with plt.rc_context(rc=rc_params):
+                result = func(*args, **kwargs)
+        else:
+            result = func(*args, **kwargs)
 
-        # 运行绘图函数
-        result = func(*args, **kwargs)
-
-        # 如果指定了 output，则保存
         if output:
             if isinstance(result, Figure):
                 fig = result
             else:
-                # 尝试获取当前 figure
                 fig = plt.gcf()
 
             output_path = Path(output)
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            # 保存
             fig.savefig(output_path, dpi=300, bbox_inches="tight")
-            # 不要在保存后关闭，因为可能还要在测试中检查它
-            # 或者，如果这是最后一步，应该关闭以释放内存。
-            # 但为了测试方便，通常保留对象。
-            # 不过 CLI 运行完就退出了。
 
         return result
 
@@ -80,13 +77,27 @@ class BasePlot(ABC):
         self.theme = theme
         set_theme(theme)
 
-        # 获取当前主题对象，以便访问 chart_specific_params
-        # set_theme 已经应用了主题，但我们需要对象本身来获取额外参数
         self.theme_obj = None
         if theme in THEMES:
             self.theme_obj = THEMES[theme]
         else:
             self.theme_obj = load_custom_theme(theme)
+
+    def infer_chart_type(self) -> str:
+        class_name = self.__class__.__name__
+        if class_name.lower().endswith("plot"):
+            return class_name[:-4].lower()
+        return class_name.lower()
+
+    def _get_chart_params_raw(self, chart_type: str) -> dict[str, Any]:
+        if not self.theme_obj:
+            return {}
+        params = self.theme_obj.get_chart_params(chart_type)
+        if params is None:
+            return {}
+        if not isinstance(params, dict):
+            raise ValueError(f"chart_specific_params['{chart_type}'] must be a dictionary")
+        return params
 
     def get_chart_specific_params(self, chart_type: str) -> dict[str, Any]:
         """
@@ -103,9 +114,18 @@ class BasePlot(ABC):
                 zh: 配置参数字典
                 en: Configuration parameters dictionary
         """
-        if self.theme_obj:
-            return self.theme_obj.get_chart_params(chart_type)
-        return {}
+        params = self._get_chart_params_raw(chart_type)
+        params.pop("rc_params", None)
+        return params
+
+    def get_chart_rc_params(self, chart_type: str) -> dict[str, Any]:
+        params = self._get_chart_params_raw(chart_type)
+        rc_params = params.get("rc_params", {})
+        if rc_params is None:
+            return {}
+        if not isinstance(rc_params, dict):
+            raise ValueError(f"chart_specific_params['{chart_type}']['rc_params'] must be a dictionary")
+        return rc_params.copy()
 
     def get_fig_ax(self, figsize: tuple[float, float] | None = None) -> tuple[Figure, Axes]:
         """
