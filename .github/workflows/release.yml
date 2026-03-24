@@ -1,6 +1,10 @@
 name: Publish to PyPI
 
 on:
+    push:
+        branches: [main]
+        tags:
+            - 'packages/*/v*'
     workflow_run:
         workflows: ["CI"]
         types:
@@ -14,6 +18,7 @@ jobs:
     release:
         name: Build and Publish
         runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
         if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
 
         steps:
@@ -31,9 +36,24 @@ jobs:
               run: |
                   git fetch --force --tags
                   HEAD_SHA="${{ github.event.workflow_run.head_sha }}"
-                  mapfile -t CANDIDATE_TAGS < <(git tag --merged "$HEAD_SHA" --list 'packages/*/v*' --sort=creatordate)
+                  PREV_MAIN_SHA="$(git rev-parse "${HEAD_SHA}^1" 2>/dev/null || true)"
 
-                  SELECTED_TAG=""
+                  if [ -n "$PREV_MAIN_SHA" ]; then
+                    mapfile -t CANDIDATE_TAGS < <(git tag --merged "$HEAD_SHA" --no-merged "$PREV_MAIN_SHA" --list 'packages/*/v*')
+                  else
+                    mapfile -t CANDIDATE_TAGS < <(git tag --merged "$HEAD_SHA" --list 'packages/*/v*')
+                  fi
+
+                  if [ "${#CANDIDATE_TAGS[@]}" -eq 0 ]; then
+                    echo "No candidate tags introduced by this main commit."
+                    echo "SHOULD_RELEASE=false" >> $GITHUB_ENV
+                    exit 0
+                  fi
+
+                  echo "Candidate tags introduced by this commit:"
+                  printf '%s\n' "${CANDIDATE_TAGS[@]}"
+
+                  SELECTED_TAGS=()
                   for TAG in "${CANDIDATE_TAGS[@]}"; do
                     TAG_COMMIT="$(git rev-list -n 1 "$TAG")"
                     if ! git merge-base --is-ancestor "$TAG_COMMIT" "$HEAD_SHA"; then
@@ -42,16 +62,21 @@ jobs:
                     if gh release view "$TAG" >/dev/null 2>&1; then
                       continue
                     fi
-                    SELECTED_TAG="$TAG"
+                    SELECTED_TAGS+=("$TAG")
                   done
 
-                  if [ -z "$SELECTED_TAG" ]; then
+                  if [ "${#SELECTED_TAGS[@]}" -eq 0 ]; then
                     echo "No unreleased tag merged into main for SHA: $HEAD_SHA"
                     echo "SHOULD_RELEASE=false" >> $GITHUB_ENV
                     exit 0
                   fi
 
-                  TAG_NAME="$SELECTED_TAG"
+                  if [ "${#SELECTED_TAGS[@]}" -gt 1 ]; then
+                    echo "Multiple unreleased tags detected in this merge; selecting latest by version sort."
+                    printf '%s\n' "${SELECTED_TAGS[@]}"
+                  fi
+
+                  TAG_NAME="$(printf '%s\n' "${SELECTED_TAGS[@]}" | sort -V | tail -n 1)"
                   IFS='/' read -r _ PKG_NAME TAG_VERSION <<< "$TAG_NAME"
                   VERSION=${TAG_VERSION#v}
 
