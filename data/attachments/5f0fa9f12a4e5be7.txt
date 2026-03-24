@@ -1,0 +1,90 @@
+09:05:41 | INFO | Running node: Batch Receptor Preparation
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=600358), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: Batch Receptor Preparation', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4706, name='MainProcess'), 'thread': (id=139779695208256, name='MainThread'), 'time': datetime(2026, 3, 24, 9, 5, 41, 450299, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+09:05:41 | INFO | 恢复受体准备。剩余: 2
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=601104), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 356, 'message': '恢复受体准备。剩余: 2', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4706, name='MainProcess'), 'thread': (id=139779695208256, name='MainThread'), 'time': datetime(2026, 3, 24, 9, 5, 41, 451045, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+09:05:41 | INFO | Running node: Batch Ligand Preparation
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=603338), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: Batch Ligand Preparation', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4706, name='MainProcess'), 'thread': (id=139779695208256, name='MainThread'), 'time': datetime(2026, 3, 24, 9, 5, 41, 453279, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+09:05:41 | INFO | 恢复配体准备。剩余: 1
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=604030), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 508, 'message': '恢复配体准备。剩余: 1', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4706, name='MainProcess'), 'thread': (id=139779695208256, name='MainThread'), 'time': datetime(2026, 3, 24, 9, 5, 41, 453971, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+09:05:41 | INFO | Running node: Batch Docking
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=605425), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: Batch Docking', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4706, name='MainProcess'), 'thread': (id=139779695208256, name='MainThread'), 'time': datetime(2026, 3, 24, 9, 5, 41, 455366, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+09:05:41 | INFO | 开始批量对接。总计: 2, 已完成: 0
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=606044), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 740, 'message': '开始批量对接。总计: 2, 已完成: 0', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4706, name='MainProcess'), 'thread': (id=139779695208256, name='MainThread'), 'time': datetime(2026, 3, 24, 9, 5, 41, 455985, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+09:05:41 | INFO | 已保存受体配置到: /tmp/pytest-of-runner/pytest-0/test_batch_docking_node_with_b0/output/configs.json
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=607371), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 885, 'message': '已保存受体配置到: /tmp/pytest-of-runner/pytest-0/test_batch_docking_node_with_b0/output/configs.json', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4706, name='MainProcess'), 'thread': (id=139779695208256, name='MainThread'), 'time': datetime(2026, 3, 24, 9, 5, 41, 457312, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+09:05:41 | INFO | Running node: Generate Docking Summary
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=608114), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='pipeline.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/pipeline.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 230, 'message': 'Running node: Generate Docking Summary', 'module': 'pipeline', 'name': 'bio_analyze_core.pipeline', 'process': (id=4706, name='MainProcess'), 'thread': (id=139779695208256, name='MainThread'), 'time': datetime(2026, 3, 24, 9, 5, 41, 458055, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+09:05:41 | INFO | 正在将汇总写入 /tmp/pytest-of-runner/pytest-0/test_batch_docking_node_with_b0/output/docking_summary.csv (格式: csv)
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=609474), 'exception': None, 'extra': {'name': 'batch_docking'}, 'file': (name='nodes.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/nodes.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 994, 'message': '正在将汇总写入 /tmp/pytest-of-runner/pytest-0/test_batch_docking_node_with_b0/output/docking_summary.csv (格式: csv)', 'module': 'nodes', 'name': 'bio_analyze_docking.nodes', 'process': (id=4706, name='MainProcess'), 'thread': (id=139779695208256, name='MainThread'), 'time': datetime(2026, 3, 24, 9, 5, 41, 459415, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
