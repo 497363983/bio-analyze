@@ -104,11 +104,11 @@ jobs:
                     --junit-xml pytest.xml \
                     --alluredir=allure-results-${{ matrix.python-version }} \
                     --clean-alluredir \
-                    --cov=packages/cli/src/bio_analyse_cli \
-                    --cov=packages/core/src/bio_analyse_core \
-                    --cov=packages/core/src/bio_analyse_docking \
-                    --cov=packages/core/src/bio_analyse_plot \
-                    --cov=packages/core/src/bio_analyse_rna_seq \
+                    --cov=packages/cli/src/bio_analyze_cli \
+                    --cov=packages/core/src/bio_analyze_core \
+                    --cov=packages/docking/src/bio_analyze_docking \
+                    --cov=packages/plot/src/bio_analyze_plot \
+                    --cov=packages/rna_seq/src/bio_analyze_rna_seq \
                     --cov-report=term \
                     --cov-report=xml:coverage.xml
             - name: Upload to Codecov
