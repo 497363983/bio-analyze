@@ -14,6 +14,8 @@ from .pca import PCAPlot
 from .pie import PiePlot
 from .scatter import ScatterPlot
 from .volcano import VolcanoPlot
+from .msa import MsaPlot
+from .tree import TreePlot
 
 __all__ = [
     "BarPlot",
@@ -27,4 +29,6 @@ __all__ = [
     "PiePlot",
     "ScatterPlot",
     "VolcanoPlot",
+    "MsaPlot",
+    "TreePlot",
 ]

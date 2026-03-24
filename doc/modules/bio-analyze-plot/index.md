@@ -10,6 +10,7 @@
 - **Chinese Comments**: Code comments are in Chinese, facilitating understanding and secondary development for developers.
 - **LaTeX Support**: Automatically parses LaTeX formulas in axis labels (e.g., `$y = \sin(x)$`).
 - **Unified CLI**: All charts can be invoked through a unified command-line interface.
+- **MSA Color Customization**: MSA plots support custom residue color mapping (for example `{"A": "#000000"}`) to meet personalized coloring rules.
 
 ## 🎨 Themes
 
@@ -43,6 +44,32 @@ Create `my_theme.json`:
 ```
 
 Usage: `bio-analyze plot volcano ... --theme ./my_theme.json`
+
+You can also configure chart arguments through `chart_specific_params` in theme files:
+
+```json
+{
+  "name": "custom_with_chart_params",
+  "chart_specific_params": {
+    "msa": {
+      "seq_type": "aa",
+      "show_logo": false,
+      "bases_per_line": 60,
+      "rc_params": {
+        "axes.facecolor": "#f7f7f7"
+      },
+      "base_colors": {
+        "A": "#111111",
+        "-": "#f8f8f8"
+      }
+    }
+  }
+}
+```
+
+Supported chart keys for `chart_specific_params`: `bar`, `box`, `chromosome`, `gsea`, `heatmap`, `line`, `msa`, `pca`, `pie`, `scatter`, `tree`, `volcano`.
+
+For a complete per-chart parameter catalog, see [Theme Chart-Specific Parameters](./theme-chart-specific-params.md).
 
 ## 💻 Development
 
