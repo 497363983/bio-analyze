@@ -14,7 +14,7 @@ jobs:
     release:
         name: Build and Publish
         runs-on: ubuntu-latest
-        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
 
         steps:
             - name: Checkout code
@@ -26,17 +26,32 @@ jobs:
 
             - name: Parse Tag
               id: parse_tag
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   git fetch --force --tags
                   HEAD_SHA="${{ github.event.workflow_run.head_sha }}"
-                  TAG_NAME="$(git tag --points-at "$HEAD_SHA" | grep -E '^packages/[^/]+/v.+' | head -n 1)"
+                  mapfile -t CANDIDATE_TAGS < <(git tag --merged "$HEAD_SHA" --list 'packages/*/v*' --sort=creatordate)
 
-                  if [ -z "$TAG_NAME" ]; then
-                    echo "No release tag found on SHA: $HEAD_SHA"
+                  SELECTED_TAG=""
+                  for TAG in "${CANDIDATE_TAGS[@]}"; do
+                    TAG_COMMIT="$(git rev-list -n 1 "$TAG")"
+                    if ! git merge-base --is-ancestor "$TAG_COMMIT" "$HEAD_SHA"; then
+                      continue
+                    fi
+                    if gh release view "$TAG" >/dev/null 2>&1; then
+                      continue
+                    fi
+                    SELECTED_TAG="$TAG"
+                  done
+
+                  if [ -z "$SELECTED_TAG" ]; then
+                    echo "No unreleased tag merged into main for SHA: $HEAD_SHA"
                     echo "SHOULD_RELEASE=false" >> $GITHUB_ENV
                     exit 0
                   fi
 
+                  TAG_NAME="$SELECTED_TAG"
                   IFS='/' read -r _ PKG_NAME TAG_VERSION <<< "$TAG_NAME"
                   VERSION=${TAG_VERSION#v}
 
