@@ -1,0 +1,20 @@
+09:07:32 | INFO | 设置 Smina 搜索盒子 (中心=[10.0, 10.0, 10.0], 尺寸=[20.0, 20.0, 20.0])...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=47, microseconds=619182), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.smina'}, 'file': (name='smina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/smina.py'), 'function': 'compute_box', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 89, 'message': '设置 Smina 搜索盒子 (中心=[10.0, 10.0, 10.0], 尺寸=[20.0, 20.0, 20.0])...', 'module': 'smina', 'name': 'bio_analyze_docking.engines.smina', 'process': (id=4681, name='MainProcess'), 'thread': (id=140717244462912, name='MainThread'), 'time': datetime(2026, 3, 24, 9, 7, 32, 133642, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+09:07:32 | INFO | 执行 Smina 命令: /mock/path/to/smina --receptor receptor.pdbqt --ligand ligand.pdbqt --center_x 10.0 --center_y 10.0 --center_z 10.0 --size_x 20.0 --size_y 20.0 --size_z 20.0 --exhaustiveness 1 --num_modes 1 --min_rmsd_filter 1.0 --out output/smina_out.pdbqt --cpu 4
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=47, microseconds=619463), 'exception': None, 'extra': {'name': 'bio_analyze_docking.engines.smina'}, 'file': (name='smina.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/engines/smina.py'), 'function': 'dock', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 145, 'message': '执行 Smina 命令: /mock/path/to/smina --receptor receptor.pdbqt --ligand ligand.pdbqt --center_x 10.0 --center_y 10.0 --center_z 10.0 --size_x 20.0 --size_y 20.0 --size_z 20.0 --exhaustiveness 1 --num_modes 1 --min_rmsd_filter 1.0 --out output/smina_out.pdbqt --cpu 4', 'module': 'smina', 'name': 'bio_analyze_docking.engines.smina', 'process': (id=4681, name='MainProcess'), 'thread': (id=140717244462912, name='MainThread'), 'time': datetime(2026, 3, 24, 9, 7, 32, 133923, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
