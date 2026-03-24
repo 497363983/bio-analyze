@@ -31,3 +31,7 @@ component_management:
       name: cli
       paths:
         - packages/cli/src/bio_analyze_cli
+    - component_id: msa
+      name: msa
+      paths:
+        - packages/msa/src/bio_analyze_msa
