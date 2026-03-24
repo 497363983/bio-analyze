@@ -1,0 +1,40 @@
+08:09:30 | INFO | Reading alignment from /home/runner/work/bio-analyze/bio-analyze/packages/msa/tests/data/aligned_cli.fasta
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=49, microseconds=727390), 'exception': None, 'extra': {'name': 'bio_analyze_msa.tree.distance'}, 'file': (name='distance.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/msa/src/bio_analyze_msa/tree/distance.py'), 'function': 'build', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 37, 'message': 'Reading alignment from /home/runner/work/bio-analyze/bio-analyze/packages/msa/tests/data/aligned_cli.fasta', 'module': 'distance', 'name': 'bio_analyze_msa.tree.distance', 'process': (id=5327, name='MainProcess'), 'thread': (id=139667758188352, name='MainThread'), 'time': datetime(2026, 3, 24, 8, 9, 30, 278044, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:09:30 | INFO | Calculating distance matrix using model 'identity'
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=49, microseconds=728020), 'exception': None, 'extra': {'name': 'bio_analyze_msa.tree.distance'}, 'file': (name='distance.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/msa/src/bio_analyze_msa/tree/distance.py'), 'function': 'build', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 40, 'message': "Calculating distance matrix using model 'identity'", 'module': 'distance', 'name': 'bio_analyze_msa.tree.distance', 'process': (id=5327, name='MainProcess'), 'thread': (id=139667758188352, name='MainThread'), 'time': datetime(2026, 3, 24, 8, 9, 30, 278674, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:09:30 | INFO | Building UPGMA tree
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=49, microseconds=728782), 'exception': None, 'extra': {'name': 'bio_analyze_msa.tree.distance'}, 'file': (name='distance.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/msa/src/bio_analyze_msa/tree/distance.py'), 'function': 'build', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 44, 'message': 'Building UPGMA tree', 'module': 'distance', 'name': 'bio_analyze_msa.tree.distance', 'process': (id=5327, name='MainProcess'), 'thread': (id=139667758188352, name='MainThread'), 'time': datetime(2026, 3, 24, 8, 9, 30, 279436, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:09:30 | INFO | Saving tree to /tmp/pytest-of-runner/pytest-0/test_distance_tree0/tree.nwk
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=49, microseconds=730134), 'exception': None, 'extra': {'name': 'bio_analyze_msa.tree.distance'}, 'file': (name='distance.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/msa/src/bio_analyze_msa/tree/distance.py'), 'function': 'build', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 51, 'message': 'Saving tree to /tmp/pytest-of-runner/pytest-0/test_distance_tree0/tree.nwk', 'module': 'distance', 'name': 'bio_analyze_msa.tree.distance', 'process': (id=5327, name='MainProcess'), 'thread': (id=139667758188352, name='MainThread'), 'time': datetime(2026, 3, 24, 8, 9, 30, 280788, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
