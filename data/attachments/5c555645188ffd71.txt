@@ -1,0 +1,20 @@
+07:36:31 | INFO | Running MUSCLE on /home/runner/work/bio-analyze/bio-analyze/packages/msa/tests/data/sample.fasta
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=48, microseconds=463757), 'exception': None, 'extra': {'name': 'bio_analyze_msa.aligners.muscle'}, 'file': (name='muscle.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/msa/src/bio_analyze_msa/aligners/muscle.py'), 'function': 'align', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 58, 'message': 'Running MUSCLE on /home/runner/work/bio-analyze/bio-analyze/packages/msa/tests/data/sample.fasta', 'module': 'muscle', 'name': 'bio_analyze_msa.aligners.muscle', 'process': (id=4676, name='MainProcess'), 'thread': (id=140136423077696, name='MainThread'), 'time': datetime(2026, 3, 24, 7, 36, 31, 311894, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+07:36:31 | INFO | MUSCLE alignment saved to /tmp/pytest-of-runner/pytest-0/test_muscle_aligner0/out.fasta
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=48, microseconds=464178), 'exception': None, 'extra': {'name': 'bio_analyze_msa.aligners.muscle'}, 'file': (name='muscle.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/msa/src/bio_analyze_msa/aligners/muscle.py'), 'function': 'align', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 61, 'message': 'MUSCLE alignment saved to /tmp/pytest-of-runner/pytest-0/test_muscle_aligner0/out.fasta', 'module': 'muscle', 'name': 'bio_analyze_msa.aligners.muscle', 'process': (id=4676, name='MainProcess'), 'thread': (id=140136423077696, name='MainThread'), 'time': datetime(2026, 3, 24, 7, 36, 31, 312315, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
