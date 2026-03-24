@@ -14,7 +14,7 @@ jobs:
     release:
         name: Build and Publish
         runs-on: ubuntu-latest
-        if: ${{ github.event.workflow_run.conclusion == 'success' && startsWith(github.event.workflow_run.head_branch, 'packages/') && contains(github.event.workflow_run.head_branch, '/v') }}
+        if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
 
         steps:
             - name: Checkout code
@@ -22,12 +22,36 @@ jobs:
               with:
                   fetch-depth: 0
                   ref: ${{ github.event.workflow_run.head_sha }}
+                  fetch-tags: true
 
             - name: Parse Tag
               id: parse_tag
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                  # In a workflow_run event triggered by a tag, head_branch contains the tag name
-                  TAG_NAME="${{ github.event.workflow_run.head_branch }}"
+                  git fetch --force --tags
+                  HEAD_SHA="${{ github.event.workflow_run.head_sha }}"
+                  mapfile -t CANDIDATE_TAGS < <(git tag --merged "$HEAD_SHA" --list 'packages/*/v*' --sort=creatordate)
+
+                  SELECTED_TAG=""
+                  for TAG in "${CANDIDATE_TAGS[@]}"; do
+                    TAG_COMMIT="$(git rev-list -n 1 "$TAG")"
+                    if ! git merge-base --is-ancestor "$TAG_COMMIT" "$HEAD_SHA"; then
+                      continue
+                    fi
+                    if gh release view "$TAG" >/dev/null 2>&1; then
+                      continue
+                    fi
+                    SELECTED_TAG="$TAG"
+                  done
+
+                  if [ -z "$SELECTED_TAG" ]; then
+                    echo "No unreleased tag merged into main for SHA: $HEAD_SHA"
+                    echo "SHOULD_RELEASE=false" >> $GITHUB_ENV
+                    exit 0
+                  fi
+
+                  TAG_NAME="$SELECTED_TAG"
                   IFS='/' read -r _ PKG_NAME TAG_VERSION <<< "$TAG_NAME"
                   VERSION=${TAG_VERSION#v}
 
@@ -38,30 +62,37 @@ jobs:
                     PRERELEASE="false"
                   fi
 
+                  echo "SHOULD_RELEASE=true" >> $GITHUB_ENV
+                  echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
                   echo "PACKAGE_NAME=${PKG_NAME}" >> $GITHUB_ENV
                   echo "VERSION=${VERSION}" >> $GITHUB_ENV
                   echo "PRERELEASE=${PRERELEASE}" >> $GITHUB_ENV
                   echo "Parsed Package: $PKG_NAME, Version: $VERSION, Prerelease: $PRERELEASE"
 
             - name: Set up uv
+              if: ${{ env.SHOULD_RELEASE == 'true' }}
               uses: astral-sh/setup-uv@v7
 
             - name: Bump Version
+              if: ${{ env.SHOULD_RELEASE == 'true' }}
               run: |
                   cd packages/${{ env.PACKAGE_NAME }}
                   uv version ${{ env.VERSION }}
 
             - name: Build Package
+              if: ${{ env.SHOULD_RELEASE == 'true' }}
               run: |
                   cd packages/${{ env.PACKAGE_NAME }}
                   uv build --out-dir dist
 
             - name: Publish to PyPI
+              if: ${{ env.SHOULD_RELEASE == 'true' }}
               run: |
                   cd packages/${{ env.PACKAGE_NAME }}
                   uv publish dist/* --trusted-publishing always
 
             - name: Commit and Push Version Bump
+              if: ${{ env.SHOULD_RELEASE == 'true' }}
               run: |
                   git config --global user.name "github-actions[bot]"
                   git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -105,9 +136,10 @@ jobs:
                   fi
 
             - name: Create GitHub Release
+              if: ${{ env.SHOULD_RELEASE == 'true' }}
               uses: softprops/action-gh-release@v2
               with:
-                  tag_name: packages/${{ env.PACKAGE_NAME }}/v${{ env.VERSION }}
+                  tag_name: ${{ env.TAG_NAME }}
                   body_path: release_notes.md
                   name: ${{ env.PACKAGE_NAME }} v${{ env.VERSION }}
                   prerelease: ${{ env.PRERELEASE == 'true' }}
