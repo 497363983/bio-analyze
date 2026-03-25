@@ -1,0 +1,111 @@
+00:46:05 | INFO | Converting CIF to PDB: test_rec.cif
+00:46:05 | INFO | Converted CIF to PDB: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_converted.pdb (size: 524070 bytes)
+00:46:05 | INFO | Repairing PDB structure using PDBFixer: test_rec_converted.pdb
+00:46:09 | INFO | Fixed PDB saved to: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb
+00:46:09 | INFO | Running PropKa analysis for test_rec_fixed.pdb at pH 7.4
+00:46:09 | ERROR | PropKa analysis failed for test_rec.cif: cannot unpack non-iterable Options object. Proceeding with previous file.
+00:46:09 | INFO | Preparing receptor using Meeko CLI: test_rec.pdbqt
+00:46:24 | ERROR | Command failed with exit code 1 after 15.50s: /home/runner/micromamba/envs/bio-analyze-env/bin/python -m meeko.cli.mk_prepare_receptor --read_pdb /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb --write_pdbqt /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt --charge_model gasteiger
+00:46:24 | ERROR | Meeko CLI failed with exit code 1
+00:46:24 | ERROR | Meeko CLI stderr: 
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=752, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=780, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=780, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=780, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+matched with excess inter-residue bond(s): A:793
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/site-packages/meeko/polymer.py", line 1139, in from_pdb_string
+    polymer = cls(
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/site-packages/meeko/polymer.py", line 931, in __init__
+    padded_mols = self._build_padded_mols(self.monomers, bonds, padders)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/site-packages/meeko/polymer.py", line 1801, in _build_padded_mols
+    raise RuntimeError(err_msg)
+RuntimeError: Expected 6 paddings for (A:571, A:585) with bonds [(9, 16), (9, 17), (9, 18)], but got 0
+Expected 6 paddings for (A:710, A:793) with bonds [(18, 1), (19, 1), (20, 1)], but got 0
+
+00:46:24 | WARNING | Meeko CLI failed (Exit code 1: 
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=752, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=780, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=780, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HE1', resName='MET', resNum=780, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HZ1', resName='LYS', resNum=782, icode='', chain='A') 
+
+matched with excess inter-residue bond(s): A:793
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/site-packages/meeko/polymer.py", line 1139, in from_pdb_string
+    polymer = cls(
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/site-packages/meeko/polymer.py", line 931, in __init__
+    padded_mols = self._build_padded_mols(self.monomers, bonds, padders)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.9/site-packages/meeko/polymer.py", line 1801, in _build_padded_mols
+    raise RuntimeError(err_msg)
+RuntimeError: Expected 6 paddings for (A:571, A:585) with bonds [(9, 16), (9, 17), (9, 18)], but got 0
+Expected 6 paddings for (A:710, A:793) with bonds [(18, 1), (19, 1), (20, 1)], but got 0
+), attempting fallback to OpenBabel...
+00:46:24 | INFO | Using OpenBabel Python bindings for fallback.
+00:46:26 | INFO | OpenBabel fallback successful: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt
