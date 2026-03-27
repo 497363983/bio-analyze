@@ -1,0 +1,20 @@
+01:45:52 | INFO | Running DESeq2 on 4 samples using condition 'condition'...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=72, microseconds=152155), 'exception': None, 'extra': {'name': 'bio_analyze_rna_seq.de'}, 'file': (name='de.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/rna_seq/src/bio_analyze_rna_seq/de.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 84, 'message': "Running DESeq2 on 4 samples using condition 'condition'...", 'module': 'de', 'name': 'bio_analyze_rna_seq.de', 'process': (id=4777, name='MainProcess'), 'thread': (id=139757088790336, name='MainThread'), 'time': datetime(2026, 3, 27, 1, 45, 52, 342240, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+01:45:52 | INFO | Contrasting Treated vs Control
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=72, microseconds=153205), 'exception': None, 'extra': {'name': 'bio_analyze_rna_seq.de'}, 'file': (name='de.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/rna_seq/src/bio_analyze_rna_seq/de.py'), 'function': 'run', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 106, 'message': 'Contrasting Treated vs Control', 'module': 'de', 'name': 'bio_analyze_rna_seq.de', 'process': (id=4777, name='MainProcess'), 'thread': (id=139757088790336, name='MainThread'), 'time': datetime(2026, 3, 27, 1, 45, 52, 343290, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
