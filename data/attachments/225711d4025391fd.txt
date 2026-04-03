@@ -1,0 +1,218 @@
+08:43:32 | INFO | Converting CIF to PDB: test_rec.cif
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=4, microseconds=738688), 'exception': None, 'extra': {'name': 'bio_analyze_docking.utils'}, 'file': (name='utils.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/utils.py'), 'function': 'convert_cif_to_pdb', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 43, 'message': 'Converting CIF to PDB: test_rec.cif', 'module': 'utils', 'name': 'bio_analyze_docking.utils', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 43, 32, 627281, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:43:32 | INFO | Converted CIF to PDB: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_converted.pdb (size: 730053 bytes)
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=4, microseconds=757694), 'exception': None, 'extra': {'name': 'bio_analyze_docking.utils'}, 'file': (name='utils.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/utils.py'), 'function': 'convert_cif_to_pdb', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 101, 'message': 'Converted CIF to PDB: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_converted.pdb (size: 730053 bytes)', 'module': 'utils', 'name': 'bio_analyze_docking.utils', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 43, 32, 646287, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:43:32 | INFO | Repairing PDB structure using PDBFixer: test_rec_converted.pdb
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=4, microseconds=758159), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 184, 'message': 'Repairing PDB structure using PDBFixer: test_rec_converted.pdb', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 43, 32, 646752, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:43:41 | INFO | Fixed PDB saved to: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=13, microseconds=320502), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 209, 'message': 'Fixed PDB saved to: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 43, 41, 209095, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:43:41 | INFO | Running PropKa analysis for test_rec_fixed.pdb at pH 7.4
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=13, microseconds=321069), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 233, 'message': 'Running PropKa analysis for test_rec_fixed.pdb at pH 7.4', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 43, 41, 209662, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:43:41 | ERROR | PropKa analysis failed for test_rec.cif: cannot unpack non-iterable Options object. Proceeding with previous file.
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=13, microseconds=323209), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep', 'exc_info': True}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='ERROR', no=40, icon='❌'), 'line': 264, 'message': 'PropKa analysis failed for test_rec.cif: cannot unpack non-iterable Options object. Proceeding with previous file.', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 43, 41, 211802, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py", line 241, in prepare_receptor
+    options, _ = loadOptions(args)
+TypeError: cannot unpack non-iterable Options object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:43:41 | INFO | Preparing receptor using Meeko CLI: test_rec.pdbqt
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=13, microseconds=323726), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 269, 'message': 'Preparing receptor using Meeko CLI: test_rec.pdbqt', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 43, 41, 212319, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:44:05 | ERROR | Command failed with exit code 1 after 23.83s: /home/runner/micromamba/envs/bio-analyze-env/bin/python3.10 -m meeko.cli.mk_prepare_receptor --read_pdb /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb --write_pdbqt /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt --charge_model gasteiger
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=37, microseconds=153508), 'exception': None, 'extra': {'name': 'bio_analyze_core.subprocess'}, 'file': (name='subprocess.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/subprocess.py'), 'function': 'run', 'level': (name='ERROR', no=40, icon='❌'), 'line': 144, 'message': 'Command failed with exit code 1 after 23.83s: /home/runner/micromamba/envs/bio-analyze-env/bin/python3.10 -m meeko.cli.mk_prepare_receptor --read_pdb /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb --write_pdbqt /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt --charge_model gasteiger', 'module': 'subprocess', 'name': 'bio_analyze_core.subprocess', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 44, 5, 42101, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:44:05 | ERROR | Meeko CLI failed with exit code 1
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=37, microseconds=153962), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='ERROR', no=40, icon='❌'), 'line': 338, 'message': 'Meeko CLI failed with exit code 1', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 44, 5, 42555, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py", line 334, in prepare_receptor
+    result = run_command(cmd, capture_output=True, text=True, check=True)
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/subprocess.py", line 173, in run
+    raise subprocess.CalledProcessError(
+subprocess.CalledProcessError: Command '['/home/runner/micromamba/envs/bio-analyze-env/bin/python3.10', '-m', 'meeko.cli.mk_prepare_receptor', '--read_pdb', '/tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb', '--write_pdbqt', '/tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt', '--charge_model', 'gasteiger']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:44:05 | ERROR | Meeko CLI stderr: matched with excess inter-residue bond(s): A:113
+matched with excess inter-residue bond(s): A:134
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 1139, in from_pdb_string
+    polymer = cls(
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 931, in __init__
+    padded_mols = self._build_padded_mols(self.monomers, bonds, padders)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 1801, in _build_padded_mols
+    raise RuntimeError(err_msg)
+RuntimeError: Expected 2 paddings for (A:113, A:134) with bonds [(18, 1)], but got 0
+
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=37, microseconds=154362), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='ERROR', no=40, icon='❌'), 'line': 343, 'message': 'Meeko CLI stderr: matched with excess inter-residue bond(s): A:113\nmatched with excess inter-residue bond(s): A:134\nTraceback (most recent call last):\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/runpy.py", line 196, in _run_module_as_main\n    return _run_code(code, main_globals, None,\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/runpy.py", line 86, in _run_code\n    exec(code, run_globals)\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>\n    sys.exit(main())\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main\n    polymer = Polymer.from_pdb_string(\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 1139, in from_pdb_string\n    polymer = cls(\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 931, in __init__\n    padded_mols = self._build_padded_mols(self.monomers, bonds, padders)\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 1801, in _build_padded_mols\n    raise RuntimeError(err_msg)\nRuntimeError: Expected 2 paddings for (A:113, A:134) with bonds [(18, 1)], but got 0\n', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 44, 5, 42955, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py", line 334, in prepare_receptor
+    result = run_command(cmd, capture_output=True, text=True, check=True)
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/subprocess.py", line 173, in run
+    raise subprocess.CalledProcessError(
+subprocess.CalledProcessError: Command '['/home/runner/micromamba/envs/bio-analyze-env/bin/python3.10', '-m', 'meeko.cli.mk_prepare_receptor', '--read_pdb', '/tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb', '--write_pdbqt', '/tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt', '--charge_model', 'gasteiger']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:44:05 | WARNING | Meeko CLI failed (Exit code 1: matched with excess inter-residue bond(s): A:113
+matched with excess inter-residue bond(s): A:134
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 1139, in from_pdb_string
+    polymer = cls(
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 931, in __init__
+    padded_mols = self._build_padded_mols(self.monomers, bonds, padders)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 1801, in _build_padded_mols
+    raise RuntimeError(err_msg)
+RuntimeError: Expected 2 paddings for (A:113, A:134) with bonds [(18, 1)], but got 0
+), attempting fallback to OpenBabel...
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=37, microseconds=154686), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'run_openbabel_fallback', 'level': (name='WARNING', no=30, icon='⚠️'), 'line': 275, 'message': 'Meeko CLI failed (Exit code 1: matched with excess inter-residue bond(s): A:113\nmatched with excess inter-residue bond(s): A:134\nTraceback (most recent call last):\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/runpy.py", line 196, in _run_module_as_main\n    return _run_code(code, main_globals, None,\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/runpy.py", line 86, in _run_code\n    exec(code, run_globals)\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>\n    sys.exit(main())\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main\n    polymer = Polymer.from_pdb_string(\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 1139, in from_pdb_string\n    polymer = cls(\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 931, in __init__\n    padded_mols = self._build_padded_mols(self.monomers, bonds, padders)\n  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/meeko/polymer.py", line 1801, in _build_padded_mols\n    raise RuntimeError(err_msg)\nRuntimeError: Expected 2 paddings for (A:113, A:134) with bonds [(18, 1)], but got 0\n), attempting fallback to OpenBabel...', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 44, 5, 43279, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py", line 334, in prepare_receptor
+    result = run_command(cmd, capture_output=True, text=True, check=True)
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/subprocess.py", line 173, in run
+    raise subprocess.CalledProcessError(
+subprocess.CalledProcessError: Command '['/home/runner/micromamba/envs/bio-analyze-env/bin/python3.10', '-m', 'meeko.cli.mk_prepare_receptor', '--read_pdb', '/tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb', '--write_pdbqt', '/tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt', '--charge_model', 'gasteiger']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:44:05 | INFO | Using OpenBabel Python bindings for fallback.
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=37, microseconds=154994), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'run_openbabel_fallback', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 279, 'message': 'Using OpenBabel Python bindings for fallback.', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 44, 5, 43587, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py", line 334, in prepare_receptor
+    result = run_command(cmd, capture_output=True, text=True, check=True)
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/subprocess.py", line 173, in run
+    raise subprocess.CalledProcessError(
+subprocess.CalledProcessError: Command '['/home/runner/micromamba/envs/bio-analyze-env/bin/python3.10', '-m', 'meeko.cli.mk_prepare_receptor', '--read_pdb', '/tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb', '--write_pdbqt', '/tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt', '--charge_model', 'gasteiger']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+08:44:06 | INFO | OpenBabel fallback successful: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=38, microseconds=329629), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'run_openbabel_fallback', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 299, 'message': 'OpenBabel fallback successful: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4679, name='MainProcess'), 'thread': (id=139952505288512, name='MainThread'), 'time': datetime(2026, 4, 3, 8, 44, 6, 218222, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py", line 334, in prepare_receptor
+    result = run_command(cmd, capture_output=True, text=True, check=True)
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/core/src/bio_analyze_core/subprocess.py", line 173, in run
+    raise subprocess.CalledProcessError(
+subprocess.CalledProcessError: Command '['/home/runner/micromamba/envs/bio-analyze-env/bin/python3.10', '-m', 'meeko.cli.mk_prepare_receptor', '--read_pdb', '/tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb', '--write_pdbqt', '/tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec.pdbqt', '--charge_model', 'gasteiger']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
