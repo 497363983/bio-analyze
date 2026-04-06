@@ -1,0 +1,2 @@
+12:12:26 | WARNING | Using pure Python star-aligner. This is a basic implementation and not suitable for large or complex datasets. Consider installing MAFFT or MUSCLE.
+12:12:26 | INFO | Python star alignment saved to /tmp/pytest-of-runner/pytest-0/test_python_aligner0/out.fasta
