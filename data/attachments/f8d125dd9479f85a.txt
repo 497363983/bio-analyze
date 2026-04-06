@@ -1,0 +1,85 @@
+12:11:28 | INFO | Converting CIF to PDB: test_rec_charge.cif
+12:11:28 | INFO | Converted CIF to PDB: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge_converted.pdb (size: 730053 bytes)
+12:11:28 | INFO | Repairing PDB structure using PDBFixer: test_rec_charge_converted.pdb
+12:11:37 | INFO | Fixed PDB saved to: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge_fixed.pdb
+12:11:37 | INFO | Running PropKa analysis for test_rec_charge_fixed.pdb at pH 7.4
+12:11:37 | ERROR | PropKa analysis failed for test_rec_charge.cif: cannot unpack non-iterable Options object. Proceeding with previous file.
+12:11:37 | INFO | Preparing receptor using Meeko CLI: test_rec_charge.pdbqt
+12:11:59 | ERROR | Command failed with exit code 1 after 22.34s: /home/runner/micromamba/envs/bio-analyze-env/bin/python3.12 -m meeko.cli.mk_prepare_receptor --read_pdb /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge_fixed.pdb --write_pdbqt /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge.pdbqt --charge_model zero
+12:11:59 | ERROR | Meeko CLI failed with exit code 1
+12:11:59 | ERROR | Meeko CLI stderr: matched with excess inter-residue bond(s): A:113
+matched with excess inter-residue bond(s): A:134
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=651, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=651, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=651, icode='', chain='A') 
+
+No template matched for residue_key='A:693'
+tried 3 templates for residue_key='A:693'excess_H_ok=False
+PHE        heavy_miss=0 heavy_excess=0 H_excess=[9] bond_miss=set() bond_excess=set()
+NPHE       heavy_miss=0 heavy_excess=0 H_excess=[11] bond_miss=set() bond_excess={4}
+CPHE       heavy_miss=1 heavy_excess=0 H_excess=[10] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:693
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/polymer.py", line 1139, in from_pdb_string
+    polymer = cls(
+              ^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/polymer.py", line 931, in __init__
+    padded_mols = self._build_padded_mols(self.monomers, bonds, padders)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/polymer.py", line 1801, in _build_padded_mols
+    raise RuntimeError(err_msg)
+RuntimeError: Expected 2 paddings for (A:113, A:134) with bonds [(18, 1)], but got 0
+
+12:11:59 | WARNING | Meeko CLI failed (Exit code 1: matched with excess inter-residue bond(s): A:113
+matched with excess inter-residue bond(s): A:134
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=651, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=651, icode='', chain='A') 
+
+WARNING: Lone hydrogen is ignored: 
+  PDBAtomInfo(name='HD11', resName='LEU', resNum=651, icode='', chain='A') 
+
+No template matched for residue_key='A:693'
+tried 3 templates for residue_key='A:693'excess_H_ok=False
+PHE        heavy_miss=0 heavy_excess=0 H_excess=[9] bond_miss=set() bond_excess=set()
+NPHE       heavy_miss=0 heavy_excess=0 H_excess=[11] bond_miss=set() bond_excess={4}
+CPHE       heavy_miss=1 heavy_excess=0 H_excess=[10] bond_miss=set() bond_excess={1}
+
+matched with excess inter-residue bond(s): A:693
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/polymer.py", line 1139, in from_pdb_string
+    polymer = cls(
+              ^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/polymer.py", line 931, in __init__
+    padded_mols = self._build_padded_mols(self.monomers, bonds, padders)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/polymer.py", line 1801, in _build_padded_mols
+    raise RuntimeError(err_msg)
+RuntimeError: Expected 2 paddings for (A:113, A:134) with bonds [(18, 1)], but got 0
+), attempting fallback to OpenBabel...
+12:11:59 | INFO | Using OpenBabel Python bindings for fallback.
+12:12:00 | INFO | OpenBabel fallback successful: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge.pdbqt
