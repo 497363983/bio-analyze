@@ -1,0 +1,2 @@
+18:02:34 | INFO | Running MUSCLE on /home/runner/work/bio-analyze/bio-analyze/packages/msa/tests/data/sample.fasta
+18:02:34 | INFO | MUSCLE alignment saved to /tmp/pytest-of-runner/pytest-0/test_muscle_aligner0/out.fasta

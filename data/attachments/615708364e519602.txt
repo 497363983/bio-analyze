@@ -1,0 +1,4 @@
+18:01:00 | INFO | Reading alignment from /home/runner/work/bio-analyze/bio-analyze/packages/msa/tests/data/aligned_cli.fasta
+18:01:00 | INFO | Calculating distance matrix using model 'identity'
+18:01:00 | INFO | Building UPGMA tree
+18:01:00 | INFO | Saving tree to /tmp/pytest-of-runner/pytest-0/test_distance_tree0/tree.nwk
