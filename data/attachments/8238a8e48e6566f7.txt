@@ -1,0 +1,51 @@
+10:02:56 | INFO | Converting CIF to PDB: test_rec_charge.cif
+10:02:56 | INFO | Converted CIF to PDB: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge_converted.pdb (size: 730053 bytes)
+10:02:56 | INFO | Repairing PDB structure using PDBFixer: test_rec_charge_converted.pdb
+10:03:04 | INFO | Fixed PDB saved to: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge_fixed.pdb
+10:03:04 | INFO | Running PropKa analysis for test_rec_charge_fixed.pdb at pH 7.4
+10:03:04 | ERROR | PropKa analysis failed for test_rec_charge.cif: cannot unpack non-iterable Options object. Proceeding with previous file.
+10:03:04 | INFO | Preparing receptor using Meeko CLI: test_rec_charge.pdbqt
+10:03:05 | ERROR | Command failed with exit code 1 after 1.03s: /home/runner/micromamba/envs/bio-analyze-env/bin/python3.12 -m meeko.cli.mk_prepare_receptor --read_pdb /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge_fixed.pdb --write_pdbqt /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge.pdbqt --charge_model zero
+10:03:05 | ERROR | Meeko CLI failed with exit code 1
+10:03:05 | ERROR | Meeko CLI stderr: [RDKit] ERROR:[10:03:05] Explicit valence for atom # 6 C, 5, is greater than permitted
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/polymer.py", line 1101, in from_pdb_string
+    tmp_raw_input_mols = cls._pdb_to_residue_mols(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/polymer.py", line 1897, in _pdb_to_residue_mols
+    pdbmol, _, missed_altloc, needed_altloc = _aux_altloc_mol_build(
+                                              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/utils/rdkitutils.py", line 415, in _aux_altloc_mol_build
+    _ = Chem.SanitizeMol(pdbmol)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+rdkit.Chem.rdchem.AtomValenceException: Explicit valence for atom # 6 C, 5, is greater than permitted
+10:03:05 | WARNING | Meeko CLI failed (Exit code 1: [RDKit] ERROR:[10:03:05] Explicit valence for atom # 6 C, 5, is greater than permitted
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/cli/mk_prepare_receptor.py", line 1150, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/cli/mk_prepare_receptor.py", line 628, in main
+    polymer = Polymer.from_pdb_string(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/polymer.py", line 1101, in from_pdb_string
+    tmp_raw_input_mols = cls._pdb_to_residue_mols(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/polymer.py", line 1897, in _pdb_to_residue_mols
+    pdbmol, _, missed_altloc, needed_altloc = _aux_altloc_mol_build(
+                                              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.12/site-packages/meeko/utils/rdkitutils.py", line 415, in _aux_altloc_mol_build
+    _ = Chem.SanitizeMol(pdbmol)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+rdkit.Chem.rdchem.AtomValenceException: Explicit valence for atom # 6 C, 5, is greater than permitted), attempting fallback to OpenBabel...
+10:03:05 | INFO | Using OpenBabel Python bindings for fallback.
+10:03:06 | INFO | OpenBabel fallback successful: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_charge_m0/prep_output/test_rec_charge.pdbqt

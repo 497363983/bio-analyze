@@ -1,0 +1,12 @@
+10:02:10 | INFO | Running node: Prepare Receptor: fold_tlr_9_scophthalmus_maximus_model_0.cif
+10:02:10 | INFO | 准备受体 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/data/receptor/fold_tlr_9_scophthalmus_maximus_model_0.cif 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/smina/fold_tlr_9_scophthalmus_maximus_model_0.pdbqt
+10:02:10 | INFO | Running node: Prepare Ligand: AAAAML.xaa.sdf
+10:02:10 | INFO | 准备配体 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/data/ligand/AAAAML.xaa.sdf 到 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/smina/AAAAML.xaa.pdbqt
+10:02:10 | INFO | Running node: Single Docking
+10:02:10 | INFO | Calculated box: center=[-1.8239   0.5263  -0.06595], size=[9.7138 6.8488 8.4771]
+10:02:10 | INFO | 正在对接 fold_tlr_9_scophthalmus_maximus_model_0.pdbqt 和 AAAAML.xaa.pdbqt
+10:02:10 | INFO | 设置 Smina 搜索盒子 (中心=[-1.8238999999999999, 0.5263, -0.06594999999999995], 尺寸=[9.713799999999999, 6.848800000000001, 8.4771])...
+10:02:10 | INFO | 执行 Smina 命令: /mock/path/to/smina --receptor /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/smina/fold_tlr_9_scophthalmus_maximus_model_0.pdbqt --ligand /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/smina/AAAAML.xaa.pdbqt --center_x -1.8238999999999999 --center_y 0.5263 --center_z -0.06594999999999995 --size_x 9.713799999999999 --size_y 6.848800000000001 --size_z 8.4771 --exhaustiveness 1 --num_modes 1 --min_rmsd_filter 1.0 --out /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/smina/smina_out.pdbqt --cpu 4
+10:02:10 | INFO | 保存对接姿态到: /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/smina/docked.pdbqt
+10:02:10 | INFO | Running node: Generate Docking Summary
+10:02:10 | INFO | 正在将汇总写入 /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/smina/docking_summary.csv (格式: csv)
