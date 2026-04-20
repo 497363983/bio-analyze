@@ -1,0 +1,54 @@
+# bio-analyze 单体容器镜像构建规范
+# 此模板定义了标准化执行环境，用于在 Docker 容器中运行 Pipeline 任务。
+
+FROM ubuntu:20.04
+
+# 避免交互式安装时的卡顿
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+
+# 1. 安装基础依赖和系统工具
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    curl \
+    git \
+    bzip2 \
+    unzip \
+    build-essential \
+    zlib1g-dev \
+    libncurses5-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    python3.9 \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+# 2. 安装并配置 uv 作为包管理器
+RUN pip3 install --no-cache-dir uv
+
+# 3. 安装业务所需的外部二进制工具
+# 以下为示例，具体工具可根据实际需要通过 conda 或预编译二进制包安装
+# 例如通过 wget 安装 fastp:
+RUN wget http://opendata.bgi.com/fastp/fastp -O /usr/local/bin/fastp \
+    && chmod a+x /usr/local/bin/fastp
+
+# 例如通过 conda 安装 salmon 等，可先安装 miniconda
+# ... (此处省略 Miniconda 安装细节)
+
+# 4. 安装 bio-analyze 核心与业务包
+WORKDIR /app
+COPY . /app
+
+# 使用 uv 安装本地包 (假设项目根目录挂载在此)
+# 在实际 CI/CD 中，这里应该是通过 uv pip install 预先打好的 wheel 包
+RUN uv pip install --system /app/packages/core /app/packages/omics /app/packages/docking
+
+# 5. 配置入口点和工作目录
+# 容器默认挂载点，由 Pipeline.run() 动态映射
+WORKDIR /mnt/workspace
+ENV BIO_ANALYZE_IN_CONTAINER=1
+
+# 默认命令 (由启动时 sys.argv 覆盖)
+CMD ["bioanalyze", "--help"]

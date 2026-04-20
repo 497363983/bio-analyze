@@ -1,0 +1,330 @@
+{
+  "name": "run",
+  "type": "api",
+  "description": {
+    "zh": "Run the complete RNA-Seq analysis pipeline.  Parameters can be specified via command line arguments or a configuration file.",
+    "en": "Run the complete RNA-Seq analysis pipeline.  Parameters can be specified via command line arguments or a configuration file."
+  },
+  "params": [
+    {
+      "name": "config_file",
+      "type": "path",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=('--config', '-c'), help='Path to JSON/YAML config file. Overrides other options if provided.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "input_dir",
+      "type": "path",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=('--input', '-i'), help='Directory containing raw FastQ files. Required if --sra-ids is not provided.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "sra_ids",
+      "type": "string",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=('--sra-id',), help='SRA Accession IDs to download and process (e.g. SRR123456).', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "output_dir",
+      "type": "path",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=('--output', '-o'), help='Directory for analysis results.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "design_file",
+      "type": "path",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=('--design', '-d'), help='CSV file describing experimental design (columns: sample, condition, ...).', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "species",
+      "type": "string",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=('--species', '-s'), help=\"Species name for auto-downloading reference genome (e.g. 'Homo sapiens').\", show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "assembly",
+      "type": "string",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=('--assembly',), help='Reference assembly accession, e.g. GCA_013347765.1. Takes precedence over --species for auto-download.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "genome_fasta",
+      "type": "path",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=('--genome-fasta',), help='Path to reference genome FASTA file (overrides --species/--assembly auto-download).', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "genome_gtf",
+      "type": "path",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=('--genome-gtf',), help='Path to reference genome GTF annotation file (overrides --species/--assembly auto-download).', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "threads",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=4, param_decls=('--threads', '-t'), help='Number of threads to use.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "skip_qc",
+      "type": "bool",
+      "required": false,
+      "default": "OptionInfo(default=False, param_decls=('--skip-qc',), help='Skip Quality Control step.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "skip_trim",
+      "type": "bool",
+      "required": false,
+      "default": "OptionInfo(default=False, param_decls=('--skip-trim',), help='Skip Trimming step.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "star_align",
+      "type": "bool",
+      "required": false,
+      "default": "OptionInfo(default=False, param_decls=('--star-align',), help='Enable STAR alignment and chromosome distribution analysis.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "theme",
+      "type": "string",
+      "required": false,
+      "default": "OptionInfo(default='default', param_decls=('--theme',), help='Plotting theme (default, nature, science, or custom package name).', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "quant_tool",
+      "type": "string",
+      "required": false,
+      "default": "OptionInfo(default='salmon', param_decls=('--quant-tool',), help='Quantification backend.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "quant_compare_tools",
+      "type": "string",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=('--quant-compare-tool',), help='Comparison quantifiers, repeatable.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "step",
+      "type": "string",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=('--step',), help='Run only a specific step (qc, quant, de, enrichment, report). If None, run all.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "qualified_quality_phred",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='The quality value that a base is qualified. Default 15 means Phred quality >= Q15.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "unqualified_percent_limit",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='How many percents of bases are allowed to be unqualified (0~100). Default 40 means 40%.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "n_base_limit",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='How many N bases are allowed. Default 5.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "length_required",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='Reads shorter than length_required will be discarded. Default 15.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "max_len1",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='If read1 is longer than max_len1, trim it at tail. Default 0 (no trim).', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "max_len2",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='If read2 is longer than max_len2, trim it at tail. Default 0 (no trim).', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "adapter_sequence",
+      "type": "string",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='Adapter sequence for read1. Auto-detected if not provided.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "adapter_sequence_r2",
+      "type": "string",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='Adapter sequence for read2. Auto-detected if not provided.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "trim_front1",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='Trimming how many bases in front for read1.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "trim_tail1",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='Trimming how many bases in tail for read1.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "cut_right",
+      "type": "bool",
+      "required": false,
+      "default": "OptionInfo(default=False, param_decls=(), help='Enable cut_right (sliding window trimming).', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "cut_window_size",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='Window size for cut_right. Default 4.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "cut_mean_quality",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='Mean quality requirement for cut_right. Default 20.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "dedup",
+      "type": "bool",
+      "required": false,
+      "default": "OptionInfo(default=False, param_decls=(), help='Enable deduplication.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    },
+    {
+      "name": "poly_g_min_len",
+      "type": "int",
+      "required": false,
+      "default": "OptionInfo(default=None, param_decls=(), help='Minimum length for polyG tail trimming. Default 10.', show_default=True, hidden=False, is_flag=False, metavar=None, envvar=None)",
+      "description": {
+        "zh": "",
+        "en": ""
+      }
+    }
+  ]
+}

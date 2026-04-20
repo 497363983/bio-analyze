@@ -1,6 +1,5 @@
 """
-zh: 生物信息学绘图工具包。
-en: Bioinformatics plotting toolkit.
+Bioinformatics plotting toolkit.
 """
 
 from .plots import (
@@ -28,8 +27,8 @@ __all__ = [
     "LinePlot",
     "PCAPlot",
     "PiePlot",
+    "PlotTheme",
     "ScatterPlot",
     "VolcanoPlot",
-    "PlotTheme",
     "set_theme",
 ]

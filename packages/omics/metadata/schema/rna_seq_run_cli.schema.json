@@ -1,0 +1,263 @@
+{
+  "name": "rna_seq_run",
+  "type": "cli",
+  "description": "Run the complete RNA-Seq analysis pipeline.  Parameters can be specified via command line arguments or a configuration file.",
+  "params": [
+    {
+      "field": "config_file",
+      "name": "--config, -c",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Path to JSON/YAML config file. Overrides other options if provided."
+    },
+    {
+      "field": "input_dir",
+      "name": "--input, -i",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Directory containing raw FastQ files. Required if --sra-ids is not provided."
+    },
+    {
+      "field": "sra_ids",
+      "name": "--sra-id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SRA Accession IDs to download and process (e.g. SRR123456)."
+    },
+    {
+      "field": "output_dir",
+      "name": "--output, -o",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Directory for analysis results."
+    },
+    {
+      "field": "design_file",
+      "name": "--design, -d",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "CSV file describing experimental design (columns: sample, condition, ...)."
+    },
+    {
+      "field": "species",
+      "name": "--species, -s",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Species name for auto-downloading reference genome (e.g. 'Homo sapiens')."
+    },
+    {
+      "field": "assembly",
+      "name": "--assembly",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Reference assembly accession, e.g. GCA_013347765.1. Takes precedence over --species for auto-download."
+    },
+    {
+      "field": "genome_fasta",
+      "name": "--genome-fasta",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Path to reference genome FASTA file (overrides --species/--assembly auto-download)."
+    },
+    {
+      "field": "genome_gtf",
+      "name": "--genome-gtf",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Path to reference genome GTF annotation file (overrides --species/--assembly auto-download)."
+    },
+    {
+      "field": "threads",
+      "name": "--threads, -t",
+      "type": "int",
+      "required": false,
+      "default": "4",
+      "description": "Number of threads to use."
+    },
+    {
+      "field": "skip_qc",
+      "name": "--skip-qc",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Skip Quality Control step."
+    },
+    {
+      "field": "skip_trim",
+      "name": "--skip-trim",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Skip Trimming step."
+    },
+    {
+      "field": "star_align",
+      "name": "--star-align",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Enable STAR alignment and chromosome distribution analysis."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Plotting theme (default, nature, science, or custom package name)."
+    },
+    {
+      "field": "quant_tool",
+      "name": "--quant-tool",
+      "type": "string",
+      "required": false,
+      "default": "salmon",
+      "description": "Quantification backend."
+    },
+    {
+      "field": "quant_compare_tools",
+      "name": "--quant-compare-tool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Comparison quantifiers, repeatable."
+    },
+    {
+      "field": "step",
+      "name": "--step",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Run only a specific step (qc, quant, de, enrichment, report). If None, run all."
+    },
+    {
+      "field": "qualified_quality_phred",
+      "name": "--qualified-quality-phred",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "The quality value that a base is qualified. Default 15 means Phred quality >= Q15."
+    },
+    {
+      "field": "unqualified_percent_limit",
+      "name": "--unqualified-percent-limit",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "How many percents of bases are allowed to be unqualified (0~100). Default 40 means 40%."
+    },
+    {
+      "field": "n_base_limit",
+      "name": "--n-base-limit",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "How many N bases are allowed. Default 5."
+    },
+    {
+      "field": "length_required",
+      "name": "--length-required",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Reads shorter than length_required will be discarded. Default 15."
+    },
+    {
+      "field": "max_len1",
+      "name": "--max-len1",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "If read1 is longer than max_len1, trim it at tail. Default 0 (no trim)."
+    },
+    {
+      "field": "max_len2",
+      "name": "--max-len2",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "If read2 is longer than max_len2, trim it at tail. Default 0 (no trim)."
+    },
+    {
+      "field": "adapter_sequence",
+      "name": "--adapter-sequence",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Adapter sequence for read1. Auto-detected if not provided."
+    },
+    {
+      "field": "adapter_sequence_r2",
+      "name": "--adapter-sequence-r2",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Adapter sequence for read2. Auto-detected if not provided."
+    },
+    {
+      "field": "trim_front1",
+      "name": "--trim-front1",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Trimming how many bases in front for read1."
+    },
+    {
+      "field": "trim_tail1",
+      "name": "--trim-tail1",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Trimming how many bases in tail for read1."
+    },
+    {
+      "field": "cut_right",
+      "name": "--cut-right",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Enable cut_right (sliding window trimming)."
+    },
+    {
+      "field": "cut_window_size",
+      "name": "--cut-window-size",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Window size for cut_right. Default 4."
+    },
+    {
+      "field": "cut_mean_quality",
+      "name": "--cut-mean-quality",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Mean quality requirement for cut_right. Default 20."
+    },
+    {
+      "field": "dedup",
+      "name": "--dedup",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Enable deduplication."
+    },
+    {
+      "field": "poly_g_min_len",
+      "name": "--poly-g-min-len",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Minimum length for polyG tail trimming. Default 10."
+    }
+  ]
+}

@@ -2,8 +2,8 @@
   "name": "chromosome",
   "type": "cli",
   "description": {
-    "zh": "",
-    "en": ""
+    "zh": "Generate chromosome coverage distribution plot.",
+    "en": "Generate chromosome coverage distribution plot."
   },
   "params": [
     {
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
+        "zh": "Input file path (CSV, TSV, or Excel).",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输出文件路径。",
+        "zh": "Output file path.",
         "en": "Output file path."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": "chrom",
       "description": {
-        "zh": "染色体列名。",
+        "zh": "Column name for chromosome.",
         "en": "Column name for chromosome."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "pos",
       "description": {
-        "zh": "位置列名。",
+        "zh": "Column name for position.",
         "en": "Column name for position."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "pos_counts",
       "description": {
-        "zh": "正链计数列名。",
+        "zh": "Column name for positive strand counts.",
         "en": "Column name for positive strand counts."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": "neg_counts",
       "description": {
-        "zh": "负链计数列名。",
+        "zh": "Column name for negative strand counts.",
         "en": "Column name for negative strand counts."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Plot title.",
         "en": "Plot title."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Excel 工作表名称。",
+        "zh": "Sheet name for Excel files.",
         "en": "Sheet name for Excel files."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "24",
       "description": {
-        "zh": "显示的最大染色体数量。",
+        "zh": "Maximum number of chromosomes to display.",
         "en": "Maximum number of chromosomes to display."
       }
     }

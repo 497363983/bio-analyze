@@ -2,7 +2,7 @@
   "name": "line",
   "type": "api",
   "description": {
-    "zh": "绘制折线图。",
+    "zh": "Plot line chart.",
     "en": "Plot line chart."
   },
   "params": [
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "包含数据的 DataFrame。",
+        "zh": "DataFrame containing data.",
         "en": "DataFrame containing data."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "x 轴的列名。",
+        "zh": "Column name for x-axis.",
         "en": "Column name for x-axis."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "y 轴的列名。",
+        "zh": "Column name for y-axis.",
         "en": "Column name for y-axis."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "分组列名。",
+        "zh": "Column name for grouping.",
         "en": "Column name for grouping."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Chart title.",
         "en": "Chart title."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "X轴标签。",
+        "zh": "X-axis label.",
         "en": "X-axis label."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Y轴标签。",
+        "zh": "Y-axis label.",
         "en": "Y-axis label."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "保存图表的路径。",
+        "zh": "Path to save the chart.",
         "en": "Path to save the chart."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "误差棒类型 (SD, SE, CI)。",
+        "zh": "Error bar type (SD, SE, CI).",
         "en": "Error bar type (SD, SE, CI)."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "95",
       "description": {
-        "zh": "当类型为 CI 时的置信区间大小 (默认 95)。",
+        "zh": "Confidence interval size when type is CI (default 95).",
         "en": "Confidence interval size when type is CI (default 95)."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "误差棒上限的列名 (暂不支持手动绘制，仅占位)。",
+        "zh": "Column name for error bar upper bound (placeholder, manual drawing not supported yet).",
         "en": "Column name for error bar upper bound (placeholder, manual drawing not supported yet)."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "误差棒下限的列名 (暂不支持手动绘制，仅占位)。",
+        "zh": "Column name for error bar lower bound (placeholder, manual drawing not supported yet).",
         "en": "Column name for error bar lower bound (placeholder, manual drawing not supported yet)."
       }
     },
@@ -132,7 +132,7 @@
       "required": false,
       "default": "3.0",
       "description": {
-        "zh": "误差棒的横线宽度 (单位: points)。",
+        "zh": "Width of error bar caps (unit: points).",
         "en": "Width of error bar caps (unit: points)."
       }
     },
@@ -142,7 +142,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "误差棒颜色。",
+        "zh": "Error bar color.",
         "en": "Error bar color."
       }
     },
@@ -152,7 +152,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "误差棒横线颜色 (对于 lineplot，通常与 err_color 一致)。",
+        "zh": "Error bar cap color (usually same as err_color for lineplot).",
         "en": "Error bar cap color (usually same as err_color for lineplot)."
       }
     },
@@ -162,7 +162,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "是否显示数据点标记，或指定标记样式。",
+        "zh": "Whether to show data point markers, or specify marker style.",
         "en": "Whether to show data point markers, or specify marker style."
       }
     },
@@ -172,7 +172,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "是否显示虚线，或指定虚线样式。",
+        "zh": "Whether to show dashes, or specify dash style.",
         "en": "Whether to show dashes, or specify dash style."
       }
     },
@@ -182,7 +182,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "是否启用平滑曲线拟合。",
+        "zh": "Whether to enable smooth curve fitting.",
         "en": "Whether to enable smooth curve fitting."
       }
     },
@@ -192,7 +192,7 @@
       "required": false,
       "default": "300",
       "description": {
-        "zh": "平滑曲线的插值点数。",
+        "zh": "Number of interpolation points for smooth curve.",
         "en": "Number of interpolation points for smooth curve."
       }
     }

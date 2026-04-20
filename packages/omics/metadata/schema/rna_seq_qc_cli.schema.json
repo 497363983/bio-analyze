@@ -1,0 +1,103 @@
+{
+  "name": "rna_seq_qc",
+  "type": "cli",
+  "description": "Run quality control and trimming.",
+  "params": [
+    {
+      "field": "input_dir",
+      "name": "-i, --input",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input directory (raw FastQ)."
+    },
+    {
+      "field": "output_dir",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output directory."
+    },
+    {
+      "field": "threads",
+      "name": "-t, --threads",
+      "type": "int",
+      "required": false,
+      "default": "4",
+      "description": "Number of threads."
+    },
+    {
+      "field": "skip_qc",
+      "name": "--skip-qc",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Skip FastQC/fastp stats."
+    },
+    {
+      "field": "skip_trim",
+      "name": "--skip-trim",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Skip trimming."
+    },
+    {
+      "field": "qualified_quality_phred",
+      "name": "--qualified-quality-phred",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Phred quality threshold."
+    },
+    {
+      "field": "unqualified_percent_limit",
+      "name": "--unqualified-percent-limit",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Unqualified percent limit."
+    },
+    {
+      "field": "n_base_limit",
+      "name": "--n-base-limit",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "N base limit."
+    },
+    {
+      "field": "length_required",
+      "name": "--length-required",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Length required."
+    },
+    {
+      "field": "adapter_sequence",
+      "name": "--adapter-sequence",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Adapter sequence R1."
+    },
+    {
+      "field": "adapter_sequence_r2",
+      "name": "--adapter-sequence-r2",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Adapter sequence R2."
+    },
+    {
+      "field": "dedup",
+      "name": "--dedup",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Enable deduplication."
+    }
+  ]
+}

@@ -20,7 +20,7 @@ class DistanceTreeBuilder(BaseTreeBuilder):
     def build(self, alignment_file: Path, output_file: Path, **kwargs: Any) -> Path:
         """
         Build distance tree.
-        
+
         Args:
             alignment_file: MSA file in FASTA format.
             output_file: Output Newick file.
@@ -31,24 +31,21 @@ class DistanceTreeBuilder(BaseTreeBuilder):
         method = kwargs.get("method", "nj").lower()
         if method not in ["nj", "upgma"]:
             raise ValueError(f"Unsupported method '{method}'. Use 'nj' or 'upgma'.")
-            
+
         model = kwargs.get("model", "identity")
-        
+
         logger.info(f"Reading alignment from {alignment_file}")
         alignment = AlignIO.read(alignment_file, "fasta")
-        
+
         logger.info(f"Calculating distance matrix using model '{model}'")
         calculator = DistanceCalculator(model)
         dm = calculator.get_distance(alignment)
-        
+
         logger.info(f"Building {method.upper()} tree")
         constructor = DistanceTreeConstructor()
-        if method == "nj":
-            tree = constructor.nj(dm)
-        else:
-            tree = constructor.upgma(dm)
-            
+        tree = constructor.nj(dm) if method == "nj" else constructor.upgma(dm)
+
         logger.info(f"Saving tree to {output_file}")
         Phylo.write(tree, output_file, "newick")
-        
+
         return output_file

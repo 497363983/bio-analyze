@@ -2,7 +2,7 @@
   "name": "run_smina_batch",
   "type": "api",
   "description": {
-    "zh": "使用 Smina 引擎批量运行对接流程。",
+    "zh": "Run batch docking pipeline using Smina engine.",
     "en": "Run batch docking pipeline using Smina engine."
   },
   "params": [
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "受体目录或文件。",
+        "zh": "Receptors directory or file.",
         "en": "Receptors directory or file."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "配体目录或文件。",
+        "zh": "Ligands directory or file.",
         "en": "Ligands directory or file."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输出目录。",
+        "zh": "Output directory.",
         "en": "Output directory."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "搜索空间中心点坐标 [x, y, z]。如果为 None，则根据 autobox_ligand 或 receptor 自动计算。",
+        "zh": "Center of search space [x, y, z]. If None, automatically calculated.",
         "en": "Center of search space [x, y, z]. If None, automatically calculated."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "搜索空间大小 [x, y, z] (Angstroms)。",
+        "zh": "Size of search space [x, y, z] in Angstroms.",
         "en": "Size of search space [x, y, z] in Angstroms."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "用于自动计算搜索盒子的参考配体。",
+        "zh": "Reference ligand for automatically calculating search box.",
         "en": "Reference ligand for automatically calculating search box."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": "4.0",
       "description": {
-        "zh": "自动计算盒子时的额外扩展空间 (Angstroms)。",
+        "zh": "Padding added to auto-calculated box (Angstroms).",
         "en": "Padding added to auto-calculated box (Angstroms)."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": "8",
       "description": {
-        "zh": "搜索详尽程度。",
+        "zh": "Exhaustiveness of the global search.",
         "en": "Exhaustiveness of the global search."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": "9",
       "description": {
-        "zh": "输出的最大构象数量。",
+        "zh": "Maximum number of poses to output.",
         "en": "Maximum number of poses to output."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "docking_summary.csv",
       "description": {
-        "zh": "摘要结果文件名。",
+        "zh": "Summary results filename.",
         "en": "Summary results filename."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "是否输出对接后的受体-配体复合物结构。",
+        "zh": "Whether to output docked receptor-ligand complex structure.",
         "en": "Whether to output docked receptor-ligand complex structure."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "要输出的复合物结构数量 (如果为 None，则输出全部)。",
+        "zh": "Number of complex structures to output.",
         "en": "Number of complex structures to output."
       }
     },
@@ -132,7 +132,7 @@
       "required": false,
       "default": "gasteiger",
       "description": {
-        "zh": "受体准备时的电荷模型。",
+        "zh": "Charge model for receptor preparation.",
         "en": "Charge model for receptor preparation."
       }
     },
@@ -142,7 +142,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "针对特定受体的盒子配置字典。",
+        "zh": "Box configuration dictionary for specific receptors.",
         "en": "Box configuration dictionary for specific receptors."
       }
     }

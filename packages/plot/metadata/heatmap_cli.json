@@ -2,8 +2,8 @@
   "name": "heatmap",
   "type": "cli",
   "description": {
-    "zh": "",
-    "en": ""
+    "zh": "Generate heatmap/clustermap.",
+    "en": "Generate heatmap/clustermap."
   },
   "params": [
     {
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
+        "zh": "Input file path (CSV, TSV, or Excel).",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输出文件路径。",
+        "zh": "Output file path.",
         "en": "Output file path."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "用作行索引的列。",
+        "zh": "Column to use as row index.",
         "en": "Column to use as row index."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "是否聚类行。",
+        "zh": "Whether to cluster rows.",
         "en": "Whether to cluster rows."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "是否聚类列。",
+        "zh": "Whether to cluster columns.",
         "en": "Whether to cluster columns."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "标准化 (0: 行, 1: 列)。None 禁用。",
+        "zh": "0 (rows) or 1 (columns) for standardization. None to disable.",
         "en": "0 (rows) or 1 (columns) for standardization. None to disable."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "颜色映射名称 (例如 'vlag', 'coolwarm')。",
+        "zh": "Colormap name (e.g. 'vlag', 'coolwarm').",
         "en": "Colormap name (e.g. 'vlag', 'coolwarm')."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "颜色映射居中的值。",
+        "zh": "Value at which to center the colormap.",
         "en": "Value at which to center the colormap."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Plot title.",
         "en": "Plot title."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Excel 工作表名称。",
+        "zh": "Sheet name for Excel files.",
         "en": "Sheet name for Excel files."
       }
     }

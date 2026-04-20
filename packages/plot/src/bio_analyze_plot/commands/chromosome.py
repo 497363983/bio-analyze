@@ -2,38 +2,37 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import typer
-
+from bio_analyze_core.cli.app import Argument, Option, echo
+from bio_analyze_core.i18n import _
 from bio_analyze_plot.commands.utils import read_data
 from bio_analyze_plot.plots.chromosome import ChromosomePlot
 
 
 def chromosome_cmd(
-    input_file: Path = typer.Argument(
-        ..., help="zh: 输入文件路径 (CSV, TSV 或 Excel)。\nen: Input file path (CSV, TSV, or Excel)."
+    input_file: Path = Argument(
+        ..., help=_("Input file path (CSV, TSV, or Excel).")
     ),
-    output: Path = typer.Option(..., "-o", "--output", help="zh: 输出文件路径。\nen: Output file path."),
-    chrom_col: str = typer.Option("chrom", help="zh: 染色体列名。\nen: Column name for chromosome."),
-    pos_col: str = typer.Option("pos", help="zh: 位置列名。\nen: Column name for position."),
-    pos_counts_col: str = typer.Option(
-        "pos_counts", help="zh: 正链计数列名。\nen: Column name for positive strand counts."
+    output: Path = Option(..., "-o", "--output", help=_("Output file path.")),
+    chrom_col: str = Option("chrom", help=_("Column name for chromosome.")),
+    pos_col: str = Option("pos", help=_("Column name for position.")),
+    pos_counts_col: str = Option(
+        "pos_counts", help=_("Column name for positive strand counts.")
     ),
-    neg_counts_col: str = typer.Option(
-        "neg_counts", help="zh: 负链计数列名。\nen: Column name for negative strand counts."
+    neg_counts_col: str = Option(
+        "neg_counts", help=_("Column name for negative strand counts.")
     ),
-    theme: str = typer.Option(
+    theme: str = Option(
         "nature",
-        help="zh: 绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。\nen: Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        help=_("Plot theme (nature, science, default) or path to custom theme (.json/.py)."),
     ),
-    title: str = typer.Option(None, help="zh: 图表标题。\nen: Plot title."),
-    sheet: str = typer.Option(None, help="zh: Excel 工作表名称。\nen: Sheet name for Excel files."),
-    max_chroms: int = typer.Option(
-        24, help="zh: 显示的最大染色体数量。\nen: Maximum number of chromosomes to display."
+    title: str = Option(None, help=_("Plot title.")),
+    sheet: str = Option(None, help=_("Sheet name for Excel files.")),
+    max_chroms: int = Option(
+        24, help=_("Maximum number of chromosomes to display.")
     ),
 ) -> None:
     """
-    zh: 生成染色体覆盖度分布图。
-    en: Generate chromosome coverage distribution plot.
+    Generate chromosome coverage distribution plot.
     """
     df = read_data(input_file, sheet=sheet)
     plotter = ChromosomePlot(theme=theme)
@@ -47,4 +46,4 @@ def chromosome_cmd(
         title=title,
         output=str(output),
     )
-    typer.echo(f"Saved chromosome plot to {output}")
+    echo(f"Saved chromosome plot to {output}")

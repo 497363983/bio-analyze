@@ -1,26 +1,32 @@
-import typer
+from bio_analyze_core.i18n import _
+from pathlib import Path
+
+from bio_analyze_core.cli.app import BioAnalyzeTyper, Option, get_app as build_app
+from bio_analyze_core.cli_i18n import localize_app
 
 from bio_analyze_core.logging import setup_logging
 from .commands.align import align_cmd
 from .commands.tree import tree_cmd
 
-def get_app() -> typer.Typer:
-    app = typer.Typer(
+def get_app() -> BioAnalyzeTyper:
+    app = build_app(
         name="msa",
-        help="zh: 多序列比对和系统发育树工具\nen: Multiple Sequence Alignment and Phylogenetic Tree tools",
+        help=_("Multiple Sequence Alignment and Phylogenetic Tree tools"),
         no_args_is_help=True,
+        locale_path=Path(__file__).resolve().parents[2] / "locale",
     )
 
     # Common callback to setup logging
     @app.callback()
     def callback(
-        verbose: bool = typer.Option(False, "--verbose", "-v", help="zh: 启用详细日志\nen: Enable verbose logging"),
+        verbose: bool = Option(False, "--verbose", help=_("Enable verbose logging"), is_flag=True),
     ):
         setup_logging(level="DEBUG" if verbose else "INFO")
 
     app.command("align")(align_cmd)
     app.command("tree")(tree_cmd)
 
+    localize_app(app)
     return app
 
 if __name__ == "__main__":

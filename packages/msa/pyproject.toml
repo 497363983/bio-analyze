@@ -7,13 +7,13 @@ name = "bio-analyze-msa"
 version = "0.1.0a0"
 description = "Multiple Sequence Alignment and Phylogenetic Tree module for bio-analyze."
 readme = "README.md"
-requires-python = ">=3.9, <3.15"
+requires-python = ">=3.10, <3.15"
 license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [
     "bio-analyze-core>=0.1.0a0",
     "biopython>=1.80",
-    "typer>=0.9.0",
+    "agentyper>=0.1.12",
 ]
 
 [project.optional-dependencies]

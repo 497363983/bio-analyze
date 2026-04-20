@@ -2,7 +2,7 @@
   "name": "pca",
   "type": "api",
   "description": {
-    "zh": "生成 PCA 图。",
+    "zh": "Generate PCA plot.",
     "en": "Generate PCA plot."
   },
   "params": [
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "包含数值数据的 DataFrame。",
+        "zh": "DataFrame containing numerical data.",
         "en": "DataFrame containing numerical data."
       }
     },
@@ -22,7 +22,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "分组信息。可以是 data 中的列名（如果 transpose=False），或者是与样本匹配的值列表/Series（如果 transpose=True）。",
+        "zh": "Grouping info. Can be column name in data (if transpose=False), or list/Series matching samples (if transpose=True).",
         "en": "Grouping info. Can be column name in data (if transpose=False), or list/Series matching samples (if transpose=True)."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "用作索引的列（例如基因 ID）。",
+        "zh": "Column to use as index (e.g. Gene ID).",
         "en": "Column to use as index (e.g. Gene ID)."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "是否转置 dataframe。通常表达矩阵是 基因 x 样本。PCA 需要 样本 x 基因。所以默认为 True。",
+        "zh": "Whether to transpose dataframe. Usually expression matrix is Gene x Sample. PCA needs Sample x Gene. So defaults to True.",
         "en": "Whether to transpose dataframe. Usually expression matrix is Gene x Sample. PCA needs Sample x Gene. So defaults to True."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "2",
       "description": {
-        "zh": "组件数量（默认 2）。",
+        "zh": "Number of components (default 2).",
         "en": "Number of components (default 2)."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "如果为 True，则围绕 hue 定义的组绘制置信椭圆。",
+        "zh": "If True, draw confidence ellipses around groups defined by hue.",
         "en": "If True, draw confidence ellipses around groups defined by hue."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": "3",
       "description": {
-        "zh": "已弃用/忽略。椭圆是基于 'hue' 分组绘制的。",
+        "zh": "Deprecated/Ignored. Ellipses are drawn based on 'hue' grouping.",
         "en": "Deprecated/Ignored. Ellipses are drawn based on 'hue' grouping."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Chart title.",
         "en": "Chart title."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "X轴标签。",
+        "zh": "X-axis label.",
         "en": "X-axis label."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Y轴标签。",
+        "zh": "Y-axis label.",
         "en": "Y-axis label."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": "pca.png",
       "description": {
-        "zh": "保存图表的路径。",
+        "zh": "Path to save the chart.",
         "en": "Path to save the chart."
       }
     }

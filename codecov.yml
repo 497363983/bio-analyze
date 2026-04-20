@@ -23,10 +23,10 @@ component_management:
       name: docking
       paths:
         - packages/docking/src/bio_analyze_docking
-    - component_id: rna_seq
-      name: rna_seq
+    - component_id: omics
+      name: omics
       paths:
-        - packages/rna_seq/src/bio_analyze_rna_seq
+        - packages/omics/src/bio_analyze_omics
     - component_id: cli
       name: cli
       paths:

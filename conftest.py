@@ -3,20 +3,17 @@ import matplotlib
 # Set backend to Agg before importing pyplot to avoid GUI dependencies
 matplotlib.use("Agg")
 
-import os
 import io
+import logging
+import os
+import pathlib
+
+import allure
+import matplotlib.pyplot as plt
 import numpy as np
 import pytest
-import logging
-import pathlib
-import matplotlib.pyplot as plt
-from PIL import Image
 from matplotlib.figure import Figure
-import allure
-from pytest_regressions.data_regression import DataRegressionFixture
-from pytest_regressions.image_regression import ImageRegressionFixture
-from pytest_regressions.num_regression import NumericRegressionFixture
-from pytest_regressions.file_regression import FileRegressionFixture
+from PIL import Image
 
 SNAPSHOT_DIR_NAME = "snapshot"
 

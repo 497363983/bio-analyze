@@ -2,7 +2,7 @@
   "name": "box",
   "type": "api",
   "description": {
-    "zh": "绘制箱线图。",
+    "zh": "Plot box chart.",
     "en": "Plot box chart."
   },
   "params": [
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "包含数据的 DataFrame。",
+        "zh": "DataFrame containing data.",
         "en": "DataFrame containing data."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "x 轴的列名。",
+        "zh": "Column name for x-axis.",
         "en": "Column name for x-axis."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "y 轴的列名。",
+        "zh": "Column name for y-axis.",
         "en": "Column name for y-axis."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "分组列名。",
+        "zh": "Column name for grouping.",
         "en": "Column name for grouping."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Chart title.",
         "en": "Chart title."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "X轴标签。",
+        "zh": "X-axis label.",
         "en": "X-axis label."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Y轴标签。",
+        "zh": "Y-axis label.",
         "en": "Y-axis label."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "保存图表的路径。",
+        "zh": "Path to save the chart.",
         "en": "Path to save the chart."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "要进行显著性检验的配对列表。",
+        "zh": "List of pairs for significance testing.",
         "en": "List of pairs for significance testing."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "t-test_ind",
       "description": {
-        "zh": "统计检验方法。",
+        "zh": "Statistical test method.",
         "en": "Statistical test method."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": "star",
       "description": {
-        "zh": "显著性标记格式。",
+        "zh": "Significance annotation format.",
         "en": "Significance annotation format."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "是否叠加散点图 (swarmplot)。",
+        "zh": "Whether to overlay swarmplot.",
         "en": "Whether to overlay swarmplot."
       }
     },
@@ -132,7 +132,7 @@
       "required": false,
       "default": ".25",
       "description": {
-        "zh": "散点颜色。",
+        "zh": "Color of swarm points.",
         "en": "Color of swarm points."
       }
     },
@@ -142,7 +142,7 @@
       "required": false,
       "default": "3",
       "description": {
-        "zh": "散点大小。",
+        "zh": "Size of swarm points.",
         "en": "Size of swarm points."
       }
     }

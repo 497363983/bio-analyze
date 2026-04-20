@@ -4,26 +4,21 @@ try:
 except ImportError:
     HAS_BIOPYTHON = False
 
-
 def gc_content(sequence: str, ignore_n: bool = True) -> float:
     """
-    zh: 计算序列的 GC 含量。
-    en: Calculate the GC content of the sequence.
+    Calculate the GC content of the sequence.
 
     Args:
         sequence (str):
-            zh: 输入的核酸序列。
-            en: Input nucleic acid sequence.
+            Input nucleic acid sequence.
         ignore_n (bool):
-            zh: 是否在总长度中忽略 'N' 或其他非明确碱基。默认为 True，仅计算 G+C 占 A+C+G+T+U 的比例。
             如果使用 Biopython，该参数将被忽略，因为 gc_fraction 内部有自己的处理逻辑
             （通常计算 G+S+C 占全长的比例）。
-            en: Whether to ignore 'N' or other ambiguous bases in total length. Default is True.
+            Whether to ignore 'N' or other ambiguous bases in total length. Default is True.
 
     Returns:
         float:
-            zh: GC 含量比例 (0.0 到 1.0 之间)。如果序列为空则返回 0.0。
-            en: GC content fraction (between 0.0 and 1.0). Returns 0.0 if sequence is empty.
+            GC content fraction (between 0.0 and 1.0). Returns 0.0 if sequence is empty.
     """
     if not sequence:
         return 0.0

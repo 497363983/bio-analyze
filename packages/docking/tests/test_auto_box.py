@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 from bio_analyze_docking.cli import get_app
 from bio_analyze_docking.prep import get_box_from_receptor
-from typer.testing import CliRunner
+from bio_analyze_core.cli.app import CliRunner
 
 # Define paths relative to the package root
 DATA_DIR = Path(__file__).parent / "data"

@@ -6,84 +6,69 @@ from dataclasses import dataclass
 from importlib.metadata import EntryPoint, entry_points
 from typing import Any
 
-import typer
+from bio_analyze_core.cli.app import BioAnalyzeTyper
 
 ENTRYPOINT_GROUP = "bio_analyze.cli"
-
 
 @dataclass(frozen=True, **({"slots": True} if sys.version_info >= (3, 10) else {}))
 class CliPlugin:
     """
-    zh: CLI 插件数据类。
-    en: CLI Plugin data class.
+    CLI Plugin data class.
 
     Attributes:
         name (str):
-            zh: 插件名称。
-            en: Plugin name.
-        app (typer.Typer):
-            zh: Typer 应用实例。
-            en: Typer application instance.
+            Plugin name.
+        app (BioAnalyzeTyper):
+            Typer application instance.
     """
 
     name: str
-    app: typer.Typer
-
+    app: BioAnalyzeTyper
 
 def _iter_entry_points() -> Iterable[EntryPoint]:
     """
-    zh: 迭代所有注册的 entry points。
-    en: Iterate over all registered entry points.
+    Iterate over all registered entry points.
 
     Returns:
         Iterable[EntryPoint]:
-            zh: EntryPoint 迭代器。
-            en: Iterable of EntryPoints.
+            Iterable of EntryPoints.
     """
     eps = entry_points()
     if hasattr(eps, "select"):
         return eps.select(group=ENTRYPOINT_GROUP)
     return eps.get(ENTRYPOINT_GROUP, [])
 
-
-def _load_typer(obj: Any) -> typer.Typer:
+def _load_typer(obj: Any) -> BioAnalyzeTyper:
     """
-    zh: 从对象加载 Typer 实例。
-    en: Load Typer instance from object.
+    Load Typer instance from object.
 
     Args:
         obj (Any):
-            zh: 目标对象（Typer 实例或返回 Typer 实例的可调用对象）。
-            en: Target object (Typer instance or callable returning Typer instance).
+            Target object (Typer instance or callable returning Typer instance).
 
     Returns:
-        typer.Typer:
-            zh: Typer 应用实例。
-            en: Typer application instance.
+        BioAnalyzeTyper:
+            Typer application instance.
 
     Raises:
         TypeError:
-            zh: 如果对象不是 Typer 实例或返回 Typer 实例的可调用对象。
-            en: If object is not a Typer instance or a callable returning a Typer instance.
+            If object is not a Typer instance or a callable returning a Typer instance.
     """
-    if isinstance(obj, typer.Typer):
+    if isinstance(obj, BioAnalyzeTyper):
         return obj
     if callable(obj):
         app = obj()
-        if isinstance(app, typer.Typer):
+        if isinstance(app, BioAnalyzeTyper):
             return app
-    raise TypeError("CLI plugin must be a Typer app or a callable returning a Typer app.")
-
+    raise TypeError("CLI plugin must be a BioAnalyzeTyper app or a callable returning a BioAnalyzeTyper app.")
 
 def load_plugins() -> list[CliPlugin]:
     """
-    zh: 加载所有可用插件。
-    en: Load all available plugins.
+    Load all available plugins.
 
     Returns:
         list[CliPlugin]:
-            zh: 已加载的插件列表，按名称排序。
-            en: List of loaded plugins, sorted by name.
+            List of loaded plugins, sorted by name.
     """
     plugins: list[CliPlugin] = []
     for ep in _iter_entry_points():
@@ -91,16 +76,13 @@ def load_plugins() -> list[CliPlugin]:
         plugins.append(CliPlugin(name=ep.name, app=app))
     return sorted(plugins, key=lambda p: p.name)
 
-
-def attach_plugins(root: typer.Typer) -> None:
+def attach_plugins(root: BioAnalyzeTyper) -> None:
     """
-    zh: 将插件挂载到根命令。
-    en: Attach plugins to root command.
+    Attach plugins to root command.
 
     Args:
-        root (typer.Typer):
-            zh: 根 Typer 应用实例。
-            en: Root Typer application instance.
+        root (BioAnalyzeTyper):
+            Root Typer application instance.
     """
     for plugin in load_plugins():
         root.add_typer(plugin.app, name=plugin.name)

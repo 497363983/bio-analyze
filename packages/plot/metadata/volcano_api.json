@@ -2,7 +2,7 @@
   "name": "volcano",
   "type": "api",
   "description": {
-    "zh": "绘制火山图。",
+    "zh": "Plot volcano plot.",
     "en": "Plot volcano plot."
   },
   "params": [
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "包含数据的 DataFrame。",
+        "zh": "DataFrame containing data.",
         "en": "DataFrame containing data."
       }
     },
@@ -22,7 +22,7 @@
       "required": false,
       "default": "log2FoldChange",
       "description": {
-        "zh": "log2 fold change 的列名。",
+        "zh": "Column name for log2 fold change.",
         "en": "Column name for log2 fold change."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": "pvalue",
       "description": {
-        "zh": "p-value (或 adj. p-value) 的列名。",
+        "zh": "Column name for p-value (or adj. p-value).",
         "en": "Column name for p-value (or adj. p-value)."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "是否对 y 轴进行 -log10 转换。",
+        "zh": "Whether to apply -log10 transformation to y-axis.",
         "en": "Whether to apply -log10 transformation to y-axis."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "1.0",
       "description": {
-        "zh": "Fold change 截止值 (绝对值)。",
+        "zh": "Fold change cutoff value (absolute).",
         "en": "Fold change cutoff value (absolute)."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": "0.05",
       "description": {
-        "zh": "P-value 截止值。",
+        "zh": "P-value cutoff value.",
         "en": "P-value cutoff value."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Chart title.",
         "en": "Chart title."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "X轴标签。",
+        "zh": "X-axis label.",
         "en": "X-axis label."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Y轴标签。",
+        "zh": "Y-axis label.",
         "en": "Y-axis label."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "保存图表的路径。",
+        "zh": "Path to save the chart.",
         "en": "Path to save the chart."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "自定义图例标签，字典格式，键为 \"up\", \"down\", \"ns\"。\n默认为 {\"up\": \"Up\", \"down\": \"Down\", \"ns\": \"Not Sig\"}。",
+        "zh": "Custom legend labels, dict with keys \"up\", \"down\", \"ns\".\nDefaults to {\"up\": \"Up\", \"down\": \"Down\", \"ns\": \"Not Sig\"}.",
         "en": "Custom legend labels, dict with keys \"up\", \"down\", \"ns\".\nDefaults to {\"up\": \"Up\", \"down\": \"Down\", \"ns\": \"Not Sig\"}."
       }
     }

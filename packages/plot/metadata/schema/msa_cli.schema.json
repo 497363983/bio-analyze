@@ -1,0 +1,71 @@
+{
+  "name": "msa",
+  "type": "cli",
+  "description": "Plot a Multiple Sequence Alignment (MSA)",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "-i, --input",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Path to the input MSA file (FASTA)"
+    },
+    {
+      "field": "output_file",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output image path"
+    },
+    {
+      "field": "seq_type",
+      "name": "--seq-type",
+      "type": "string",
+      "required": false,
+      "default": "aa",
+      "description": "Sequence type (aa/nt)"
+    },
+    {
+      "field": "show_logo",
+      "name": "--show-logo/--no-logo",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": "Whether to show a conservation logo at the top"
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Plot theme (default/nature/science)"
+    },
+    {
+      "field": "font_size",
+      "name": "--font-size",
+      "type": "int",
+      "required": false,
+      "default": "10",
+      "description": "Font size"
+    },
+    {
+      "field": "bases_per_line",
+      "name": "--bases-per-line",
+      "type": "int",
+      "required": false,
+      "default": "0",
+      "description": "Residues per line for wrapping, 0 means no wrap"
+    },
+    {
+      "field": "base_colors",
+      "name": "--base-colors",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "JSON mapping for custom residue colors, e.g. '{\"A\":\"#000000\"}'"
+    }
+  ]
+}

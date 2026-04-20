@@ -18,11 +18,11 @@ import pytest
 
 def test_import_rna_seq_pipeline():
     try:
-        from bio_analyze_rna_seq.pipeline import RNASeqPipeline
+        from bio_analyze_omics.rna_seq.pipeline import RNASeqPipeline
 
         assert RNASeqPipeline is not None
     except ImportError as e:
-        pytest.fail(f"Failed to import bio_analyze_rna_seq.pipeline: {e}")
+        pytest.fail(f"Failed to import bio_analyze_omics.rna_seq.pipeline: {e}")
 
 
 def test_import_docking_api():
@@ -36,9 +36,9 @@ def test_import_docking_api():
 
 def test_instantiate_rna_seq_pipeline(tmp_path):
     try:
-        from bio_analyze_rna_seq.pipeline import RNASeqPipeline
+        from bio_analyze_omics.rna_seq.pipeline import RNASeqPipeline
     except ImportError:
-        pytest.skip("bio_analyze_rna_seq not installed")
+        pytest.skip("bio_analyze_omics not installed")
 
     input_dir = tmp_path / "input"
     input_dir.mkdir()

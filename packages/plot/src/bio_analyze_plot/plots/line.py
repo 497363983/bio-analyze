@@ -13,8 +13,7 @@ from .base import BasePlot, save_plot
 
 class LinePlot(BasePlot):
     """
-    zh: 折线图实现。
-    en: Line plot implementation.
+    Line plot implementation.
     """
 
     @save_plot
@@ -42,70 +41,49 @@ class LinePlot(BasePlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        zh: 绘制折线图。
-        en: Plot line chart.
+        Plot line chart.
 
         Args:
             data:
-                zh: 包含数据的 DataFrame。
-                en: DataFrame containing data.
+                DataFrame containing data.
             x:
-                zh: x 轴的列名。
-                en: Column name for x-axis.
+                Column name for x-axis.
             y:
-                zh: y 轴的列名。
-                en: Column name for y-axis.
+                Column name for y-axis.
             hue:
-                zh: 分组列名。
-                en: Column name for grouping.
+                Column name for grouping.
             title:
-                zh: 图表标题。
-                en: Chart title.
+                Chart title.
             xlabel:
-                zh: X轴标签。
-                en: X-axis label.
+                X-axis label.
             ylabel:
-                zh: Y轴标签。
-                en: Y-axis label.
+                Y-axis label.
             output:
-                zh: 保存图表的路径。
-                en: Path to save the chart.
+                Path to save the chart.
             error_bar_type:
-                zh: 误差棒类型 (SD, SE, CI)。
-                en: Error bar type (SD, SE, CI).
+                Error bar type (SD, SE, CI).
             error_bar_ci:
-                zh: 当类型为 CI 时的置信区间大小 (默认 95)。
-                en: Confidence interval size when type is CI (default 95).
+                Confidence interval size when type is CI (default 95).
             error_bar_max:
-                zh: 误差棒上限的列名 (暂不支持手动绘制，仅占位)。
-                en: Column name for error bar upper bound (placeholder, manual drawing not supported yet).
+                Column name for error bar upper bound (placeholder, manual drawing not supported yet).
             error_bar_min:
-                zh: 误差棒下限的列名 (暂不支持手动绘制，仅占位)。
-                en: Column name for error bar lower bound (placeholder, manual drawing not supported yet).
+                Column name for error bar lower bound (placeholder, manual drawing not supported yet).
             error_bar_capsize:
-                zh: 误差棒的横线宽度 (单位: points)。
-                en: Width of error bar caps (unit: points).
+                Width of error bar caps (unit: points).
             err_color:
-                zh: 误差棒颜色。
-                en: Error bar color.
+                Error bar color.
             cap_color:
-                zh: 误差棒横线颜色 (对于 lineplot，通常与 err_color 一致)。
-                en: Error bar cap color (usually same as err_color for lineplot).
+                Error bar cap color (usually same as err_color for lineplot).
             markers:
-                zh: 是否显示数据点标记，或指定标记样式。
-                en: Whether to show data point markers, or specify marker style.
+                Whether to show data point markers, or specify marker style.
             dashes:
-                zh: 是否显示虚线，或指定虚线样式。
-                en: Whether to show dashes, or specify dash style.
+                Whether to show dashes, or specify dash style.
             smooth:
-                zh: 是否启用平滑曲线拟合。
-                en: Whether to enable smooth curve fitting.
+                Whether to enable smooth curve fitting.
             smooth_points:
-                zh: 平滑曲线的插值点数。
-                en: Number of interpolation points for smooth curve.
+                Number of interpolation points for smooth curve.
             **kwargs:
-                zh: 其他传递给 seaborn.lineplot 的参数。
-                en: Other arguments passed to seaborn.lineplot.
+                Other arguments passed to seaborn.lineplot.
         """
         # 获取主题特定参数
         theme_params = self.get_chart_specific_params("line")
@@ -205,10 +183,7 @@ class LinePlot(BasePlot):
             else:
                 smooth_list.append(get_smooth_series(data))
 
-            if smooth_list:
-                smoothed_data = pd.concat(smooth_list, ignore_index=True)
-            else:
-                smoothed_data = data  # Fallback
+            smoothed_data = pd.concat(smooth_list, ignore_index=True) if smooth_list else data
 
             # 如果需要绘制误差棒，先用原始数据绘制误差棒和标记（不画线）
             if errorbar_arg is not None:

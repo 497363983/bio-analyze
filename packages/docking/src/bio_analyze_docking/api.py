@@ -24,23 +24,22 @@ __all__ = [
     "prepare_receptor",
     "run_docking",
     "run_docking_batch",
-    "run_vina",
-    "run_smina",
     "run_gnina",
-    "run_haddock",
-    "run_vina_batch",
-    "run_smina_batch",
     "run_gnina_batch",
+    "run_haddock",
     "run_haddock_batch",
+    "run_smina",
+    "run_smina_batch",
+    "run_vina",
+    "run_vina_batch",
 ]
-
 
 def run_docking(
     receptor: Path,
     ligand: Path,
     output_dir: Path,
     center: list[float] | None = None,
-    size: list[float] = [20.0, 20.0, 20.0],
+    size: list[float] | None = None,
     autobox_ligand: Path | None = None,
     padding: float = 4.0,
     exhaustiveness: int = 8,
@@ -53,53 +52,40 @@ def run_docking(
     haddock_config: Path | None = None,
 ) -> dict:
     """
-    zh: 运行单个受体-配体对的完整对接流程。
-    en: Run complete docking pipeline for a single receptor-ligand pair.
+    Run complete docking pipeline for a single receptor-ligand pair.
 
     Args:
         receptor:
-            zh: 受体文件路径 (PDB/PDBQT)。
-            en: Path to receptor file (PDB/PDBQT).
+            Path to receptor file (PDB/PDBQT).
         ligand:
-            zh: 配体文件路径 (SDF/MOL2/PDB/SMILES)。
-            en: Path to ligand file (SDF/MOL2/PDB/SMILES).
+            Path to ligand file (SDF/MOL2/PDB/SMILES).
         output_dir:
-            zh: 输出目录。
-            en: Output directory.
+            Output directory.
         center:
-            zh: 盒子中心 [x, y, z]。
-            en: Box center [x, y, z].
+            Box center [x, y, z].
         size:
-            zh: 盒子大小 [x, y, z]。
-            en: Box size [x, y, z].
+            Box size [x, y, z].
         autobox_ligand:
-            zh: 用于自动盒计算的配体路径。
-            en: Ligand path for autobox calculation.
+            Ligand path for autobox calculation.
         padding:
-            zh: 自动盒填充。
-            en: Autobox padding.
+            Autobox padding.
         exhaustiveness:
-            zh: Vina 穷尽性。
-            en: Vina exhaustiveness.
+            Vina exhaustiveness.
         n_poses:
-            zh: 姿态数量。
-            en: Number of poses.
+            Number of poses.
         summary_filename:
-            zh: 摘要文件名。
-            en: Summary filename.
+            Summary filename.
         output_docked_lig_recep_struct:
-            zh: 是否保存复合物结构（PDB 格式，通过 PyMOL）。
-            en: Whether to save complex structure (PDB format, via PyMOL).
+            Whether to save complex structure (PDB format, via PyMOL).
         n_docked_lig_recep_struct:
-            zh: 要保存的复合物数量。
-            en: Number of complexes to save.
+            Number of complexes to save.
         charge_model:
-            zh: 受体准备的电荷模型 (例如 'gasteiger', 'zero')。
-            en: Charge model for receptor preparation (e.g. 'gasteiger', 'zero').
+            Charge model for receptor preparation (e.g. 'gasteiger', 'zero').
         engine:
-            zh: 对接引擎类型 (例如 'vina', 'gnina', 'haddock')。
-            en: Docking engine type (e.g. 'vina', 'gnina', 'haddock').
+            Docking engine type (e.g. 'vina', 'gnina', 'haddock').
     """
+    if size is None:
+        size = [20.0, 20.0, 20.0]
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -162,13 +148,12 @@ def run_docking(
         # 如果 DockingNode 成功运行（或捕获异常），这不应该发生
         raise RuntimeError("Docking pipeline finished but no result found.")
 
-
 def run_docking_batch(
     receptors: list[Path] | Path,
     ligands: list[Path] | Path,
     output_dir: Path,
     center: list[float] | None = None,
-    size: list[float] = [20.0, 20.0, 20.0],
+    size: list[float] | None = None,
     autobox_ligand: Path | None = None,
     padding: float = 4.0,
     exhaustiveness: int = 8,
@@ -182,56 +167,42 @@ def run_docking_batch(
     haddock_config: Path | None = None,
 ) -> list[dict]:
     """
-    zh: 对多个受体和/或配体 (M x N) 运行对接。
-    en: Run docking for multiple receptors and/or ligands (M x N).
+    Run docking for multiple receptors and/or ligands (M x N).
 
     Args:
         receptors:
-            zh: 受体路径列表或包含受体的目录。
-            en: List of receptor paths or directory containing receptors.
+            List of receptor paths or directory containing receptors.
         ligands:
-            zh: 配体路径列表或包含配体的目录。
-            en: List of ligand paths or directory containing ligands.
+            List of ligand paths or directory containing ligands.
         output_dir:
-            zh: 基础输出目录。
-            en: Base output directory.
+            Base output directory.
         center:
-            zh: 盒子中心 [x, y, z]。
-            en: Box center [x, y, z].
+            Box center [x, y, z].
         size:
-            zh: 盒子大小 [x, y, z]。
-            en: Box size [x, y, z].
+            Box size [x, y, z].
         autobox_ligand:
-            zh: 用于自动盒计算的配体路径。
-            en: Ligand path for autobox calculation.
+            Ligand path for autobox calculation.
         padding:
-            zh: 自动盒填充。
-            en: Autobox padding.
+            Autobox padding.
         exhaustiveness:
-            zh: Vina 穷尽性。
-            en: Vina exhaustiveness.
+            Vina exhaustiveness.
         n_poses:
-            zh: 姿态数量。
-            en: Number of poses.
+            Number of poses.
         summary_filename:
-            zh: 摘要文件名。
-            en: Summary filename.
+            Summary filename.
         output_docked_lig_recep_struct:
-            zh: 是否保存复合物结构（PDB 格式，通过 PyMOL）。
-            en: Whether to save complex structure (PDB format, via PyMOL).
+            Whether to save complex structure (PDB format, via PyMOL).
         n_docked_lig_recep_struct:
-            zh: 要保存的复合物数量。
-            en: Number of complexes to save.
+            Number of complexes to save.
         charge_model:
-            zh: 受体准备的电荷模型 (例如 'gasteiger', 'zero')。
-            en: Charge model for receptor preparation (e.g. 'gasteiger', 'zero').
+            Charge model for receptor preparation (e.g. 'gasteiger', 'zero').
         engine:
-            zh: 对接引擎类型 (例如 'vina', 'gnina', 'haddock')。
-            en: Docking engine type (e.g. 'vina', 'gnina', 'haddock').
+            Docking engine type (e.g. 'vina', 'gnina', 'haddock').
         boxes:
-            zh: 针对特定受体的盒子配置字典。
-            en: Dictionary of box configurations for specific receptors.
+            Dictionary of box configurations for specific receptors.
     """
+    if size is None:
+        size = [20.0, 20.0, 20.0]
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -266,8 +237,8 @@ def run_docking_batch(
     pipeline = Pipeline("batch_docking", str(output_dir / "pipeline_state.json"))
 
     # 识别唯一输入并分配上下文键
-    unique_receptors = sorted(list(set(receptors)))
-    unique_ligands = sorted(list(set(ligands)))
+    unique_receptors = sorted(set(receptors))
+    unique_ligands = sorted(set(ligands))
 
     rec_map_key = "receptor_prep_map"
     lig_map_key = "ligand_prep_map"
@@ -338,7 +309,6 @@ def run_docking_batch(
 
     return pipeline.context.get(result_key, [])
 
-
 def run_vina(
     receptor: Path,
     ligand: Path,
@@ -355,49 +325,35 @@ def run_vina(
     charge_model: str = "gasteiger",
 ) -> dict:
     """
-    zh: 使用 Vina 引擎运行单个受体-配体对的完整对接流程。
-    en: Run complete docking pipeline for a single receptor-ligand pair using Vina engine.
+    Run complete docking pipeline for a single receptor-ligand pair using Vina engine.
 
     Args:
         receptor:
-            zh: 受体文件路径 (PDB/PDBQT)。
-            en: Path to receptor file (PDB/PDBQT).
+            Path to receptor file (PDB/PDBQT).
         ligand:
-            zh: 配体文件路径 (SDF/MOL2/PDB/SMILES)。
-            en: Path to ligand file (SDF/MOL2/PDB/SMILES).
+            Path to ligand file (SDF/MOL2/PDB/SMILES).
         output_dir:
-            zh: 输出目录。
-            en: Output directory.
+            Output directory.
         center:
-            zh: 搜索空间中心点坐标 [x, y, z]。如果为 None，则根据 autobox_ligand 或 receptor 自动计算。
-            en: Center of search space [x, y, z]. If None, automatically calculated.
+            Center of search space [x, y, z]. If None, automatically calculated.
         size:
-            zh: 搜索空间大小 [x, y, z] (Angstroms)。
-            en: Size of search space [x, y, z] in Angstroms.
+            Size of search space [x, y, z] in Angstroms.
         autobox_ligand:
-            zh: 用于自动计算搜索盒子的参考配体。
-            en: Reference ligand for automatically calculating search box.
+            Reference ligand for automatically calculating search box.
         padding:
-            zh: 自动计算盒子时的额外扩展空间 (Angstroms)。
-            en: Padding added to auto-calculated box (Angstroms).
+            Padding added to auto-calculated box (Angstroms).
         exhaustiveness:
-            zh: 搜索详尽程度。
-            en: Exhaustiveness of the global search.
+            Exhaustiveness of the global search.
         n_poses:
-            zh: 输出的最大构象数量。
-            en: Maximum number of poses to output.
+            Maximum number of poses to output.
         summary_filename:
-            zh: 摘要结果文件名。
-            en: Summary results filename.
+            Summary results filename.
         output_docked_lig_recep_struct:
-            zh: 是否输出对接后的受体-配体复合物结构。
-            en: Whether to output docked receptor-ligand complex structure.
+            Whether to output docked receptor-ligand complex structure.
         n_docked_lig_recep_struct:
-            zh: 要输出的复合物结构数量 (如果为 None，则输出全部)。
-            en: Number of complex structures to output.
+            Number of complex structures to output.
         charge_model:
-            zh: 受体准备时的电荷模型。
-            en: Charge model for receptor preparation.
+            Charge model for receptor preparation.
     """
     size_val = size if size is not None else [20.0, 20.0, 20.0]
     return run_docking(
@@ -417,7 +373,6 @@ def run_vina(
         engine="vina",
     )
 
-
 def run_smina(
     receptor: Path,
     ligand: Path,
@@ -434,49 +389,35 @@ def run_smina(
     charge_model: str = "gasteiger",
 ) -> dict:
     """
-    zh: 使用 Smina 引擎运行单个受体-配体对的完整对接流程。
-    en: Run complete docking pipeline for a single receptor-ligand pair using Smina engine.
+    Run complete docking pipeline for a single receptor-ligand pair using Smina engine.
 
     Args:
         receptor:
-            zh: 受体文件路径 (PDB/PDBQT)。
-            en: Path to receptor file (PDB/PDBQT).
+            Path to receptor file (PDB/PDBQT).
         ligand:
-            zh: 配体文件路径 (SDF/MOL2/PDB/SMILES)。
-            en: Path to ligand file (SDF/MOL2/PDB/SMILES).
+            Path to ligand file (SDF/MOL2/PDB/SMILES).
         output_dir:
-            zh: 输出目录。
-            en: Output directory.
+            Output directory.
         center:
-            zh: 搜索空间中心点坐标 [x, y, z]。如果为 None，则根据 autobox_ligand 或 receptor 自动计算。
-            en: Center of search space [x, y, z]. If None, automatically calculated.
+            Center of search space [x, y, z]. If None, automatically calculated.
         size:
-            zh: 搜索空间大小 [x, y, z] (Angstroms)。
-            en: Size of search space [x, y, z] in Angstroms.
+            Size of search space [x, y, z] in Angstroms.
         autobox_ligand:
-            zh: 用于自动计算搜索盒子的参考配体。
-            en: Reference ligand for automatically calculating search box.
+            Reference ligand for automatically calculating search box.
         padding:
-            zh: 自动计算盒子时的额外扩展空间 (Angstroms)。
-            en: Padding added to auto-calculated box (Angstroms).
+            Padding added to auto-calculated box (Angstroms).
         exhaustiveness:
-            zh: 搜索详尽程度。
-            en: Exhaustiveness of the global search.
+            Exhaustiveness of the global search.
         n_poses:
-            zh: 输出的最大构象数量。
-            en: Maximum number of poses to output.
+            Maximum number of poses to output.
         summary_filename:
-            zh: 摘要结果文件名。
-            en: Summary results filename.
+            Summary results filename.
         output_docked_lig_recep_struct:
-            zh: 是否输出对接后的受体-配体复合物结构。
-            en: Whether to output docked receptor-ligand complex structure.
+            Whether to output docked receptor-ligand complex structure.
         n_docked_lig_recep_struct:
-            zh: 要输出的复合物结构数量 (如果为 None，则输出全部)。
-            en: Number of complex structures to output.
+            Number of complex structures to output.
         charge_model:
-            zh: 受体准备时的电荷模型。
-            en: Charge model for receptor preparation.
+            Charge model for receptor preparation.
     """
     size_val = size if size is not None else [20.0, 20.0, 20.0]
     return run_docking(
@@ -496,7 +437,6 @@ def run_smina(
         engine="smina",
     )
 
-
 def run_gnina(
     receptor: Path,
     ligand: Path,
@@ -513,49 +453,35 @@ def run_gnina(
     charge_model: str = "gasteiger",
 ) -> dict:
     """
-    zh: 使用 Gnina 引擎运行单个受体-配体对的完整对接流程。
-    en: Run complete docking pipeline for a single receptor-ligand pair using Gnina engine.
+    Run complete docking pipeline for a single receptor-ligand pair using Gnina engine.
 
     Args:
         receptor:
-            zh: 受体文件路径 (PDB/PDBQT)。
-            en: Path to receptor file (PDB/PDBQT).
+            Path to receptor file (PDB/PDBQT).
         ligand:
-            zh: 配体文件路径 (SDF/MOL2/PDB/SMILES)。
-            en: Path to ligand file (SDF/MOL2/PDB/SMILES).
+            Path to ligand file (SDF/MOL2/PDB/SMILES).
         output_dir:
-            zh: 输出目录。
-            en: Output directory.
+            Output directory.
         center:
-            zh: 搜索空间中心点坐标 [x, y, z]。如果为 None，则根据 autobox_ligand 或 receptor 自动计算。
-            en: Center of search space [x, y, z]. If None, automatically calculated.
+            Center of search space [x, y, z]. If None, automatically calculated.
         size:
-            zh: 搜索空间大小 [x, y, z] (Angstroms)。
-            en: Size of search space [x, y, z] in Angstroms.
+            Size of search space [x, y, z] in Angstroms.
         autobox_ligand:
-            zh: 用于自动计算搜索盒子的参考配体。
-            en: Reference ligand for automatically calculating search box.
+            Reference ligand for automatically calculating search box.
         padding:
-            zh: 自动计算盒子时的额外扩展空间 (Angstroms)。
-            en: Padding added to auto-calculated box (Angstroms).
+            Padding added to auto-calculated box (Angstroms).
         exhaustiveness:
-            zh: 搜索详尽程度。
-            en: Exhaustiveness of the global search.
+            Exhaustiveness of the global search.
         n_poses:
-            zh: 输出的最大构象数量。
-            en: Maximum number of poses to output.
+            Maximum number of poses to output.
         summary_filename:
-            zh: 摘要结果文件名。
-            en: Summary results filename.
+            Summary results filename.
         output_docked_lig_recep_struct:
-            zh: 是否输出对接后的受体-配体复合物结构。
-            en: Whether to output docked receptor-ligand complex structure.
+            Whether to output docked receptor-ligand complex structure.
         n_docked_lig_recep_struct:
-            zh: 要输出的复合物结构数量 (如果为 None，则输出全部)。
-            en: Number of complex structures to output.
+            Number of complex structures to output.
         charge_model:
-            zh: 受体准备时的电荷模型。
-            en: Charge model for receptor preparation.
+            Charge model for receptor preparation.
     """
     size_val = size if size is not None else [20.0, 20.0, 20.0]
     return run_docking(
@@ -575,7 +501,6 @@ def run_gnina(
         engine="gnina",
     )
 
-
 def run_haddock(
     receptor: Path,
     ligand: Path,
@@ -588,37 +513,27 @@ def run_haddock(
     haddock_config: Path | None = None,
 ) -> dict:
     """
-    zh: 使用 HADDOCK 引擎运行单个受体-配体对的完整对接流程。
-    en: Run complete docking pipeline for a single receptor-ligand pair using HADDOCK engine.
+    Run complete docking pipeline for a single receptor-ligand pair using HADDOCK engine.
 
     Args:
         receptor:
-            zh: 受体文件路径 (PDB)。
-            en: Path to receptor file (PDB).
+            Path to receptor file (PDB).
         ligand:
-            zh: 配体文件路径 (PDB)。
-            en: Path to ligand file (PDB).
+            Path to ligand file (PDB).
         output_dir:
-            zh: 输出目录。
-            en: Output directory.
+            Output directory.
         n_poses:
-            zh: 采样的构象数量。
-            en: Number of poses to sample.
+            Number of poses to sample.
         summary_filename:
-            zh: 摘要结果文件名。
-            en: Summary results filename.
+            Summary results filename.
         output_docked_lig_recep_struct:
-            zh: 是否输出对接后的受体-配体复合物结构。
-            en: Whether to output docked receptor-ligand complex structure.
+            Whether to output docked receptor-ligand complex structure.
         n_docked_lig_recep_struct:
-            zh: 要输出的复合物结构数量 (如果为 None，则输出全部)。
-            en: Number of complex structures to output.
+            Number of complex structures to output.
         charge_model:
-            zh: 受体准备时的电荷模型。
-            en: Charge model for receptor preparation.
+            Charge model for receptor preparation.
         haddock_config:
-            zh: 自定义 HADDOCK3 配置文件路径。
-            en: Path to custom HADDOCK3 configuration file.
+            Path to custom HADDOCK3 configuration file.
     """
     return run_docking(
         receptor=receptor,
@@ -638,7 +553,6 @@ def run_haddock(
         haddock_config=haddock_config,
     )
 
-
 def run_vina_batch(
     receptors: Path,
     ligands: Path,
@@ -656,52 +570,37 @@ def run_vina_batch(
     boxes: dict | None = None,
 ) -> list[dict]:
     """
-    zh: 使用 Vina 引擎批量运行对接流程。
-    en: Run batch docking pipeline using Vina engine.
+    Run batch docking pipeline using Vina engine.
 
     Args:
         receptors:
-            zh: 受体目录或文件。
-            en: Receptors directory or file.
+            Receptors directory or file.
         ligands:
-            zh: 配体目录或文件。
-            en: Ligands directory or file.
+            Ligands directory or file.
         output_dir:
-            zh: 输出目录。
-            en: Output directory.
+            Output directory.
         center:
-            zh: 搜索空间中心点坐标 [x, y, z]。如果为 None，则根据 autobox_ligand 或 receptor 自动计算。
-            en: Center of search space [x, y, z]. If None, automatically calculated.
+            Center of search space [x, y, z]. If None, automatically calculated.
         size:
-            zh: 搜索空间大小 [x, y, z] (Angstroms)。
-            en: Size of search space [x, y, z] in Angstroms.
+            Size of search space [x, y, z] in Angstroms.
         autobox_ligand:
-            zh: 用于自动计算搜索盒子的参考配体。
-            en: Reference ligand for automatically calculating search box.
+            Reference ligand for automatically calculating search box.
         padding:
-            zh: 自动计算盒子时的额外扩展空间 (Angstroms)。
-            en: Padding added to auto-calculated box (Angstroms).
+            Padding added to auto-calculated box (Angstroms).
         exhaustiveness:
-            zh: 搜索详尽程度。
-            en: Exhaustiveness of the global search.
+            Exhaustiveness of the global search.
         n_poses:
-            zh: 输出的最大构象数量。
-            en: Maximum number of poses to output.
+            Maximum number of poses to output.
         summary_filename:
-            zh: 摘要结果文件名。
-            en: Summary results filename.
+            Summary results filename.
         output_docked_lig_recep_struct:
-            zh: 是否输出对接后的受体-配体复合物结构。
-            en: Whether to output docked receptor-ligand complex structure.
+            Whether to output docked receptor-ligand complex structure.
         n_docked_lig_recep_struct:
-            zh: 要输出的复合物结构数量 (如果为 None，则输出全部)。
-            en: Number of complex structures to output.
+            Number of complex structures to output.
         charge_model:
-            zh: 受体准备时的电荷模型。
-            en: Charge model for receptor preparation.
+            Charge model for receptor preparation.
         boxes:
-            zh: 针对特定受体的盒子配置字典。
-            en: Box configuration dictionary for specific receptors.
+            Box configuration dictionary for specific receptors.
     """
     return run_docking_batch(
         receptors=receptors,
@@ -721,7 +620,6 @@ def run_vina_batch(
         boxes=boxes,
     )
 
-
 def run_smina_batch(
     receptors: Path,
     ligands: Path,
@@ -739,52 +637,37 @@ def run_smina_batch(
     boxes: dict | None = None,
 ) -> list[dict]:
     """
-    zh: 使用 Smina 引擎批量运行对接流程。
-    en: Run batch docking pipeline using Smina engine.
+    Run batch docking pipeline using Smina engine.
 
     Args:
         receptors:
-            zh: 受体目录或文件。
-            en: Receptors directory or file.
+            Receptors directory or file.
         ligands:
-            zh: 配体目录或文件。
-            en: Ligands directory or file.
+            Ligands directory or file.
         output_dir:
-            zh: 输出目录。
-            en: Output directory.
+            Output directory.
         center:
-            zh: 搜索空间中心点坐标 [x, y, z]。如果为 None，则根据 autobox_ligand 或 receptor 自动计算。
-            en: Center of search space [x, y, z]. If None, automatically calculated.
+            Center of search space [x, y, z]. If None, automatically calculated.
         size:
-            zh: 搜索空间大小 [x, y, z] (Angstroms)。
-            en: Size of search space [x, y, z] in Angstroms.
+            Size of search space [x, y, z] in Angstroms.
         autobox_ligand:
-            zh: 用于自动计算搜索盒子的参考配体。
-            en: Reference ligand for automatically calculating search box.
+            Reference ligand for automatically calculating search box.
         padding:
-            zh: 自动计算盒子时的额外扩展空间 (Angstroms)。
-            en: Padding added to auto-calculated box (Angstroms).
+            Padding added to auto-calculated box (Angstroms).
         exhaustiveness:
-            zh: 搜索详尽程度。
-            en: Exhaustiveness of the global search.
+            Exhaustiveness of the global search.
         n_poses:
-            zh: 输出的最大构象数量。
-            en: Maximum number of poses to output.
+            Maximum number of poses to output.
         summary_filename:
-            zh: 摘要结果文件名。
-            en: Summary results filename.
+            Summary results filename.
         output_docked_lig_recep_struct:
-            zh: 是否输出对接后的受体-配体复合物结构。
-            en: Whether to output docked receptor-ligand complex structure.
+            Whether to output docked receptor-ligand complex structure.
         n_docked_lig_recep_struct:
-            zh: 要输出的复合物结构数量 (如果为 None，则输出全部)。
-            en: Number of complex structures to output.
+            Number of complex structures to output.
         charge_model:
-            zh: 受体准备时的电荷模型。
-            en: Charge model for receptor preparation.
+            Charge model for receptor preparation.
         boxes:
-            zh: 针对特定受体的盒子配置字典。
-            en: Box configuration dictionary for specific receptors.
+            Box configuration dictionary for specific receptors.
     """
     return run_docking_batch(
         receptors=receptors,
@@ -804,7 +687,6 @@ def run_smina_batch(
         boxes=boxes,
     )
 
-
 def run_gnina_batch(
     receptors: Path,
     ligands: Path,
@@ -822,52 +704,37 @@ def run_gnina_batch(
     boxes: dict | None = None,
 ) -> list[dict]:
     """
-    zh: 使用 Gnina 引擎批量运行对接流程。
-    en: Run batch docking pipeline using Gnina engine.
+    Run batch docking pipeline using Gnina engine.
 
     Args:
         receptors:
-            zh: 受体目录或文件。
-            en: Receptors directory or file.
+            Receptors directory or file.
         ligands:
-            zh: 配体目录或文件。
-            en: Ligands directory or file.
+            Ligands directory or file.
         output_dir:
-            zh: 输出目录。
-            en: Output directory.
+            Output directory.
         center:
-            zh: 搜索空间中心点坐标 [x, y, z]。如果为 None，则根据 autobox_ligand 或 receptor 自动计算。
-            en: Center of search space [x, y, z]. If None, automatically calculated.
+            Center of search space [x, y, z]. If None, automatically calculated.
         size:
-            zh: 搜索空间大小 [x, y, z] (Angstroms)。
-            en: Size of search space [x, y, z] in Angstroms.
+            Size of search space [x, y, z] in Angstroms.
         autobox_ligand:
-            zh: 用于自动计算搜索盒子的参考配体。
-            en: Reference ligand for automatically calculating search box.
+            Reference ligand for automatically calculating search box.
         padding:
-            zh: 自动计算盒子时的额外扩展空间 (Angstroms)。
-            en: Padding added to auto-calculated box (Angstroms).
+            Padding added to auto-calculated box (Angstroms).
         exhaustiveness:
-            zh: 搜索详尽程度。
-            en: Exhaustiveness of the global search.
+            Exhaustiveness of the global search.
         n_poses:
-            zh: 输出的最大构象数量。
-            en: Maximum number of poses to output.
+            Maximum number of poses to output.
         summary_filename:
-            zh: 摘要结果文件名。
-            en: Summary results filename.
+            Summary results filename.
         output_docked_lig_recep_struct:
-            zh: 是否输出对接后的受体-配体复合物结构。
-            en: Whether to output docked receptor-ligand complex structure.
+            Whether to output docked receptor-ligand complex structure.
         n_docked_lig_recep_struct:
-            zh: 要输出的复合物结构数量 (如果为 None，则输出全部)。
-            en: Number of complex structures to output.
+            Number of complex structures to output.
         charge_model:
-            zh: 受体准备时的电荷模型。
-            en: Charge model for receptor preparation.
+            Charge model for receptor preparation.
         boxes:
-            zh: 针对特定受体的盒子配置字典。
-            en: Box configuration dictionary for specific receptors.
+            Box configuration dictionary for specific receptors.
     """
     return run_docking_batch(
         receptors=receptors,
@@ -887,7 +754,6 @@ def run_gnina_batch(
         boxes=boxes,
     )
 
-
 def run_haddock_batch(
     receptors: Path,
     ligands: Path,
@@ -900,37 +766,27 @@ def run_haddock_batch(
     haddock_config: Path | None = None,
 ) -> list[dict]:
     """
-    zh: 使用 HADDOCK 引擎批量运行对接流程。
-    en: Run batch docking pipeline using HADDOCK engine.
+    Run batch docking pipeline using HADDOCK engine.
 
     Args:
         receptors:
-            zh: 受体目录或文件。
-            en: Receptors directory or file.
+            Receptors directory or file.
         ligands:
-            zh: 配体目录或文件。
-            en: Ligands directory or file.
+            Ligands directory or file.
         output_dir:
-            zh: 输出目录。
-            en: Output directory.
+            Output directory.
         n_poses:
-            zh: 采样的构象数量。
-            en: Number of poses to sample.
+            Number of poses to sample.
         summary_filename:
-            zh: 摘要结果文件名。
-            en: Summary results filename.
+            Summary results filename.
         output_docked_lig_recep_struct:
-            zh: 是否输出对接后的受体-配体复合物结构。
-            en: Whether to output docked receptor-ligand complex structure.
+            Whether to output docked receptor-ligand complex structure.
         n_docked_lig_recep_struct:
-            zh: 要输出的复合物结构数量 (如果为 None，则输出全部)。
-            en: Number of complex structures to output.
+            Number of complex structures to output.
         charge_model:
-            zh: 受体准备时的电荷模型。
-            en: Charge model for receptor preparation.
+            Charge model for receptor preparation.
         haddock_config:
-            zh: 自定义 HADDOCK3 配置文件路径。
-            en: Path to custom HADDOCK3 configuration file.
+            Path to custom HADDOCK3 configuration file.
     """
     return run_docking_batch(
         receptors=receptors,

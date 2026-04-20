@@ -1,42 +1,40 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
 
-import typer
-
+from bio_analyze_core.cli.app import Exit, echo
 from bio_analyze_core.utils import load_config
 from bio_analyze_docking.api import run_docking, run_docking_batch
 
 
 def execute_docking_cli(
     engine: str,
-    config_file: Optional[Path],
-    receptor: Optional[Path],
-    ligand: Optional[Path],
-    output_dir: Optional[Path],
-    center_x: Optional[float] = None,
-    center_y: Optional[float] = None,
-    center_z: Optional[float] = None,
-    size_x: Optional[float] = None,
-    size_y: Optional[float] = None,
-    size_z: Optional[float] = None,
-    autobox_ligand: Optional[Path] = None,
-    padding: Optional[float] = 4.0,
-    exhaustiveness: Optional[int] = 8,
-    n_poses: Optional[int] = 9,
-    charge_model: Optional[str] = "gasteiger",
-    haddock_config: Optional[Path] = None,
+    config_file: Path | None,
+    receptor: Path | None,
+    ligand: Path | None,
+    output_dir: Path | None,
+    center_x: float | None = None,
+    center_y: float | None = None,
+    center_z: float | None = None,
+    size_x: float | None = None,
+    size_y: float | None = None,
+    size_z: float | None = None,
+    autobox_ligand: Path | None = None,
+    padding: float | None = 4.0,
+    exhaustiveness: int | None = 8,
+    n_poses: int | None = 9,
+    charge_model: str | None = "gasteiger",
+    haddock_config: Path | None = None,
 ):
     # 1. 加载配置
     config = {}
     if config_file:
         try:
             config = load_config(config_file)
-            typer.echo(f"Loaded configuration from {config_file}")
+            echo(f"Loaded configuration from {config_file}")
         except Exception as e:
-            typer.echo(f"Error loading config: {e}", err=True)
-            raise typer.Exit(code=1)
+            echo(f"Error loading config: {e}", err=True)
+            raise Exit(code=1) from e
 
     # 2. 合并参数 (命令行 > 配置文件 > 默认值)
     def get_param(cli_val, config_key, default=None):
@@ -61,10 +59,10 @@ def execute_docking_cli(
         p_autobox_ligand = Path(p_autobox_ligand)
 
     if not p_receptor or not p_ligand or not p_output_dir:
-        typer.echo(
+        echo(
             "Error: Missing required arguments: --receptor, --ligand, or --output (or in config file).", err=True
         )
-        raise typer.Exit(code=1)
+        raise Exit(code=1)
 
     p_center_x = get_param(center_x, "center_x")
     p_center_y = get_param(center_y, "center_y")
@@ -102,13 +100,13 @@ def execute_docking_cli(
         center = [float(p_center_x), float(p_center_y), float(p_center_z)]
     else:
         if not p_autobox_ligand and engine != "haddock":
-            typer.echo("Info: No box parameters provided. Docking box will be calculated from receptor.", err=True)
+            echo("Info: No box parameters provided. Docking box will be calculated from receptor.")
 
     is_batch = p_receptor.is_dir() or p_ligand.is_dir()
     p_boxes = get_param(None, "boxes", {})
 
     if is_batch:
-        typer.echo(f"Running {engine} in batch mode...")
+        echo(f"Running {engine} in batch mode...")
         results = run_docking_batch(
             receptors=p_receptor,
             ligands=p_ligand,
@@ -124,13 +122,13 @@ def execute_docking_cli(
             boxes=p_boxes,
             haddock_config=p_haddock_config,
         )
-        typer.echo(f"\nBatch docking completed. Processed {len(results)} pairs.")
+        echo(f"\nBatch docking completed. Processed {len(results)} pairs.")
         success_count = sum(1 for r in results if r.get("status") == "success")
-        typer.echo(f"Successful: {success_count}/{len(results)}")
+        echo(f"Successful: {success_count}/{len(results)}")
         summary_file = p_output_dir / "docking_summary.csv"
-        typer.echo(f"Summary saved to: {summary_file}")
+        echo(f"Summary saved to: {summary_file}")
     else:
-        typer.echo(f"Running {engine} single docking...")
+        echo(f"Running {engine} single docking...")
         if p_receptor and p_boxes:
             box_config = p_boxes.get(p_receptor.name) or p_boxes.get(p_receptor.stem)
             if box_config:
@@ -158,12 +156,12 @@ def execute_docking_cli(
                 engine=engine,
                 haddock_config=p_haddock_config,
             )
-            typer.echo("Docking completed successfully!")
-            typer.echo(f"Best Score: {res['best_score']}")
-            typer.echo(f"Output saved to: {res['output_file']}")
+            echo("Docking completed successfully!")
+            echo(f"Best Score: {res['best_score']}")
+            echo(f"Output saved to: {res['output_file']}")
             if res.get("box_center"):
-                typer.echo(f"Box Center: {res['box_center']}")
-                typer.echo(f"Box Size:   {res['box_size']}")
+                echo(f"Box Center: {res['box_center']}")
+                echo(f"Box Size:   {res['box_size']}")
         except Exception as e:
-            typer.echo(f"Error: {e}", err=True)
-            raise typer.Exit(code=1)
+            echo(f"Error: {e}", err=True)
+            raise Exit(code=1) from e

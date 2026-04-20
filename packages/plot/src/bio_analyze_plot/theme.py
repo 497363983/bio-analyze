@@ -13,8 +13,7 @@ import seaborn as sns
 @dataclass
 class PlotTheme:
     """
-    zh: SCI 风格绘图配置。
-    en: SCI style plotting configuration.
+    SCI style plotting configuration.
     """
 
     name: str
@@ -31,18 +30,15 @@ class PlotTheme:
     @classmethod
     def from_json(cls, path: Path | str) -> PlotTheme:
         """
-        zh: 从 JSON 文件加载主题配置。
-        en: Load theme configuration from JSON file.
+        Load theme configuration from JSON file.
 
         Args:
             path (Path | str):
-                zh: JSON 文件路径
-                en: JSON file path
+                JSON file path
 
         Returns:
             PlotTheme:
-                zh: 主题对象
-                en: Theme object
+                Theme object
         """
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
@@ -61,8 +57,7 @@ class PlotTheme:
 
     def apply(self) -> None:
         """
-        zh: 应用主题设置到 matplotlib/seaborn。
-        en: Apply theme settings to matplotlib/seaborn.
+        Apply theme settings to matplotlib/seaborn.
         """
         # ... (原有代码保持不变) ...
         # 这里不需要修改 apply，因为 chart_specific_params 是在绘图类中手动获取的
@@ -144,21 +139,17 @@ class PlotTheme:
 
     def get_chart_params(self, chart_type: str) -> dict[str, Any]:
         """
-        zh: 获取特定图表类型的配置参数。
-        en: Get configuration parameters for a specific chart type.
+        Get configuration parameters for a specific chart type.
 
         Args:
             chart_type (str):
-                zh: 图表类型
-                en: Chart type
+                Chart type
 
         Returns:
             dict[str, Any]:
-                zh: 配置参数字典
-                en: Configuration parameters dictionary
+                Configuration parameters dictionary
         """
         return self.chart_specific_params.get(chart_type, {}).copy()
-
 
 # 常见的支持中文的字体列表
 CHINESE_SANS_FONTS = [
@@ -228,7 +219,6 @@ THEMES = {
     ),
 }
 
-
 def discover_themes_from_packages(theme_name: str) -> PlotTheme | None:
     """
     扫描已安装的包以查找主题。
@@ -262,7 +252,6 @@ def discover_themes_from_packages(theme_name: str) -> PlotTheme | None:
         return discover_themes_from_packages(theme_name.replace("-", "_"))
 
     return None
-
 
 def load_custom_theme(path_or_module: str) -> PlotTheme | None:
     """
@@ -326,7 +315,6 @@ def load_custom_theme(path_or_module: str) -> PlotTheme | None:
             return discovered
 
     return None
-
 
 def set_theme(name: str = "default") -> None:
     """

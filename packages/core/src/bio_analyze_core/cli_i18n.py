@@ -1,107 +1,107 @@
 from __future__ import annotations
 
-import os
-from typing import Any
+import functools
+import inspect
+from typing import Any, cast
 
-import typer
-from typer.models import ArgumentInfo, OptionInfo
+from .cli.app import ArgumentInfo, OptionInfo
+from .config import Settings
+from .i18n_gettext import Translator, get_translator, resolve_locale_from_environment, use_translator
 
-from .i18n import get_target_text
+
+def _normalize_source_text(text: str) -> str:
+    return text or ""
+
+
+def resolve_language(settings: Settings | None = None, explicit: str | None = None) -> str:
+    if explicit:
+        return explicit
+    if settings and settings.language:
+        return settings.language
+    return resolve_locale_from_environment()
 
 
 def detect_language() -> str:
-    """
-    Detect the preferred language for the CLI.
-    Priority:
-    1. BIO_ANALYZE_LANG environment variable
-    2. LANG / LC_ALL environment variables (simple check)
-    3. Default to 'en'
-    """
-    # 1. Specific Env Var
-    lang = os.environ.get("BIO_ANALYZE_LANG")
-    if lang:
-        return lang.lower()
-
-    # 2. System Locale
-    # This is a basic check. Python's locale module is more robust but environment vars are often enough for CLI tools.
-    sys_lang = os.environ.get("LANG", "") or os.environ.get("LC_ALL", "")
-    if "zh" in sys_lang.lower() or "cn" in sys_lang.lower():
-        return "zh"
-
-    # 3. Default
-    return "en"
+    return resolve_language()
 
 
-def localize_app(app: typer.Typer, lang: str | None = None) -> None:
-    """
-    In-place localize the Typer app by filtering help strings.
+def localize_app(
+    app: Any,
+    lang: str | None = None,
+    settings: Settings | None = None,
+    translator: Translator | None = None,
+) -> None:
+    active_translator = translator
+    if active_translator is None:
+        active_translator = getattr(app, "translator", None)
+    if active_translator is None:
+        locale_path = getattr(app, "locale_path", None)
+        if locale_path:
+            active_translator = get_translator(locale_path)
+    if active_translator is None:
+        return
 
-    Args:
-        app: The Typer application instance.
-        lang: Target language ('zh' or 'en'). If None, auto-detects.
-    """
-    if lang is None:
-        lang = detect_language()
+    active_translator.set_language(resolve_language(settings, lang))
+    if hasattr(active_translator, "set_dev_mode"):
+        active_translator.set_dev_mode(bool(settings.dev_mode) if settings else False)
+    if hasattr(app, "bind_translator"):
+        app.bind_translator(active_translator)
 
-    # If language is English (default), and we assume strings are "zh... en...",
-    # we still need to process them to remove the zh part.
-    # So we always run this.
+    if getattr(app, "help", None):
+        app.help = _translate_text(app.help, active_translator)
 
-    # 1. Localize Commands
     for cmd_info in app.registered_commands:
         if cmd_info.help:
-            cmd_info.help = get_target_text(cmd_info.help, lang)
+            cmd_info.help = _translate_text(cmd_info.help, active_translator)
         elif cmd_info.callback and cmd_info.callback.__doc__:
-            cmd_info.callback.__doc__ = get_target_text(cmd_info.callback.__doc__, lang)
-
-        # Localize Callback Parameters
+            cmd_info.help = _translate_text(inspect.getdoc(cmd_info.callback) or "", active_translator)
         if cmd_info.callback:
-            _localize_callback(cmd_info.callback, lang)
+            if cmd_info.callback.__doc__:
+                cmd_info.callback.__doc__ = _translate_text(inspect.getdoc(cmd_info.callback) or "", active_translator)
+            _localize_callback(cmd_info.callback, active_translator)
+            cmd_info.callback = _wrap_callback(cmd_info.callback, active_translator)
 
-    # 2. Localize Sub-groups (Typer instances)
     for group_info in app.registered_groups:
         if group_info.help:
-            group_info.help = get_target_text(group_info.help, lang)
-
+            group_info.help = _translate_text(group_info.help, active_translator)
         if group_info.typer_instance:
-            # Also localize the main help of the sub-typer if not set in group_info
-            if not group_info.help and group_info.typer_instance.info.help:
-                group_info.typer_instance.info.help = get_target_text(group_info.typer_instance.info.help, lang)
-
-            localize_app(group_info.typer_instance, lang)
+            group_translator = getattr(group_info.typer_instance, "translator", active_translator)
+            localize_app(group_info.typer_instance, settings=settings, translator=group_translator)
 
 
-def _localize_callback(callback: Any, lang: str) -> None:
-    """
-    Inspect a callback function and update its default values (OptionInfo/ArgumentInfo).
-    """
-    # We need to access the defaults of the function.
-    # Typer reads from __defaults__ (positional args) and __kwdefaults__ (keyword-only args).
+def _wrap_callback(callback: Any, translator: Translator) -> Any:
+    if getattr(callback, "__bio_analyze_wrapped__", False):
+        return callback
 
-    # 1. Handle __defaults__
+    @functools.wraps(callback)
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
+        with use_translator(translator):
+            return callback(*args, **kwargs)
+
+    wrapped_callback = cast(Any, wrapper)
+    wrapped_callback.__bio_analyze_wrapped__ = True
+    wrapped_callback.__signature__ = inspect.signature(callback)
+    if hasattr(callback, "__defaults__"):
+        wrapped_callback.__defaults__ = callback.__defaults__
+    if hasattr(callback, "__kwdefaults__"):
+        wrapped_callback.__kwdefaults__ = callback.__kwdefaults__
+    return wrapped_callback
+
+
+def _translate_text(text: str, translator: Translator) -> str:
+    source = _normalize_source_text(text)
+    return translator.gettext(source)
+
+
+def _localize_callback(callback: Any, translator: Translator) -> None:
     if callback.__defaults__:
-        new_defaults = []
         for default in callback.__defaults__:
-            _localize_param_info(default, lang)
-            new_defaults.append(default)
-        # We modified objects in place, so re-assignment might not be strictly necessary
-        # if the tuple holds references to mutable objects.
-        # But tuple itself is immutable. The objects inside OptionInfo are mutable.
-        pass
-
-    # 2. Handle __kwdefaults__
+            _localize_param_info(default, translator)
     if callback.__kwdefaults__:
-        for key, default in callback.__kwdefaults__.items():
-            _localize_param_info(default, lang)
+        for default in callback.__kwdefaults__.values():
+            _localize_param_info(default, translator)
 
 
-def _localize_param_info(param: Any, lang: str) -> None:
-    """
-    Update help text in OptionInfo or ArgumentInfo.
-    """
-    if isinstance(param, (OptionInfo, ArgumentInfo)):
-        if param.help:
-            # We modify the object in-place.
-            # Since these objects are created at definition time and stored in the function defaults,
-            # this change persists for the runtime of the process.
-            param.help = get_target_text(param.help, lang)
+def _localize_param_info(param: Any, translator: Translator) -> None:
+    if isinstance(param, (OptionInfo, ArgumentInfo)) and param.help:
+        param.help = _translate_text(param.help, translator)

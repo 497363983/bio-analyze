@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import inspect
 import json
 import sys
@@ -5,14 +7,8 @@ from pathlib import Path
 from typing import Any
 from unittest.mock import MagicMock
 
-# Mock localize_app BEFORE importing CLIs to ensure we get raw bilingual strings
-# We create a dummy module for bio_analyze_core.cli_i18n
-cli_i18n_mock = MagicMock()
-cli_i18n_mock.localize_app = lambda app, lang: None  # No-op
-cli_i18n_mock.detect_language = lambda: "en"  # Dummy return
-sys.modules["bio_analyze_core.cli_i18n"] = cli_i18n_mock
+from docstring_parser import parse as parse_docstring
 
-# Mock heavy dependencies
 sys.modules["pydeseq2"] = MagicMock()
 sys.modules["pydeseq2.dds"] = MagicMock()
 sys.modules["pydeseq2.ds"] = MagicMock()
@@ -30,96 +26,96 @@ sys.modules["gseapy"] = MagicMock()
 sys.modules["jinja2"] = MagicMock()
 sys.modules["genomepy"] = MagicMock()
 
-# Import API functions/classes for docking (examples)
-from bio_analyze_docking.api import (  # noqa: E402
-    run_docking,
-    run_docking_batch,
-    run_gnina,
-    run_gnina_batch,
-    run_haddock,
-    run_haddock_batch,
-    run_smina,
-    run_smina_batch,
-    run_vina,
-    run_vina_batch,
-)
-from bio_analyze_docking.cli import get_app as get_docking_app  # noqa: E402
-from bio_analyze_docking.prep import prepare_ligand, prepare_receptor  # noqa: E402
-
-# We assume this script is run from project root, so pythonpath needs to be set
-from bio_analyze_plot.cli import get_app as get_plot_app  # noqa: E402
-
-# Import API classes for plot
-from bio_analyze_plot.plots import (  # noqa: E402
-    BarPlot,
-    BoxPlot,
-    ChromosomePlot,
-    GSEAPlot,
-    HeatmapPlot,
-    LinePlot,
-    PCAPlot,
-    PiePlot,
-    ScatterPlot,
-    VolcanoPlot,
-)
-from docstring_parser import parse as parse_docstring  # noqa: E402
-
-# Import core i18n
-from bio_analyze_core.i18n import extract_i18n_desc  # noqa: E402
-from bio_analyze_rna_seq.cli import get_app as get_rna_app  # noqa: E402
-
-# Import API for RNA-seq (examples)
-from bio_analyze_rna_seq.pipeline import RNASeqPipeline  # noqa: E402
-
-# Define package paths and registries
 PACKAGES_ROOT = Path("packages")
-PACKAGES = {
-    "plot": {
-        "cli_app": get_plot_app(),
-        "path": PACKAGES_ROOT / "plot",
-        "api": {
-            "volcano": VolcanoPlot.plot,
-            "line": LinePlot.plot,
-            "bar": BarPlot.plot,
-            "box": BoxPlot.plot,
-            "heatmap": HeatmapPlot.plot,
-            "pca": PCAPlot.plot,
-            "scatter": ScatterPlot.plot,
-            "pie": PiePlot.plot,
-            "chromosome": ChromosomePlot.plot,
-            "gsea": GSEAPlot.plot,
+
+
+def _load_packages() -> dict[str, dict[str, Any]]:
+    from bio_analyze_core.i18n_gettext import get_translator
+    from bio_analyze_core.metadata import build_cli_schema, schema_to_metadata
+    from bio_analyze_docking.api import (
+        run_docking,
+        run_docking_batch,
+        run_gnina,
+        run_gnina_batch,
+        run_haddock,
+        run_haddock_batch,
+        run_smina,
+        run_smina_batch,
+        run_vina,
+        run_vina_batch,
+    )
+    from bio_analyze_docking.cli import get_app as get_docking_app
+    from bio_analyze_docking.prep import prepare_ligand, prepare_receptor
+    from bio_analyze_omics.cli import get_app as get_omics_app
+    from bio_analyze_omics.rna_seq.commands.run import run_analysis
+    from bio_analyze_plot.cli import get_app as get_plot_app
+    from bio_analyze_plot.plots import (
+        BarPlot,
+        BoxPlot,
+        ChromosomePlot,
+        GSEAPlot,
+        HeatmapPlot,
+        LinePlot,
+        PCAPlot,
+        PiePlot,
+        ScatterPlot,
+        VolcanoPlot,
+    )
+
+    globals()["get_translator"] = get_translator
+    globals()["build_cli_schema"] = build_cli_schema
+    globals()["schema_to_metadata"] = schema_to_metadata
+
+    return {
+        "plot": {
+            "cli_app": get_plot_app(),
+            "path": PACKAGES_ROOT / "plot",
+            "locale": PACKAGES_ROOT / "plot" / "locale",
+            "api": {
+                "volcano": VolcanoPlot.plot,
+                "line": LinePlot.plot,
+                "bar": BarPlot.plot,
+                "box": BoxPlot.plot,
+                "heatmap": HeatmapPlot.plot,
+                "pca": PCAPlot.plot,
+                "scatter": ScatterPlot.plot,
+                "pie": PiePlot.plot,
+                "chromosome": ChromosomePlot.plot,
+                "gsea": GSEAPlot.plot,
+            },
         },
-    },
-    "rna_seq": {"cli_app": get_rna_app(), "path": PACKAGES_ROOT / "rna_seq", "api": {"run": RNASeqPipeline.run}},
-    "docking": {
-        "cli_app": get_docking_app(),
-        "path": PACKAGES_ROOT / "docking",
-        "api": {
-            "run": run_docking,
-            "run_batch": run_docking_batch,
-            "run_vina": run_vina,
-            "run_smina": run_smina,
-            "run_gnina": run_gnina,
-            "run_haddock": run_haddock,
-            "run_vina_batch": run_vina_batch,
-            "run_smina_batch": run_smina_batch,
-            "run_gnina_batch": run_gnina_batch,
-            "run_haddock_batch": run_haddock_batch,
-            "prepare_ligand": prepare_ligand,
-            "prepare_receptor": prepare_receptor,
+        "docking": {
+            "cli_app": get_docking_app(),
+            "path": PACKAGES_ROOT / "docking",
+            "locale": PACKAGES_ROOT / "docking" / "locale",
+            "api": {
+                "run": run_docking,
+                "run_batch": run_docking_batch,
+                "run_vina": run_vina,
+                "run_smina": run_smina,
+                "run_gnina": run_gnina,
+                "run_haddock": run_haddock,
+                "run_vina_batch": run_vina_batch,
+                "run_smina_batch": run_smina_batch,
+                "run_gnina_batch": run_gnina_batch,
+                "run_haddock_batch": run_haddock_batch,
+                "prepare_ligand": prepare_ligand,
+                "prepare_receptor": prepare_receptor,
+            },
         },
-    },
-}
+        "omics": {
+            "cli_app": get_omics_app(),
+            "path": PACKAGES_ROOT / "omics",
+            "locale": PACKAGES_ROOT / "omics" / "locale",
+            "api": {"run": run_analysis},
+        },
+    }
 
 
 def get_param_type(param: inspect.Parameter) -> str:
-    """Extract type name from annotation."""
     if param.annotation == inspect.Parameter.empty:
         return "any"
-
-    # Handle Optional[type] or type | None
     annotation = str(param.annotation)
-    # Simple cleanup for common types
     if "Path" in annotation:
         return "path"
     if "int" in annotation:
@@ -136,170 +132,101 @@ def get_param_type(param: inspect.Parameter) -> str:
         return "dict"
     if "DataFrame" in annotation:
         return "DataFrame"
-
     return annotation.replace("typing.", "").replace("<class '", "").replace("'>", "")
 
 
-def parse_cli_command(command_info: Any, cmd_name: str) -> dict[str, Any]:
-    """Parse a Typer command to extract metadata."""
-    callback = command_info.callback
-    if not callback:
-        return {"name": cmd_name, "type": "cli", "params": []}
-
-    sig = inspect.signature(callback)
-    params_list = []
-
-    for name, param in sig.parameters.items():
-        if param.kind in (inspect.Parameter.VAR_POSITIONAL, inspect.Parameter.VAR_KEYWORD):
-            continue
-
-        default = param.default
-        help_text = ""
-        param_opts = []
-
-        if hasattr(default, "help"):
-            help_text = default.help or ""
-        if hasattr(default, "param_decls"):
-            param_opts = default.param_decls
-
-        real_default = default
-        if hasattr(default, "default"):
-            real_default = default.default
-            if real_default == ...:
-                real_default = None
-
-        if real_default == inspect.Parameter.empty:
-            real_default = None
-
-        if param_opts:
-            display_name = ", ".join(param_opts)
-        else:
-            cli_name = name.replace("_", "-")
-            display_name = f"--{cli_name}"
-
-        type_str = get_param_type(param)
-        required = (default == inspect.Parameter.empty) or (hasattr(default, "default") and default.default == ...)
-
-        param_entry = {
-            "name": display_name,
-            "type": type_str,
-            "required": required,
-            "default": str(real_default) if real_default is not None else None,
-            "description": extract_i18n_desc(help_text),
-        }
-        params_list.append(param_entry)
-
-    cmd_desc = command_info.help or ""
-    return {"name": cmd_name, "type": "cli", "description": extract_i18n_desc(cmd_desc), "params": params_list}
+def _to_bilingual(text: str, translator: Any) -> dict[str, str]:
+    normalized = text or ""
+    current_language = translator.get_language()
+    try:
+        translator.set_language("en_US")
+        en_text = translator.gettext(normalized) if normalized else ""
+        if not en_text:
+            en_text = normalized
+        translator.set_language("zh_CN")
+        zh_text = translator.gettext(normalized) if normalized else ""
+        if not zh_text:
+            zh_text = en_text
+        return {"zh": zh_text, "en": en_text}
+    finally:
+        translator.set_language(current_language)
 
 
-def parse_api_function(func: Any, name: str) -> dict[str, Any]:
-    """Parse a Python function or method docstring to extract metadata."""
-
+def parse_api_function(func: Any, name: str, translator: Any) -> dict[str, Any]:
     target_func = func
-    doc_str_override = ""
-
-    # Try to find class from __qualname__
-    qualname = getattr(func, "__qualname__", "")
-    if "." in qualname:
-        cls_name = qualname.split(".")[0]
-
-        # Hack: for RNASeqPipeline.run, we want RNASeqPipeline.__init__
-        if cls_name == "RNASeqPipeline" and name == "run":
-            from bio_analyze_rna_seq.pipeline import RNASeqPipeline
-
-            target_func = RNASeqPipeline.__init__
-            # Use the class docstring instead of init docstring for parameter descriptions
-            doc_str_override = inspect.getdoc(RNASeqPipeline) or ""
-        elif "Plot" in cls_name and name == "plot":
-            pass
-
     sig = inspect.signature(target_func)
-    doc_str = doc_str_override or (inspect.getdoc(target_func) or "")
-
-    doc = parse_docstring(doc_str)
-
-    # Map docstring params
-    doc_params = {p.arg_name: p.description for p in doc.params}
-
+    doc = parse_docstring(inspect.getdoc(target_func) or "")
+    doc_params = {p.arg_name: p.description or "" for p in doc.params}
     params_list = []
 
     for param_name, param in sig.parameters.items():
-        if param_name in ("self", "cls"):
+        if param_name in {"self", "cls"}:
             continue
         if param.kind in (inspect.Parameter.VAR_POSITIONAL, inspect.Parameter.VAR_KEYWORD):
             continue
 
-        default = param.default
-        required = default == inspect.Parameter.empty
-        default_val = None if required else default
-
-        desc = doc_params.get(param_name, "")
-
-        param_entry = {
-            "name": param_name,
-            "type": get_param_type(param),
-            "required": required,
-            "default": str(default_val) if default_val is not None else None,
-            "description": extract_i18n_desc(desc),
-        }
-        params_list.append(param_entry)
+        required = param.default == inspect.Parameter.empty
+        default_val = None if required else param.default
+        params_list.append(
+            {
+                "name": param_name,
+                "type": get_param_type(param),
+                "required": required,
+                "default": str(default_val) if default_val is not None else None,
+                "description": _to_bilingual(doc_params.get(param_name, ""), translator),
+            }
+        )
 
     func_desc = doc.short_description or ""
     if doc.long_description:
-        func_desc += "\n" + doc.long_description
-
-    return {"name": name, "type": "api", "description": extract_i18n_desc(func_desc), "params": params_list}
-
-
-def process_cli_app(cli_app: Any, metadata_dir: Path, prefix: str = ""):
-    if not cli_app:
-        return
-
-    # Process direct commands
-    for cmd_info in cli_app.registered_commands:
-        cmd_name = cmd_info.name or cmd_info.callback.__name__.strip("_")
-        if not cmd_name:
-            continue
-
-        full_cmd_name = f"{prefix}{cmd_name}"
-        print(f"  - Generating CLI metadata: {full_cmd_name}")
-        metadata = parse_cli_command(cmd_info, full_cmd_name)
-
-        output_file = metadata_dir / f"{full_cmd_name}_cli.json"
-        with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(metadata, f, indent=2, ensure_ascii=False)
-
-    # Process sub-groups
-    for group_info in getattr(cli_app, "registered_groups", []):
-        group_name = group_info.name
-        if group_info.typer_instance:
-            new_prefix = f"{prefix}{group_name}_" if group_name else prefix
-            process_cli_app(group_info.typer_instance, metadata_dir, new_prefix)
+        func_desc += f"\n{doc.long_description}"
+    return {
+        "name": name,
+        "type": "api",
+        "description": _to_bilingual(func_desc, translator),
+        "params": params_list,
+    }
 
 
-def main():
-    for pkg_name, info in PACKAGES.items():
-        cli_app = info["cli_app"]
-        pkg_path = info["path"]
-        api_registry = info.get("api", {})
+def process_cli_app(cli_app: Any, metadata_dir: Path, translator: Any) -> None:
+    from bio_analyze_core.metadata import build_cli_schema, schema_to_metadata
 
-        metadata_dir = pkg_path / "metadata"
+    schema_dir = metadata_dir / "schema"
+    schema_dir.mkdir(parents=True, exist_ok=True)
+
+    for schema_entry in build_cli_schema(cli_app):
+        print(f"  - Generating CLI schema: {schema_entry['name']}")
+        schema_file = schema_dir / f"{schema_entry['name']}_cli.schema.json"
+        with schema_file.open("w", encoding="utf-8") as handle:
+            json.dump(schema_entry, handle, indent=2, ensure_ascii=False)
+
+        print(f"  - Generating CLI metadata: {schema_entry['name']}")
+        metadata = schema_to_metadata(schema_entry, translator)
+        output_file = metadata_dir / f"{schema_entry['name']}_cli.json"
+        with output_file.open("w", encoding="utf-8") as handle:
+            json.dump(metadata, handle, indent=2, ensure_ascii=False)
+
+
+def main() -> None:
+    from bio_analyze_core.i18n_gettext import get_translator
+
+    packages = _load_packages()
+    for pkg_name, info in packages.items():
+        metadata_dir = info["path"] / "metadata"
         metadata_dir.mkdir(exist_ok=True)
 
+        translator = get_translator(str(info["locale"].resolve()))
+        translator.set_language("en_US")
+
         print(f"Processing package: {pkg_name}")
+        process_cli_app(info["cli_app"], metadata_dir, translator)
 
-        # 1. Parse CLI Commands
-        process_cli_app(cli_app, metadata_dir)
-
-        # 2. Parse API Functions/Classes
-        for api_name, func_or_class in api_registry.items():
+        for api_name, func_or_class in info.get("api", {}).items():
             print(f"  - Generating API metadata: {api_name}")
-            metadata = parse_api_function(func_or_class, api_name)
-
+            metadata = parse_api_function(func_or_class, api_name, translator)
             output_file = metadata_dir / f"{api_name}_api.json"
-            with open(output_file, "w", encoding="utf-8") as f:
-                json.dump(metadata, f, indent=2, ensure_ascii=False)
+            with output_file.open("w", encoding="utf-8") as handle:
+                json.dump(metadata, handle, indent=2, ensure_ascii=False)
 
     print("Done!")
 

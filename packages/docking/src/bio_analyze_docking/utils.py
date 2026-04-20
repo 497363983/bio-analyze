@@ -13,29 +13,23 @@ except ImportError:
 
 logger = get_logger(__name__)
 
-
 def convert_cif_to_pdb(input_file: Path, output_file: Path | None = None) -> Path:
     """
-    zh: 将 CIF/mmCIF 文件转换为 PDB 文件。
-    en: Convert CIF/mmCIF file to PDB file.
+    Convert CIF/mmCIF file to PDB file.
 
     Args:
         input_file (Path):
-            zh: 输入的 CIF/mmCIF 文件路径。
-            en: Path to input CIF/mmCIF file.
+            Path to input CIF/mmCIF file.
         output_file (Optional[Path], optional):
-            zh: 输出的 PDB 文件路径。如果为 None，则在同目录下生成。
-            en: Path to output PDB file. If None, generated in the same directory.
+            Path to output PDB file. If None, generated in the same directory.
 
     Returns:
         Path:
-            zh: 生成的 PDB 文件路径。
-            en: Path to generated PDB file.
+            Path to generated PDB file.
 
     Raises:
         RuntimeError:
-            zh: 如果转换失败。
-            en: If conversion fails.
+            If conversion fails.
     """
     input_file = Path(input_file)
     output_file = input_file.parent / f"{input_file.stem}_converted.pdb" if output_file is None else Path(output_file)
@@ -87,7 +81,11 @@ def convert_cif_to_pdb(input_file: Path, output_file: Path | None = None) -> Pat
             logger.info(f"Trying OpenBabel fallback for {input_file}...")
             try:
                 import subprocess
-                subprocess.run(["obabel", "-icif", str(input_file), "-opdb", "-O", str(output_file)], check=True, capture_output=True)
+                subprocess.run(
+                    ["obabel", "-icif", str(input_file), "-opdb", "-O", str(output_file)],
+                    check=True,
+                    capture_output=True,
+                )
                 if output_file.exists() and output_file.stat().st_size > 100:
                     logger.info(f"OpenBabel fallback successful for {input_file}")
                     return output_file
@@ -104,7 +102,6 @@ def convert_cif_to_pdb(input_file: Path, output_file: Path | None = None) -> Pat
         logger.error(f"Failed to convert CIF to PDB: {e}")
         raise RuntimeError(f"CIF conversion failed: {e}") from e
 
-
 def merge_complex_with_pymol(
     receptor_path: Path,
     ligand_poses_path: Path,
@@ -113,26 +110,20 @@ def merge_complex_with_pymol(
     output_name_prefix: str = "complex_pose",
 ) -> None:
     """
-    zh: 使用 PyMOL 将受体和配体姿态合并为复合物 PDB 文件。
-    en: Merge receptor and ligand poses into complex PDB files using PyMOL.
+    Merge receptor and ligand poses into complex PDB files using PyMOL.
 
     Args:
         receptor_path (Path):
-            zh: 受体文件路径 (PDB/PDBQT)。
-            en: Path to receptor file (PDB/PDBQT).
+            Path to receptor file (PDB/PDBQT).
         ligand_poses_path (Path):
-            zh: 包含多个姿态的配体文件路径 (PDBQT)。
-            en: Path to ligand file containing multiple poses (PDBQT).
+            Path to ligand file containing multiple poses (PDBQT).
         output_dir (Path):
-            zh: 保存结果的输出目录。
-            en: Output directory for saving results.
+            Output directory for saving results.
         n_save (int):
-            zh: 要保存的前 N 个姿态。
-            en: Number of top poses to save.
+            Number of top poses to save.
         output_name_prefix (str, optional):
-            zh: 输出文件名的前缀 (默认为 "complex_pose")。
                 例如前缀为 "foo"，则文件名为 "foo_1.pdb", "foo_2.pdb" 等。
-            en: Prefix for output filenames (default "complex_pose").
+            Prefix for output filenames (default "complex_pose").
                 E.g., if prefix is "foo", filenames will be "foo_1.pdb", "foo_2.pdb", etc.
     """
     if cmd is None:

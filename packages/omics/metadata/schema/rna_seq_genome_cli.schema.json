@@ -1,0 +1,47 @@
+{
+  "name": "rna_seq_genome",
+  "type": "cli",
+  "description": "Prepare reference genome (download or index).",
+  "params": [
+    {
+      "field": "output_dir",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output directory."
+    },
+    {
+      "field": "species",
+      "name": "-s, --species",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Species name."
+    },
+    {
+      "field": "assembly",
+      "name": "--assembly",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Reference assembly accession, e.g. GCA_013347765.1."
+    },
+    {
+      "field": "fasta",
+      "name": "--fasta",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Genome FASTA file."
+    },
+    {
+      "field": "gtf",
+      "name": "--gtf",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Genome GTF file."
+    }
+  ]
+}

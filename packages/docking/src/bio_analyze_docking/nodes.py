@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import contextlib
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
@@ -31,54 +32,39 @@ def run_docking_task(
     haddock_config: Path | None = None,
 ) -> dict:
     """
-    zh: 并行对接执行的辅助函数。
-    en: Helper function for parallel docking execution.
+    Helper function for parallel docking execution.
 
     Args:
         rec_prep (str):
-            zh: 准备好的受体文件路径。
-            en: Path to prepared receptor file.
+            Path to prepared receptor file.
         lig_prep (str):
-            zh: 准备好的配体文件路径。
-            en: Path to prepared ligand file.
+            Path to prepared ligand file.
         output_dir (Path):
-            zh: 输出目录。
-            en: Output directory.
+            Output directory.
         rec_name (str):
-            zh: 受体名称。
-            en: Receptor name.
+            Receptor name.
         lig_name (str):
-            zh: 配体名称。
-            en: Ligand name.
+            Ligand name.
         center (list[float] | None):
-            zh: 盒子中心 [x, y, z]。如果为 None，则自动计算。
-            en: Box center [x, y, z]. If None, auto-calculated.
+            Box center [x, y, z]. If None, auto-calculated.
         size (list[float] | None):
-            zh: 盒子大小 [x, y, z]。如果为 None，则自动计算。
-            en: Box size [x, y, z]. If None, auto-calculated.
+            Box size [x, y, z]. If None, auto-calculated.
         exhaustiveness (int):
-            zh: 搜索穷尽性。
-            en: Search exhaustiveness.
+            Search exhaustiveness.
         n_poses (int):
-            zh: 生成的姿态数量。
-            en: Number of poses to generate.
+            Number of poses to generate.
         output_docked_lig_recep_struct (bool, optional):
-            zh: 是否输出复合物结构。默认为 False。
-            en: Whether to output complex structure. Defaults to False.
+            Whether to output complex structure. Defaults to False.
         n_docked_lig_recep_struct (int | None, optional):
-            zh: 输出复合物的数量。
-            en: Number of complexes to output.
+            Number of complexes to output.
         engine_type (str, optional):
-            zh: 对接引擎类型。默认为 "vina"。
-            en: Docking engine type. Defaults to "vina".
+            Docking engine type. Defaults to "vina".
         padding (float, optional):
-            zh: 自动盒填充。默认为 4.0。
-            en: Autobox padding. Defaults to 4.0.
+            Autobox padding. Defaults to 4.0.
 
     Returns:
         dict:
-            zh: 对接结果字典。
-            en: Docking result dictionary.
+            Docking result dictionary.
     """
     output_dir = output_dir.resolve()
     # 为此任务配置记录器
@@ -176,16 +162,12 @@ def run_docking_task(
         # 确保所有日志都已写入
         from loguru import logger as loguru_logger
 
-        try:
+        with contextlib.suppress(Exception):
             loguru_logger.complete()
-        except Exception:
-            pass
-
 
 class ReceptorPrepNode(Node):
     """
-    zh: 准备受体文件的节点 (PDB -> PDBQT)。
-    en: Node for preparing receptor files (PDB -> PDBQT).
+    Node for preparing receptor files (PDB -> PDBQT).
     """
 
     def __init__(
@@ -202,29 +184,21 @@ class ReceptorPrepNode(Node):
         """
         Args:
             receptor_path (Path):
-                zh: 输入受体文件的路径。
-                en: Path to input receptor file.
+                Path to input receptor file.
             output_dir (Path):
-                zh: 保存准备后文件的目录。
-                en: Directory to save prepared files.
+                Directory to save prepared files.
             context_key (str):
-                zh: 在上下文中存储输出路径的键。
-                en: Key to store output path in context.
+                Key to store output path in context.
             ph (float, optional):
-                zh: 质子化的 pH 值。默认为 7.4。
-                en: pH value for protonation. Defaults to 7.4.
+                pH value for protonation. Defaults to 7.4.
             keep_water (bool, optional):
-                zh: 是否保留结晶水。默认为 False。
-                en: Whether to keep crystal water. Defaults to False.
+                Whether to keep crystal water. Defaults to False.
             rigid_macrocycles (bool, optional):
-                zh: 是否将大环视为刚性。默认为 True。
-                en: Whether to treat macrocycles as rigid. Defaults to True.
+                Whether to treat macrocycles as rigid. Defaults to True.
             charge_model (str, optional):
-                zh: Meeko 的电荷模型。默认为 'gasteiger'。
-                en: Charge model for Meeko. Defaults to 'gasteiger'.
+                Charge model for Meeko. Defaults to 'gasteiger'.
             engine_type (str, optional):
-                zh: 引擎类型。默认为 'vina'。
-                en: Engine type. Defaults to 'vina'.
+                Engine type. Defaults to 'vina'.
         """
         super().__init__(f"Prepare Receptor: {receptor_path.name}")
         self.receptor_path = Path(receptor_path)
@@ -238,19 +212,15 @@ class ReceptorPrepNode(Node):
 
     def run(self, context: Context, progress: Progress, logger: Any):
         """
-        zh: 执行节点逻辑。
-        en: Execute node logic.
+        Execute node logic.
 
         Args:
             context (Context):
-                zh: 管道上下文。
-                en: Pipeline context.
+                Pipeline context.
             progress (Progress):
-                zh: 进度报告器。
-                en: Progress reporter.
+                Progress reporter.
             logger (Any):
-                zh: 日志记录器。
-                en: Logger instance.
+                Logger instance.
         """
         self.output_dir.mkdir(parents=True, exist_ok=True)
         engine_cls = DockingEngineFactory.get_engine_class(self.engine_type)
@@ -270,11 +240,9 @@ class ReceptorPrepNode(Node):
         # 将绝对路径存储在上下文中
         context[self.context_key] = str(output_path.resolve())
 
-
 class BatchReceptorPrepNode(Node):
     """
-    zh: 用于准备多个受体文件并支持断点续传的节点。
-    en: Node for preparing multiple receptor files with resume support.
+    Node for preparing multiple receptor files with resume support.
     """
 
     def __init__(
@@ -291,29 +259,21 @@ class BatchReceptorPrepNode(Node):
         """
         Args:
             receptors (list[Path]):
-                zh: 输入受体路径列表。
-                en: List of input receptor paths.
+                List of input receptor paths.
             output_dir (Path):
-                zh: 保存准备后文件的目录。
-                en: Directory to save prepared files.
+                Directory to save prepared files.
             context_map_key (str):
-                zh: 在上下文中存储映射 {input_path_str: output_path_str} 的键。
-                en: Key to store map {input_path_str: output_path_str} in context.
+                Key to store map {input_path_str: output_path_str} in context.
             ph (float, optional):
-                zh: 质子化的 pH 值。默认为 7.4。
-                en: pH value for protonation. Defaults to 7.4.
+                pH value for protonation. Defaults to 7.4.
             keep_water (bool, optional):
-                zh: 是否保留结晶水。默认为 False。
-                en: Whether to keep crystal water. Defaults to False.
+                Whether to keep crystal water. Defaults to False.
             rigid_macrocycles (bool, optional):
-                zh: 是否将大环视为刚性。默认为 True。
-                en: Whether to treat macrocycles as rigid. Defaults to True.
+                Whether to treat macrocycles as rigid. Defaults to True.
             charge_model (str, optional):
-                zh: Meeko 的电荷模型。默认为 'gasteiger'。
-                en: Charge model for Meeko. Defaults to 'gasteiger'.
+                Charge model for Meeko. Defaults to 'gasteiger'.
             engine_type (str, optional):
-                zh: 引擎类型。默认为 'vina'。
-                en: Engine type. Defaults to 'vina'.
+                Engine type. Defaults to 'vina'.
         """
         super().__init__("Batch Receptor Preparation")
         self.receptors = receptors
@@ -327,19 +287,15 @@ class BatchReceptorPrepNode(Node):
 
     def run(self, context: Context, progress: Progress, logger: Any):
         """
-        zh: 执行节点逻辑。
-        en: Execute node logic.
+        Execute node logic.
 
         Args:
             context (Context):
-                zh: 管道上下文。
-                en: Pipeline context.
+                Pipeline context.
             progress (Progress):
-                zh: 进度报告器。
-                en: Progress reporter.
+                Progress reporter.
             logger (Any):
-                zh: 日志记录器。
-                en: Logger instance.
+                Logger instance.
         """
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -392,28 +348,22 @@ class BatchReceptorPrepNode(Node):
         else:
             logger.info("所有受体已准备完毕。")
 
-
 class LigandPrepNode(Node):
     """
-    zh: 准备配体文件的节点 (SDF/MOL2/PDB -> PDBQT)。
-    en: Node for preparing ligand files (SDF/MOL2/PDB -> PDBQT).
+    Node for preparing ligand files (SDF/MOL2/PDB -> PDBQT).
     """
 
     def __init__(self, ligand_path: Path, output_dir: Path, context_key: str, engine_type: str = "vina"):
         """
         Args:
             ligand_path (Path):
-                zh: 输入配体文件的路径。
-                en: Path to input ligand file.
+                Path to input ligand file.
             output_dir (Path):
-                zh: 保存准备后文件的目录。
-                en: Directory to save prepared files.
+                Directory to save prepared files.
             context_key (str):
-                zh: 在上下文中存储输出路径的键。
-                en: Key to store output path in context.
+                Key to store output path in context.
             engine_type (str, optional):
-                zh: 引擎类型。默认为 'vina'。
-                en: Engine type. Defaults to 'vina'.
+                Engine type. Defaults to 'vina'.
         """
         super().__init__(f"Prepare Ligand: {ligand_path.name}")
         self.ligand_path = Path(ligand_path)
@@ -423,19 +373,15 @@ class LigandPrepNode(Node):
 
     def run(self, context: Context, progress: Progress, logger: Any):
         """
-        zh: 执行节点逻辑。
-        en: Execute node logic.
+        Execute node logic.
 
         Args:
             context (Context):
-                zh: 管道上下文。
-                en: Pipeline context.
+                Pipeline context.
             progress (Progress):
-                zh: 进度报告器。
-                en: Progress reporter.
+                Progress reporter.
             logger (Any):
-                zh: 日志记录器。
-                en: Logger instance.
+                Logger instance.
         """
         self.output_dir.mkdir(parents=True, exist_ok=True)
         engine_cls = DockingEngineFactory.get_engine_class(self.engine_type)
@@ -448,28 +394,22 @@ class LigandPrepNode(Node):
         # 将绝对路径存储在上下文中
         context[self.context_key] = str(output_path.resolve())
 
-
 class BatchLigandPrepNode(Node):
     """
-    zh: 用于准备多个配体文件并支持断点续传的节点。
-    en: Node for preparing multiple ligand files with resume support.
+    Node for preparing multiple ligand files with resume support.
     """
 
     def __init__(self, ligands: list[Path], output_dir: Path, context_map_key: str, engine_type: str = "vina"):
         """
         Args:
             ligands (list[Path]):
-                zh: 输入配体路径列表。
-                en: List of input ligand paths.
+                List of input ligand paths.
             output_dir (Path):
-                zh: 保存准备后文件的目录。
-                en: Directory to save prepared files.
+                Directory to save prepared files.
             context_map_key (str):
-                zh: 在上下文中存储映射 {input_path_str: output_path_str} 的键。
-                en: Key to store map {input_path_str: output_path_str} in context.
+                Key to store map {input_path_str: output_path_str} in context.
             engine_type (str, optional):
-                zh: 引擎类型。默认为 'vina'。
-                en: Engine type. Defaults to 'vina'.
+                Engine type. Defaults to 'vina'.
         """
         super().__init__("Batch Ligand Preparation")
         self.ligands = ligands
@@ -479,19 +419,15 @@ class BatchLigandPrepNode(Node):
 
     def run(self, context: Context, progress: Progress, logger: Any):
         """
-        zh: 执行节点逻辑。
-        en: Execute node logic.
+        Execute node logic.
 
         Args:
             context (Context):
-                zh: 管道上下文。
-                en: Pipeline context.
+                Pipeline context.
             progress (Progress):
-                zh: 进度报告器。
-                en: Progress reporter.
+                Progress reporter.
             logger (Any):
-                zh: 日志记录器。
-                en: Logger instance.
+                Logger instance.
         """
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -534,7 +470,6 @@ class BatchLigandPrepNode(Node):
         else:
             logger.info("所有配体已准备完毕。")
 
-
 class DockingNode(Node):
     """
     使用准备好的文件执行对接的节点。
@@ -546,7 +481,7 @@ class DockingNode(Node):
         ligand_key: str,
         output_dir: Path,
         center: list[float] | None = None,
-        size: list[float] = [20.0, 20.0, 20.0],
+        size: list[float] | None = None,
         autobox_ligand: Path | None = None,
         padding: float = 4.0,
         exhaustiveness: int = 8,
@@ -574,6 +509,8 @@ class DockingNode(Node):
             n_docked_lig_recep_struct: 要保存的前几名复合物数量（None=全部）。
             engine_type: 对接引擎类型 (默认: "vina")。
         """
+        if size is None:
+            size = [20.0, 20.0, 20.0]
         super().__init__("Single Docking")
         self.receptor_key = receptor_key
         self.ligand_key = ligand_key
@@ -660,7 +597,6 @@ class DockingNode(Node):
         current_results.append(result)
         context[self.result_key] = current_results
 
-
 class BatchDockingNode(Node):
     """
     执行 M x N 对接并支持断点续传的节点。
@@ -674,7 +610,7 @@ class BatchDockingNode(Node):
         context_key_receptors: str,
         context_key_ligands: str,
         center: list[float] | None = None,
-        size: list[float] = [20.0, 20.0, 20.0],
+        size: list[float] | None = None,
         autobox_ligand: Path | None = None,
         padding: float = 4.0,
         exhaustiveness: int = 8,
@@ -704,6 +640,8 @@ class BatchDockingNode(Node):
             n_docked_lig_recep_struct: 要保存的前几名复合物数量（None=全部）。
             engine_type: 对接引擎类型 (默认: "vina")。
         """
+        if size is None:
+            size = [20.0, 20.0, 20.0]
         super().__init__("Batch Docking")
         self.receptors = receptors
         self.ligands = ligands
@@ -832,7 +770,7 @@ class BatchDockingNode(Node):
                 )
                 future_to_key[future] = key
 
-            for i, future in enumerate(as_completed(future_to_key)):
+            for _i, future in enumerate(as_completed(future_to_key)):
                 key = future_to_key[future]
                 completed_count += 1
                 progress.update(
@@ -883,7 +821,6 @@ class BatchDockingNode(Node):
 
         safe_save_json(final_configs, self.output_dir / "configs.json")
         logger.info(f"已保存受体配置到: {self.output_dir / 'configs.json'}")
-
 
 class ResultSummaryNode(Node):
     """

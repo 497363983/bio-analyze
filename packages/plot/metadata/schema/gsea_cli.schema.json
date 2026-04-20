@@ -1,0 +1,127 @@
+{
+  "name": "gsea",
+  "type": "cli",
+  "description": "Generate GSEA enrichment plot.",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input file path (CSV, TSV, or Excel)."
+    },
+    {
+      "field": "output",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output file path."
+    },
+    {
+      "field": "rank",
+      "name": "--rank",
+      "type": "string",
+      "required": false,
+      "default": "rank",
+      "description": "Column name for rank (x-axis)."
+    },
+    {
+      "field": "score",
+      "name": "--score",
+      "type": "string",
+      "required": false,
+      "default": "running_es",
+      "description": "Column name for running ES (y-axis)."
+    },
+    {
+      "field": "hit",
+      "name": "--hit",
+      "type": "string",
+      "required": false,
+      "default": "hit",
+      "description": "Column name for hit status (0/1 or boolean)."
+    },
+    {
+      "field": "metric",
+      "name": "--metric",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Column name for ranking metric (y-axis bottom)."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+    },
+    {
+      "field": "title",
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plot title."
+    },
+    {
+      "field": "sheet",
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sheet name for Excel files."
+    },
+    {
+      "field": "color",
+      "name": "--color",
+      "type": "string",
+      "required": false,
+      "default": "#4DAF4A",
+      "description": "Color for enrichment score line."
+    },
+    {
+      "field": "hit_color",
+      "name": "--hit-color",
+      "type": "string",
+      "required": false,
+      "default": "black",
+      "description": "Color for hit lines."
+    },
+    {
+      "field": "nes",
+      "name": "--nes",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": "Normalized Enrichment Score."
+    },
+    {
+      "field": "pvalue",
+      "name": "--pvalue",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": "P-value."
+    },
+    {
+      "field": "fdr",
+      "name": "--fdr",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": "FDR q-value."
+    },
+    {
+      "field": "show_border",
+      "name": "--show-border",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": "Show top and right borders."
+    }
+  ]
+}

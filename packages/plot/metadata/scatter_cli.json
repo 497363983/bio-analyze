@@ -2,8 +2,8 @@
   "name": "scatter",
   "type": "cli",
   "description": {
-    "zh": "",
-    "en": ""
+    "zh": "Generate scatter plot.",
+    "en": "Generate scatter plot."
   },
   "params": [
     {
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
+        "zh": "Input file path (CSV, TSV, or Excel).",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输出文件路径。",
+        "zh": "Output file path.",
         "en": "Output file path."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "X 轴列名。",
+        "zh": "Column name for X-axis.",
         "en": "Column name for X-axis."
       }
     },
@@ -42,7 +42,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Y 轴列名。",
+        "zh": "Column name for Y-axis.",
         "en": "Column name for Y-axis."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "分组列名 (hue)。",
+        "zh": "Grouping column name (hue).",
         "en": "Grouping column name (hue)."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "标记样式列名。",
+        "zh": "Column name for marker style.",
         "en": "Column name for marker style."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "标记大小列名。",
+        "zh": "Column name for marker size.",
         "en": "Column name for marker size."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Plot title.",
         "en": "Plot title."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "为每个分组绘制置信椭圆。",
+        "zh": "Draw confidence ellipses for each group.",
         "en": "Draw confidence ellipses for each group."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": "2.0",
       "description": {
-        "zh": "置信椭圆的标准差。",
+        "zh": "Standard deviation for confidence ellipses.",
         "en": "Standard deviation for confidence ellipses."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Excel 工作表名称。",
+        "zh": "Sheet name for Excel files.",
         "en": "Sheet name for Excel files."
       }
     }

@@ -2,8 +2,8 @@
   "name": "box",
   "type": "cli",
   "description": {
-    "zh": "",
-    "en": ""
+    "zh": "Generate box plot.",
+    "en": "Generate box plot."
   },
   "params": [
     {
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
+        "zh": "Input file path (CSV, TSV, or Excel).",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输出文件路径。",
+        "zh": "Output file path.",
         "en": "Output file path."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "X 轴列名。",
+        "zh": "Column name for X-axis.",
         "en": "Column name for X-axis."
       }
     },
@@ -42,7 +42,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Y 轴列名。",
+        "zh": "Column name for Y-axis.",
         "en": "Column name for Y-axis."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "分组列名 (hue)。",
+        "zh": "Grouping column name (hue).",
         "en": "Grouping column name (hue)."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Plot title.",
         "en": "Plot title."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "显著性检验配对 (例如 'A,B' 'C,D')。",
+        "zh": "Pairs for significance testing (e.g. 'A,B' 'C,D').",
         "en": "Pairs for significance testing (e.g. 'A,B' 'C,D')."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": "t-test_ind",
       "description": {
-        "zh": "统计检验方法。",
+        "zh": "Statistical test method.",
         "en": "Statistical test method."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "star",
       "description": {
-        "zh": "显著性标注格式。",
+        "zh": "Significance annotation format.",
         "en": "Significance annotation format."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "叠加蜂群图点。",
+        "zh": "Overlay swarmplot points.",
         "en": "Overlay swarmplot points."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": ".25",
       "description": {
-        "zh": "蜂群图点颜色。",
+        "zh": "Swarmplot point color.",
         "en": "Swarmplot point color."
       }
     },
@@ -132,7 +132,7 @@
       "required": false,
       "default": "3.0",
       "description": {
-        "zh": "蜂群图点大小。",
+        "zh": "Swarmplot point size.",
         "en": "Swarmplot point size."
       }
     },
@@ -142,7 +142,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Excel 工作表名称。",
+        "zh": "Sheet name for Excel files.",
         "en": "Sheet name for Excel files."
       }
     }

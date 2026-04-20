@@ -42,11 +42,9 @@ def confidence_ellipse(x, y, ax, n_std=2.0, facecolor="none", **kwargs):
     ellipse.set_transform(transf + ax.transData)
     return ax.add_patch(ellipse)
 
-
 class ScatterPlot(BasePlot):
     """
-    zh: 散点图实现。
-    en: Scatter plot implementation.
+    Scatter plot implementation.
     """
 
     @save_plot
@@ -67,49 +65,35 @@ class ScatterPlot(BasePlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        zh: 绘制散点图。
-        en: Plot scatter chart.
+        Plot scatter chart.
 
         Args:
             data:
-                zh: 包含数据的 DataFrame。
-                en: DataFrame containing data.
+                DataFrame containing data.
             x:
-                zh: x 轴的列名。
-                en: Column name for x-axis.
+                Column name for x-axis.
             y:
-                zh: y 轴的列名。
-                en: Column name for y-axis.
+                Column name for y-axis.
             hue:
-                zh: 分组列名。
-                en: Column name for grouping.
+                Column name for grouping.
             style:
-                zh: 样式分组列名。
-                en: Column name for style grouping.
+                Column name for style grouping.
             size:
-                zh: 大小分组列名。
-                en: Column name for size grouping.
+                Column name for size grouping.
             title:
-                zh: 图表标题。
-                en: Chart title.
+                Chart title.
             xlabel:
-                zh: X轴标签。
-                en: X-axis label.
+                X-axis label.
             ylabel:
-                zh: Y轴标签。
-                en: Y-axis label.
+                Y-axis label.
             output:
-                zh: 保存图表的路径。
-                en: Path to save the chart.
+                Path to save the chart.
             add_ellipse:
-                zh: 是否为每个分组绘制置信椭圆。
-                en: Whether to draw confidence ellipses for each group.
+                Whether to draw confidence ellipses for each group.
             ellipse_std:
-                zh: 椭圆的标准差倍数。
-                en: Number of standard deviations for ellipse.
+                Number of standard deviations for ellipse.
             **kwargs:
-                zh: 其他传递给 seaborn.scatterplot 的参数。
-                en: Other arguments passed to seaborn.scatterplot.
+                Other arguments passed to seaborn.scatterplot.
         """
         # 获取主题特定参数
         theme_params = self.get_chart_specific_params("scatter")
@@ -141,7 +125,7 @@ class ScatterPlot(BasePlot):
                 unique_groups = data[hue].unique()
                 n_colors = len(unique_groups)
                 colors = sns.color_palette(n_colors=n_colors)
-                palette = dict(zip(unique_groups, colors))
+                palette = dict(zip(unique_groups, colors, strict=False))
                 # 更新 kwargs 以便 scatterplot 使用相同的 palette
                 kwargs["palette"] = palette
 

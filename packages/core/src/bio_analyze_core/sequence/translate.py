@@ -24,27 +24,21 @@ STANDARD_CODON_TABLE = {
     'TGC': 'C', 'TGT': 'C', 'TGA': '*', 'TGG': 'W',
 }
 
-
 def translate(sequence: str, is_rna: bool = False, to_stop: bool = False) -> str:
     """
-    zh: 将核酸序列翻译为蛋白质序列。
-    en: Translate nucleic acid sequence to protein sequence.
+    Translate nucleic acid sequence to protein sequence.
 
     Args:
         sequence (str):
-            zh: 输入的 DNA 或 RNA 序列。
-            en: Input DNA or RNA sequence.
+            Input DNA or RNA sequence.
         is_rna (bool):
-            zh: 序列是否为 RNA。如果为 True，会将 U 替换为 T 后进行标准翻译。
-            en: Whether the sequence is RNA. If True, replaces U with T before translation.
+            Whether the sequence is RNA. If True, replaces U with T before translation.
         to_stop (bool):
-            zh: 是否在遇到第一个终止密码子时停止翻译（不包含终止符）。
-            en: Whether to stop translation at the first stop codon (excluding the stop character).
+            Whether to stop translation at the first stop codon (excluding the stop character).
 
     Returns:
         str:
-            zh: 翻译后的蛋白质序列。
-            en: Translated protein sequence.
+            Translated protein sequence.
     """
     if not sequence:
         return ""

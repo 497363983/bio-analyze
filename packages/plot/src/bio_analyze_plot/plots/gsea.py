@@ -14,8 +14,7 @@ from .base import BasePlot, save_plot
 
 class GSEAPlot(BasePlot):
     """
-    zh: GSEA 富集图实现。
-    en: GSEA Enrichment Plot implementation.
+    GSEA Enrichment Plot implementation.
     """
 
     @save_plot
@@ -37,52 +36,37 @@ class GSEAPlot(BasePlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        zh: 绘制 GSEA 富集图。
-        en: Plot GSEA enrichment plot.
+        Plot GSEA enrichment plot.
 
         Args:
             data:
-                zh: 包含 GSEA 结果的 DataFrame。
-                en: DataFrame containing GSEA results.
+                DataFrame containing GSEA results.
             rank:
-                zh: 排名列名（x 轴）。
-                en: Column name for rank (x-axis).
+                Column name for rank (x-axis).
             score:
-                zh: 运行富集分数列名（y 轴顶部）。
-                en: Column name for running enrichment score (y-axis top).
+                Column name for running enrichment score (y-axis top).
             hit:
-                zh: 命中状态列名（布尔值或 0/1）。
-                en: Column name for hit status (boolean or 0/1).
+                Column name for hit status (boolean or 0/1).
             metric:
-                zh: 排名指标列名（y 轴底部）。可选。
-                en: Column name for ranking metric (y-axis bottom). Optional.
+                Column name for ranking metric (y-axis bottom). Optional.
             title:
-                zh: 图表标题。
-                en: Chart title.
+                Chart title.
             output:
-                zh: 输出文件路径。
-                en: Path to output file.
+                Path to output file.
             color:
-                zh: 富集分数线的颜色。
-                en: Color of the enrichment score line.
+                Color of the enrichment score line.
             hit_color:
-                zh: 命中垂直线的颜色。
-                en: Color of the hit vertical lines.
+                Color of the hit vertical lines.
             nes:
-                zh: 标准化富集评分（用于注释）。
-                en: Normalized Enrichment Score (for annotation).
+                Normalized Enrichment Score (for annotation).
             pvalue:
-                zh: P 值（用于注释）。
-                en: P-value (for annotation).
+                P-value (for annotation).
             fdr:
-                zh: FDR/调整后的 P 值（用于注释）。
-                en: FDR/Adjusted P-value (for annotation).
+                FDR/Adjusted P-value (for annotation).
             show_border:
-                zh: 是否显示子图的顶部和右侧边框。默认为 True。
-                en: Whether to show top and right borders of subplots. Defaults to True.
+                Whether to show top and right borders of subplots. Defaults to True.
             **kwargs:
-                zh: 其他绘图参数。
-                en: Other plotting parameters.
+                Other plotting parameters.
         """
         # 获取主题参数
         theme_params = self.get_chart_specific_params("gsea")
@@ -142,7 +126,7 @@ class GSEAPlot(BasePlot):
                 ha="right",
                 va="top",
                 fontsize=10,
-                bbox=dict(boxstyle="round,pad=0.3", fc="white", alpha=0.8, ec="none"),
+                bbox={"boxstyle": "round,pad=0.3", "fc": "white", "alpha": 0.8, "ec": "none"},
             )
 
         ax0.set_ylabel("Running Enrichment Score", fontsize=12)

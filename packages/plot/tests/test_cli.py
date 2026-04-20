@@ -1,7 +1,7 @@
 import matplotlib
 import pandas as pd
 from bio_analyze_plot.cli import get_app
-from typer.testing import CliRunner
+from bio_analyze_core.cli.app import CliRunner
 
 matplotlib.use("Agg")
 

@@ -2,38 +2,37 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import typer
-
+from bio_analyze_core.cli.app import Argument, Option, echo
+from bio_analyze_core.i18n import _
 from bio_analyze_plot.commands.utils import read_data
 from bio_analyze_plot.plots.volcano import VolcanoPlot
 
 
 def volcano_cmd(
-    input_file: Path = typer.Argument(
-        ..., help="zh: 输入文件路径 (CSV, TSV 或 Excel)。\nen: Input file path (CSV, TSV, or Excel)."
+    input_file: Path = Argument(
+        ..., help=_("Input file path (CSV, TSV, or Excel).")
     ),
-    output: Path = typer.Option(
+    output: Path = Option(
         ...,
         "-o",
         "--output",
-        help="zh: 输出文件路径 (例如 volcano.png)。\nen: Output file path (e.g. volcano.png).",
+        help=_("Output file path (e.g. volcano.png)."),
     ),
-    x: str = typer.Option(
-        "log2FoldChange", help="zh: log2 fold change 列名。\nen: Column name for log2 fold change."
+    x: str = Option(
+        "log2FoldChange", help=_("Column name for log2 fold change.")
     ),
-    y: str = typer.Option("pvalue", help="zh: p-value 列名。\nen: Column name for p-value."),
-    theme: str = typer.Option(
+    y: str = Option("pvalue", help=_("Column name for p-value.")),
+    theme: str = Option(
         "nature",
-        help="zh: 绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。\nen: Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        help=_("Plot theme (nature, science, default) or path to custom theme (.json/.py)."),
     ),
-    fc_cutoff: float = typer.Option(1.0, help="zh: Fold change 截断值。\nen: Fold change cutoff."),
-    p_cutoff: float = typer.Option(0.05, help="zh: P-value 截断值。\nen: P-value cutoff."),
-    title: str = typer.Option(None, help="zh: 图表标题。\nen: Plot title."),
-    sheet: str = typer.Option(None, help="zh: Excel 工作表名称。\nen: Sheet name for Excel files."),
+    fc_cutoff: float = Option(1.0, help=_("Fold change cutoff.")),
+    p_cutoff: float = Option(0.05, help=_("P-value cutoff.")),
+    title: str = Option(None, help=_("Plot title.")),
+    sheet: str = Option(None, help=_("Sheet name for Excel files.")),
 ) -> None:
     """
-    zh: 从数据生成火山图。
-    en: Generate volcano plot from data.
+    Generate volcano plot from data.
     """
     df = read_data(input_file, sheet=sheet)
     plotter = VolcanoPlot(theme=theme)
@@ -46,4 +45,4 @@ def volcano_cmd(
         title=title,
         output=str(output),
     )
-    typer.echo(f"Saved volcano plot to {output}")
+    echo(f"Saved volcano plot to {output}")

@@ -1,0 +1,119 @@
+{
+  "name": "pca",
+  "type": "cli",
+  "description": "Generate PCA plot.",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input file path (CSV, TSV, or Excel)."
+    },
+    {
+      "field": "output",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output file path."
+    },
+    {
+      "field": "hue",
+      "name": "--hue",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Grouping column name (hue)."
+    },
+    {
+      "field": "style",
+      "name": "--style",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Column name for marker style."
+    },
+    {
+      "field": "size",
+      "name": "--size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Column name for marker size."
+    },
+    {
+      "field": "index_col",
+      "name": "--index-col",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Column to use as index (e.g. gene names)."
+    },
+    {
+      "field": "transpose",
+      "name": "--transpose",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": "Transpose input data (default: True, assumes Genes x Samples)."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+    },
+    {
+      "field": "title",
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plot title."
+    },
+    {
+      "field": "cluster",
+      "name": "--cluster",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Perform KMeans clustering."
+    },
+    {
+      "field": "n_clusters",
+      "name": "--n-clusters",
+      "type": "int",
+      "required": false,
+      "default": "3",
+      "description": "Number of clusters for KMeans."
+    },
+    {
+      "field": "add_ellipse",
+      "name": "--add-ellipse",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Draw confidence ellipses for each group."
+    },
+    {
+      "field": "ellipse_std",
+      "name": "--ellipse-std",
+      "type": "float",
+      "required": false,
+      "default": "2.0",
+      "description": "Standard deviation for confidence ellipses."
+    },
+    {
+      "field": "sheet",
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sheet name for Excel files."
+    }
+  ]
+}

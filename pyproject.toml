@@ -4,15 +4,15 @@ members = ["packages/*"]
 [tool.uv.sources]
 bio-analyze-core = { workspace = true }
 bio-analyze-cli = { workspace = true }
-bio-analyze-rna-seq = { workspace = true }
 bio-analyze-docking = { workspace = true }
 bio-analyze-plot = { workspace = true }
 bio-analyze-msa = { workspace = true }
 
 [tool.ruff]
 line-length = 120
-target-version = "py39"
+target-version = "py310"
 src = ["packages"]
+extend-exclude = ["packages/*/tests"]
 
 [tool.ruff.lint]
 select = [
@@ -30,7 +30,7 @@ select = [
 ignore = ["RUF003", "RUF002", "B008"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["bio_analyze_core", "bio_analyze_cli", "bio_analyze_rna_seq", "docking", "bio_plot", "bio_analyze_msa"]
+known-first-party = ["bio_analyze_core", "bio_analyze_cli", "bio_analyze_omics", "docking", "bio_plot", "bio_analyze_msa"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -55,6 +55,8 @@ dev = [
     "pytest-clarity",
     "pytest-regressions",
     "allure-pytest",
+    "agentyper>=0.1.12",
+    "polib>=1.2.0",
 ]
 
 [tool.commitizen]

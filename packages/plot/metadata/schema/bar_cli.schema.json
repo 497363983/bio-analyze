@@ -1,0 +1,135 @@
+{
+  "name": "bar",
+  "type": "cli",
+  "description": "Generate bar plot.",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input file path (CSV, TSV, or Excel)."
+    },
+    {
+      "field": "output",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output file path."
+    },
+    {
+      "field": "x",
+      "name": "--x",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Column name for X-axis."
+    },
+    {
+      "field": "y",
+      "name": "--y",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Column name for Y-axis."
+    },
+    {
+      "field": "hue",
+      "name": "--hue",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Grouping column name (hue)."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+    },
+    {
+      "field": "title",
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plot title."
+    },
+    {
+      "field": "error_bar_type",
+      "name": "--error-bar-type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Error bar type: SD, SE, CI."
+    },
+    {
+      "field": "error_bar_ci",
+      "name": "--error-bar-ci",
+      "type": "float",
+      "required": false,
+      "default": "95",
+      "description": "Confidence interval size (default: 95)."
+    },
+    {
+      "field": "error_bar_max",
+      "name": "--error-bar-max",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Column name for error bar upper limit."
+    },
+    {
+      "field": "error_bar_min",
+      "name": "--error-bar-min",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Column name for error bar lower limit."
+    },
+    {
+      "field": "error_bar_capsize",
+      "name": "--error-bar-capsize",
+      "type": "float",
+      "required": false,
+      "default": "0.1",
+      "description": "Error bar capsize."
+    },
+    {
+      "field": "significance",
+      "name": "--significance",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Pairs for significance testing (e.g. 'A,B' 'C,D')."
+    },
+    {
+      "field": "test",
+      "name": "--test",
+      "type": "string",
+      "required": false,
+      "default": "t-test_ind",
+      "description": "Statistical test method."
+    },
+    {
+      "field": "text_format",
+      "name": "--text-format",
+      "type": "string",
+      "required": false,
+      "default": "star",
+      "description": "Significance annotation format."
+    },
+    {
+      "field": "sheet",
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sheet name for Excel files."
+    }
+  ]
+}

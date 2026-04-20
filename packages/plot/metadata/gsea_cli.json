@@ -2,8 +2,8 @@
   "name": "gsea",
   "type": "cli",
   "description": {
-    "zh": "",
-    "en": ""
+    "zh": "Generate GSEA enrichment plot.",
+    "en": "Generate GSEA enrichment plot."
   },
   "params": [
     {
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
+        "zh": "Input file path (CSV, TSV, or Excel).",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输出文件路径。",
+        "zh": "Output file path.",
         "en": "Output file path."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": "rank",
       "description": {
-        "zh": "排名列名 (X 轴)。",
+        "zh": "Column name for rank (x-axis).",
         "en": "Column name for rank (x-axis)."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "running_es",
       "description": {
-        "zh": "运行富集得分列名 (Y 轴)。",
+        "zh": "Column name for running ES (y-axis).",
         "en": "Column name for running ES (y-axis)."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "hit",
       "description": {
-        "zh": "命中状态列名 (0/1 或布尔值)。",
+        "zh": "Column name for hit status (0/1 or boolean).",
         "en": "Column name for hit status (0/1 or boolean)."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "排名指标列名 (Y 轴底部)。",
+        "zh": "Column name for ranking metric (y-axis bottom).",
         "en": "Column name for ranking metric (y-axis bottom)."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Plot title.",
         "en": "Plot title."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Excel 工作表名称。",
+        "zh": "Sheet name for Excel files.",
         "en": "Sheet name for Excel files."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "#4DAF4A",
       "description": {
-        "zh": "富集得分曲线颜色。",
+        "zh": "Color for enrichment score line.",
         "en": "Color for enrichment score line."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": "black",
       "description": {
-        "zh": "命中线条颜色。",
+        "zh": "Color for hit lines.",
         "en": "Color for hit lines."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "标准化富集得分 (NES)。",
+        "zh": "Normalized Enrichment Score.",
         "en": "Normalized Enrichment Score."
       }
     },
@@ -132,7 +132,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "P-value。",
+        "zh": "P-value.",
         "en": "P-value."
       }
     },
@@ -142,7 +142,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "FDR q-value。",
+        "zh": "FDR q-value.",
         "en": "FDR q-value."
       }
     },
@@ -152,7 +152,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "显示顶部和右侧边框。",
+        "zh": "Show top and right borders.",
         "en": "Show top and right borders."
       }
     }

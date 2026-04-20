@@ -1,0 +1,135 @@
+{
+  "name": "line",
+  "type": "cli",
+  "description": "Generate line plot.",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input file path (CSV, TSV, or Excel)."
+    },
+    {
+      "field": "output",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output file path."
+    },
+    {
+      "field": "x",
+      "name": "--x",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Column name for X-axis."
+    },
+    {
+      "field": "y",
+      "name": "--y",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Column name for Y-axis."
+    },
+    {
+      "field": "hue",
+      "name": "--hue",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Grouping column name (hue)."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+    },
+    {
+      "field": "title",
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plot title."
+    },
+    {
+      "field": "sheet",
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sheet name for Excel files."
+    },
+    {
+      "field": "error_bar_type",
+      "name": "--error-bar-type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Error bar type: SD, SE, CI."
+    },
+    {
+      "field": "error_bar_ci",
+      "name": "--error-bar-ci",
+      "type": "float",
+      "required": false,
+      "default": "95",
+      "description": "Confidence interval size (default: 95)."
+    },
+    {
+      "field": "error_bar_capsize",
+      "name": "--error-bar-capsize",
+      "type": "float",
+      "required": false,
+      "default": "3.0",
+      "description": "Error bar capsize (in points)."
+    },
+    {
+      "field": "markers",
+      "name": "--markers",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Use default markers for data points."
+    },
+    {
+      "field": "marker_style",
+      "name": "--marker-style",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specific marker symbols (comma-separated, e.g. 'o,s'). Overrides --markers."
+    },
+    {
+      "field": "dashes",
+      "name": "--dashes",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": "Use dashes for lines."
+    },
+    {
+      "field": "smooth",
+      "name": "--smooth",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Enable smooth curve fitting."
+    },
+    {
+      "field": "smooth_points",
+      "name": "--smooth-points",
+      "type": "int",
+      "required": false,
+      "default": "300",
+      "description": "Number of points for interpolation."
+    }
+  ]
+}

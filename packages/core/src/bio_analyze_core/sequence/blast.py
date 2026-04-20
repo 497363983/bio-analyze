@@ -1,7 +1,7 @@
 import math
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from typing import Any, Optional, Union
+from typing import Any
 
 try:
     from Bio.Blast import NCBIWWW, NCBIXML
@@ -15,8 +15,7 @@ from .fasta import read_fasta
 
 def _parse_blast_xml(xml_content: str) -> dict[str, list[dict[str, Any]]]:
     """
-    zh: 简易解析 BLAST XML 结果。
-    en: Simple parsing of BLAST XML results.
+    Simple parsing of BLAST XML results.
     """
     results: dict[str, list[dict[str, Any]]] = {}
     try:
@@ -45,47 +44,37 @@ def _parse_blast_xml(xml_content: str) -> dict[str, list[dict[str, Any]]]:
         pass
     return results
 
-
 def run_blast(
-    query_sequence: Union[str, list[str], dict[str, str]],
+    query_sequence: str | list[str] | dict[str, str],
     program: str = "blastn",
     database: str = "nt",
     local: bool = False,
-    local_db_path: Optional[Union[str, Path]] = None,
+    local_db_path: str | Path | None = None,
     evalue: float = 10.0,
     **kwargs,
 ) -> dict[str, list[dict[str, Any]]]:
     """
-    zh: 运行 BLAST (支持在线 NCBI 和本地命令行)。
-    en: Run BLAST (supports online NCBI and local command line).
+    Run BLAST (supports online NCBI and local command line).
 
     Args:
         query_sequence (Union[str, list[str], dict[str, str]]):
-            zh: 要搜索的查询序列。可以是单条序列字符串，序列列表，或 {序列名: 序列} 的字典。
-            en: The query sequence to search. Can be a single string, a list of strings, or a dict of {name: sequence}.
+            The query sequence to search. Can be a single string, a list of strings, or a dict of {name: sequence}.
         program (str):
-            zh: BLAST 程序名称 (如 'blastn', 'blastp', 'blastx' 等)。
-            en: BLAST program name (e.g., 'blastn', 'blastp', 'blastx').
+            BLAST program name (e.g., 'blastn', 'blastp', 'blastx').
         database (str):
-            zh: 目标数据库名称 (对于在线通常是 'nt' 或 'nr')。如果使用本地模式且未提供 local_db_path，将作为数据库路径。
-            en: Target database name.
+            Target database name.
         local (bool):
-            zh: 是否使用本地 BLAST+ 工具。如果为 True，系统必须已安装对应的 BLAST 程序。
-            en: Whether to use local BLAST+ tools. If True, corresponding BLAST program must be installed.
+            Whether to use local BLAST+ tools. If True, corresponding BLAST program must be installed.
         local_db_path (Optional[Union[str, Path]]):
-            zh: 本地数据库路径(FASTA格式)。
-            en: Specific path to the local database FASTA file.
+            Specific path to the local database FASTA file.
         evalue (float):
-            zh: E-value 阈值。
-            en: E-value threshold.
+            E-value threshold.
         **kwargs:
-            zh: 传递给 NCBIWWW.qblast 或本地命令行工具的附加参数。
-            en: Additional arguments passed to NCBIWWW.qblast or local command line tool.
+            Additional arguments passed to NCBIWWW.qblast or local command line tool.
 
     Returns:
         dict[str, list[dict[str, Any]]]:
-            zh: 包含匹配结果的字典，键为查询序列名，值为匹配结果列表。
-            en: Dictionary containing match results, keyed by query name, valued by list of match results.
+            Dictionary containing match results, keyed by query name, valued by list of match results.
     """
     if not query_sequence:
         return {}
@@ -109,7 +98,6 @@ def run_blast(
         return _run_local_blast(query_dict, program, database, local_db_path, evalue, **kwargs)
     else:
         return _run_online_blast(query_dict, program, database, evalue, **kwargs)
-
 
 def _run_online_blast(
     query_dict: dict[str, str], program: str, database: str, evalue: float, **kwargs
@@ -153,11 +141,9 @@ def _run_online_blast(
     result_handle.close()
     return results
 
-
 def _calculate_evalue(score: int, m: int, n: int) -> float:
     """
-    zh: 估算 E-value 的极简方法 (仅用于模拟，非标准 BLAST 统计模型)
-    en: Extremely simple E-value estimation (for mock only, not standard BLAST statistical model)
+    Extremely simple E-value estimation (for mock only, not standard BLAST statistical model)
     """
     # 假设 K 和 Lambda 为常数
     k = 0.1
@@ -169,18 +155,16 @@ def _calculate_evalue(score: int, m: int, n: int) -> float:
     except OverflowError:
         return float('inf')
 
-
 def _run_local_blast(
     query_dict: dict[str, str],
     program: str,
     database: str,
-    local_db_path: Optional[Union[str, Path]],
+    local_db_path: str | Path | None,
     evalue: float,
     **kwargs,
 ) -> dict[str, list[dict[str, Any]]]:
     """
-    zh: 使用内部实现的 Smith-Waterman 算法进行本地比对。
-    en: Perform local alignment using internally implemented Smith-Waterman algorithm.
+    Perform local alignment using internally implemented Smith-Waterman algorithm.
     """
     db_path = str(local_db_path) if local_db_path else database
     db_file = Path(db_path)

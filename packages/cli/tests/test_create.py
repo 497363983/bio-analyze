@@ -2,7 +2,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 import pytest
-import typer
+from bio_analyze_core.cli.app import Option, Argument, Context, Exit, echo, prompt, confirm
 
 from bio_analyze_cli.commands.create import TEMPLATES, ThemeTemplate, ToolTemplate, create_command
 
@@ -38,7 +38,7 @@ def test_tool_template_create_exists(tmp_output):
     package_dir = tmp_output / "packages" / name
     package_dir.mkdir(parents=True)
 
-    with pytest.raises(typer.Exit) as exc_info:
+    with pytest.raises(Exit) as exc_info:
         template.create(name, tmp_output)
 
     assert exc_info.value.exit_code == 1
@@ -71,7 +71,7 @@ def test_theme_template_create_exists(tmp_output):
     package_dir = tmp_output / name
     package_dir.mkdir(parents=True)
 
-    with pytest.raises(typer.Exit) as exc_info:
+    with pytest.raises(Exit) as exc_info:
         template.create(name, tmp_output)
 
     assert exc_info.value.exit_code == 1
@@ -105,7 +105,7 @@ def test_create_command_interactive(tmp_output):
 
 def test_create_command_invalid_type():
     """测试提供未知模板类型"""
-    with pytest.raises(typer.Exit) as exc_info:
+    with pytest.raises(Exit) as exc_info:
         create_command(template_type="invalid_type", name="my_tool", output=Path.cwd())
 
     assert exc_info.value.exit_code == 1

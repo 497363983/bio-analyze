@@ -1,0 +1,90 @@
+{
+  "name": "msa",
+  "type": "cli",
+  "description": {
+    "zh": "Plot a Multiple Sequence Alignment (MSA)",
+    "en": "Plot a Multiple Sequence Alignment (MSA)"
+  },
+  "params": [
+    {
+      "name": "-i, --input",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Path to the input MSA file (FASTA)",
+        "en": "Path to the input MSA file (FASTA)"
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Output image path",
+        "en": "Output image path"
+      }
+    },
+    {
+      "name": "--seq-type",
+      "type": "string",
+      "required": false,
+      "default": "aa",
+      "description": {
+        "zh": "Sequence type (aa/nt)",
+        "en": "Sequence type (aa/nt)"
+      }
+    },
+    {
+      "name": "--show-logo/--no-logo",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": {
+        "zh": "Whether to show a conservation logo at the top",
+        "en": "Whether to show a conservation logo at the top"
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": {
+        "zh": "Plot theme (default/nature/science)",
+        "en": "Plot theme (default/nature/science)"
+      }
+    },
+    {
+      "name": "--font-size",
+      "type": "int",
+      "required": false,
+      "default": "10",
+      "description": {
+        "zh": "Font size",
+        "en": "Font size"
+      }
+    },
+    {
+      "name": "--bases-per-line",
+      "type": "int",
+      "required": false,
+      "default": "0",
+      "description": {
+        "zh": "Residues per line for wrapping, 0 means no wrap",
+        "en": "Residues per line for wrapping, 0 means no wrap"
+      }
+    },
+    {
+      "name": "--base-colors",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "JSON mapping for custom residue colors, e.g. '{\"A\":\"#000000\"}'",
+        "en": "JSON mapping for custom residue colors, e.g. '{\"A\":\"#000000\"}'"
+      }
+    }
+  ]
+}

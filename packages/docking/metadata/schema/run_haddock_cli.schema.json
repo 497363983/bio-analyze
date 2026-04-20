@@ -1,0 +1,63 @@
+{
+  "name": "run_haddock",
+  "type": "cli",
+  "description": "Run molecular docking using HADDOCK engine.",
+  "params": [
+    {
+      "field": "config_file",
+      "name": "--config, -c",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Config file path."
+    },
+    {
+      "field": "receptor",
+      "name": "-r, --receptor",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Receptor file/dir."
+    },
+    {
+      "field": "ligand",
+      "name": "-l, --ligand",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Ligand file/dir."
+    },
+    {
+      "field": "output_dir",
+      "name": "-o, --output",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Output dir."
+    },
+    {
+      "field": "n_poses",
+      "name": "--n-poses",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Number of poses to sample."
+    },
+    {
+      "field": "charge_model",
+      "name": "--charge-model",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Charge model."
+    },
+    {
+      "field": "haddock_config",
+      "name": "--haddock-config",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Custom HADDOCK3 configuration file path."
+    }
+  ]
+}

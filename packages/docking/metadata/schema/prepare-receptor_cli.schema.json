@@ -1,0 +1,39 @@
+{
+  "name": "prepare-receptor",
+  "type": "cli",
+  "description": "Prepare receptor for docking (PDB -> PDBQT).\n\nArgs:\ninput_file (Path):\nPath to input receptor file (PDB/CIF).\noutput_file (Path):\nPath to output PDBQT file.\nadd_hydrogens (bool, optional):\nWhether to automatically add polar hydrogens. Defaults to True.\ncharge_model (str, optional):\nCharge calculation model (gasteiger, kollman, zero). Defaults to 'gasteiger'.",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input receptor file (PDB)."
+    },
+    {
+      "field": "output_file",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output PDBQT file."
+    },
+    {
+      "field": "add_hydrogens",
+      "name": "--add-hydrogens",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": "Add hydrogens."
+    },
+    {
+      "field": "charge_model",
+      "name": "--charge-model",
+      "type": "string",
+      "required": false,
+      "default": "gasteiger",
+      "description": "Charge model (gasteiger, zero, etc.)."
+    }
+  ]
+}

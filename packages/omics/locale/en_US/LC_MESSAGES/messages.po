@@ -1,0 +1,316 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bio-analyze-omics\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-20 19:21+0800\n"
+"PO-Revision-Date: 2026-04-20 00:00+0000\n"
+"Last-Translator: GPT-5.4 <noreply@example.com>\n"
+"Language-Team: en_US\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: custom locale bootstrap\n"
+
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:26
+msgid "Adapter sequence R1."
+msgstr "Adapter sequence R1."
+
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:27
+msgid "Adapter sequence R2."
+msgstr "Adapter sequence R2."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:167
+msgid "Adapter sequence for read1. Auto-detected if not provided."
+msgstr "Adapter sequence for read1. Auto-detected if not provided."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:171
+msgid "Adapter sequence for read2. Auto-detected if not provided."
+msgstr "Adapter sequence for read2. Auto-detected if not provided."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:87
+msgid ""
+"CSV file describing experimental design (columns: sample, condition, ...)."
+msgstr ""
+"CSV file describing experimental design (columns: sample, condition, ...)."
+
+#: src/bio_analyze_omics/cli.py:14
+msgid "Collection of omics analysis workflows."
+msgstr "Collection of omics analysis workflows."
+
+#: src/bio_analyze_omics/rna_seq/commands/gsea.py:26
+msgid "Column for ranking (auto, stat, log2FoldChange)."
+msgstr "Column for ranking (auto, stat, log2FoldChange)."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:134
+msgid "Comparison quantifiers, repeatable."
+msgstr "Comparison quantifiers, repeatable."
+
+#: src/bio_analyze_omics/rna_seq/commands/de.py:13
+msgid "Counts matrix CSV file."
+msgstr "Counts matrix CSV file."
+
+#: src/bio_analyze_omics/rna_seq/commands/enrich.py:14
+#: src/bio_analyze_omics/rna_seq/commands/gsea.py:14
+msgid "DESeq2 results CSV file."
+msgstr "DESeq2 results CSV file."
+
+#: src/bio_analyze_omics/rna_seq/commands/de.py:14
+msgid "Design matrix CSV file."
+msgstr "Design matrix CSV file."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:73
+msgid ""
+"Directory containing raw FastQ files. Required if --sra-ids is not provided."
+msgstr ""
+"Directory containing raw FastQ files. Required if --sra-ids is not provided."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:81
+msgid "Directory for analysis results."
+msgstr "Directory for analysis results."
+
+#: src/bio_analyze_omics/rna_seq/commands/align.py:14
+#: src/bio_analyze_omics/rna_seq/commands/quant.py:14
+msgid "Directory with clean FastQ files."
+msgstr "Directory with clean FastQ files."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:117
+msgid "Enable STAR alignment and chromosome distribution analysis."
+msgstr "Enable STAR alignment and chromosome distribution analysis."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:180
+msgid "Enable cut_right (sliding window trimming)."
+msgstr "Enable cut_right (sliding window trimming)."
+
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:28
+#: src/bio_analyze_omics/rna_seq/commands/run.py:189
+msgid "Enable deduplication."
+msgstr "Enable deduplication."
+
+#: src/bio_analyze_omics/rna_seq/commands/gsea.py:22
+msgid "Gene sets library (e.g. KEGG_2021_Human, GO_Biological_Process_2021)."
+msgstr "Gene sets library (e.g. KEGG_2021_Human, GO_Biological_Process_2021)."
+
+#: src/bio_analyze_omics/rna_seq/commands/align.py:17
+#: src/bio_analyze_omics/rna_seq/commands/genome.py:20
+msgid "Genome FASTA file."
+msgstr "Genome FASTA file."
+
+#: src/bio_analyze_omics/rna_seq/commands/quant.py:23
+msgid "Genome GTF file (optional if FASTA is transcriptome)."
+msgstr "Genome GTF file (optional if FASTA is transcriptome)."
+
+#: src/bio_analyze_omics/rna_seq/commands/align.py:18
+#: src/bio_analyze_omics/rna_seq/commands/genome.py:21
+msgid "Genome GTF file."
+msgstr "Genome GTF file."
+
+#: src/bio_analyze_omics/rna_seq/commands/quant.py:18
+msgid "Genome/Transcriptome FASTA file."
+msgstr "Genome/Transcriptome FASTA file."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:151
+msgid "How many N bases are allowed. Default 5."
+msgstr "How many N bases are allowed. Default 5."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:148
+msgid ""
+"How many percents of bases are allowed to be unqualified (0~100). Default 40"
+" means 40%."
+msgstr ""
+"How many percents of bases are allowed to be unqualified (0~100). Default 40"
+" means 40%."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:159
+msgid ""
+"If read1 is longer than max_len1, trim it at tail. Default 0 (no trim)."
+msgstr ""
+"If read1 is longer than max_len1, trim it at tail. Default 0 (no trim)."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:163
+msgid ""
+"If read2 is longer than max_len2, trim it at tail. Default 0 (no trim)."
+msgstr ""
+"If read2 is longer than max_len2, trim it at tail. Default 0 (no trim)."
+
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:13
+msgid "Input directory (raw FastQ)."
+msgstr "Input directory (raw FastQ)."
+
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:25
+msgid "Length required."
+msgstr "Length required."
+
+#: src/bio_analyze_omics/rna_seq/commands/download.py:12
+msgid "List of SRA Accession IDs."
+msgstr "List of SRA Accession IDs."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:187
+msgid "Mean quality requirement for cut_right. Default 20."
+msgstr "Mean quality requirement for cut_right. Default 20."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:192
+msgid "Minimum length for polyG tail trimming. Default 10."
+msgstr "Minimum length for polyG tail trimming. Default 10."
+
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:24
+msgid "N base limit."
+msgstr "N base limit."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:110
+msgid "Number of threads to use."
+msgstr "Number of threads to use."
+
+#: src/bio_analyze_omics/rna_seq/commands/align.py:19
+#: src/bio_analyze_omics/rna_seq/commands/download.py:14
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:16
+#: src/bio_analyze_omics/rna_seq/commands/quant.py:37
+msgid "Number of threads."
+msgstr "Number of threads."
+
+#: src/bio_analyze_omics/rna_seq/commands/gsea.py:28
+msgid "Number of top pathways to plot."
+msgstr "Number of top pathways to plot."
+
+#: src/bio_analyze_omics/rna_seq/commands/quant.py:35
+msgid "Optional comparison quantifiers, repeatable."
+msgstr "Optional comparison quantifiers, repeatable."
+
+#: src/bio_analyze_omics/rna_seq/commands/align.py:16
+#: src/bio_analyze_omics/rna_seq/commands/de.py:15
+#: src/bio_analyze_omics/rna_seq/commands/download.py:13
+#: src/bio_analyze_omics/rna_seq/commands/enrich.py:19
+#: src/bio_analyze_omics/rna_seq/commands/genome.py:13
+#: src/bio_analyze_omics/rna_seq/commands/gsea.py:19
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:15
+#: src/bio_analyze_omics/rna_seq/commands/quant.py:16
+msgid "Output directory."
+msgstr "Output directory."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:67
+msgid "Path to JSON/YAML config file. Overrides other options if provided."
+msgstr "Path to JSON/YAML config file. Overrides other options if provided."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:103
+msgid ""
+"Path to reference genome FASTA file (overrides --species/--assembly auto-"
+"download)."
+msgstr ""
+"Path to reference genome FASTA file (overrides --species/--assembly auto-"
+"download)."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:108
+msgid ""
+"Path to reference genome GTF annotation file (overrides --species/--assembly"
+" auto-download)."
+msgstr ""
+"Path to reference genome GTF annotation file (overrides --species/--assembly"
+" auto-download)."
+
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:20
+msgid "Phred quality threshold."
+msgstr "Phred quality threshold."
+
+#: src/bio_analyze_omics/rna_seq/commands/align.py:20
+#: src/bio_analyze_omics/rna_seq/commands/de.py:16
+#: src/bio_analyze_omics/rna_seq/commands/enrich.py:20
+#: src/bio_analyze_omics/rna_seq/commands/gsea.py:29
+msgid "Plot theme."
+msgstr "Plot theme."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:122
+msgid "Plotting theme (default, nature, science, or custom package name)."
+msgstr "Plotting theme (default, nature, science, or custom package name)."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:155
+msgid "Reads shorter than length_required will be discarded. Default 15."
+msgstr "Reads shorter than length_required will be discarded. Default 15."
+
+#: src/bio_analyze_omics/rna_seq/commands/genome.py:18
+msgid "Reference assembly accession, e.g. GCA_013347765.1."
+msgstr "Reference assembly accession, e.g. GCA_013347765.1."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:98
+msgid ""
+"Reference assembly accession, e.g. GCA_013347765.1. Takes precedence over "
+"--species for auto-download."
+msgstr ""
+"Reference assembly accession, e.g. GCA_013347765.1. Takes precedence over "
+"--species for auto-download."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:139
+msgid ""
+"Run only a specific step (qc, quant, de, enrichment, report). If None, run "
+"all."
+msgstr ""
+"Run only a specific step (qc, quant, de, enrichment, report). If None, run "
+"all."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:78
+msgid "SRA Accession IDs to download and process (e.g. SRR123456)."
+msgstr "SRA Accession IDs to download and process (e.g. SRR123456)."
+
+#: src/bio_analyze_omics/rna_seq/commands/utils.py:85
+msgid "Select the reference genome number to download"
+msgstr "Select the reference genome number to download"
+
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:17
+msgid "Skip FastQC/fastp stats."
+msgstr "Skip FastQC/fastp stats."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:111
+msgid "Skip Quality Control step."
+msgstr "Skip Quality Control step."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:112
+msgid "Skip Trimming step."
+msgstr "Skip Trimming step."
+
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:18
+msgid "Skip trimming."
+msgstr "Skip trimming."
+
+#: src/bio_analyze_omics/rna_seq/commands/enrich.py:17
+#: src/bio_analyze_omics/rna_seq/commands/gsea.py:17
+msgid "Species name (e.g. 'Homo sapiens')."
+msgstr "Species name (e.g. 'Homo sapiens')."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:93
+msgid ""
+"Species name for auto-downloading reference genome (e.g. 'Homo sapiens')."
+msgstr ""
+"Species name for auto-downloading reference genome (e.g. 'Homo sapiens')."
+
+#: src/bio_analyze_omics/rna_seq/commands/genome.py:14
+msgid "Species name."
+msgstr "Species name."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:144
+msgid ""
+"The quality value that a base is qualified. Default 15 means Phred quality "
+">= Q15."
+msgstr ""
+"The quality value that a base is qualified. Default 15 means Phred quality "
+">= Q15."
+
+#: src/bio_analyze_omics/rna_seq/cli.py:21
+msgid "Transcriptomics analysis workflow."
+msgstr "Transcriptomics analysis workflow."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:174
+msgid "Trimming how many bases in front for read1."
+msgstr "Trimming how many bases in front for read1."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:177
+msgid "Trimming how many bases in tail for read1."
+msgstr "Trimming how many bases in tail for read1."
+
+#: src/bio_analyze_omics/rna_seq/commands/qc.py:22
+msgid "Unqualified percent limit."
+msgstr "Unqualified percent limit."
+
+#: src/bio_analyze_omics/rna_seq/commands/run.py:183
+msgid "Window size for cut_right. Default 4."
+msgstr "Window size for cut_right. Default 4."

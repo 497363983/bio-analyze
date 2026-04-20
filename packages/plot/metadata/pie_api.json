@@ -2,7 +2,7 @@
   "name": "pie",
   "type": "api",
   "description": {
-    "zh": "绘制饼图。",
+    "zh": "Plot pie chart.",
     "en": "Plot pie chart."
   },
   "params": [
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "包含数据的 DataFrame。",
+        "zh": "DataFrame containing data.",
         "en": "DataFrame containing data."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "标签列名 (Categorical)。",
+        "zh": "Column name for labels (Categorical).",
         "en": "Column name for labels (Categorical)."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "数值列名 (Numerical)。",
+        "zh": "Column name for values (Numerical).",
         "en": "Column name for values (Numerical)."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Chart title.",
         "en": "Chart title."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "%1.1f%%",
       "description": {
-        "zh": "百分比显示格式，例如 '%1.1f%%'。",
+        "zh": "Percentage format string, e.g., '%1.1f%%'.",
         "en": "Percentage format string, e.g., '%1.1f%%'."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": "90",
       "description": {
-        "zh": "起始角度。",
+        "zh": "Starting angle.",
         "en": "Starting angle."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "突出显示的切片。可以是列名（布尔值或数值），也可以是列表。",
+        "zh": "Slices to explode. Can be column name (boolean or numeric) or list.",
         "en": "Slices to explode. Can be column name (boolean or numeric) or list."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "是否显示阴影。",
+        "zh": "Whether to show shadow.",
         "en": "Whether to show shadow."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "颜色列表。",
+        "zh": "List of colors.",
         "en": "List of colors."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "保存图表的路径。",
+        "zh": "Path to save the chart.",
         "en": "Path to save the chart."
       }
     }

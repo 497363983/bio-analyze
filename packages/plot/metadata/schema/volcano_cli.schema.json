@@ -1,0 +1,79 @@
+{
+  "name": "volcano",
+  "type": "cli",
+  "description": "Generate volcano plot from data.",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input file path (CSV, TSV, or Excel)."
+    },
+    {
+      "field": "output",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output file path (e.g. volcano.png)."
+    },
+    {
+      "field": "x",
+      "name": "--x",
+      "type": "string",
+      "required": false,
+      "default": "log2FoldChange",
+      "description": "Column name for log2 fold change."
+    },
+    {
+      "field": "y",
+      "name": "--y",
+      "type": "string",
+      "required": false,
+      "default": "pvalue",
+      "description": "Column name for p-value."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+    },
+    {
+      "field": "fc_cutoff",
+      "name": "--fc-cutoff",
+      "type": "float",
+      "required": false,
+      "default": "1.0",
+      "description": "Fold change cutoff."
+    },
+    {
+      "field": "p_cutoff",
+      "name": "--p-cutoff",
+      "type": "float",
+      "required": false,
+      "default": "0.05",
+      "description": "P-value cutoff."
+    },
+    {
+      "field": "title",
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plot title."
+    },
+    {
+      "field": "sheet",
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sheet name for Excel files."
+    }
+  ]
+}

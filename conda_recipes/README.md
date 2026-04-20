@@ -10,6 +10,7 @@
    ```bash
    conda install conda-build anaconda-client
    ```
+
 2. **Anaconda 账号**:
    如果你还没有账号，请在 [Anaconda.org](https://anaconda.org/) 创建一个。
 3. **登录**:
@@ -38,8 +39,8 @@ conda build conda_recipes/bio-analyze-plot -c conda-forge -c bioconda
 # 3. Docking (依赖 core)
 conda build conda_recipes/bio-analyze-docking -c conda-forge -c bioconda
 
-# 4. RNA-Seq (依赖 core, plot)
-conda build conda_recipes/bio-analyze-rna-seq -c conda-forge -c bioconda
+# 4. Omics (依赖 core, plot)
+conda build conda_recipes/bio-analyze-omics -c conda-forge -c bioconda
 
 # 5. CLI (依赖 core)
 conda build conda_recipes/bio-analyze-cli -c conda-forge -c bioconda
@@ -65,7 +66,7 @@ anaconda upload (Get-ChildItem -Path $env:CONDA_PREFIX\conda-bld\win-64\bio-anal
 anaconda upload <path_to_conda_bld>/win-64/bio-analyze-core-0.1.0-py_0.tar.bz2
 anaconda upload <path_to_conda_bld>/win-64/bio-analyze-plot-0.1.0-py_0.tar.bz2
 anaconda upload <path_to_conda_bld>/win-64/bio-analyze-docking-0.1.0-py_0.tar.bz2
-anaconda upload <path_to_conda_bld>/win-64/bio-analyze-rna-seq-0.1.0-py_0.tar.bz2
+anaconda upload <path_to_conda_bld>/win-64/bio-analyze-omics-0.1.0-py_0.tar.bz2
 anaconda upload <path_to_conda_bld>/win-64/bio-analyze-cli-0.1.0-py_0.tar.bz2
 ```
 
@@ -78,7 +79,7 @@ anaconda upload <path_to_conda_bld>/win-64/bio-analyze-cli-0.1.0-py_0.tar.bz2
 conda install -c <your-username> -c conda-forge -c bioconda bio-analyze-cli
 ```
 
-安装 `bio-analyze-cli` 会自动拉取 `bio-analyze-core`。其他插件（docking, plot, rna-seq）可以按需安装：
+安装 `bio-analyze-cli` 会自动拉取 `bio-analyze-core`。其他插件（docking, plot, omics）可以按需安装：
 
 ```bash
 conda install -c <your-username> -c conda-forge -c bioconda bio-analyze-docking

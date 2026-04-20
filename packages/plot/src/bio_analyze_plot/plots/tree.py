@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
 import numpy as np
 from Bio import Phylo
+from matplotlib.figure import Figure
 
 from .base import BasePlot, save_plot
+
 
 def _draw_circular(
     tree,
@@ -18,23 +19,23 @@ def _draw_circular(
     label_bbox_alpha=0.65,
 ):
     """
-    Custom helper function to draw a circular tree using Matplotlib, 
+    Custom helper function to draw a circular tree using Matplotlib,
     as Bio.Phylo doesn't natively support circular layout out-of-the-box.
     """
     # 1. Calculate depths (radii) and number of leaves (for angles)
     depths = tree.depths()
     max_depth = max(depths.values())
-    
+
     # Give all clades an angular position
     terminals = tree.get_terminals()
     num_terminals = len(terminals)
     label_offset = max_depth * label_offset_scale
-    
+
     # 2. Assign angles to each leaf
     angles = {}
     for i, leaf in enumerate(terminals):
         angles[leaf] = (i / num_terminals) * 2 * np.pi
-        
+
     # 3. Calculate internal node angles by averaging children's angles
     for node in reversed(list(tree.find_clades(order="level"))):
         if node not in angles:
@@ -49,32 +50,46 @@ def _draw_circular(
     for node in tree.find_clades(order="level"):
         r1 = depths[node]
         theta1 = angles[node]
-        
+
         # Plot children
         for child in node.clades:
             r2 = depths[child]
             theta2 = angles[child]
-            
+
             # Radial line (from node radius to child radius, at child's angle)
-            axes.plot([theta2, theta2], [r1, r2], color=branch_color, lw=branch_thickness, 
-                      solid_capstyle='round', antialiased=True)
-            
+            axes.plot(
+                [theta2, theta2],
+                [r1, r2],
+                color=branch_color,
+                lw=branch_thickness,
+                solid_capstyle="round",
+                antialiased=True,
+            )
+
             # Arc line (connecting children at node's radius)
             # Create a smooth arc between theta1 and theta2 at radius r1
             arc_angles = np.linspace(min(theta1, theta2), max(theta1, theta2), 100)
-            axes.plot(arc_angles, [r1] * len(arc_angles), color=branch_color, lw=branch_thickness, 
-                      solid_capstyle='round', antialiased=True)
-            
+            axes.plot(
+                arc_angles,
+                [r1] * len(arc_angles),
+                color=branch_color,
+                lw=branch_thickness,
+                solid_capstyle="round",
+                antialiased=True,
+            )
+
             # Draw confidence values
-            if show_confidence and hasattr(child, 'confidence') and child.confidence:
+            if show_confidence and hasattr(child, "confidence") and child.confidence:
                 # Add a small background to confidence text for better readability
                 axes.text(
-                    theta2, (r1 + r2) / 2, f" {child.confidence} ", 
-                    fontsize=max(6, font_size * 0.75), ha='center', va='center',
+                    theta2, (r1 + r2) / 2, f" {child.confidence} ",
+                    fontsize=max(6, font_size * 0.75),
+                    ha="center",
+                    va="center",
                     rotation=np.degrees(theta2),
-                    rotation_mode='anchor',
-                    bbox=dict(facecolor='white', edgecolor='none', alpha=0.75, pad=0.5),
-                    clip_on=False
+                    rotation_mode="anchor",
+                    bbox={"facecolor": "white", "edgecolor": "none", "alpha": 0.75, "pad": 0.5},
+                    clip_on=False,
                 )
 
     # 5. Add labels to terminals
@@ -85,27 +100,30 @@ def _draw_circular(
         rotation = np.degrees(theta)
         if 90 < rotation < 270:
             rotation += 180
-            ha = 'right'
+            ha = "right"
             pad_theta = theta
             pad_r = r + label_offset
         else:
-            ha = 'left'
+            ha = "left"
             pad_theta = theta
             pad_r = r + label_offset
-            
+
         axes.text(
-            pad_theta, pad_r, leaf.name, 
-            fontsize=font_size, rotation=rotation, ha=ha, va='center',
-            rotation_mode='anchor',
-            fontstyle='italic',
-            bbox=dict(facecolor='white', edgecolor='none', alpha=label_bbox_alpha, pad=0.15),
-            clip_on=False
+            pad_theta, pad_r, leaf.name,
+            fontsize=font_size,
+            rotation=rotation,
+            ha=ha,
+            va="center",
+            rotation_mode="anchor",
+            fontstyle="italic",
+            bbox={"facecolor": "white", "edgecolor": "none", "alpha": label_bbox_alpha, "pad": 0.15},
+            clip_on=False,
         )
-        
+
     # 6. Formatting
     axes.set_rticks([])
     axes.set_xticks([])
-    axes.spines['polar'].set_visible(False)
+    axes.spines["polar"].set_visible(False)
     axes.set_ylim(0, max_depth * 1.15)
 
 
@@ -135,7 +153,7 @@ class TreePlot(BasePlot):
             data (str): Path to the tree file.
             format (str): Format of the tree file (default: newick).
             layout (str): Layout of the tree ('rectangular', 'circular').
-            show_confidence (bool): Whether to show branch support values.      
+            show_confidence (bool): Whether to show branch support values.
             branch_thickness (float): Thickness of the branches.
             font_size (int): Font size for leaf labels.
             figsize (tuple): Figure size.
@@ -144,7 +162,7 @@ class TreePlot(BasePlot):
             **kwargs: Extra parameters.
         """
         tree = Phylo.read(data, format)
-        
+
         # Apply theme-specific params if needed
         params = self.get_chart_specific_params("tree")
         branch_color = params.get("color", "black")
@@ -163,8 +181,11 @@ class TreePlot(BasePlot):
             fig = plt.figure(figsize=figsize)
             ax = fig.add_subplot(111, polar=True)
             _draw_circular(
-                tree, ax, show_confidence=show_confidence, 
-                branch_thickness=branch_thickness, font_size=font_size, 
+                tree,
+                ax,
+                show_confidence=show_confidence,
+                branch_thickness=branch_thickness,
+                font_size=font_size,
                 branch_color=branch_color,
                 label_offset_scale=label_offset_scale,
                 label_bbox_alpha=label_bbox_alpha,
@@ -190,10 +211,10 @@ class TreePlot(BasePlot):
                 # Phylo.draw doesn't expose the coordinates easily, but we can extract them
                 # Alternatively, we just use Phylo's built-in branch_labels and customize the created texts.
                 # Let's re-run draw_kwargs with the label func just to get the texts
-                ax.clear() # Clear and redraw with labels
-                
+                ax.clear()  # Clear and redraw with labels
+
                 def get_conf(c):
-                    if hasattr(c, 'confidence') and c.confidence is not None:
+                    if hasattr(c, "confidence") and c.confidence is not None:
                         # Sometimes confidence is stored as float or string
                         try:
                             val = float(c.confidence)
@@ -224,34 +245,43 @@ class TreePlot(BasePlot):
                 if content.strip().replace('.', '').isdigit():
                     # This is a confidence value
                     text.set_fontsize(max(6, font_size * 0.75))
-                    text.set_color('#333333')
-                    text.set_bbox(dict(facecolor='white', edgecolor='none', alpha=0.7, pad=0.2))
+                    text.set_color("#333333")
+                    text.set_bbox({"facecolor": "white", "edgecolor": "none", "alpha": 0.7, "pad": 0.2})
                     # slightly shift it up to not overlap the line
                     pos = text.get_position()
                     text.set_position((pos[0], pos[1] + 0.1))
                 elif content in terminal_names:
                     text.set_fontsize(font_size)
-                    text.set_fontstyle('italic')
-                    text.set_ha('left')
-                    text.set_va('center')
-                    text.set_bbox(dict(facecolor='white', edgecolor='none', alpha=label_bbox_alpha, pad=0.15))
+                    text.set_fontstyle("italic")
+                    text.set_ha("left")
+                    text.set_va("center")
+                    text.set_bbox(
+                        {"facecolor": "white", "edgecolor": "none", "alpha": label_bbox_alpha, "pad": 0.15}
+                    )
                     pos = text.get_position()
                     text.set_position((pos[0] + x_offset, pos[1]))
                 else:
                     text.set_fontsize(max(7, font_size * 0.85))
-                    text.set_ha('left')
-                    text.set_va('center')
-                    text.set_color('#222222')
-                    text.set_bbox(dict(facecolor='white', edgecolor='none', alpha=min(1.0, label_bbox_alpha + 0.2), pad=0.15))
+                    text.set_ha("left")
+                    text.set_va("center")
+                    text.set_color("#222222")
+                    text.set_bbox(
+                        {
+                            "facecolor": "white",
+                            "edgecolor": "none",
+                            "alpha": min(1.0, label_bbox_alpha + 0.2),
+                            "pad": 0.15,
+                        }
+                    )
                     pos = text.get_position()
                     text.set_position((pos[0] + x_offset, pos[1]))
 
             # Optional: remove axes for cleaner look
-            ax.spines['top'].set_visible(False)
-            ax.spines['right'].set_visible(False)
-            ax.spines['left'].set_visible(False)
-            ax.spines['bottom'].set_visible(True)
-            ax.spines['bottom'].set_linewidth(1.5)
+            ax.spines["top"].set_visible(False)
+            ax.spines["right"].set_visible(False)
+            ax.spines["left"].set_visible(False)
+            ax.spines["bottom"].set_visible(True)
+            ax.spines["bottom"].set_linewidth(1.5)
             ax.set_yticks([])
             ax.set_ylabel("")
             ax.set_xlabel("Evolutionary distance", fontsize=max(10, font_size * 0.9))

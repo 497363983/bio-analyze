@@ -7,14 +7,14 @@ name = "bio-analyze-docking"
 version = "0.1.0a0"
 description = "Molecular docking module for bio-analyze."
 readme = "README.md"
-requires-python = ">=3.9, <3.15"
+requires-python = ">=3.10, <3.15"
 license = { text = "GPL-3.0" }
 authors = [{ name = "qww" }]
 dependencies = [
     "bio-analyze-core>=0.1.0a0",
     "numpy>=1.20.0",
     "meeko>=0.5.1",
-    # "vina>=1.2.0; sys_platform != 'win32'", # Provided by Conda
+    "vina>=1.2.0; sys_platform != 'win32'", # Provided by Conda
     "rdkit>=2024.03.1", # Provided by Conda
     "scipy>=1.10.0",
     "propka>=3.5.0",
@@ -22,7 +22,7 @@ dependencies = [
     "pdbfixer>=1.9.0",
     "pandas>=2.0.0",
     "openpyxl>=3.1.0",
-    # "pymol-open-source>=2.5.0", # Provided by Conda
+    "pymol-open-source>=2.5.0; sys_platform != 'win32'", # Provided by Conda
     "openbabel-wheel", # Provided by Conda
 ]
 

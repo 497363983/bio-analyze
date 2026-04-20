@@ -2,7 +2,7 @@
   "name": "heatmap",
   "type": "api",
   "description": {
-    "zh": "绘制带有可选聚类的热图。",
+    "zh": "Plot heatmap with optional clustering.",
     "en": "Plot heatmap with optional clustering."
   },
   "params": [
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "包含数据的 DataFrame。",
+        "zh": "DataFrame containing data.",
         "en": "DataFrame containing data."
       }
     },
@@ -22,7 +22,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "用作索引（标签）的列。如果为 None，则使用现有索引。",
+        "zh": "Column to use as index (labels). If None, uses existing index.",
         "en": "Column to use as index (labels). If None, uses existing index."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "是否对行进行聚类。",
+        "zh": "Whether to cluster rows.",
         "en": "Whether to cluster rows."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "是否对列进行聚类。",
+        "zh": "Whether to cluster columns.",
         "en": "Whether to cluster columns."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "0（行）或 1（列）进行标准化。None 表示禁用。",
+        "zh": "0 (rows) or 1 (columns) for standardization. None to disable.",
         "en": "0 (rows) or 1 (columns) for standardization. None to disable."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": "vlag",
       "description": {
-        "zh": "颜色映射名称。",
+        "zh": "Colormap name.",
         "en": "Colormap name."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": "0.0",
       "description": {
-        "zh": "颜色映射居中的值。",
+        "zh": "Value at which to center the colormap.",
         "en": "Value at which to center the colormap."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Chart title.",
         "en": "Chart title."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "X轴标签。",
+        "zh": "X-axis label.",
         "en": "X-axis label."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Y轴标签。",
+        "zh": "Y-axis label.",
         "en": "Y-axis label."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "保存图表的路径。",
+        "zh": "Path to save the chart.",
         "en": "Path to save the chart."
       }
     }

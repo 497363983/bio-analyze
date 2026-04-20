@@ -2,33 +2,34 @@
 
 ## Branch Strategy
 
-> **IMPORTANT: Never develop on `main` branch!**
+> **IMPORTANT: Never develop on** **`main`** **branch!**
 >
-> - `main` is the **production branch** — it only contains released or release candidate versions
-> - Feature branches should be created from `main` and merged back
+> - `main` = **production branch**. Only released or release-candidate code.
+> - Create feature branch from `main`, merge back later.
 >   - Name format: `<type>/<short-description>`
->     - `<type>`: One of `feat`, `fix`, `refactor`, `docs`, `test`
->     - `<short-description>`: A brief description of the work (use hyphens for spacing)
+>     - `<type>`: `feat`, `fix`, `refactor`, `docs`, `test`
+>     - `<short-description>`: short summary, use hyphens
 
 ## Architecture & Project Structure
 
-- **Monorepo Architecture**: The project uses a Python monorepo structure. Each tool module is maintained as an independent distribution package.
+- **Monorepo Architecture**: Python monorepo. Each tool module = independent distribution package.
 - **Naming Conventions**:
-  - **Distribution Packages**: Always use the `bio-analyse-` prefix (e.g., `bio-analyse-core`, `bio-analyse-plot`).
-  - **Module Import Names**: Keep it flat. Import modules directly by their names (e.g., `import bio_analyze_core`, `import rna_seq`) without a unified top-level namespace.
+  - **Distribution Packages**: Always use `bio-analyze-` prefix, like `bio-analyze-core`, `bio-analyze-plot`.
+  - **Module Import Names**: Keep flat. Import direct, like `import bio_analyze_core`, `import rna_seq`. No unified top-level namespace.
 - **Toolchain**:
   - **Dependency Management**: Use `uv`.
-  - **Code Formatting & Linting**: Use `ruff` (configured globally in `pyproject.toml` at the root directory).
+  - **Python Env Commands**: Run Python-dependent local commands with *`uv run`, like* *`uv run pytest`,* *`uv run python scripts/generate_metadata.py`,* *`uv run ruff check`. Do* not call bare `python`, `pytest`, `ruff` when project env matters.
+  - **Code Formatting & Linting**: Use `ruff`, configured in root `pyproject.toml`.
   - **Testing Framework**: Use `pytest`.
 - **Compatibility Requirements**:
-  - **Python Versions**: The project strictly supports Python versions from **3.9 to 3.14**. All code must be compatible within this range.
-  - **Backward Compatibility**: New features should prioritize backward compatibility to the greatest extent possible.
-  - **Breaking Changes**: If a breaking change is unavoidable, it must be clearly documented and only released in a **major** version update (e.g., v1.0.0 -> v2.0.0).
-  - **Pre-release Versions**: Breaking changes are permitted between pre-release versions (alpha, beta, rc), provided they maintain compatibility with the last stable release (unless the pre-release is explicitly for a new major version).
+  - **Python Versions**: Support Python **3.10 to 3.14**.
+  - **Backward Compatibility**: New feature should keep backward compatibility as much as possible.
+  - **Breaking Changes**: If unavoidable, document clearly. Release only in **major** version update, like v1.0.0 -> v2.0.0.
+  - **Pre-release Versions**: Breaking change allowed between alpha/beta/rc, but keep compatibility with last stable release unless pre-release targets new major version.
 
 ## Module Directory Structure
 
-To ensure consistency across the monorepo, any new module added to the `packages/` directory must strictly follow this standard directory structure:
+New module under `packages/` must follow this structure:
 
 ```text
 packages/<module_name>/
@@ -38,7 +39,7 @@ packages/<module_name>/
 ├── src/
 │   └── bio_analyze_<module_name>/   # Main source code directory (using bio_analyze_ prefix)
 │       ├── __init__.py
-│       ├── cli.py         # Typer CLI commands definitions (if applicable)
+│       ├── cli.py         # CLI command definitions (BioAnalyzeTyper/Agentyper-compatible, if applicable)
 │       └── commands/      # Subcommands implementations (if applicable)
 ├── tests/                 # Unit and integration tests (pytest)
 │   ├── conftest.py        # Shared test fixtures
@@ -48,40 +49,41 @@ packages/<module_name>/
 
 ## Language & Comments
 
-- **Code Comments**: Must be written in **English**.
-- **Docstrings**: Must be written in **English**, EXCEPT for the Chinese localization strings in i18n sections.
-- **Log Messages**: Must be written in **English**.
-- **CLI Help & Prompts**: Supports bilingual i18n. Use the fixed format when writing docstrings for CLI commands: `zh: [Chinese Content]\nen: [English Content]`.
-- **Git Commit Messages**: Must be written in **English**.
+- **Code Comments**: English only.
+- **Docstrings**: English only, except Chinese localization strings in i18n sections.
+- **Log Messages**: English only.
+- **CLI Help & Prompts**: Gettext-first i18n. Write new CLI help/prompt text as English `msgid`, then translate through module `locale/<lang>/LC_MESSAGES/messages.po` and `messages.mo`. Do not use `zh: ...\nen: ...` bilingual blocks in code comments, docstrings, or help strings.
+- **Git Commit Messages**: English only.
 
 ## Documentation Standards
 
-- **Synchronous Updates**: Whenever there is a new feature, a parameter change, or any functional modification, the documentation in the `doc/` directory MUST be updated synchronously.
-- **Unified Style**: All documentation must adhere to a consistent style. Keep descriptions objective, professional, and clear. Avoid overly conversational or colloquial language.
-- **Bilingual Support**: Since the project supports bilingual CLI and documentation, ensure that updates are reflected in both the English (default) and Chinese (`zh/`) documentation directories where applicable.
+- **Synchronous Updates**: Any new feature, parameter change, or function change must update `doc/` at same time.
+- **Unified Style**: Keep docs objective, professional, clear. Avoid conversational style.
+- **Bilingual Support**: Update both English default docs and Chinese `zh/` docs when applicable.
 
 ## Coding Standards
 
-- **Maintainability & Extensibility**: Always design with maintainability and extensibility in mind. Follow the DRY (Don't Repeat Yourself) principle by extracting common logic to avoid repetitive code.
-- **Core Extraction**: If a method or utility is generic enough to be used across multiple modules, extract it and move it to the `bio_analyze_core` module for global sharing.
-- **Module Independence**: Business modules MUST NOT depend on each other to prevent tight coupling. They should only depend on foundational modules such as `core`, `plot`, and `cli`.
-- **CLI Architecture**: Modules use a plugin-based design and are registered to the unified Typer CLI main program via Entry points.
+- **Maintainability & Extensibility**: Design for maintainability and extensibility. Follow DRY. Extract common logic.
+- **Core Extraction**: Generic utility used across modules goes to `bio_analyze_core`.
+- **Module Independence**: Business modules must not depend on each other. Depend only on base modules like `core`, `plot`, `cli`.
+- **CLI Architecture**: Plugin-based. Register to unified `BioAnalyzeTyper` CLI main program via Entry points. Core compatibility layer is built on Agentyper.
 - **Unified Logging**:
-  - Idempotent initialization is performed by calling `bio_analyze_core.logging.setup_logging()` at the CLI entry point.
-  - **Core Restriction**: Library code (e.g., various Pipeline constructors) is **STRICTLY PROHIBITED** from calling `setup_logging()` or resetting global handlers. Library code can only use `get_logger()` to bind context and output logs.
+  - CLI entry point does idempotent init with `bio_analyze_core.logging.setup_logging()`.
+  - **Core Restriction**: Library code, like Pipeline constructors, must not call `setup_logging()` or reset global handlers. Library code only use `get_logger()` for context-bound logging.
 - **Subprocess Execution**:
-  - Never use the native Python `subprocess.run` directly.
-  - When executing external binary commands, always use the `run` or `run_streaming` methods provided by the core module `bio_analyze_core.subprocess`. This ensures the built-in `timeout` and `tail_lines` (tail error log capturing) mechanisms are utilized.
+  - Never use native Python `subprocess.run` direct.
+  - External binary commands must use core `bio_analyze_core.subprocess` methods `run` or `run_streaming`. This ensures built-in `timeout` and `tail_lines`.
 - **Configuration Loader**:
-  - If a CLI command supports the `--config` option, reuse the `bio_analyze_core.utils.load_config` function to support `.json`, `.yaml`/`.yml`, and `.toml` formats by default.
+  - If CLI command supports `--config`, reuse `bio_analyze_core.utils.load_config` for `.json`, `.yaml`/`.yml`, `.toml`.
 
 ## Testing Strategy
 
-- **Test Coverage**: New code must maintain a test coverage of **at least 70%**.
-- **Test Data**: All test data and files must be uniformly stored in the `tests/data/` directory of the corresponding module.
-- **Plotting Regression Tests**: Tests for plotting functions must include visual regression testing to verify the generated images.
-- **Baseline Snapshots**: Baseline files for regression testing must be uniformly stored in the `tests/snapshot/` directory of the corresponding module.
-- **Local Testing Environment**: When running tests locally, especially on Windows systems, you must use a **Docker environment** to ensure consistency and avoid environment-specific issues.
-- **Mocking External Binary Dependencies**: For modules involving external executables (e.g., `fastp`, `gnina` in `rna_seq` or `docking`), you must extensively mock `shutil.which` and `subprocess.run` in unit tests to avoid over-reliance on the local environment.
-- **Parallel Workers in Tests**: When using `pytest`'s `monkeypatch`, mocks cannot be propagated to child processes created by `ProcessPoolExecutor`. When testing concurrent code, temporarily patch `ProcessPoolExecutor` with `ThreadPoolExecutor` to ensure mocks take effect.
-- **Log Flushing for Short-lived Processes**: When testing short-lived child processes in Docker or Windows environments, pay attention to `loguru`'s asynchronous writing features. You must explicitly call `logger.complete()` to ensure the log buffer is fully flushed, preventing data loss.
+- **Test Coverage**: New code must keep at least **70%** coverage.
+- **Test Data**: Store all test data/files in module `tests/data/`.
+- **Plotting Regression Tests**: Plot tests must include visual regression checks.
+- **Baseline Snapshots**: Store regression baselines in module `tests/snapshot/`.
+- **Local Testing Environment**: Run local tests in **Docker**, especially on Windows, for consistency.
+- **Mocking External Binary Dependencies**: For modules using external executables like `fastp`, `gnina`, mock `shutil.which` and `subprocess.run` heavily in unit tests. Avoid relying on local environment.
+- **Parallel Workers in Tests**: With `pytest` `monkeypatch`, mocks do not propagate to child processes from `ProcessPoolExecutor`. Patch `ProcessPoolExecutor` to `ThreadPoolExecutor` during concurrent tests so mocks work.
+- **Log Flushing for Short-lived Processes**: For short-lived child processes in Docker or Windows, watch `loguru` async writing. Call `logger.complete()` explicitly so log buffer flushes fully.
+

@@ -1,0 +1,130 @@
+{
+  "name": "rna_seq_qc",
+  "type": "cli",
+  "description": {
+    "zh": "Run quality control and trimming.",
+    "en": "Run quality control and trimming."
+  },
+  "params": [
+    {
+      "name": "-i, --input",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Input directory (raw FastQ).",
+        "en": "Input directory (raw FastQ)."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Output directory.",
+        "en": "Output directory."
+      }
+    },
+    {
+      "name": "-t, --threads",
+      "type": "int",
+      "required": false,
+      "default": "4",
+      "description": {
+        "zh": "Number of threads.",
+        "en": "Number of threads."
+      }
+    },
+    {
+      "name": "--skip-qc",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "Skip FastQC/fastp stats.",
+        "en": "Skip FastQC/fastp stats."
+      }
+    },
+    {
+      "name": "--skip-trim",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "Skip trimming.",
+        "en": "Skip trimming."
+      }
+    },
+    {
+      "name": "--qualified-quality-phred",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Phred quality threshold.",
+        "en": "Phred quality threshold."
+      }
+    },
+    {
+      "name": "--unqualified-percent-limit",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Unqualified percent limit.",
+        "en": "Unqualified percent limit."
+      }
+    },
+    {
+      "name": "--n-base-limit",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "N base limit.",
+        "en": "N base limit."
+      }
+    },
+    {
+      "name": "--length-required",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Length required.",
+        "en": "Length required."
+      }
+    },
+    {
+      "name": "--adapter-sequence",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Adapter sequence R1.",
+        "en": "Adapter sequence R1."
+      }
+    },
+    {
+      "name": "--adapter-sequence-r2",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Adapter sequence R2.",
+        "en": "Adapter sequence R2."
+      }
+    },
+    {
+      "name": "--dedup",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": {
+        "zh": "Enable deduplication.",
+        "en": "Enable deduplication."
+      }
+    }
+  ]
+}

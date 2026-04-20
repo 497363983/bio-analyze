@@ -2,8 +2,8 @@
   "name": "run_haddock",
   "type": "cli",
   "description": {
-    "zh": "",
-    "en": ""
+    "zh": "Run molecular docking using HADDOCK engine.",
+    "en": "Run molecular docking using HADDOCK engine."
   },
   "params": [
     {
@@ -12,7 +12,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "配置文件路径。",
+        "zh": "Config file path.",
         "en": "Config file path."
       }
     },
@@ -22,7 +22,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "受体文件/目录。",
+        "zh": "Receptor file/dir.",
         "en": "Receptor file/dir."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "配体文件/目录。",
+        "zh": "Ligand file/dir.",
         "en": "Ligand file/dir."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "输出目录。",
+        "zh": "Output dir.",
         "en": "Output dir."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "采样的姿态数量。",
+        "zh": "Number of poses to sample.",
         "en": "Number of poses to sample."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "电荷模型。",
+        "zh": "Charge model.",
         "en": "Charge model."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "自定义 HADDOCK3 配置文件路径。",
+        "zh": "Custom HADDOCK3 configuration file path.",
         "en": "Custom HADDOCK3 configuration file path."
       }
     }

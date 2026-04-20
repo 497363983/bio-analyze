@@ -1,0 +1,127 @@
+{
+  "name": "run_vina",
+  "type": "cli",
+  "description": "Run molecular docking using Vina engine.",
+  "params": [
+    {
+      "field": "config_file",
+      "name": "--config, -c",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Config file path."
+    },
+    {
+      "field": "receptor",
+      "name": "-r, --receptor",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Receptor file/dir."
+    },
+    {
+      "field": "ligand",
+      "name": "-l, --ligand",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Ligand file/dir."
+    },
+    {
+      "field": "output_dir",
+      "name": "-o, --output",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Output dir."
+    },
+    {
+      "field": "center_x",
+      "name": "--center-x",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": "Box center X."
+    },
+    {
+      "field": "center_y",
+      "name": "--center-y",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": "Box center Y."
+    },
+    {
+      "field": "center_z",
+      "name": "--center-z",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": "Box center Z."
+    },
+    {
+      "field": "size_x",
+      "name": "--size-x",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": "Box size X."
+    },
+    {
+      "field": "size_y",
+      "name": "--size-y",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": "Box size Y."
+    },
+    {
+      "field": "size_z",
+      "name": "--size-z",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": "Box size Z."
+    },
+    {
+      "field": "autobox_ligand",
+      "name": "--autobox-ligand",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Reference ligand."
+    },
+    {
+      "field": "padding",
+      "name": "--padding",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": "Autobox padding."
+    },
+    {
+      "field": "exhaustiveness",
+      "name": "--exhaustiveness",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Exhaustiveness."
+    },
+    {
+      "field": "n_poses",
+      "name": "--n-poses",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "Number of poses."
+    },
+    {
+      "field": "charge_model",
+      "name": "--charge-model",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Charge model."
+    }
+  ]
+}

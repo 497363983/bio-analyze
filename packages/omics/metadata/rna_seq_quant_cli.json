@@ -1,0 +1,80 @@
+{
+  "name": "rna_seq_quant",
+  "type": "cli",
+  "description": {
+    "zh": "Run extensible transcript quantification.",
+    "en": "Run extensible transcript quantification."
+  },
+  "params": [
+    {
+      "name": "-i, --input",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Directory with clean FastQ files.",
+        "en": "Directory with clean FastQ files."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Output directory.",
+        "en": "Output directory."
+      }
+    },
+    {
+      "name": "--fasta",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Genome/Transcriptome FASTA file.",
+        "en": "Genome/Transcriptome FASTA file."
+      }
+    },
+    {
+      "name": "--gtf",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Genome GTF file (optional if FASTA is transcriptome).",
+        "en": "Genome GTF file (optional if FASTA is transcriptome)."
+      }
+    },
+    {
+      "name": "--tool",
+      "type": "string",
+      "required": false,
+      "default": "salmon",
+      "description": {
+        "zh": "Quantification tool name.",
+        "en": "Quantification tool name."
+      }
+    },
+    {
+      "name": "--compare-tool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": {
+        "zh": "Optional comparison quantifiers, repeatable.",
+        "en": "Optional comparison quantifiers, repeatable."
+      }
+    },
+    {
+      "name": "-t, --threads",
+      "type": "int",
+      "required": false,
+      "default": "4",
+      "description": {
+        "zh": "Number of threads.",
+        "en": "Number of threads."
+      }
+    }
+  ]
+}

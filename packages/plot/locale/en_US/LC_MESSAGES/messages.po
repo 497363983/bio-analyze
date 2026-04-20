@@ -1,0 +1,409 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bio-analyze-plot\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-20 19:21+0800\n"
+"PO-Revision-Date: 2026-04-20 00:00+0000\n"
+"Last-Translator: GPT-5.4 <noreply@example.com>\n"
+"Language-Team: en_US\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: custom locale bootstrap\n"
+
+#: src/bio_analyze_plot/commands/heatmap.py:21
+msgid "0 (rows) or 1 (columns) for standardization. None to disable."
+msgstr "0 (rows) or 1 (columns) for standardization. None to disable."
+
+#: src/bio_analyze_plot/commands/tree.py:44
+msgid "Branch line thickness"
+msgstr "Branch line thickness"
+
+#: src/bio_analyze_plot/commands/gsea.py:32
+msgid "Color for enrichment score line."
+msgstr "Color for enrichment score line."
+
+#: src/bio_analyze_plot/commands/gsea.py:33
+msgid "Color for hit lines."
+msgstr "Color for hit lines."
+
+#: src/bio_analyze_plot/commands/heatmap.py:24
+msgid "Colormap name (e.g. 'vlag', 'coolwarm')."
+msgstr "Colormap name (e.g. 'vlag', 'coolwarm')."
+
+#: src/bio_analyze_plot/commands/bar.py:16
+#: src/bio_analyze_plot/commands/box.py:16
+#: src/bio_analyze_plot/commands/line.py:16
+#: src/bio_analyze_plot/commands/scatter.py:16
+msgid "Column name for X-axis."
+msgstr "Column name for X-axis."
+
+#: src/bio_analyze_plot/commands/bar.py:17
+#: src/bio_analyze_plot/commands/box.py:17
+#: src/bio_analyze_plot/commands/line.py:17
+#: src/bio_analyze_plot/commands/scatter.py:17
+msgid "Column name for Y-axis."
+msgstr "Column name for Y-axis."
+
+#: src/bio_analyze_plot/commands/chromosome.py:16
+msgid "Column name for chromosome."
+msgstr "Column name for chromosome."
+
+#: src/bio_analyze_plot/commands/bar.py:32
+msgid "Column name for error bar lower limit."
+msgstr "Column name for error bar lower limit."
+
+#: src/bio_analyze_plot/commands/bar.py:29
+msgid "Column name for error bar upper limit."
+msgstr "Column name for error bar upper limit."
+
+#: src/bio_analyze_plot/commands/gsea.py:21
+msgid "Column name for hit status (0/1 or boolean)."
+msgstr "Column name for hit status (0/1 or boolean)."
+
+#: src/bio_analyze_plot/commands/pie.py:16
+msgid "Column name for labels (categorical)."
+msgstr "Column name for labels (categorical)."
+
+#: src/bio_analyze_plot/commands/volcano.py:22
+msgid "Column name for log2 fold change."
+msgstr "Column name for log2 fold change."
+
+#: src/bio_analyze_plot/commands/pca.py:18
+#: src/bio_analyze_plot/commands/scatter.py:20
+msgid "Column name for marker size."
+msgstr "Column name for marker size."
+
+#: src/bio_analyze_plot/commands/pca.py:17
+#: src/bio_analyze_plot/commands/scatter.py:19
+msgid "Column name for marker style."
+msgstr "Column name for marker style."
+
+#: src/bio_analyze_plot/commands/chromosome.py:22
+msgid "Column name for negative strand counts."
+msgstr "Column name for negative strand counts."
+
+#: src/bio_analyze_plot/commands/volcano.py:24
+msgid "Column name for p-value."
+msgstr "Column name for p-value."
+
+#: src/bio_analyze_plot/commands/chromosome.py:17
+msgid "Column name for position."
+msgstr "Column name for position."
+
+#: src/bio_analyze_plot/commands/chromosome.py:19
+msgid "Column name for positive strand counts."
+msgstr "Column name for positive strand counts."
+
+#: src/bio_analyze_plot/commands/gsea.py:16
+msgid "Column name for rank (x-axis)."
+msgstr "Column name for rank (x-axis)."
+
+#: src/bio_analyze_plot/commands/gsea.py:24
+msgid "Column name for ranking metric (y-axis bottom)."
+msgstr "Column name for ranking metric (y-axis bottom)."
+
+#: src/bio_analyze_plot/commands/gsea.py:18
+msgid "Column name for running ES (y-axis)."
+msgstr "Column name for running ES (y-axis)."
+
+#: src/bio_analyze_plot/commands/pie.py:17
+msgid "Column name for values (numerical)."
+msgstr "Column name for values (numerical)."
+
+#: src/bio_analyze_plot/commands/pca.py:20
+msgid "Column to use as index (e.g. gene names)."
+msgstr "Column to use as index (e.g. gene names)."
+
+#: src/bio_analyze_plot/commands/heatmap.py:16
+msgid "Column to use as row index."
+msgstr "Column to use as row index."
+
+#: src/bio_analyze_plot/commands/bar.py:26
+#: src/bio_analyze_plot/commands/line.py:27
+msgid "Confidence interval size (default: 95)."
+msgstr "Confidence interval size (default: 95)."
+
+#: src/bio_analyze_plot/commands/pca.py:34
+#: src/bio_analyze_plot/commands/scatter.py:27
+msgid "Draw confidence ellipses for each group."
+msgstr "Draw confidence ellipses for each group."
+
+#: src/bio_analyze_plot/commands/line.py:40
+msgid "Enable smooth curve fitting."
+msgstr "Enable smooth curve fitting."
+
+#: src/bio_analyze_plot/commands/line.py:30
+msgid "Error bar capsize (in points)."
+msgstr "Error bar capsize (in points)."
+
+#: src/bio_analyze_plot/commands/bar.py:34
+msgid "Error bar capsize."
+msgstr "Error bar capsize."
+
+#: src/bio_analyze_plot/commands/bar.py:24
+#: src/bio_analyze_plot/commands/line.py:25
+msgid "Error bar type: SD, SE, CI."
+msgstr "Error bar type: SD, SE, CI."
+
+#: src/bio_analyze_plot/commands/pie.py:27
+msgid "Explode slices. Can be a column name or comma-separated values."
+msgstr "Explode slices. Can be a column name or comma-separated values."
+
+#: src/bio_analyze_plot/commands/gsea.py:36
+msgid "FDR q-value."
+msgstr "FDR q-value."
+
+#: src/bio_analyze_plot/commands/volcano.py:29
+msgid "Fold change cutoff."
+msgstr "Fold change cutoff."
+
+#: src/bio_analyze_plot/commands/msa.py:41
+#: src/bio_analyze_plot/commands/tree.py:49
+msgid "Font size"
+msgstr "Font size"
+
+#: src/bio_analyze_plot/commands/bar.py:18
+#: src/bio_analyze_plot/commands/box.py:18
+#: src/bio_analyze_plot/commands/line.py:18
+#: src/bio_analyze_plot/commands/pca.py:16
+#: src/bio_analyze_plot/commands/scatter.py:18
+msgid "Grouping column name (hue)."
+msgstr "Grouping column name (hue)."
+
+#: src/bio_analyze_plot/commands/bar.py:13
+#: src/bio_analyze_plot/commands/box.py:13
+#: src/bio_analyze_plot/commands/chromosome.py:13
+#: src/bio_analyze_plot/commands/gsea.py:13
+#: src/bio_analyze_plot/commands/heatmap.py:13
+#: src/bio_analyze_plot/commands/line.py:13
+#: src/bio_analyze_plot/commands/pca.py:13
+#: src/bio_analyze_plot/commands/pie.py:13
+#: src/bio_analyze_plot/commands/scatter.py:13
+#: src/bio_analyze_plot/commands/volcano.py:13
+msgid "Input file path (CSV, TSV, or Excel)."
+msgstr "Input file path (CSV, TSV, or Excel)."
+
+#: src/bio_analyze_plot/commands/msa.py:51
+msgid "JSON mapping for custom residue colors, e.g. '{\"A\":\"#000000\"}'"
+msgstr "JSON mapping for custom residue colors, e.g. '{\"A\":\"#000000\"}'"
+
+#: src/bio_analyze_plot/commands/tree.py:59
+msgid "Label background alpha (0-1)"
+msgstr "Label background alpha (0-1)"
+
+#: src/bio_analyze_plot/commands/chromosome.py:31
+msgid "Maximum number of chromosomes to display."
+msgstr "Maximum number of chromosomes to display."
+
+#: src/bio_analyze_plot/commands/gsea.py:34
+msgid "Normalized Enrichment Score."
+msgstr "Normalized Enrichment Score."
+
+#: src/bio_analyze_plot/commands/pca.py:32
+msgid "Number of clusters for KMeans."
+msgstr "Number of clusters for KMeans."
+
+#: src/bio_analyze_plot/commands/line.py:41
+msgid "Number of points for interpolation."
+msgstr "Number of points for interpolation."
+
+#: src/bio_analyze_plot/commands/volcano.py:19
+msgid "Output file path (e.g. volcano.png)."
+msgstr "Output file path (e.g. volcano.png)."
+
+#: src/bio_analyze_plot/commands/bar.py:15
+#: src/bio_analyze_plot/commands/box.py:15
+#: src/bio_analyze_plot/commands/chromosome.py:15
+#: src/bio_analyze_plot/commands/gsea.py:15
+#: src/bio_analyze_plot/commands/heatmap.py:15
+#: src/bio_analyze_plot/commands/line.py:15
+#: src/bio_analyze_plot/commands/pca.py:15
+#: src/bio_analyze_plot/commands/pie.py:15
+#: src/bio_analyze_plot/commands/scatter.py:15
+msgid "Output file path."
+msgstr "Output file path."
+
+#: src/bio_analyze_plot/commands/msa.py:21
+#: src/bio_analyze_plot/commands/tree.py:19
+msgid "Output image path"
+msgstr "Output image path"
+
+#: src/bio_analyze_plot/commands/box.py:29
+msgid "Overlay swarmplot points."
+msgstr "Overlay swarmplot points."
+
+#: src/bio_analyze_plot/commands/volcano.py:30
+msgid "P-value cutoff."
+msgstr "P-value cutoff."
+
+#: src/bio_analyze_plot/commands/gsea.py:35
+msgid "P-value."
+msgstr "P-value."
+
+#: src/bio_analyze_plot/commands/bar.py:36
+#: src/bio_analyze_plot/commands/box.py:25
+msgid "Pairs for significance testing (e.g. 'A,B' 'C,D')."
+msgstr "Pairs for significance testing (e.g. 'A,B' 'C,D')."
+
+#: src/bio_analyze_plot/commands/msa.py:16
+msgid "Path to the input MSA file (FASTA)"
+msgstr "Path to the input MSA file (FASTA)"
+
+#: src/bio_analyze_plot/commands/tree.py:14
+msgid "Path to the input tree file (Newick format)"
+msgstr "Path to the input tree file (Newick format)"
+
+#: src/bio_analyze_plot/commands/pie.py:23
+msgid "Percentage format."
+msgstr "Percentage format."
+
+#: src/bio_analyze_plot/commands/pca.py:31
+msgid "Perform KMeans clustering."
+msgstr "Perform KMeans clustering."
+
+#: src/bio_analyze_plot/commands/msa.py:36
+#: src/bio_analyze_plot/commands/tree.py:39
+msgid "Plot theme (default/nature/science)"
+msgstr "Plot theme (default/nature/science)"
+
+#: src/bio_analyze_plot/commands/bar.py:21
+#: src/bio_analyze_plot/commands/box.py:21
+#: src/bio_analyze_plot/commands/chromosome.py:26
+#: src/bio_analyze_plot/commands/gsea.py:28
+#: src/bio_analyze_plot/commands/heatmap.py:29
+#: src/bio_analyze_plot/commands/line.py:21
+#: src/bio_analyze_plot/commands/pca.py:28
+#: src/bio_analyze_plot/commands/pie.py:20
+#: src/bio_analyze_plot/commands/scatter.py:23
+#: src/bio_analyze_plot/commands/volcano.py:27
+msgid ""
+"Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+msgstr ""
+"Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+
+#: src/bio_analyze_plot/commands/bar.py:23
+#: src/bio_analyze_plot/commands/box.py:23
+#: src/bio_analyze_plot/commands/chromosome.py:28
+#: src/bio_analyze_plot/commands/gsea.py:30
+#: src/bio_analyze_plot/commands/heatmap.py:31
+#: src/bio_analyze_plot/commands/line.py:23
+#: src/bio_analyze_plot/commands/pca.py:30
+#: src/bio_analyze_plot/commands/pie.py:22
+#: src/bio_analyze_plot/commands/scatter.py:25
+#: src/bio_analyze_plot/commands/volcano.py:31
+msgid "Plot title."
+msgstr "Plot title."
+
+#: src/bio_analyze_plot/cli.py:26
+msgid "Publication-ready plotting tools."
+msgstr "Publication-ready plotting tools."
+
+#: src/bio_analyze_plot/commands/tree.py:54
+msgid "Relative label offset scale"
+msgstr "Relative label offset scale"
+
+#: src/bio_analyze_plot/commands/msa.py:46
+msgid "Residues per line for wrapping, 0 means no wrap"
+msgstr "Residues per line for wrapping, 0 means no wrap"
+
+#: src/bio_analyze_plot/commands/msa.py:26
+msgid "Sequence type (aa/nt)"
+msgstr "Sequence type (aa/nt)"
+
+#: src/bio_analyze_plot/commands/bar.py:40
+#: src/bio_analyze_plot/commands/box.py:32
+#: src/bio_analyze_plot/commands/chromosome.py:29
+#: src/bio_analyze_plot/commands/gsea.py:31
+#: src/bio_analyze_plot/commands/heatmap.py:32
+#: src/bio_analyze_plot/commands/line.py:24
+#: src/bio_analyze_plot/commands/pca.py:39
+#: src/bio_analyze_plot/commands/pie.py:30
+#: src/bio_analyze_plot/commands/scatter.py:32
+#: src/bio_analyze_plot/commands/volcano.py:32
+msgid "Sheet name for Excel files."
+msgstr "Sheet name for Excel files."
+
+#: src/bio_analyze_plot/commands/pie.py:29
+msgid "Show shadow."
+msgstr "Show shadow."
+
+#: src/bio_analyze_plot/commands/gsea.py:37
+msgid "Show top and right borders."
+msgstr "Show top and right borders."
+
+#: src/bio_analyze_plot/commands/bar.py:39
+#: src/bio_analyze_plot/commands/box.py:28
+msgid "Significance annotation format."
+msgstr "Significance annotation format."
+
+#: src/bio_analyze_plot/commands/line.py:37
+msgid ""
+"Specific marker symbols (comma-separated, e.g. 'o,s'). Overrides --markers."
+msgstr ""
+"Specific marker symbols (comma-separated, e.g. 'o,s'). Overrides --markers."
+
+#: src/bio_analyze_plot/commands/pca.py:37
+#: src/bio_analyze_plot/commands/scatter.py:30
+msgid "Standard deviation for confidence ellipses."
+msgstr "Standard deviation for confidence ellipses."
+
+#: src/bio_analyze_plot/commands/pie.py:24
+msgid "Start angle."
+msgstr "Start angle."
+
+#: src/bio_analyze_plot/commands/bar.py:38
+#: src/bio_analyze_plot/commands/box.py:27
+msgid "Statistical test method."
+msgstr "Statistical test method."
+
+#: src/bio_analyze_plot/commands/box.py:30
+msgid "Swarmplot point color."
+msgstr "Swarmplot point color."
+
+#: src/bio_analyze_plot/commands/box.py:31
+msgid "Swarmplot point size."
+msgstr "Swarmplot point size."
+
+#: src/bio_analyze_plot/commands/pca.py:24
+msgid "Transpose input data (default: True, assumes Genes x Samples)."
+msgstr "Transpose input data (default: True, assumes Genes x Samples)."
+
+#: src/bio_analyze_plot/commands/tree.py:24
+msgid "Tree file format (newick/nexus)"
+msgstr "Tree file format (newick/nexus)"
+
+#: src/bio_analyze_plot/commands/tree.py:29
+msgid "Tree layout (rectangular/circular)"
+msgstr "Tree layout (rectangular/circular)"
+
+#: src/bio_analyze_plot/commands/line.py:39
+msgid "Use dashes for lines."
+msgstr "Use dashes for lines."
+
+#: src/bio_analyze_plot/commands/line.py:33
+msgid "Use default markers for data points."
+msgstr "Use default markers for data points."
+
+#: src/bio_analyze_plot/commands/heatmap.py:26
+msgid "Value at which to center the colormap."
+msgstr "Value at which to center the colormap."
+
+#: src/bio_analyze_plot/commands/heatmap.py:18
+msgid "Whether to cluster columns."
+msgstr "Whether to cluster columns."
+
+#: src/bio_analyze_plot/commands/heatmap.py:17
+msgid "Whether to cluster rows."
+msgstr "Whether to cluster rows."
+
+#: src/bio_analyze_plot/commands/msa.py:31
+msgid "Whether to show a conservation logo at the top"
+msgstr "Whether to show a conservation logo at the top"
+
+#: src/bio_analyze_plot/commands/tree.py:34
+msgid "Whether to show branch support values"
+msgstr "Whether to show branch support values"

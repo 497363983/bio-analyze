@@ -106,13 +106,11 @@ def run_pipeline(config_path: str):
     """
     Run the analysis pipeline.
     
-    zh: 运行分析流程。读取配置文件并按顺序执行任务。
-    en: Run the analysis pipeline. Reads the config file and executes tasks sequentially.
+    Run the analysis pipeline. Read the config file and execute tasks sequentially.
     
     Args:
         config_path (str):
-            zh: 配置文件路径 (.json/.yaml)
-            en: Path to configuration file (.json/.yaml)
+            Path to configuration file (.json/.yaml)
     """
     pass
 ```
@@ -124,11 +122,9 @@ For the parameter (Args) section descriptions, multi-language markers are also s
 ```python
     Args:
         input_dir (Path): 
-            zh: 输入数据目录，包含原始 FastQ 文件。
-            en: Input data directory containing raw FastQ files.
+            Input data directory containing raw FastQ files.
         threads (int, optional):
-            zh: 并行线程数。默认为 4。
-            en: Number of parallel threads. Defaults to 4.
+            Number of parallel threads. Defaults to 4.
 ```
 
 ## 4. Git Commit Standards

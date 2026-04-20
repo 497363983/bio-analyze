@@ -2,7 +2,7 @@
   "name": "run_batch",
   "type": "api",
   "description": {
-    "zh": "对多个受体和/或配体 (M x N) 运行对接。",
+    "zh": "Run docking for multiple receptors and/or ligands (M x N).",
     "en": "Run docking for multiple receptors and/or ligands (M x N)."
   },
   "params": [
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "受体路径列表或包含受体的目录。",
+        "zh": "List of receptor paths or directory containing receptors.",
         "en": "List of receptor paths or directory containing receptors."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "配体路径列表或包含配体的目录。",
+        "zh": "List of ligand paths or directory containing ligands.",
         "en": "List of ligand paths or directory containing ligands."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "基础输出目录。",
+        "zh": "Base output directory.",
         "en": "Base output directory."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "盒子中心 [x, y, z]。",
+        "zh": "Box center [x, y, z].",
         "en": "Box center [x, y, z]."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": "[20.0, 20.0, 20.0]",
       "description": {
-        "zh": "盒子大小 [x, y, z]。",
+        "zh": "Box size [x, y, z].",
         "en": "Box size [x, y, z]."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "用于自动盒计算的配体路径。",
+        "zh": "Ligand path for autobox calculation.",
         "en": "Ligand path for autobox calculation."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": "4.0",
       "description": {
-        "zh": "自动盒填充。",
+        "zh": "Autobox padding.",
         "en": "Autobox padding."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": "8",
       "description": {
-        "zh": "Vina 穷尽性。",
+        "zh": "Vina exhaustiveness.",
         "en": "Vina exhaustiveness."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": "9",
       "description": {
-        "zh": "姿态数量。",
+        "zh": "Number of poses.",
         "en": "Number of poses."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "docking_summary.csv",
       "description": {
-        "zh": "摘要文件名。",
+        "zh": "Summary filename.",
         "en": "Summary filename."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "是否保存复合物结构（PDB 格式，通过 PyMOL）。",
+        "zh": "Whether to save complex structure (PDB format, via PyMOL).",
         "en": "Whether to save complex structure (PDB format, via PyMOL)."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "要保存的复合物数量。",
+        "zh": "Number of complexes to save.",
         "en": "Number of complexes to save."
       }
     },
@@ -132,7 +132,7 @@
       "required": false,
       "default": "gasteiger",
       "description": {
-        "zh": "受体准备的电荷模型 (例如 'gasteiger', 'zero')。",
+        "zh": "Charge model for receptor preparation (e.g. 'gasteiger', 'zero').",
         "en": "Charge model for receptor preparation (e.g. 'gasteiger', 'zero')."
       }
     },
@@ -142,7 +142,7 @@
       "required": false,
       "default": "vina",
       "description": {
-        "zh": "对接引擎类型 (例如 'vina', 'gnina', 'haddock')。",
+        "zh": "Docking engine type (e.g. 'vina', 'gnina', 'haddock').",
         "en": "Docking engine type (e.g. 'vina', 'gnina', 'haddock')."
       }
     },
@@ -152,7 +152,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "针对特定受体的盒子配置字典。",
+        "zh": "Dictionary of box configurations for specific receptors.",
         "en": "Dictionary of box configurations for specific receptors."
       }
     },

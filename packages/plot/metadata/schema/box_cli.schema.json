@@ -1,0 +1,119 @@
+{
+  "name": "box",
+  "type": "cli",
+  "description": "Generate box plot.",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input file path (CSV, TSV, or Excel)."
+    },
+    {
+      "field": "output",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output file path."
+    },
+    {
+      "field": "x",
+      "name": "--x",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Column name for X-axis."
+    },
+    {
+      "field": "y",
+      "name": "--y",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Column name for Y-axis."
+    },
+    {
+      "field": "hue",
+      "name": "--hue",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Grouping column name (hue)."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+    },
+    {
+      "field": "title",
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plot title."
+    },
+    {
+      "field": "significance",
+      "name": "--significance",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Pairs for significance testing (e.g. 'A,B' 'C,D')."
+    },
+    {
+      "field": "test",
+      "name": "--test",
+      "type": "string",
+      "required": false,
+      "default": "t-test_ind",
+      "description": "Statistical test method."
+    },
+    {
+      "field": "text_format",
+      "name": "--text-format",
+      "type": "string",
+      "required": false,
+      "default": "star",
+      "description": "Significance annotation format."
+    },
+    {
+      "field": "add_swarm",
+      "name": "--add-swarm",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Overlay swarmplot points."
+    },
+    {
+      "field": "swarm_color",
+      "name": "--swarm-color",
+      "type": "string",
+      "required": false,
+      "default": ".25",
+      "description": "Swarmplot point color."
+    },
+    {
+      "field": "swarm_size",
+      "name": "--swarm-size",
+      "type": "float",
+      "required": false,
+      "default": "3.0",
+      "description": "Swarmplot point size."
+    },
+    {
+      "field": "sheet",
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sheet name for Excel files."
+    }
+  ]
+}

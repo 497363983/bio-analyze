@@ -1,0 +1,63 @@
+{
+  "name": "rna_seq_gsea",
+  "type": "cli",
+  "description": "Run GSEA analysis.",
+  "params": [
+    {
+      "field": "de_results",
+      "name": "--de-results",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "DESeq2 results CSV file."
+    },
+    {
+      "field": "species",
+      "name": "-s, --species",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Species name (e.g. 'Homo sapiens')."
+    },
+    {
+      "field": "output_dir",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output directory."
+    },
+    {
+      "field": "gene_sets",
+      "name": "--gene-sets",
+      "type": "string",
+      "required": false,
+      "default": "KEGG_2021_Human",
+      "description": "Gene sets library (e.g. KEGG_2021_Human, GO_Biological_Process_2021)."
+    },
+    {
+      "field": "ranking_metric",
+      "name": "--ranking-metric",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Column for ranking (auto, stat, log2FoldChange)."
+    },
+    {
+      "field": "top_n",
+      "name": "--top-n",
+      "type": "int",
+      "required": false,
+      "default": "5",
+      "description": "Number of top pathways to plot."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Plot theme."
+    }
+  ]
+}

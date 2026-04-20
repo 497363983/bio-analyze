@@ -1,0 +1,27 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bio-analyze-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-20 19:21+0800\n"
+"PO-Revision-Date: 2026-04-20 00:00+0000\n"
+"Last-Translator: GPT-5.4 <noreply@example.com>\n"
+"Language-Team: zh_CN\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: custom locale bootstrap\n"
+
+#: src/bio_analyze_core/cli/app.py:90
+msgid "Enable verbose output (DEBUG level)."
+msgstr "启用详细输出（DEBUG级别）。"
+
+#: src/bio_analyze_core/cli/app.py:134
+msgid "Execution environment (for example dev or prod)."
+msgstr "运行环境（例如 dev 或 prod）。"
+
+#: src/bio_analyze_core/cli/app.py:115
+msgid "Path to configuration file (.json, .yaml, .toml)."
+msgstr "配置文件路径 (.json, .yaml, .toml)。"

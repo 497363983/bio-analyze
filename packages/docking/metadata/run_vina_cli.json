@@ -2,8 +2,8 @@
   "name": "run_vina",
   "type": "cli",
   "description": {
-    "zh": "",
-    "en": ""
+    "zh": "Run molecular docking using Vina engine.",
+    "en": "Run molecular docking using Vina engine."
   },
   "params": [
     {
@@ -12,7 +12,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "配置文件路径。",
+        "zh": "Config file path.",
         "en": "Config file path."
       }
     },
@@ -22,7 +22,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "受体文件/目录。",
+        "zh": "Receptor file/dir.",
         "en": "Receptor file/dir."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "配体文件/目录。",
+        "zh": "Ligand file/dir.",
         "en": "Ligand file/dir."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "输出目录。",
+        "zh": "Output dir.",
         "en": "Output dir."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "盒子中心 X。",
+        "zh": "Box center X.",
         "en": "Box center X."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "盒子中心 Y。",
+        "zh": "Box center Y.",
         "en": "Box center Y."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "盒子中心 Z。",
+        "zh": "Box center Z.",
         "en": "Box center Z."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "盒子大小 X。",
+        "zh": "Box size X.",
         "en": "Box size X."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "盒子大小 Y。",
+        "zh": "Box size Y.",
         "en": "Box size Y."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "盒子大小 Z。",
+        "zh": "Box size Z.",
         "en": "Box size Z."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "参考配体。",
+        "zh": "Reference ligand.",
         "en": "Reference ligand."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "自动盒填充。",
+        "zh": "Autobox padding.",
         "en": "Autobox padding."
       }
     },
@@ -132,7 +132,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "对接穷尽性。",
+        "zh": "Exhaustiveness.",
         "en": "Exhaustiveness."
       }
     },
@@ -142,7 +142,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "生成的姿态数量。",
+        "zh": "Number of poses.",
         "en": "Number of poses."
       }
     },
@@ -152,7 +152,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "电荷模型。",
+        "zh": "Charge model.",
         "en": "Charge model."
       }
     }

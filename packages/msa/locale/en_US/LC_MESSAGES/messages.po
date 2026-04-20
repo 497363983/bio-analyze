@@ -1,0 +1,47 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bio-analyze-msa\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-20 19:21+0800\n"
+"PO-Revision-Date: 2026-04-20 00:00+0000\n"
+"Last-Translator: GPT-5.4 <noreply@example.com>\n"
+"Language-Team: en_US\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: custom locale bootstrap\n"
+
+#: src/bio_analyze_msa/commands/align.py:24
+msgid "Alignment algorithm to use (mafft, muscle, python)"
+msgstr "Alignment algorithm to use (mafft, muscle, python)"
+
+#: src/bio_analyze_msa/cli.py:22
+msgid "Enable verbose logging"
+msgstr "Enable verbose logging"
+
+#: src/bio_analyze_msa/cli.py:14
+msgid "Multiple Sequence Alignment and Phylogenetic Tree tools"
+msgstr "Multiple Sequence Alignment and Phylogenetic Tree tools"
+
+#: src/bio_analyze_msa/commands/tree.py:14
+msgid "Path to the input MSA file"
+msgstr "Path to the input MSA file"
+
+#: src/bio_analyze_msa/commands/align.py:14
+msgid "Path to the input unaligned FASTA file"
+msgstr "Path to the input unaligned FASTA file"
+
+#: src/bio_analyze_msa/commands/align.py:19
+msgid "Path to the output aligned FASTA file"
+msgstr "Path to the output aligned FASTA file"
+
+#: src/bio_analyze_msa/commands/tree.py:19
+msgid "Path to the output phylogenetic tree file (Newick format)"
+msgstr "Path to the output phylogenetic tree file (Newick format)"
+
+#: src/bio_analyze_msa/commands/tree.py:24
+msgid "Tree building algorithm (nj, upgma, fasttree)"
+msgstr "Tree building algorithm (nj, upgma, fasttree)"

@@ -1,0 +1,87 @@
+{
+  "name": "chromosome",
+  "type": "cli",
+  "description": "Generate chromosome coverage distribution plot.",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input file path (CSV, TSV, or Excel)."
+    },
+    {
+      "field": "output",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output file path."
+    },
+    {
+      "field": "chrom_col",
+      "name": "--chrom-col",
+      "type": "string",
+      "required": false,
+      "default": "chrom",
+      "description": "Column name for chromosome."
+    },
+    {
+      "field": "pos_col",
+      "name": "--pos-col",
+      "type": "string",
+      "required": false,
+      "default": "pos",
+      "description": "Column name for position."
+    },
+    {
+      "field": "pos_counts_col",
+      "name": "--pos-counts-col",
+      "type": "string",
+      "required": false,
+      "default": "pos_counts",
+      "description": "Column name for positive strand counts."
+    },
+    {
+      "field": "neg_counts_col",
+      "name": "--neg-counts-col",
+      "type": "string",
+      "required": false,
+      "default": "neg_counts",
+      "description": "Column name for negative strand counts."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+    },
+    {
+      "field": "title",
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plot title."
+    },
+    {
+      "field": "sheet",
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sheet name for Excel files."
+    },
+    {
+      "field": "max_chroms",
+      "name": "--max-chroms",
+      "type": "int",
+      "required": false,
+      "default": "24",
+      "description": "Maximum number of chromosomes to display."
+    }
+  ]
+}

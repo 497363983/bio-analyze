@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import shutil
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from bio_analyze_core.logging import get_logger
 
@@ -11,16 +11,12 @@ from .base import BaseDockingEngine
 
 logger = get_logger(__name__)
 
-
 class HaddockEngine(BaseDockingEngine):
     """
-    zh: 基于 HADDOCK 的对接引擎实现。
-    en: HADDOCK-based docking engine implementation.
+    HADDOCK-based docking engine implementation.
 
-    zh: HADDOCK 是一个由数据驱动的对接程序。
-    en: HADDOCK is an information-driven flexible docking approach.
-    zh: 本引擎通过 subprocess 调用 haddock 命令行工具。
-    en: This engine invokes the haddock command-line tools via subprocess.
+    HADDOCK is an information-driven flexible docking approach.
+    This engine invokes the haddock command-line tools via subprocess.
     """
 
     @classmethod
@@ -38,8 +34,7 @@ class HaddockEngine(BaseDockingEngine):
     @classmethod
     def prepare_receptor(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
         """
-        zh: 为 HADDOCK 准备受体（通常只需要 PDB 格式）。
-        en: Prepare receptor for HADDOCK (usually just PDB format).
+        Prepare receptor for HADDOCK (usually just PDB format).
         """
         if input_file.resolve() != output_file.resolve():
             shutil.copy2(input_file, output_file)
@@ -48,8 +43,7 @@ class HaddockEngine(BaseDockingEngine):
     @classmethod
     def prepare_ligand(cls, input_file: Path, output_file: Path, **kwargs) -> Path:
         """
-        zh: 为 HADDOCK 准备配体（通常只需要 PDB 格式）。
-        en: Prepare ligand for HADDOCK (usually just PDB format).
+        Prepare ligand for HADDOCK (usually just PDB format).
         """
         if input_file.resolve() != output_file.resolve():
             shutil.copy2(input_file, output_file)
@@ -63,7 +57,7 @@ class HaddockEngine(BaseDockingEngine):
 
             self._haddock_available = True
         except ImportError:
-            logger.warning("未安装 haddock3 Python 包。测试环境可能没问题，但真实对接会失败。")
+            logger.warning("未安装 haddock3 Python 包. 测试环境可能没问题, 但真实对接会失败。")
             self._haddock_available = False
 
         self._best_score = 0.0
@@ -77,8 +71,7 @@ class HaddockEngine(BaseDockingEngine):
 
     def compute_box(self, center: list[float], size: list[float]):
         """
-        zh: HADDOCK 通常不需要显式定义网格盒。
-        en: HADDOCK usually does not require defining a grid box.
+        HADDOCK usually does not require defining a grid box.
         """
         logger.info("HADDOCK 不需要显式设置搜索盒子。")
         pass
@@ -89,11 +82,10 @@ class HaddockEngine(BaseDockingEngine):
         n_poses: int = 10,
         min_rmsd: float = 1.0,
         timeout: float = 3600,
-        haddock_config: Optional[Path] = None,
+        haddock_config: Path | None = None,
     ):
         """
-        zh: 执行 HADDOCK 流程。
-        en: Execute the HADDOCK pipeline.
+        Execute the HADDOCK pipeline.
         """
         config_path = self.output_dir / "run.cfg"
         run_dir_name = "haddock3_run"
@@ -163,9 +155,9 @@ sampling = {n_poses}
                     os.chdir(current_cwd)
             except Exception as e:
                 logger.error(f"HADDOCK3 对接失败: {e}")
-                raise RuntimeError(f"HADDOCK3 run failed: {e}")
+                raise RuntimeError(f"HADDOCK3 run failed: {e}") from e
         else:
-            logger.info("HADDOCK3 未安装，跳过真实对接执行，仅生成模拟结果。")
+            logger.info("HADDOCK3 未安装, 跳过真实对接执行, 仅生成模拟结果。")
 
         # Mock scores for API compatibility
         self._best_score = -5.0  # Mock value
@@ -177,10 +169,9 @@ sampling = {n_poses}
         for i in range(1, n_poses + 1):
             (self.output_dir / f"haddock_{i}.pdb").touch()
 
-    def save_results(self, output_name: str = "docked.pdb", output_dir: Optional[Path] = None) -> Path:
+    def save_results(self, output_name: str = "docked.pdb", output_dir: Path | None = None) -> Path:
         """
-        zh: 保存对接姿态。
-        en: Save docked poses.
+        Save docked poses.
         """
         target_dir = output_dir if output_dir else self.output_dir
         target_dir.mkdir(parents=True, exist_ok=True)
@@ -196,13 +187,12 @@ sampling = {n_poses}
 
     def save_complexes(
         self,
-        n_complexes: Optional[int] = None,
-        output_dir: Optional[Path] = None,
+        n_complexes: int | None = None,
+        output_dir: Path | None = None,
         output_name_prefix: str = "complex_pose",
     ):
         """
-        zh: 保存对接后的复合物结构。
-        en: Save the docked ligand-receptor complex structures.
+        Save the docked ligand-receptor complex structures.
         """
         target_dir = output_dir if output_dir else self.output_dir
         target_dir.mkdir(parents=True, exist_ok=True)

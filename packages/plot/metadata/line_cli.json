@@ -2,8 +2,8 @@
   "name": "line",
   "type": "cli",
   "description": {
-    "zh": "",
-    "en": ""
+    "zh": "Generate line plot.",
+    "en": "Generate line plot."
   },
   "params": [
     {
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输入文件路径 (CSV, TSV 或 Excel)。",
+        "zh": "Input file path (CSV, TSV, or Excel).",
         "en": "Input file path (CSV, TSV, or Excel)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输出文件路径。",
+        "zh": "Output file path.",
         "en": "Output file path."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "X 轴列名。",
+        "zh": "Column name for X-axis.",
         "en": "Column name for X-axis."
       }
     },
@@ -42,7 +42,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "Y 轴列名。",
+        "zh": "Column name for Y-axis.",
         "en": "Column name for Y-axis."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "分组列名 (hue)。",
+        "zh": "Grouping column name (hue).",
         "en": "Grouping column name (hue)."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": "nature",
       "description": {
-        "zh": "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。",
+        "zh": "Plot theme (nature, science, default) or path to custom theme (.json/.py).",
         "en": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Plot title.",
         "en": "Plot title."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Excel 工作表名称。",
+        "zh": "Sheet name for Excel files.",
         "en": "Sheet name for Excel files."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "误差棒类型: SD, SE, CI。",
+        "zh": "Error bar type: SD, SE, CI.",
         "en": "Error bar type: SD, SE, CI."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "95",
       "description": {
-        "zh": "置信区间大小 (默认: 95)。",
+        "zh": "Confidence interval size (default: 95).",
         "en": "Confidence interval size (default: 95)."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": "3.0",
       "description": {
-        "zh": "误差棒帽大小 (以点为单位)。",
+        "zh": "Error bar capsize (in points).",
         "en": "Error bar capsize (in points)."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "为数据点使用默认标记。",
+        "zh": "Use default markers for data points.",
         "en": "Use default markers for data points."
       }
     },
@@ -132,7 +132,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "指定标记符号 (逗号分隔, 例如 'o,s')。覆盖 --markers。",
+        "zh": "Specific marker symbols (comma-separated, e.g. 'o,s'). Overrides --markers.",
         "en": "Specific marker symbols (comma-separated, e.g. 'o,s'). Overrides --markers."
       }
     },
@@ -142,7 +142,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "为线条使用虚线样式。",
+        "zh": "Use dashes for lines.",
         "en": "Use dashes for lines."
       }
     },
@@ -152,7 +152,7 @@
       "required": false,
       "default": "False",
       "description": {
-        "zh": "启用平滑曲线拟合。",
+        "zh": "Enable smooth curve fitting.",
         "en": "Enable smooth curve fitting."
       }
     },
@@ -162,7 +162,7 @@
       "required": false,
       "default": "300",
       "description": {
-        "zh": "插值点数。",
+        "zh": "Number of points for interpolation.",
         "en": "Number of points for interpolation."
       }
     }

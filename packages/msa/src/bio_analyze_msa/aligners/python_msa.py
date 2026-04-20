@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Any
 
-from Bio import Align, SeqIO
+from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
@@ -154,7 +154,7 @@ class PythonAligner(BaseAligner):
 
         # VERY IMPORTANT: write actual records
         aligned_records = []
-        for seq_str, seq_id in zip(msa_strings, ids):
+        for seq_str, seq_id in zip(msa_strings, ids, strict=False):
             # Print sequence to make sure it's not empty
             logger.debug(f"Writing {seq_id}: {len(seq_str)} chars")
             # We must use a simple trick, biopython's SeqIO.write sometimes fails

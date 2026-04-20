@@ -1,0 +1,31 @@
+{
+  "name": "rna_seq_download",
+  "type": "cli",
+  "description": "Download FastQ files from SRA.",
+  "params": [
+    {
+      "field": "sra_ids",
+      "name": "--sra-ids",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "List of SRA Accession IDs."
+    },
+    {
+      "field": "output_dir",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output directory."
+    },
+    {
+      "field": "threads",
+      "name": "-t, --threads",
+      "type": "int",
+      "required": false,
+      "default": "4",
+      "description": "Number of threads."
+    }
+  ]
+}

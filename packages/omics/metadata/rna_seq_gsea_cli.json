@@ -1,0 +1,80 @@
+{
+  "name": "rna_seq_gsea",
+  "type": "cli",
+  "description": {
+    "zh": "Run GSEA analysis.",
+    "en": "Run GSEA analysis."
+  },
+  "params": [
+    {
+      "name": "--de-results",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "DESeq2 results CSV file.",
+        "en": "DESeq2 results CSV file."
+      }
+    },
+    {
+      "name": "-s, --species",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Species name (e.g. 'Homo sapiens').",
+        "en": "Species name (e.g. 'Homo sapiens')."
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Output directory.",
+        "en": "Output directory."
+      }
+    },
+    {
+      "name": "--gene-sets",
+      "type": "string",
+      "required": false,
+      "default": "KEGG_2021_Human",
+      "description": {
+        "zh": "Gene sets library (e.g. KEGG_2021_Human, GO_Biological_Process_2021).",
+        "en": "Gene sets library (e.g. KEGG_2021_Human, GO_Biological_Process_2021)."
+      }
+    },
+    {
+      "name": "--ranking-metric",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": {
+        "zh": "Column for ranking (auto, stat, log2FoldChange).",
+        "en": "Column for ranking (auto, stat, log2FoldChange)."
+      }
+    },
+    {
+      "name": "--top-n",
+      "type": "int",
+      "required": false,
+      "default": "5",
+      "description": {
+        "zh": "Number of top pathways to plot.",
+        "en": "Number of top pathways to plot."
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": {
+        "zh": "Plot theme.",
+        "en": "Plot theme."
+      }
+    }
+  ]
+}

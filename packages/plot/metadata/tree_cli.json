@@ -1,0 +1,110 @@
+{
+  "name": "tree",
+  "type": "cli",
+  "description": {
+    "zh": "Plot a phylogenetic tree",
+    "en": "Plot a phylogenetic tree"
+  },
+  "params": [
+    {
+      "name": "-i, --input",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Path to the input tree file (Newick format)",
+        "en": "Path to the input tree file (Newick format)"
+      }
+    },
+    {
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": {
+        "zh": "Output image path",
+        "en": "Output image path"
+      }
+    },
+    {
+      "name": "--format",
+      "type": "string",
+      "required": false,
+      "default": "newick",
+      "description": {
+        "zh": "Tree file format (newick/nexus)",
+        "en": "Tree file format (newick/nexus)"
+      }
+    },
+    {
+      "name": "--layout",
+      "type": "string",
+      "required": false,
+      "default": "rectangular",
+      "description": {
+        "zh": "Tree layout (rectangular/circular)",
+        "en": "Tree layout (rectangular/circular)"
+      }
+    },
+    {
+      "name": "--show-confidence/--no-confidence",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": {
+        "zh": "Whether to show branch support values",
+        "en": "Whether to show branch support values"
+      }
+    },
+    {
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": {
+        "zh": "Plot theme (default/nature/science)",
+        "en": "Plot theme (default/nature/science)"
+      }
+    },
+    {
+      "name": "--branch-thickness",
+      "type": "float",
+      "required": false,
+      "default": "1.0",
+      "description": {
+        "zh": "Branch line thickness",
+        "en": "Branch line thickness"
+      }
+    },
+    {
+      "name": "--font-size",
+      "type": "int",
+      "required": false,
+      "default": "10",
+      "description": {
+        "zh": "Font size",
+        "en": "Font size"
+      }
+    },
+    {
+      "name": "--label-offset-scale",
+      "type": "float",
+      "required": false,
+      "default": "0.05",
+      "description": {
+        "zh": "Relative label offset scale",
+        "en": "Relative label offset scale"
+      }
+    },
+    {
+      "name": "--label-bbox-alpha",
+      "type": "float",
+      "required": false,
+      "default": "0.65",
+      "description": {
+        "zh": "Label background alpha (0-1)",
+        "en": "Label background alpha (0-1)"
+      }
+    }
+  ]
+}

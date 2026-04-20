@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-20 19:21+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/bio_analyze_docking/cli.py:21
+msgid "Molecular docking tools."
+msgstr ""
+
+#: src/bio_analyze_docking/cli.py:28
+msgid "Run molecular docking pipeline."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/prepare_ligand.py:12
+msgid "Input ligand file (SDF, SMILES, PDB)."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/prepare_ligand.py:14
+#: src/bio_analyze_docking/commands/prepare_receptor.py:12
+msgid "Output PDBQT file."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/prepare_ligand.py:15
+#: src/bio_analyze_docking/commands/prepare_receptor.py:13
+msgid "Add hydrogens."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/prepare_receptor.py:11
+msgid "Input receptor file (PDB)."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/prepare_receptor.py:17
+msgid "Charge model (gasteiger, zero, etc.)."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:13
+#: src/bio_analyze_docking/commands/run_haddock.py:13
+#: src/bio_analyze_docking/commands/run_smina.py:13
+#: src/bio_analyze_docking/commands/run_vina.py:13
+msgid "Config file path."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:16
+#: src/bio_analyze_docking/commands/run_haddock.py:16
+#: src/bio_analyze_docking/commands/run_smina.py:16
+#: src/bio_analyze_docking/commands/run_vina.py:16
+msgid "Receptor file/dir."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:18
+#: src/bio_analyze_docking/commands/run_haddock.py:18
+#: src/bio_analyze_docking/commands/run_smina.py:18
+#: src/bio_analyze_docking/commands/run_vina.py:18
+msgid "Ligand file/dir."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:19
+#: src/bio_analyze_docking/commands/run_haddock.py:19
+#: src/bio_analyze_docking/commands/run_smina.py:19
+#: src/bio_analyze_docking/commands/run_vina.py:19
+msgid "Output dir."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:20
+#: src/bio_analyze_docking/commands/run_smina.py:20
+#: src/bio_analyze_docking/commands/run_vina.py:20
+msgid "Box center X."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:21
+#: src/bio_analyze_docking/commands/run_smina.py:21
+#: src/bio_analyze_docking/commands/run_vina.py:21
+msgid "Box center Y."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:22
+#: src/bio_analyze_docking/commands/run_smina.py:22
+#: src/bio_analyze_docking/commands/run_vina.py:22
+msgid "Box center Z."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:23
+#: src/bio_analyze_docking/commands/run_smina.py:23
+#: src/bio_analyze_docking/commands/run_vina.py:23
+msgid "Box size X."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:24
+#: src/bio_analyze_docking/commands/run_smina.py:24
+#: src/bio_analyze_docking/commands/run_vina.py:24
+msgid "Box size Y."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:25
+#: src/bio_analyze_docking/commands/run_smina.py:25
+#: src/bio_analyze_docking/commands/run_vina.py:25
+msgid "Box size Z."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:26
+#: src/bio_analyze_docking/commands/run_smina.py:26
+#: src/bio_analyze_docking/commands/run_vina.py:26
+msgid "Reference ligand."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:27
+#: src/bio_analyze_docking/commands/run_smina.py:27
+#: src/bio_analyze_docking/commands/run_vina.py:27
+msgid "Autobox padding."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:28
+#: src/bio_analyze_docking/commands/run_smina.py:28
+#: src/bio_analyze_docking/commands/run_vina.py:28
+msgid "Exhaustiveness."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:29
+#: src/bio_analyze_docking/commands/run_smina.py:29
+#: src/bio_analyze_docking/commands/run_vina.py:29
+msgid "Number of poses."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_gnina.py:30
+#: src/bio_analyze_docking/commands/run_haddock.py:21
+#: src/bio_analyze_docking/commands/run_smina.py:30
+#: src/bio_analyze_docking/commands/run_vina.py:30
+msgid "Charge model."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_haddock.py:20
+msgid "Number of poses to sample."
+msgstr ""
+
+#: src/bio_analyze_docking/commands/run_haddock.py:25
+msgid "Custom HADDOCK3 configuration file path."
+msgstr ""

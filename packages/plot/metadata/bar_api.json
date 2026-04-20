@@ -2,7 +2,7 @@
   "name": "bar",
   "type": "api",
   "description": {
-    "zh": "绘制带有误差棒的柱状图。",
+    "zh": "Plot bar chart with error bars.",
     "en": "Plot bar chart with error bars."
   },
   "params": [
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "包含数据的 DataFrame。",
+        "zh": "DataFrame containing data.",
         "en": "DataFrame containing data."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "x 轴的列名。",
+        "zh": "Column name for x-axis.",
         "en": "Column name for x-axis."
       }
     },
@@ -32,7 +32,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "y 轴的列名。",
+        "zh": "Column name for y-axis.",
         "en": "Column name for y-axis."
       }
     },
@@ -42,7 +42,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "分组列名。",
+        "zh": "Column name for grouping.",
         "en": "Column name for grouping."
       }
     },
@@ -52,7 +52,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "图表标题。",
+        "zh": "Chart title.",
         "en": "Chart title."
       }
     },
@@ -62,7 +62,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "X轴标签。",
+        "zh": "X-axis label.",
         "en": "X-axis label."
       }
     },
@@ -72,7 +72,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "Y轴标签。",
+        "zh": "Y-axis label.",
         "en": "Y-axis label."
       }
     },
@@ -82,7 +82,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "保存图表的路径。",
+        "zh": "Path to save the chart.",
         "en": "Path to save the chart."
       }
     },
@@ -92,7 +92,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "误差棒类型 (SD, SE, CI)。如果提供了 max/min 则忽略。",
+        "zh": "Error bar type (SD, SE, CI). Ignored if max/min are provided.",
         "en": "Error bar type (SD, SE, CI). Ignored if max/min are provided."
       }
     },
@@ -102,7 +102,7 @@
       "required": false,
       "default": "95",
       "description": {
-        "zh": "当类型为 CI 时的置信区间大小 (默认 95)。",
+        "zh": "Confidence interval size when type is CI (default 95).",
         "en": "Confidence interval size when type is CI (default 95)."
       }
     },
@@ -112,7 +112,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "误差棒上限的列名。",
+        "zh": "Column name for error bar upper bound.",
         "en": "Column name for error bar upper bound."
       }
     },
@@ -122,7 +122,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "误差棒下限的列名。",
+        "zh": "Column name for error bar lower bound.",
         "en": "Column name for error bar lower bound."
       }
     },
@@ -132,7 +132,7 @@
       "required": false,
       "default": "0.1",
       "description": {
-        "zh": "误差棒的横线宽度。",
+        "zh": "Width of error bar caps.",
         "en": "Width of error bar caps."
       }
     },
@@ -142,7 +142,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "要进行显著性检验的配对列表。例如 [(\"A\", \"B\"), (\"C\", \"D\")]。\n如果是分组柱状图 (有 hue)，则格式为 [((x1, hue1), (x2, hue2)), ...]。",
+        "zh": "List of pairs for significance testing. E.g. [(\"A\", \"B\"), (\"C\", \"D\")].\nIf grouped bar plot (with hue), format is [((x1, hue1), (x2, hue2)), ...].",
         "en": "List of pairs for significance testing. E.g. [(\"A\", \"B\"), (\"C\", \"D\")].\nIf grouped bar plot (with hue), format is [((x1, hue1), (x2, hue2)), ...]."
       }
     },
@@ -152,7 +152,7 @@
       "required": false,
       "default": "t-test_ind",
       "description": {
-        "zh": "统计检验方法。支持 't-test_ind', 't-test_welch', 't-test_paired', 'Mann-Whitney', 'Wilcoxon', 'Kruskal'。",
+        "zh": "Statistical test method. Supports 't-test_ind', 't-test_welch', 't-test_paired', 'Mann-Whitney', 'Wilcoxon', 'Kruskal'.",
         "en": "Statistical test method. Supports 't-test_ind', 't-test_welch', 't-test_paired', 'Mann-Whitney', 'Wilcoxon', 'Kruskal'."
       }
     },
@@ -162,7 +162,7 @@
       "required": false,
       "default": "star",
       "description": {
-        "zh": "显著性标记格式 ('star', 'full', 'simple', 'pvalue')。",
+        "zh": "Significance annotation format ('star', 'full', 'simple', 'pvalue').",
         "en": "Significance annotation format ('star', 'full', 'simple', 'pvalue')."
       }
     },
@@ -172,7 +172,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "误差棒颜色。",
+        "zh": "Error bar color.",
         "en": "Error bar color."
       }
     },
@@ -182,7 +182,7 @@
       "required": false,
       "default": null,
       "description": {
-        "zh": "误差棒横线颜色。",
+        "zh": "Error bar cap color.",
         "en": "Error bar cap color."
       }
     }

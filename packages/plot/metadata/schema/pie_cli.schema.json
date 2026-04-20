@@ -1,0 +1,95 @@
+{
+  "name": "pie",
+  "type": "cli",
+  "description": "Generate pie chart.",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input file path (CSV, TSV, or Excel)."
+    },
+    {
+      "field": "output",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output file path."
+    },
+    {
+      "field": "x",
+      "name": "--x",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Column name for labels (categorical)."
+    },
+    {
+      "field": "y",
+      "name": "--y",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Column name for values (numerical)."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+    },
+    {
+      "field": "title",
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plot title."
+    },
+    {
+      "field": "autopct",
+      "name": "--autopct",
+      "type": "string",
+      "required": false,
+      "default": "%1.1f%%",
+      "description": "Percentage format."
+    },
+    {
+      "field": "startangle",
+      "name": "--startangle",
+      "type": "float",
+      "required": false,
+      "default": "90",
+      "description": "Start angle."
+    },
+    {
+      "field": "explode",
+      "name": "--explode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Explode slices. Can be a column name or comma-separated values."
+    },
+    {
+      "field": "shadow",
+      "name": "--shadow",
+      "type": "bool",
+      "required": false,
+      "default": "False",
+      "description": "Show shadow."
+    },
+    {
+      "field": "sheet",
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sheet name for Excel files."
+    }
+  ]
+}

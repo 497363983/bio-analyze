@@ -1,0 +1,87 @@
+{
+  "name": "tree",
+  "type": "cli",
+  "description": "Plot a phylogenetic tree",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "-i, --input",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Path to the input tree file (Newick format)"
+    },
+    {
+      "field": "output_file",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output image path"
+    },
+    {
+      "field": "format",
+      "name": "--format",
+      "type": "string",
+      "required": false,
+      "default": "newick",
+      "description": "Tree file format (newick/nexus)"
+    },
+    {
+      "field": "layout",
+      "name": "--layout",
+      "type": "string",
+      "required": false,
+      "default": "rectangular",
+      "description": "Tree layout (rectangular/circular)"
+    },
+    {
+      "field": "show_confidence",
+      "name": "--show-confidence/--no-confidence",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": "Whether to show branch support values"
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Plot theme (default/nature/science)"
+    },
+    {
+      "field": "branch_thickness",
+      "name": "--branch-thickness",
+      "type": "float",
+      "required": false,
+      "default": "1.0",
+      "description": "Branch line thickness"
+    },
+    {
+      "field": "font_size",
+      "name": "--font-size",
+      "type": "int",
+      "required": false,
+      "default": "10",
+      "description": "Font size"
+    },
+    {
+      "field": "label_offset_scale",
+      "name": "--label-offset-scale",
+      "type": "float",
+      "required": false,
+      "default": "0.05",
+      "description": "Relative label offset scale"
+    },
+    {
+      "field": "label_bbox_alpha",
+      "name": "--label-bbox-alpha",
+      "type": "float",
+      "required": false,
+      "default": "0.65",
+      "description": "Label background alpha (0-1)"
+    }
+  ]
+}

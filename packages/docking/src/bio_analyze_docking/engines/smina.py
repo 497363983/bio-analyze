@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 import shutil
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from bio_analyze_core.logging import get_logger
 from bio_analyze_core.subprocess import CalledProcessError
@@ -19,16 +19,12 @@ except ImportError:
 
 logger = get_logger(__name__)
 
-
 class SminaEngine(BaseDockingEngine):
     """
-    zh: 基于 Smina 的对接引擎实现。
-    en: Smina-based docking engine implementation.
+    Smina-based docking engine implementation.
 
-    zh: Smina 是 Vina 的一个分支，提供了更好的评分函数和更多功能。
-    en: Smina is a fork of Vina that provides better scoring functions and more features.
-    zh: 本引擎通过 subprocess 调用 smina 命令行工具。
-    en: This engine invokes the smina command-line tool via subprocess.
+    Smina is a fork of Vina that provides better scoring functions and more features.
+    This engine invokes the smina command-line tool via subprocess.
     """
 
     @classmethod
@@ -45,8 +41,7 @@ class SminaEngine(BaseDockingEngine):
 
     def __init__(self, receptor: Path, ligand: Path, output_dir: Path):
         """
-        zh: 初始化 Smina 对接引擎。
-        en: Initialize the Smina docking engine.
+        Initialize the Smina docking engine.
         """
         super().__init__(receptor, ligand, output_dir)
 
@@ -73,8 +68,7 @@ class SminaEngine(BaseDockingEngine):
     @classmethod
     def get_summary_config(cls) -> dict[str, str]:
         """
-        zh: 获取结果摘要的配置映射 {显示名称: 内部键名}。
-        en: Get the summary configuration map {display_name: internal_key}.
+        Get the summary configuration map {display_name: internal_key}.
         """
         return {
             "minimizedAffinity": "affinity",
@@ -83,8 +77,7 @@ class SminaEngine(BaseDockingEngine):
 
     def compute_box(self, center: list[float], size: list[float]):
         """
-        zh: 定义搜索空间（网格盒）。
-        en: Define the search space (grid box).
+        Define the search space (grid box).
         """
         logger.info(f"设置 Smina 搜索盒子 (中心={center}, 尺寸={size})...")
         self.box_center = center
@@ -92,8 +85,7 @@ class SminaEngine(BaseDockingEngine):
 
     def dock(self, exhaustiveness: int = 8, n_poses: int = 9, min_rmsd: float = 1.0, timeout: float = 3600):
         """
-        zh: 执行对接。
-        en: Perform docking.
+        Perform docking.
         """
         if self.box_center is None or self.box_size is None:
             raise RuntimeError("在执行对接前必须先调用 compute_box 设置搜索空间。")
@@ -149,18 +141,16 @@ class SminaEngine(BaseDockingEngine):
             logger.debug(f"Smina 输出:\n{result.stdout}")
         except CalledProcessError as e:
             logger.error(f"Smina 执行失败: {e.stderr}")
-            raise RuntimeError(f"Smina 对接失败: {e.stderr}")
+            raise RuntimeError(f"Smina 对接失败: {e.stderr}") from e
         except Exception as e:
             logger.error(f"Smina 执行异常: {e}")
-            raise RuntimeError(f"Smina 对接异常: {e}")
+            raise RuntimeError(f"Smina 对接异常: {e}") from e
 
-    def save_results(self, output_name: str = "docked.pdbqt", output_dir: Optional[Path] = None) -> Path:
+    def save_results(self, output_name: str = "docked.pdbqt", output_dir: Path | None = None) -> Path:
         """
-        zh: 保存对接姿态。
-        en: Save docked poses.
+        Save docked poses.
 
-        zh: 实际上是将临时输出文件复制到目标位置。
-        en: Actually copies the temporary output file to the target location.
+        Actually copies the temporary output file to the target location.
         """
         if not self._temp_output_file.exists():
             raise RuntimeError("未找到对接结果文件。请先运行 dock()。")
@@ -175,13 +165,12 @@ class SminaEngine(BaseDockingEngine):
 
     def save_complexes(
         self,
-        n_complexes: Optional[int] = None,
-        output_dir: Optional[Path] = None,
+        n_complexes: int | None = None,
+        output_dir: Path | None = None,
         output_name_prefix: str = "complex_pose",
     ):
         """
-        zh: 使用 PyMOL 将对接的配体-受体复合物保存为 PDB 文件。
-        en: Save the docked ligand-receptor complex as a PDB file using PyMOL.
+        Save the docked ligand-receptor complex as a PDB file using PyMOL.
         """
         if cmd is None:
             logger.error("PyMOL 未安装。无法保存 PDB 复合物。")
@@ -191,7 +180,7 @@ class SminaEngine(BaseDockingEngine):
         target_dir.mkdir(parents=True, exist_ok=True)
 
         if not self._temp_output_file.exists():
-            logger.warning("未找到对接结果，无法保存复合物。")
+            logger.warning("未找到对接结果, 无法保存复合物。")
             return
 
         # 解析结果数量
@@ -199,7 +188,7 @@ class SminaEngine(BaseDockingEngine):
         total_poses = len(poses_info)
 
         if total_poses == 0:
-            logger.warning("对接结果为空，无法保存复合物。")
+            logger.warning("对接结果为空, 无法保存复合物。")
             return
 
         n_save = total_poses
@@ -220,8 +209,7 @@ class SminaEngine(BaseDockingEngine):
 
     def score(self) -> float:
         """
-        zh: 返回最佳能量评分（kcal/mol）。
-        en: Return the best energy score (kcal/mol).
+        Return the best energy score (kcal/mol).
         """
         if not self._temp_output_file.exists():
             return 0.0
@@ -233,11 +221,9 @@ class SminaEngine(BaseDockingEngine):
 
     def get_all_poses_info(self, n_poses: int = 9) -> list[dict[str, Any]]:
         """
-        zh: 返回所有姿态的信息：能量，RMSD 下界，RMSD 上界。
-        en: Return information for all poses: energy, RMSD lower bound, RMSD upper bound.
+        Return information for all poses: energy, RMSD lower bound, RMSD upper bound.
 
-        zh: 从 PDBQT 输出文件中解析。
-        en: Parsed from the PDBQT output file.
+        Parsed from the PDBQT output file.
         """
         if not self._temp_output_file.exists():
             return []

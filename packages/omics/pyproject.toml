@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bio-analyze-omics"
+version = "0.1.0"
+description = "Omics analysis module for bio-analyze."
+readme = "README.md"
+requires-python = ">=3.10, <3.15"
+license = { text = "GPL-3.0" }
+authors = [{ name = "qww" }]
+dependencies = [
+    "bio-analyze-core>=0.1.0a0",
+    "bio-analyze-plot>=0.1.0a0",
+    "pandas>=2.0.0",
+    "numpy>=1.20.0",
+    "scipy>=1.10.0",
+    "pydeseq2>=0.4.0",
+    "gseapy>=1.0.0",
+    "genomepy>=0.16.0",
+    "jinja2>=3.1.0",
+    "scikit-learn>=1.3.0",
+    "agentyper>=0.1.12"
+]
+
+[project.entry-points."bio_analyze.cli"]
+omics = "bio_analyze_omics.cli:get_app"
+
+[project.entry-points."bio_analyze.engine"]
+"quant:salmon" = "bio_analyze_omics.rna_seq.quant.engines.salmon:SalmonQuantifier"
+"quant:kallisto" = "bio_analyze_omics.rna_seq.quant.engines.kallisto:KallistoQuantifier"
+"quant:featurecounts" = "bio_analyze_omics.rna_seq.quant.engines.featurecounts:FeatureCountsQuantifier"
+"quant:htseq-count" = "bio_analyze_omics.rna_seq.quant.engines.htseq_count:HTSeqCountQuantifier"
+"quant:rsem" = "bio_analyze_omics.rna_seq.quant.engines.rsem:RSEMQuantifier"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bio_analyze_omics"]

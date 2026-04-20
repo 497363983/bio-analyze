@@ -2,45 +2,44 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import typer
-
+from bio_analyze_core.cli.app import Argument, Option, echo
+from bio_analyze_core.i18n import _
 from bio_analyze_plot.commands.utils import read_data
 from bio_analyze_plot.plots.pca import PCAPlot
 
 
 def pca_cmd(
-    input_file: Path = typer.Argument(
-        ..., help="zh: 输入文件路径 (CSV, TSV 或 Excel)。\nen: Input file path (CSV, TSV, or Excel)."
+    input_file: Path = Argument(
+        ..., help=_("Input file path (CSV, TSV, or Excel).")
     ),
-    output: Path = typer.Option(..., "-o", "--output", help="zh: 输出文件路径。\nen: Output file path."),
-    hue: str = typer.Option(None, help="zh: 分组列名 (hue)。\nen: Grouping column name (hue)."),
-    style: str = typer.Option(None, help="zh: 标记样式列名。\nen: Column name for marker style."),
-    size: str = typer.Option(None, help="zh: 标记大小列名。\nen: Column name for marker size."),
-    index_col: str = typer.Option(
-        None, help="zh: 用作索引的列 (例如基因名)。\nen: Column to use as index (e.g. gene names)."
+    output: Path = Option(..., "-o", "--output", help=_("Output file path.")),
+    hue: str = Option(None, help=_("Grouping column name (hue).")),
+    style: str = Option(None, help=_("Column name for marker style.")),
+    size: str = Option(None, help=_("Column name for marker size.")),
+    index_col: str = Option(
+        None, help=_("Column to use as index (e.g. gene names).")
     ),
-    transpose: bool = typer.Option(
+    transpose: bool = Option(
         True,
-        help="zh: 转置输入数据 (默认: True, 假设 Genes x Samples)。\nen: Transpose input data (default: True, assumes Genes x Samples).",
+        help=_("Transpose input data (default: True, assumes Genes x Samples)."),
     ),
-    theme: str = typer.Option(
+    theme: str = Option(
         "nature",
-        help="zh: 绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。\nen: Plot theme (nature, science, default) or path to custom theme (.json/.py).",
+        help=_("Plot theme (nature, science, default) or path to custom theme (.json/.py)."),
     ),
-    title: str = typer.Option(None, help="zh: 图表标题。\nen: Plot title."),
-    cluster: bool = typer.Option(False, help="zh: 执行 KMeans 聚类。\nen: Perform KMeans clustering."),
-    n_clusters: int = typer.Option(3, help="zh: KMeans 聚类的簇数。\nen: Number of clusters for KMeans."),
-    add_ellipse: bool = typer.Option(
-        False, help="zh: 为每个分组绘制置信椭圆。\nen: Draw confidence ellipses for each group."
+    title: str = Option(None, help=_("Plot title.")),
+    cluster: bool = Option(False, help=_("Perform KMeans clustering.")),
+    n_clusters: int = Option(3, help=_("Number of clusters for KMeans.")),
+    add_ellipse: bool = Option(
+        False, help=_("Draw confidence ellipses for each group.")
     ),
-    ellipse_std: float = typer.Option(
-        2.0, help="zh: 置信椭圆的标准差。\nen: Standard deviation for confidence ellipses."
+    ellipse_std: float = Option(
+        2.0, help=_("Standard deviation for confidence ellipses.")
     ),
-    sheet: str = typer.Option(None, help="zh: Excel 工作表名称。\nen: Sheet name for Excel files."),
+    sheet: str = Option(None, help=_("Sheet name for Excel files.")),
 ) -> None:
     """
-    zh: 生成 PCA 图。
-    en: Generate PCA plot.
+    Generate PCA plot.
     """
     df = read_data(input_file, sheet=sheet)
     plotter = PCAPlot(theme=theme)
@@ -58,4 +57,4 @@ def pca_cmd(
         ellipse_std=ellipse_std,
         output=str(output),
     )
-    typer.echo(f"Saved PCA plot to {output}")
+    echo(f"Saved PCA plot to {output}")

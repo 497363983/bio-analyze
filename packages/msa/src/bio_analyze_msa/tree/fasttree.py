@@ -24,7 +24,7 @@ class FastTreeBuilder(BaseTreeBuilder):
     def build(self, alignment_file: Path, output_file: Path, **kwargs: Any) -> Path:
         """
         Build ML tree using FastTree.
-        
+
         Args:
             alignment_file: MSA file in FASTA format.
             output_file: Output Newick file.
@@ -38,7 +38,7 @@ class FastTreeBuilder(BaseTreeBuilder):
             )
 
         args = [self.executable]
-        
+
         # Add flags
         for k, v in kwargs.items():
             if isinstance(v, bool):
@@ -46,17 +46,17 @@ class FastTreeBuilder(BaseTreeBuilder):
                     args.append(f"-{k}")
             else:
                 args.extend([f"-{k}", str(v)])
-                
+
         # FastTree requires the alignment file as the last argument
         args.append(str(alignment_file))
-        
+
         logger.info(f"Running FastTree on {alignment_file}")
-        
+
         # FastTree writes the tree to stdout and logs to stderr
         res = run(args, capture_output=True, text=True, check=True)
-        
+
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(res.stdout)
-            
+
         logger.info(f"FastTree tree saved to {output_file}")
         return output_file

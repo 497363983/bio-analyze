@@ -1,0 +1,55 @@
+{
+  "name": "rna_seq_align",
+  "type": "cli",
+  "description": "Run STAR alignment.",
+  "params": [
+    {
+      "field": "input_dir",
+      "name": "-i, --input",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Directory with clean FastQ files."
+    },
+    {
+      "field": "output_dir",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output directory."
+    },
+    {
+      "field": "fasta",
+      "name": "--fasta",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Genome FASTA file."
+    },
+    {
+      "field": "gtf",
+      "name": "--gtf",
+      "type": "path",
+      "required": false,
+      "default": null,
+      "description": "Genome GTF file."
+    },
+    {
+      "field": "threads",
+      "name": "-t, --threads",
+      "type": "int",
+      "required": false,
+      "default": "4",
+      "description": "Number of threads."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Plot theme."
+    }
+  ]
+}

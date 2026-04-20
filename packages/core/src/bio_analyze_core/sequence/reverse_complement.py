@@ -12,21 +12,17 @@ _COMPLEMENT_TRANS = str.maketrans(
 
 def reverse_complement(sequence: str, is_rna: bool = False) -> str:
     """
-    zh: 计算输入序列的反向互补序列。
-    en: Calculate the reverse complement of the input sequence.
+    Calculate the reverse complement of the input sequence.
 
     Args:
         sequence (str):
-            zh: 输入的核酸序列。
-            en: Input nucleic acid sequence.
+            Input nucleic acid sequence.
         is_rna (bool):
-            zh: 序列是否为 RNA。如果为 True，则返回包含 U 而不是 T 的序列。
-            en: Whether the sequence is RNA. If True, returns a sequence with U instead of T.
+            Whether the sequence is RNA. If True, returns a sequence with U instead of T.
 
     Returns:
         str:
-            zh: 反向互补序列。
-            en: Reverse complement sequence.
+            Reverse complement sequence.
     """
     if not sequence:
         return ""
@@ -58,21 +54,17 @@ def reverse_complement(sequence: str, is_rna: bool = False) -> str:
 
 def complement(sequence: str, is_rna: bool = False) -> str:
     """
-    zh: 计算输入序列的互补序列（不反向）。
-    en: Calculate the complement of the input sequence (without reversing).
+    Calculate the complement of the input sequence (without reversing).
 
     Args:
         sequence (str):
-            zh: 输入的核酸序列。
-            en: Input nucleic acid sequence.
+            Input nucleic acid sequence.
         is_rna (bool):
-            zh: 序列是否为 RNA。
-            en: Whether the sequence is RNA.
+            Whether the sequence is RNA.
 
     Returns:
         str:
-            zh: 互补序列。
-            en: Complement sequence.
+            Complement sequence.
     """
     if not sequence:
         return ""

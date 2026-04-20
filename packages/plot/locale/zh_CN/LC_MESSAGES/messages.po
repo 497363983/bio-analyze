@@ -1,0 +1,407 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bio-analyze-plot\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-20 19:21+0800\n"
+"PO-Revision-Date: 2026-04-20 00:00+0000\n"
+"Last-Translator: GPT-5.4 <noreply@example.com>\n"
+"Language-Team: zh_CN\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: custom locale bootstrap\n"
+
+#: src/bio_analyze_plot/commands/heatmap.py:21
+msgid "0 (rows) or 1 (columns) for standardization. None to disable."
+msgstr "标准化 (0: 行, 1: 列)。None 禁用。"
+
+#: src/bio_analyze_plot/commands/tree.py:44
+msgid "Branch line thickness"
+msgstr "分支线条粗细"
+
+#: src/bio_analyze_plot/commands/gsea.py:32
+msgid "Color for enrichment score line."
+msgstr "富集得分曲线颜色。"
+
+#: src/bio_analyze_plot/commands/gsea.py:33
+msgid "Color for hit lines."
+msgstr "命中线条颜色。"
+
+#: src/bio_analyze_plot/commands/heatmap.py:24
+msgid "Colormap name (e.g. 'vlag', 'coolwarm')."
+msgstr "颜色映射名称 (例如 'vlag', 'coolwarm')。"
+
+#: src/bio_analyze_plot/commands/bar.py:16
+#: src/bio_analyze_plot/commands/box.py:16
+#: src/bio_analyze_plot/commands/line.py:16
+#: src/bio_analyze_plot/commands/scatter.py:16
+msgid "Column name for X-axis."
+msgstr "X 轴列名。"
+
+#: src/bio_analyze_plot/commands/bar.py:17
+#: src/bio_analyze_plot/commands/box.py:17
+#: src/bio_analyze_plot/commands/line.py:17
+#: src/bio_analyze_plot/commands/scatter.py:17
+msgid "Column name for Y-axis."
+msgstr "Y 轴列名。"
+
+#: src/bio_analyze_plot/commands/chromosome.py:16
+msgid "Column name for chromosome."
+msgstr "染色体列名。"
+
+#: src/bio_analyze_plot/commands/bar.py:32
+msgid "Column name for error bar lower limit."
+msgstr "误差棒下限列名。"
+
+#: src/bio_analyze_plot/commands/bar.py:29
+msgid "Column name for error bar upper limit."
+msgstr "误差棒上限列名。"
+
+#: src/bio_analyze_plot/commands/gsea.py:21
+msgid "Column name for hit status (0/1 or boolean)."
+msgstr "命中状态列名 (0/1 或布尔值)。"
+
+#: src/bio_analyze_plot/commands/pie.py:16
+msgid "Column name for labels (categorical)."
+msgstr "标签列名 (分类变量)。"
+
+#: src/bio_analyze_plot/commands/volcano.py:22
+msgid "Column name for log2 fold change."
+msgstr "log2 fold change 列名。"
+
+#: src/bio_analyze_plot/commands/pca.py:18
+#: src/bio_analyze_plot/commands/scatter.py:20
+msgid "Column name for marker size."
+msgstr "标记大小列名。"
+
+#: src/bio_analyze_plot/commands/pca.py:17
+#: src/bio_analyze_plot/commands/scatter.py:19
+msgid "Column name for marker style."
+msgstr "标记样式列名。"
+
+#: src/bio_analyze_plot/commands/chromosome.py:22
+msgid "Column name for negative strand counts."
+msgstr "负链计数列名。"
+
+#: src/bio_analyze_plot/commands/volcano.py:24
+msgid "Column name for p-value."
+msgstr "p-value 列名。"
+
+#: src/bio_analyze_plot/commands/chromosome.py:17
+msgid "Column name for position."
+msgstr "位置列名。"
+
+#: src/bio_analyze_plot/commands/chromosome.py:19
+msgid "Column name for positive strand counts."
+msgstr "正链计数列名。"
+
+#: src/bio_analyze_plot/commands/gsea.py:16
+msgid "Column name for rank (x-axis)."
+msgstr "排名列名 (X 轴)。"
+
+#: src/bio_analyze_plot/commands/gsea.py:24
+msgid "Column name for ranking metric (y-axis bottom)."
+msgstr "排名指标列名 (Y 轴底部)。"
+
+#: src/bio_analyze_plot/commands/gsea.py:18
+msgid "Column name for running ES (y-axis)."
+msgstr "运行富集得分列名 (Y 轴)。"
+
+#: src/bio_analyze_plot/commands/pie.py:17
+msgid "Column name for values (numerical)."
+msgstr "数值列名。"
+
+#: src/bio_analyze_plot/commands/pca.py:20
+msgid "Column to use as index (e.g. gene names)."
+msgstr "用作索引的列 (例如基因名)。"
+
+#: src/bio_analyze_plot/commands/heatmap.py:16
+msgid "Column to use as row index."
+msgstr "用作行索引的列。"
+
+#: src/bio_analyze_plot/commands/bar.py:26
+#: src/bio_analyze_plot/commands/line.py:27
+msgid "Confidence interval size (default: 95)."
+msgstr "置信区间大小 (默认: 95)。"
+
+#: src/bio_analyze_plot/commands/pca.py:34
+#: src/bio_analyze_plot/commands/scatter.py:27
+msgid "Draw confidence ellipses for each group."
+msgstr "为每个分组绘制置信椭圆。"
+
+#: src/bio_analyze_plot/commands/line.py:40
+msgid "Enable smooth curve fitting."
+msgstr "启用平滑曲线拟合。"
+
+#: src/bio_analyze_plot/commands/line.py:30
+msgid "Error bar capsize (in points)."
+msgstr "误差棒帽大小 (以点为单位)。"
+
+#: src/bio_analyze_plot/commands/bar.py:34
+msgid "Error bar capsize."
+msgstr "误差棒帽大小。"
+
+#: src/bio_analyze_plot/commands/bar.py:24
+#: src/bio_analyze_plot/commands/line.py:25
+msgid "Error bar type: SD, SE, CI."
+msgstr "误差棒类型: SD, SE, CI。"
+
+#: src/bio_analyze_plot/commands/pie.py:27
+msgid "Explode slices. Can be a column name or comma-separated values."
+msgstr "扇区偏移。可以是列名或逗号分隔的数值。"
+
+#: src/bio_analyze_plot/commands/gsea.py:36
+msgid "FDR q-value."
+msgstr "FDR q-value。"
+
+#: src/bio_analyze_plot/commands/volcano.py:29
+msgid "Fold change cutoff."
+msgstr "Fold change 截断值。"
+
+#: src/bio_analyze_plot/commands/msa.py:41
+#: src/bio_analyze_plot/commands/tree.py:49
+msgid "Font size"
+msgstr "字体大小"
+
+#: src/bio_analyze_plot/commands/bar.py:18
+#: src/bio_analyze_plot/commands/box.py:18
+#: src/bio_analyze_plot/commands/line.py:18
+#: src/bio_analyze_plot/commands/pca.py:16
+#: src/bio_analyze_plot/commands/scatter.py:18
+msgid "Grouping column name (hue)."
+msgstr "分组列名 (hue)。"
+
+#: src/bio_analyze_plot/commands/bar.py:13
+#: src/bio_analyze_plot/commands/box.py:13
+#: src/bio_analyze_plot/commands/chromosome.py:13
+#: src/bio_analyze_plot/commands/gsea.py:13
+#: src/bio_analyze_plot/commands/heatmap.py:13
+#: src/bio_analyze_plot/commands/line.py:13
+#: src/bio_analyze_plot/commands/pca.py:13
+#: src/bio_analyze_plot/commands/pie.py:13
+#: src/bio_analyze_plot/commands/scatter.py:13
+#: src/bio_analyze_plot/commands/volcano.py:13
+msgid "Input file path (CSV, TSV, or Excel)."
+msgstr "输入文件路径 (CSV, TSV 或 Excel)。"
+
+#: src/bio_analyze_plot/commands/msa.py:51
+msgid "JSON mapping for custom residue colors, e.g. '{\"A\":\"#000000\"}'"
+msgstr "自定义碱基/氨基酸颜色JSON映射，如'{\"A\":\"#000000\"}'"
+
+#: src/bio_analyze_plot/commands/tree.py:59
+msgid "Label background alpha (0-1)"
+msgstr "标签背景透明度(0-1)"
+
+#: src/bio_analyze_plot/commands/chromosome.py:31
+msgid "Maximum number of chromosomes to display."
+msgstr "显示的最大染色体数量。"
+
+#: src/bio_analyze_plot/commands/gsea.py:34
+msgid "Normalized Enrichment Score."
+msgstr "标准化富集得分 (NES)。"
+
+#: src/bio_analyze_plot/commands/pca.py:32
+msgid "Number of clusters for KMeans."
+msgstr "KMeans 聚类的簇数。"
+
+#: src/bio_analyze_plot/commands/line.py:41
+msgid "Number of points for interpolation."
+msgstr "插值点数。"
+
+#: src/bio_analyze_plot/commands/volcano.py:19
+msgid "Output file path (e.g. volcano.png)."
+msgstr "输出文件路径 (例如 volcano.png)。"
+
+#: src/bio_analyze_plot/commands/bar.py:15
+#: src/bio_analyze_plot/commands/box.py:15
+#: src/bio_analyze_plot/commands/chromosome.py:15
+#: src/bio_analyze_plot/commands/gsea.py:15
+#: src/bio_analyze_plot/commands/heatmap.py:15
+#: src/bio_analyze_plot/commands/line.py:15
+#: src/bio_analyze_plot/commands/pca.py:15
+#: src/bio_analyze_plot/commands/pie.py:15
+#: src/bio_analyze_plot/commands/scatter.py:15
+msgid "Output file path."
+msgstr "输出文件路径。"
+
+#: src/bio_analyze_plot/commands/msa.py:21
+#: src/bio_analyze_plot/commands/tree.py:19
+msgid "Output image path"
+msgstr "输出图片路径"
+
+#: src/bio_analyze_plot/commands/box.py:29
+msgid "Overlay swarmplot points."
+msgstr "叠加蜂群图点。"
+
+#: src/bio_analyze_plot/commands/volcano.py:30
+msgid "P-value cutoff."
+msgstr "P-value 截断值。"
+
+#: src/bio_analyze_plot/commands/gsea.py:35
+msgid "P-value."
+msgstr "P-value。"
+
+#: src/bio_analyze_plot/commands/bar.py:36
+#: src/bio_analyze_plot/commands/box.py:25
+msgid "Pairs for significance testing (e.g. 'A,B' 'C,D')."
+msgstr "显著性检验配对 (例如 'A,B' 'C,D')。"
+
+#: src/bio_analyze_plot/commands/msa.py:16
+msgid "Path to the input MSA file (FASTA)"
+msgstr "输入的MSA文件路径(FASTA格式)"
+
+#: src/bio_analyze_plot/commands/tree.py:14
+msgid "Path to the input tree file (Newick format)"
+msgstr "输入的树文件路径(Newick格式)"
+
+#: src/bio_analyze_plot/commands/pie.py:23
+msgid "Percentage format."
+msgstr "百分比格式。"
+
+#: src/bio_analyze_plot/commands/pca.py:31
+msgid "Perform KMeans clustering."
+msgstr "执行 KMeans 聚类。"
+
+#: src/bio_analyze_plot/commands/msa.py:36
+#: src/bio_analyze_plot/commands/tree.py:39
+msgid "Plot theme (default/nature/science)"
+msgstr "绘图主题(default/nature/science)"
+
+#: src/bio_analyze_plot/commands/bar.py:21
+#: src/bio_analyze_plot/commands/box.py:21
+#: src/bio_analyze_plot/commands/chromosome.py:26
+#: src/bio_analyze_plot/commands/gsea.py:28
+#: src/bio_analyze_plot/commands/heatmap.py:29
+#: src/bio_analyze_plot/commands/line.py:21
+#: src/bio_analyze_plot/commands/pca.py:28
+#: src/bio_analyze_plot/commands/pie.py:20
+#: src/bio_analyze_plot/commands/scatter.py:23
+#: src/bio_analyze_plot/commands/volcano.py:27
+msgid ""
+"Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+msgstr "绘图主题 (nature, science, default) 或自定义主题路径 (.json/.py)。"
+
+#: src/bio_analyze_plot/commands/bar.py:23
+#: src/bio_analyze_plot/commands/box.py:23
+#: src/bio_analyze_plot/commands/chromosome.py:28
+#: src/bio_analyze_plot/commands/gsea.py:30
+#: src/bio_analyze_plot/commands/heatmap.py:31
+#: src/bio_analyze_plot/commands/line.py:23
+#: src/bio_analyze_plot/commands/pca.py:30
+#: src/bio_analyze_plot/commands/pie.py:22
+#: src/bio_analyze_plot/commands/scatter.py:25
+#: src/bio_analyze_plot/commands/volcano.py:31
+msgid "Plot title."
+msgstr "图表标题。"
+
+#: src/bio_analyze_plot/cli.py:26
+msgid "Publication-ready plotting tools."
+msgstr "面向发表的绘图工具。"
+
+#: src/bio_analyze_plot/commands/tree.py:54
+msgid "Relative label offset scale"
+msgstr "标签相对偏移比例"
+
+#: src/bio_analyze_plot/commands/msa.py:46
+msgid "Residues per line for wrapping, 0 means no wrap"
+msgstr "每行显示的碱基/氨基酸数，0表示不换行"
+
+#: src/bio_analyze_plot/commands/msa.py:26
+msgid "Sequence type (aa/nt)"
+msgstr "序列类型(aa/nt)"
+
+#: src/bio_analyze_plot/commands/bar.py:40
+#: src/bio_analyze_plot/commands/box.py:32
+#: src/bio_analyze_plot/commands/chromosome.py:29
+#: src/bio_analyze_plot/commands/gsea.py:31
+#: src/bio_analyze_plot/commands/heatmap.py:32
+#: src/bio_analyze_plot/commands/line.py:24
+#: src/bio_analyze_plot/commands/pca.py:39
+#: src/bio_analyze_plot/commands/pie.py:30
+#: src/bio_analyze_plot/commands/scatter.py:32
+#: src/bio_analyze_plot/commands/volcano.py:32
+msgid "Sheet name for Excel files."
+msgstr "Excel 工作表名称。"
+
+#: src/bio_analyze_plot/commands/pie.py:29
+msgid "Show shadow."
+msgstr "显示阴影。"
+
+#: src/bio_analyze_plot/commands/gsea.py:37
+msgid "Show top and right borders."
+msgstr "显示顶部和右侧边框。"
+
+#: src/bio_analyze_plot/commands/bar.py:39
+#: src/bio_analyze_plot/commands/box.py:28
+msgid "Significance annotation format."
+msgstr "显著性标注格式。"
+
+#: src/bio_analyze_plot/commands/line.py:37
+msgid ""
+"Specific marker symbols (comma-separated, e.g. 'o,s'). Overrides --markers."
+msgstr "指定标记符号 (逗号分隔, 例如 'o,s')。覆盖 --markers。"
+
+#: src/bio_analyze_plot/commands/pca.py:37
+#: src/bio_analyze_plot/commands/scatter.py:30
+msgid "Standard deviation for confidence ellipses."
+msgstr "置信椭圆的标准差。"
+
+#: src/bio_analyze_plot/commands/pie.py:24
+msgid "Start angle."
+msgstr "起始角度。"
+
+#: src/bio_analyze_plot/commands/bar.py:38
+#: src/bio_analyze_plot/commands/box.py:27
+msgid "Statistical test method."
+msgstr "统计检验方法。"
+
+#: src/bio_analyze_plot/commands/box.py:30
+msgid "Swarmplot point color."
+msgstr "蜂群图点颜色。"
+
+#: src/bio_analyze_plot/commands/box.py:31
+msgid "Swarmplot point size."
+msgstr "蜂群图点大小。"
+
+#: src/bio_analyze_plot/commands/pca.py:24
+msgid "Transpose input data (default: True, assumes Genes x Samples)."
+msgstr "转置输入数据 (默认: True, 假设 Genes x Samples)。"
+
+#: src/bio_analyze_plot/commands/tree.py:24
+msgid "Tree file format (newick/nexus)"
+msgstr "树文件格式(newick/nexus)"
+
+#: src/bio_analyze_plot/commands/tree.py:29
+msgid "Tree layout (rectangular/circular)"
+msgstr "树图布局(rectangular/circular)"
+
+#: src/bio_analyze_plot/commands/line.py:39
+msgid "Use dashes for lines."
+msgstr "为线条使用虚线样式。"
+
+#: src/bio_analyze_plot/commands/line.py:33
+msgid "Use default markers for data points."
+msgstr "为数据点使用默认标记。"
+
+#: src/bio_analyze_plot/commands/heatmap.py:26
+msgid "Value at which to center the colormap."
+msgstr "颜色映射居中的值。"
+
+#: src/bio_analyze_plot/commands/heatmap.py:18
+msgid "Whether to cluster columns."
+msgstr "是否聚类列。"
+
+#: src/bio_analyze_plot/commands/heatmap.py:17
+msgid "Whether to cluster rows."
+msgstr "是否聚类行。"
+
+#: src/bio_analyze_plot/commands/msa.py:31
+msgid "Whether to show a conservation logo at the top"
+msgstr "是否在顶部显示保守性Logo"
+
+#: src/bio_analyze_plot/commands/tree.py:34
+msgid "Whether to show branch support values"
+msgstr "是否显示分支支持率(Bootstrap值)"

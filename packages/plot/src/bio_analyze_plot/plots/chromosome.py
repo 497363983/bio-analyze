@@ -12,8 +12,7 @@ from .base import BasePlot, save_plot
 
 class ChromosomePlot(BasePlot):
     """
-    zh: 染色体 Reads 覆盖度分布图（Track 风格）。
-    en: Chromosome Reads Coverage Distribution Plot (Track style).
+    Chromosome Reads Coverage Distribution Plot (Track style).
     """
 
     @save_plot
@@ -33,46 +32,33 @@ class ChromosomePlot(BasePlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        zh: 绘制 Reads 在染色体上的覆盖度分布图（区分正负链）。
-        en: Plot Reads coverage distribution on chromosomes (differentiating strands).
+        Plot Reads coverage distribution on chromosomes (differentiating strands).
 
         Args:
             data:
-                zh: 包含 bin 统计数据的 DataFrame。必需列: chrom, pos (bin start), counts_pos, counts_neg。
-                en: DataFrame containing bin statistics. Required columns: chrom, pos (bin start), counts_pos, counts_neg.
+                DataFrame containing bin statistics. Required columns: chrom, pos (bin start), counts_pos, counts_neg.
             chrom_col:
-                zh: 染色体列名。
-                en: Column name for chromosome.
+                Column name for chromosome.
             pos_col:
-                zh: 位置列名（bin 起始位）。
-                en: Column name for position (bin start).
+                Column name for position (bin start).
             pos_counts_col:
-                zh: 正链 Reads 计数列名。
-                en: Column name for positive strand reads count.
+                Column name for positive strand reads count.
             neg_counts_col:
-                zh: 负链 Reads 计数列名。
-                en: Column name for negative strand reads count.
+                Column name for negative strand reads count.
             title:
-                zh: 图表标题。
-                en: Chart title.
+                Chart title.
             output:
-                zh: 保存路径。
-                en: Path to save the chart.
+                Path to save the chart.
             max_chroms:
-                zh: 最多显示的染色体数量（按长度或名称排序后）。
-                en: Maximum number of chromosomes to display (after sorting by length or name).
+                Maximum number of chromosomes to display (after sorting by length or name).
             bin_size:
-                zh: Bin 大小（用于 X 轴单位换算或标注）。
-                en: Bin size (used for X-axis unit conversion or annotation).
+                Bin size (used for X-axis unit conversion or annotation).
             color_pos:
-                zh: 正链颜色。
-                en: Color for positive strand.
+                Color for positive strand.
             color_neg:
-                zh: 负链颜色。
-                en: Color for negative strand.
+                Color for negative strand.
             **kwargs:
-                zh: 其他绘图参数，如 label_pos, label_neg, zero_line_kws 等。
-                en: Other plotting parameters, such as label_pos, label_neg, zero_line_kws, etc.
+                Other plotting parameters, such as label_pos, label_neg, zero_line_kws, etc.
         """
         # 获取主题特定参数
         theme_params = self.get_chart_specific_params("chromosome")

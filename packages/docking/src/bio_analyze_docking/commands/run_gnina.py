@@ -1,37 +1,35 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
 
-import typer
-
+from bio_analyze_core.cli.app import Option
+from bio_analyze_core.i18n import _
 from bio_analyze_docking.commands.utils import execute_docking_cli
 
 
 def run_gnina_cmd(
-    config_file: Optional[Path] = typer.Option(
-        None, "--config", "-c", help="zh: 配置文件路径。\nen: Config file path."
+    config_file: Path | None = Option(
+        None, "--config", "-c", help=_("Config file path.")
     ),
-    receptor: Optional[Path] = typer.Option(
-        None, "-r", "--receptor", help="zh: 受体文件/目录。\nen: Receptor file/dir."
+    receptor: Path | None = Option(
+        None, "-r", "--receptor", help=_("Receptor file/dir.")
     ),
-    ligand: Optional[Path] = typer.Option(None, "-l", "--ligand", help="zh: 配体文件/目录。\nen: Ligand file/dir."),
-    output_dir: Optional[Path] = typer.Option(None, "-o", "--output", help="zh: 输出目录。\nen: Output dir."),
-    center_x: Optional[float] = typer.Option(None, help="zh: 盒子中心 X。\nen: Box center X."),
-    center_y: Optional[float] = typer.Option(None, help="zh: 盒子中心 Y。\nen: Box center Y."),
-    center_z: Optional[float] = typer.Option(None, help="zh: 盒子中心 Z。\nen: Box center Z."),
-    size_x: Optional[float] = typer.Option(None, help="zh: 盒子大小 X。\nen: Box size X."),
-    size_y: Optional[float] = typer.Option(None, help="zh: 盒子大小 Y。\nen: Box size Y."),
-    size_z: Optional[float] = typer.Option(None, help="zh: 盒子大小 Z。\nen: Box size Z."),
-    autobox_ligand: Optional[Path] = typer.Option(None, help="zh: 参考配体。\nen: Reference ligand."),
-    padding: Optional[float] = typer.Option(None, help="zh: 自动盒填充。\nen: Autobox padding."),
-    exhaustiveness: Optional[int] = typer.Option(None, help="zh: 对接穷尽性。\nen: Exhaustiveness."),
-    n_poses: Optional[int] = typer.Option(None, help="zh: 生成的姿态数量。\nen: Number of poses."),
-    charge_model: Optional[str] = typer.Option(None, "--charge-model", help="zh: 电荷模型。\nen: Charge model."),
+    ligand: Path | None = Option(None, "-l", "--ligand", help=_("Ligand file/dir.")),
+    output_dir: Path | None = Option(None, "-o", "--output", help=_("Output dir.")),
+    center_x: float | None = Option(None, help=_("Box center X.")),
+    center_y: float | None = Option(None, help=_("Box center Y.")),
+    center_z: float | None = Option(None, help=_("Box center Z.")),
+    size_x: float | None = Option(None, help=_("Box size X.")),
+    size_y: float | None = Option(None, help=_("Box size Y.")),
+    size_z: float | None = Option(None, help=_("Box size Z.")),
+    autobox_ligand: Path | None = Option(None, help=_("Reference ligand.")),
+    padding: float | None = Option(None, help=_("Autobox padding.")),
+    exhaustiveness: int | None = Option(None, help=_("Exhaustiveness.")),
+    n_poses: int | None = Option(None, help=_("Number of poses.")),
+    charge_model: str | None = Option(None, "--charge-model", help=_("Charge model.")),
 ) -> None:
     """
-    zh: 使用 Gnina 引擎运行分子对接。
-    en: Run molecular docking using Gnina engine.
+    Run molecular docking using Gnina engine.
     """
     execute_docking_cli(
         "gnina",

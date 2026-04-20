@@ -1,0 +1,31 @@
+{
+  "name": "prepare-ligand",
+  "type": "cli",
+  "description": "Prepare ligand for docking (SDF/SMILES -> PDBQT).\n\nArgs:\ninput_file (Path):\nPath to input ligand file (SDF, MOL2, PDB, SMI).\noutput_file (Path):\nPath to output PDBQT file.\nadd_hydrogens (bool, optional):\nWhether to automatically add hydrogens and generate 3D conformation. Defaults to True.",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input ligand file (SDF, SMILES, PDB)."
+    },
+    {
+      "field": "output_file",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output PDBQT file."
+    },
+    {
+      "field": "add_hydrogens",
+      "name": "--add-hydrogens",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": "Add hydrogens."
+    }
+  ]
+}

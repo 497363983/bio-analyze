@@ -8,8 +8,7 @@ def smith_waterman(
     gap_penalty: int = -2
 ) -> tuple[int, str, str, int, int]:
     """
-    zh: 简易的 Smith-Waterman 局部比对算法。
-    en: Simple Smith-Waterman local alignment algorithm.
+    Simple Smith-Waterman local alignment algorithm.
 
     Args:
         query (str): 查询序列 / Query sequence.

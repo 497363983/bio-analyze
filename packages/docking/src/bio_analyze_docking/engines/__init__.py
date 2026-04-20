@@ -1,6 +1,5 @@
 """
-zh: 对接引擎集合。
-en: Collection of docking engines.
+Collection of docking engines.
 """
 
 from .base import BaseDockingEngine
@@ -13,8 +12,8 @@ from .vina import VinaEngine
 __all__ = [
     "BaseDockingEngine",
     "DockingEngineFactory",
-    "VinaEngine",
-    "SminaEngine",
     "GninaEngine",
     "HaddockEngine",
+    "SminaEngine",
+    "VinaEngine",
 ]

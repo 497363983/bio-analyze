@@ -1,9 +1,11 @@
+from contextlib import suppress
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
-from matplotlib.colors import ListedColormap, is_color_like
 from Bio import AlignIO
+from matplotlib.colors import ListedColormap, is_color_like
+from matplotlib.figure import Figure
 
 try:
     import logomaker
@@ -24,7 +26,7 @@ AA_COLORS = {
 }
 
 NT_COLORS = {
-    'A': '#5050FF', 'C': '#E00000', 'G': '#00C000', 'T': '#E6E600', 
+    'A': '#5050FF', 'C': '#E00000', 'G': '#00C000', 'T': '#E6E600',
     'U': '#E6E600', '-': '#ffffff', 'N': '#ffffff'
 }
 
@@ -46,13 +48,19 @@ class MsaPlot(BasePlot):
     """
 
     @save_plot
-    def plot(self, data: str, seq_type: str = None, show_logo: bool = None,
-             font_size: int = None, figsize: tuple = None, bases_per_line: int = None,
-             base_colors: dict = None,
-             **kwargs) -> Figure:
+    def plot(
+        self,
+        data: str,
+        seq_type: str | None = None,
+        show_logo: bool | None = None,
+        font_size: int | None = None,
+        figsize: tuple[float, float] | None = None,
+        bases_per_line: int | None = None,
+        base_colors: dict[str, str] | None = None,
+        **kwargs,
+    ) -> Figure:
         """
         Plot an MSA.
-        
         Args:
             data (str): Path to the MSA file (FASTA).
             seq_type (str): 'aa' for amino acids, 'nt' for nucleotides.
@@ -83,10 +91,10 @@ class MsaPlot(BasePlot):
         alignment = AlignIO.read(data, "fasta")
         n_seqs = len(alignment)
         seq_len = alignment.get_alignment_length()
-        
+
         ids = [rec.id for rec in alignment]
         seqs = [str(rec.seq).upper() for rec in alignment]
-        
+
         colors_dict = dict(AA_COLORS if seq_type.lower() == "aa" else NT_COLORS)
         if merged_base_colors:
             for base, color in merged_base_colors.items():
@@ -101,7 +109,7 @@ class MsaPlot(BasePlot):
                 if base not in colors_dict:
                     colors_dict[base] = fallback_color
         text_colors_dict = {c: get_text_color(hex_c) for c, hex_c in colors_dict.items()}
-        
+
         # Map characters to integers for imshow
         char_list = list(colors_dict.keys())
         char_to_int = {c: i for i, c in enumerate(char_list)}
@@ -129,48 +137,50 @@ class MsaPlot(BasePlot):
                 row_to_seq_idx.append(None)
                 row_to_block_idx.append(None)
                 row_idx += 1
-        
+
         # Build matrix
         matrix = np.full((n_rows, line_len), char_to_int.get('-', 0), dtype=int)
-        for row_i, (seq_idx, block_idx) in enumerate(zip(row_to_seq_idx, row_to_block_idx)):
+        for row_i, (seq_idx, block_idx) in enumerate(
+            zip(row_to_seq_idx, row_to_block_idx, strict=False)
+        ):
             if seq_idx is None:
                 continue
             start = block_idx * line_len
             end = min(start + line_len, seq_len)
             for j, c in enumerate(seqs[seq_idx][start:end]):
                 matrix[row_i, j] = char_to_int.get(c, char_to_int.get('-', 0))
-                
+
         # Create colormap
         cmap = ListedColormap([colors_dict[c] for c in char_list])
-        
+
         if figsize is None:
             width = max(10, line_len * 0.3)
             height_msa = max(4, n_rows * 0.4)
             height_logo = 2.0 if show_logo else 0
             figsize = (width, height_msa + height_logo)
-            
+
         if show_logo and HAS_LOGOMAKER:
             fig = plt.figure(figsize=figsize)
             # Reduce spacing between logo and msa plot
             gs = fig.add_gridspec(2, 1, height_ratios=[1, max(1, n_seqs * 0.2)], hspace=0.05)
             ax_logo = fig.add_subplot(gs[0])
             ax_msa = fig.add_subplot(gs[1])
-            
+
             # Create logo data
             df_seqs = pd.DataFrame([list(s) for s in seqs])
             counts_df = pd.DataFrame(0.0, index=range(seq_len), columns=[c for c in char_list if c != '-'])
-            
+
             for j in range(seq_len):
                 col_counts = df_seqs[j].value_counts()
                 for c, count in col_counts.items():
                     if c in counts_df.columns:
                         counts_df.at[j, c] = count
-                        
+
             # Only draw logo if we have columns left after removing invariant gaps
             if len(counts_df.columns) > 0:
                 # Convert counts to probabilities (or information content)
                 prob_df = counts_df.div(counts_df.sum(axis=1) + 1e-9, axis=0)
-                
+
                 # Check if prob_df is completely empty before passing to logomaker
                 if not prob_df.empty and prob_df.shape[0] >= 1:
                     try:
@@ -183,25 +193,27 @@ class MsaPlot(BasePlot):
                     ax_logo.set_visible(False)
             else:
                 ax_logo.set_visible(False)
-                
+
             ax_logo.set_xticks([])
             ax_logo.set_yticks([])
             ax_logo.set_xlim(-0.5, seq_len - 0.5)
         else:
             fig, ax_msa = self.get_fig_ax(figsize=figsize)
-            
+
         # Draw MSA grid
         ax_msa.imshow(matrix, cmap=cmap, aspect='auto', interpolation='nearest')
-        
+
         # Add gridlines to separate sequences
         ax_msa.set_xticks(np.arange(-0.5, line_len, 1), minor=True)
         ax_msa.set_yticks(np.arange(-0.5, n_rows, 1), minor=True)
         ax_msa.grid(which="minor", color="white", linestyle='-', linewidth=1.5)
         ax_msa.tick_params(which="minor", size=0)
-        
+
         # Add text if not too long
         if line_len <= 150:
-            for i, (seq_idx, block_idx) in enumerate(zip(row_to_seq_idx, row_to_block_idx)):
+            for i, (seq_idx, block_idx) in enumerate(
+                zip(row_to_seq_idx, row_to_block_idx, strict=False)
+            ):
                 if seq_idx is None:
                     continue
                 start = block_idx * line_len
@@ -210,32 +222,30 @@ class MsaPlot(BasePlot):
                 for j, c in enumerate(seq):
                     if c != '-':
                         ax_msa.text(
-                            j, i, c, ha='center', va='center', 
+                            j, i, c, ha='center', va='center',
                             fontsize=max(6, font_size - 2),
                             color=text_colors_dict.get(c, 'black'),
                             fontweight='bold',
                             fontfamily='monospace'
                         )
-                        
+
         ax_msa.set_yticks(y_ticks)
         ax_msa.set_yticklabels(y_ticklabels, fontsize=font_size, fontfamily='monospace')
-        
+
         # Improve x-axis labels
         x_ticks = np.arange(0, line_len, max(1, line_len // 10))
         ax_msa.set_xticks(x_ticks)
         ax_msa.set_xticklabels(x_ticks + 1, fontsize=font_size)
-        
+
         ax_msa.set_xlim(-0.5, line_len - 0.5)
-        
+
         # Remove spines for a cleaner look
         for spine in ax_msa.spines.values():
             spine.set_visible(False)
-            
+
         # Ensure tight layout and save space for labels
         # When aspect is auto and sequence is long, bounding box calculation can clip labels
         # Use constrained_layout instead of tight_layout, or adjust subplots
-        try:
+        with suppress(Exception):
             fig.tight_layout(pad=1.5, rect=[0.05, 0.05, 0.95, 0.95])
-        except Exception:
-            pass
         return fig

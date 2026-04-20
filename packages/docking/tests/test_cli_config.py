@@ -4,7 +4,7 @@ from unittest.mock import patch
 import pytest
 import yaml
 from bio_analyze_docking.cli import get_app
-from typer.testing import CliRunner
+from bio_analyze_core.cli.app import CliRunner
 
 runner = CliRunner()
 app = get_app()
@@ -111,11 +111,8 @@ def test_missing_config_file(tmp_path):
     config_file = tmp_path / "non_existent.json"
     result = runner.invoke(app, ["run", "vina", "--config", str(config_file)])
     assert result.exit_code == 1
-    # typer 可能会捕获 stderr
-    # 我们在 CLI 中使用 typer.echo(..., err=True)
-    # result.stdout 包含标准输出和标准错误（默认情况）
-    # 但有时需要显式检查
-    assert "Error loading config" in result.output
+    rendered = result.stdout + result.stderr
+    assert "Error loading config" in rendered
 
 
 def test_invalid_config_format(tmp_path):
@@ -123,7 +120,8 @@ def test_invalid_config_format(tmp_path):
     config_file.touch()
     result = runner.invoke(app, ["run", "vina", "--config", str(config_file)])
     assert result.exit_code == 1
-    assert "Error loading config" in result.output
+    rendered = result.stdout + result.stderr
+    assert "Error loading config" in rendered
 
 
 def test_engine_config(test_data, tmp_path):

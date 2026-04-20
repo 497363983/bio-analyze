@@ -25,7 +25,7 @@ class MuscleAligner(BaseAligner):
     def align(self, input_file: Path, output_file: Path, **kwargs: Any) -> Path:
         """
         Run MUSCLE on the input file.
-        
+
         Args:
             input_file: Path to unaligned sequences (FASTA).
             output_file: Path to save aligned sequences.
@@ -40,7 +40,7 @@ class MuscleAligner(BaseAligner):
         # Check MUSCLE version to determine arguments
         res = run([self.executable, "-version"], capture_output=True, text=True, check=False)
         output = res.stdout + res.stderr
-        
+
         is_v5 = "MUSCLE v5" in output or "MUSCLE 5" in output
 
         if is_v5:
@@ -57,6 +57,6 @@ class MuscleAligner(BaseAligner):
 
         logger.info(f"Running MUSCLE on {input_file}")
         run(args, capture_output=True, text=True, check=True)
-        
+
         logger.info(f"MUSCLE alignment saved to {output_file}")
         return output_file

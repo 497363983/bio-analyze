@@ -12,8 +12,7 @@ from .base import BasePlot, save_plot
 
 class BarPlot(BasePlot):
     """
-    zh: 柱状图实现。
-    en: Bar plot implementation.
+    Bar plot implementation.
     """
 
     @save_plot
@@ -40,66 +39,48 @@ class BarPlot(BasePlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        zh: 绘制带有误差棒的柱状图。
-        en: Plot bar chart with error bars.
+        Plot bar chart with error bars.
 
         Args:
             data:
-                zh: 包含数据的 DataFrame。
-                en: DataFrame containing data.
+                DataFrame containing data.
             x:
-                zh: x 轴的列名。
-                en: Column name for x-axis.
+                Column name for x-axis.
             y:
-                zh: y 轴的列名。
-                en: Column name for y-axis.
+                Column name for y-axis.
             hue:
-                zh: 分组列名。
-                en: Column name for grouping.
+                Column name for grouping.
             title:
-                zh: 图表标题。
-                en: Chart title.
+                Chart title.
             xlabel:
-                zh: X轴标签。
-                en: X-axis label.
+                X-axis label.
             ylabel:
-                zh: Y轴标签。
-                en: Y-axis label.
+                Y-axis label.
             output:
-                zh: 保存图表的路径。
-                en: Path to save the chart.
+                Path to save the chart.
             error_bar_type:
-                zh: 误差棒类型 (SD, SE, CI)。如果提供了 max/min 则忽略。
-                en: Error bar type (SD, SE, CI). Ignored if max/min are provided.
+                Error bar type (SD, SE, CI). Ignored if max/min are provided.
             error_bar_ci:
-                zh: 当类型为 CI 时的置信区间大小 (默认 95)。
-                en: Confidence interval size when type is CI (default 95).
+                Confidence interval size when type is CI (default 95).
             error_bar_max:
-                zh: 误差棒上限的列名。
-                en: Column name for error bar upper bound.
+                Column name for error bar upper bound.
             error_bar_min:
-                zh: 误差棒下限的列名。
-                en: Column name for error bar lower bound.
+                Column name for error bar lower bound.
             error_bar_capsize:
-                zh: 误差棒的横线宽度。
-                en: Width of error bar caps.
+                Width of error bar caps.
             significance:
-                zh: 要进行显著性检验的配对列表。例如 [("A", "B"), ("C", "D")]。
-                    如果是分组柱状图 (有 hue)，则格式为 [((x1, hue1), (x2, hue2)), ...]。
-                en: List of pairs for significance testing. E.g. [("A", "B"), ("C", "D")].
-                    If grouped bar plot (with hue), format is [((x1, hue1), (x2, hue2)), ...].
+                List of pairs for significance testing. E.g. [("A", "B"), ("C", "D")].
+                If grouped bar plot (with hue), format is
+                `[((x1, hue1), (x2, hue2)), ...]`.
             test:
-                zh: 统计检验方法。支持 't-test_ind', 't-test_welch', 't-test_paired', 'Mann-Whitney', 'Wilcoxon', 'Kruskal'。
-                en: Statistical test method. Supports 't-test_ind', 't-test_welch', 't-test_paired', 'Mann-Whitney', 'Wilcoxon', 'Kruskal'.
+                Statistical test method. Supports `t-test_ind`, `t-test_welch`,
+                `t-test_paired`, `Mann-Whitney`, `Wilcoxon`, and `Kruskal`.
             text_format:
-                zh: 显著性标记格式 ('star', 'full', 'simple', 'pvalue')。
-                en: Significance annotation format ('star', 'full', 'simple', 'pvalue').
+                Significance annotation format ('star', 'full', 'simple', 'pvalue').
             err_color:
-                zh: 误差棒颜色。
-                en: Error bar color.
+                Error bar color.
             cap_color:
-                zh: 误差棒横线颜色。
-                en: Error bar cap color.
+                Error bar cap color.
         """
         # 获取主题特定参数
         theme_params = self.get_chart_specific_params("bar")
@@ -158,7 +139,7 @@ class BarPlot(BasePlot):
         if "errwidth" in plot_kwargs:
             del plot_kwargs["errwidth"]
 
-        plot_obj = sns.barplot(data=data, x=x, y=y, hue=hue, ax=ax, errorbar=errorbar_arg, **plot_kwargs)
+        sns.barplot(data=data, x=x, y=y, hue=hue, ax=ax, errorbar=errorbar_arg, **plot_kwargs)
 
         # 添加显著性标记
         if significance:
@@ -185,7 +166,6 @@ class BarPlot(BasePlot):
             # 假设：数据已预聚合（每个条形一行）。
 
             # 获取轴上的条形
-            bars = ax.patches
 
             # 如果我们有 hue，seaborn 通常会先绘制第一个 hue 级别的所有条形，然后是第二个，依此类推。
             # 或者交错？
@@ -222,10 +202,7 @@ class BarPlot(BasePlot):
             for i, x_val in enumerate(x_vals):
                 for j, hue_val in enumerate(hue_vals):
                     # 查找数据行
-                    if hue:
-                        row = data[(data[x] == x_val) & (data[hue] == hue_val)]
-                    else:
-                        row = data[data[x] == x_val]
+                    row = data[(data[x] == x_val) & (data[hue] == hue_val)] if hue else data[data[x] == x_val]
 
                     if row.empty:
                         continue

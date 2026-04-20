@@ -1,0 +1,95 @@
+{
+  "name": "heatmap",
+  "type": "cli",
+  "description": "Generate heatmap/clustermap.",
+  "params": [
+    {
+      "field": "input_file",
+      "name": "--input-file",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Input file path (CSV, TSV, or Excel)."
+    },
+    {
+      "field": "output",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output file path."
+    },
+    {
+      "field": "index_col",
+      "name": "--index-col",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Column to use as row index."
+    },
+    {
+      "field": "cluster_rows",
+      "name": "--cluster-rows",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": "Whether to cluster rows."
+    },
+    {
+      "field": "cluster_cols",
+      "name": "--cluster-cols",
+      "type": "bool",
+      "required": false,
+      "default": "True",
+      "description": "Whether to cluster columns."
+    },
+    {
+      "field": "z_score",
+      "name": "--z-score",
+      "type": "int",
+      "required": false,
+      "default": null,
+      "description": "0 (rows) or 1 (columns) for standardization. None to disable."
+    },
+    {
+      "field": "cmap",
+      "name": "--cmap",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Colormap name (e.g. 'vlag', 'coolwarm')."
+    },
+    {
+      "field": "center",
+      "name": "--center",
+      "type": "float",
+      "required": false,
+      "default": null,
+      "description": "Value at which to center the colormap."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "nature",
+      "description": "Plot theme (nature, science, default) or path to custom theme (.json/.py)."
+    },
+    {
+      "field": "title",
+      "name": "--title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plot title."
+    },
+    {
+      "field": "sheet",
+      "name": "--sheet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sheet name for Excel files."
+    }
+  ]
+}

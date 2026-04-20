@@ -1,0 +1,39 @@
+{
+  "name": "rna_seq_enrich",
+  "type": "cli",
+  "description": "Run enrichment analysis (GO/KEGG).",
+  "params": [
+    {
+      "field": "de_results",
+      "name": "--de-results",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "DESeq2 results CSV file."
+    },
+    {
+      "field": "species",
+      "name": "-s, --species",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Species name (e.g. 'Homo sapiens')."
+    },
+    {
+      "field": "output_dir",
+      "name": "-o, --output",
+      "type": "path",
+      "required": true,
+      "default": null,
+      "description": "Output directory."
+    },
+    {
+      "field": "theme",
+      "name": "--theme",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Plot theme."
+    }
+  ]
+}

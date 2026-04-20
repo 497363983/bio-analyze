@@ -1,9 +1,7 @@
 """
-zh: 生物序列处理子模块。
-en: Biological sequence processing submodule.
+Biological sequence processing submodule.
 
-zh: 提供序列验证、格式解析(FASTA/FASTQ)、反向互补、GC含量、转录、翻译和搜索等基础功能。
-en: Provides basic functions for sequence validation, format parsing (FASTA/FASTQ),
+Provides basic functions for sequence validation, format parsing (FASTA/FASTQ),
     reverse complement, GC content, transcription, translation, and searching.
 """
 

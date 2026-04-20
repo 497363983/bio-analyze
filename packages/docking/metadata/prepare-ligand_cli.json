@@ -2,8 +2,8 @@
   "name": "prepare-ligand",
   "type": "cli",
   "description": {
-    "zh": "",
-    "en": ""
+    "zh": "Prepare ligand for docking (SDF/SMILES -> PDBQT).\n\nArgs:\ninput_file (Path):\nPath to input ligand file (SDF, MOL2, PDB, SMI).\noutput_file (Path):\nPath to output PDBQT file.\nadd_hydrogens (bool, optional):\nWhether to automatically add hydrogens and generate 3D conformation. Defaults to True.",
+    "en": "Prepare ligand for docking (SDF/SMILES -> PDBQT).\n\nArgs:\ninput_file (Path):\nPath to input ligand file (SDF, MOL2, PDB, SMI).\noutput_file (Path):\nPath to output PDBQT file.\nadd_hydrogens (bool, optional):\nWhether to automatically add hydrogens and generate 3D conformation. Defaults to True."
   },
   "params": [
     {
@@ -12,7 +12,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输入配体文件 (SDF, SMILES, PDB)。",
+        "zh": "Input ligand file (SDF, SMILES, PDB).",
         "en": "Input ligand file (SDF, SMILES, PDB)."
       }
     },
@@ -22,7 +22,7 @@
       "required": true,
       "default": null,
       "description": {
-        "zh": "输出 PDBQT 文件。",
+        "zh": "Output PDBQT file.",
         "en": "Output PDBQT file."
       }
     },
@@ -32,7 +32,7 @@
       "required": false,
       "default": "True",
       "description": {
-        "zh": "添加氢原子。",
+        "zh": "Add hydrogens.",
         "en": "Add hydrogens."
       }
     }

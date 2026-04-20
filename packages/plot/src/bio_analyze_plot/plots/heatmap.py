@@ -11,8 +11,7 @@ from .base import BasePlot, save_plot
 
 class HeatmapPlot(BasePlot):
     """
-    zh: 热图/聚类图实现。
-    en: Heatmap/Clustermap implementation.
+    Heatmap/Clustermap implementation.
     """
 
     @save_plot
@@ -32,46 +31,33 @@ class HeatmapPlot(BasePlot):
         **kwargs: Any,
     ) -> Figure:
         """
-        zh: 绘制带有可选聚类的热图。
-        en: Plot heatmap with optional clustering.
+        Plot heatmap with optional clustering.
 
         Args:
             data:
-                zh: 包含数据的 DataFrame。
-                en: DataFrame containing data.
+                DataFrame containing data.
             index_col:
-                zh: 用作索引（标签）的列。如果为 None，则使用现有索引。
-                en: Column to use as index (labels). If None, uses existing index.
+                Column to use as index (labels). If None, uses existing index.
             cluster_rows:
-                zh: 是否对行进行聚类。
-                en: Whether to cluster rows.
+                Whether to cluster rows.
             cluster_cols:
-                zh: 是否对列进行聚类。
-                en: Whether to cluster columns.
+                Whether to cluster columns.
             z_score:
-                zh: 0（行）或 1（列）进行标准化。None 表示禁用。
-                en: 0 (rows) or 1 (columns) for standardization. None to disable.
+                0 (rows) or 1 (columns) for standardization. None to disable.
             cmap:
-                zh: 颜色映射名称。
-                en: Colormap name.
+                Colormap name.
             center:
-                zh: 颜色映射居中的值。
-                en: Value at which to center the colormap.
+                Value at which to center the colormap.
             title:
-                zh: 图表标题。
-                en: Chart title.
+                Chart title.
             xlabel:
-                zh: X轴标签。
-                en: X-axis label.
+                X-axis label.
             ylabel:
-                zh: Y轴标签。
-                en: Y-axis label.
+                Y-axis label.
             output:
-                zh: 保存图表的路径。
-                en: Path to save the chart.
+                Path to save the chart.
             **kwargs:
-                zh: 其他传递给 seaborn.clustermap 的参数。
-                en: Other arguments passed to seaborn.clustermap.
+                Other arguments passed to seaborn.clustermap.
         """
         # 获取主题特定参数
         theme_params = self.get_chart_specific_params("heatmap")
@@ -125,8 +111,8 @@ class HeatmapPlot(BasePlot):
             try:
                 df = df.astype(float)
                 df_numeric = df
-            except ValueError:
-                raise ValueError("Heatmap requires numeric data.")
+            except ValueError as e:
+                raise ValueError("Heatmap requires numeric data.") from e
 
         # 创建 clustermap
         # 注意：clustermap 创建自己的 Figure，所以我们不使用 self.get_fig_ax()
