@@ -1,2 +1,0 @@
-09:12:16 | ERROR | Command failed with exit code 1 after 0.02s: /home/runner/micromamba/envs/bio-analyze-env/bin/python -c for i in range(100): print(f'line {i}')
-import sys; sys.exit(1)

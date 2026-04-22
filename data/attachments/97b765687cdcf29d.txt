@@ -1,7 +1,0 @@
-09:12:05 | INFO | Converting CIF to PDB: test_rec.cif
-09:12:05 | INFO | Converted CIF to PDB: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_converted.pdb (size: 697977 bytes)
-09:12:05 | INFO | Repairing PDB structure using PDBFixer: test_rec_converted.pdb
-09:12:10 | INFO | Fixed PDB saved to: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb
-09:12:10 | INFO | Running PropKa analysis for test_rec_fixed.pdb at pH 7.4
-09:12:10 | ERROR | PropKa analysis failed for test_rec.cif: cannot unpack non-iterable Options object. Proceeding with previous file.
-09:12:10 | INFO | Preparing receptor using Meeko CLI: test_rec.pdbqt
