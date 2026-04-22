@@ -1,0 +1,2 @@
+09:13:18 | INFO | Running MAFFT on /home/runner/work/bio-analyze/bio-analyze/packages/msa/tests/data/sample.fasta
+09:13:18 | INFO | MAFFT alignment saved to /tmp/pytest-of-runner/pytest-0/test_mafft_aligner0/out.fasta
