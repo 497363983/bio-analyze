@@ -1,0 +1,77 @@
+11:26:34 | INFO | Converting CIF to PDB: test_rec.cif
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=4, microseconds=702555), 'exception': None, 'extra': {'name': 'bio_analyze_docking.utils'}, 'file': (name='utils.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/utils.py'), 'function': 'convert_cif_to_pdb', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 43, 'message': 'Converting CIF to PDB: test_rec.cif', 'module': 'utils', 'name': 'bio_analyze_docking.utils', 'process': (id=4975, name='MainProcess'), 'thread': (id=139986297673536, name='MainThread'), 'time': datetime(2026, 5, 27, 11, 26, 34, 396442, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+11:26:34 | INFO | Converted CIF to PDB: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_converted.pdb (size: 697977 bytes)
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=4, microseconds=721546), 'exception': None, 'extra': {'name': 'bio_analyze_docking.utils'}, 'file': (name='utils.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/utils.py'), 'function': 'convert_cif_to_pdb', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 101, 'message': 'Converted CIF to PDB: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_converted.pdb (size: 697977 bytes)', 'module': 'utils', 'name': 'bio_analyze_docking.utils', 'process': (id=4975, name='MainProcess'), 'thread': (id=139986297673536, name='MainThread'), 'time': datetime(2026, 5, 27, 11, 26, 34, 415433, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+11:26:34 | INFO | Repairing PDB structure using PDBFixer: test_rec_converted.pdb
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=4, microseconds=721926), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 184, 'message': 'Repairing PDB structure using PDBFixer: test_rec_converted.pdb', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4975, name='MainProcess'), 'thread': (id=139986297673536, name='MainThread'), 'time': datetime(2026, 5, 27, 11, 26, 34, 415813, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+11:26:42 | INFO | Fixed PDB saved to: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=13, microseconds=256076), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 209, 'message': 'Fixed PDB saved to: /tmp/pytest-of-runner/pytest-0/test_prepare_receptor_cif0/prep_output/test_rec_fixed.pdb', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4975, name='MainProcess'), 'thread': (id=139986297673536, name='MainThread'), 'time': datetime(2026, 5, 27, 11, 26, 42, 949963, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+11:26:42 | INFO | Running PropKa analysis for test_rec_fixed.pdb at pH 7.4
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=13, microseconds=256693), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 233, 'message': 'Running PropKa analysis for test_rec_fixed.pdb at pH 7.4', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4975, name='MainProcess'), 'thread': (id=139986297673536, name='MainThread'), 'time': datetime(2026, 5, 27, 11, 26, 42, 950580, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+11:26:42 | ERROR | PropKa analysis failed for test_rec.cif: cannot unpack non-iterable Options object. Proceeding with previous file.
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=13, microseconds=259074), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep', 'exc_info': True}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='ERROR', no=40, icon='❌'), 'line': 264, 'message': 'PropKa analysis failed for test_rec.cif: cannot unpack non-iterable Options object. Proceeding with previous file.', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4975, name='MainProcess'), 'thread': (id=139986297673536, name='MainThread'), 'time': datetime(2026, 5, 27, 11, 26, 42, 952961, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py", line 241, in prepare_receptor
+    options, _ = loadOptions(args)
+TypeError: cannot unpack non-iterable Options object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+11:26:42 | INFO | Preparing receptor using Meeko CLI: test_rec.pdbqt
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=13, microseconds=259633), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'prepare_receptor', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 269, 'message': 'Preparing receptor using Meeko CLI: test_rec.pdbqt', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=4975, name='MainProcess'), 'thread': (id=139986297673536, name='MainThread'), 'time': datetime(2026, 5, 27, 11, 26, 42, 953520, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.10/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
