@@ -1,2 +1,0 @@
-11:26:16 | INFO | Running FastTree on /home/runner/work/bio-analyze/bio-analyze/packages/msa/tests/data/aligned_cli.fasta
-11:26:16 | INFO | FastTree tree saved to /tmp/pytest-of-runner/pytest-0/test_fasttree_builder0/tree.nwk
