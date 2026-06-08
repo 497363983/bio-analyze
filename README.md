@@ -3,6 +3,8 @@
 [![CI](https://github.com/497363983/bio-analyze/actions/workflows/ci.yml/badge.svg)](https://github.com/497363983/bio-analyze/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/497363983/bio-analyze/graph/badge.svg?token=I78TXQBORK)](https://codecov.io/gh/497363983/bio-analyze)
 
+> WIP
+
 A toolbox for common bioinformatics analysis tasks, organized as a monorepo with multiple independent modules, accessible through a unified CLI and Python API.
 
 ## Monorepo Structure
