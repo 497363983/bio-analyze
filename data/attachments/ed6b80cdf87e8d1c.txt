@@ -1,4 +1,0 @@
-Testing with receptors: ['fold_tlr_9_scophthalmus_maximus_model_0.cif', 'fold_tlr_1_isoform_x1_scophthalmus_maximus_model_0.cif', 'fold_tlr_7_scophthalmus_maximus_model_0.cif']
-Testing with ligands: ['AAAAML.xaa.sdf', 'AAAAMM.xaa.sdf', 'AAAAMN.xaa.sdf']
-Running Generate Docking Summary... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
-Integration test finished. Output generated at /home/runner/work/bio-analyze/bio-analyze/packages/docking/tests/output/vina
