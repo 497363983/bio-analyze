@@ -23,7 +23,7 @@ dependencies = [
     "pandas>=2.0.0",
     "openpyxl>=3.1.0",
     # "pymol-open-source>=2.5.0", # Provided by Conda
-    "openbabel-wheel", # Provided by Conda
+    "openbabel>=3.2.0", # Provided by Conda
 ]
 
 [project.optional-dependencies]
