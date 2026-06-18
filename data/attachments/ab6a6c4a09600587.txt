@@ -1,0 +1,10 @@
+
+============================================================
+【Image regression failure】
+Baseline image path: /home/runner/work/bio-analyze/bio-analyze/packages/plot/tests/snapshot/test_msa_plot/test_msa_plot_wrap_by_bases_per_line/test_msa_plot_wrap_by_bases_per_line.png
+Actual image path: /home/runner/work/bio-analyze/bio-analyze/packages/plot/tests/output/test_msa_plot/test_msa_plot_wrap_by_bases_per_line/test_msa_plot_wrap_by_bases_per_line.obtained.png
+Diff image path: /home/runner/work/bio-analyze/bio-analyze/packages/plot/tests/output/test_msa_plot/test_msa_plot_wrap_by_bases_per_line/test_msa_plot_wrap_by_bases_per_line.obtained_diff.png
+Diff pixels: 609908
+============================================================
+
+[Allure Attach] Successfully attached Expected, Actual, and Diff images.
