@@ -1,2 +1,0 @@
-16:36:09 | INFO | Running node: long_node
-16:36:09 | ERROR | Node long_node failed: Crash after checkpoint

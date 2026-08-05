@@ -1,1 +1,0 @@
-16:36:50 | INFO | Converting ligand to PDBQT: AAAAML.xaa.pdbqt
