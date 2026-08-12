@@ -1,0 +1,20 @@
+14:38:20 | INFO | Calculated box from receptor: center=[-24.642    1.1135 -10.916 ], size=[174.05   97.387 128.286]
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=180679), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'get_box_from_receptor', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 522, 'message': 'Calculated box from receptor: center=[-24.642    1.1135 -10.916 ], size=[174.05   97.387 128.286]', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=5084, name='MainProcess'), 'thread': (id=140542517208896, name='MainThread'), 'time': datetime(2026, 8, 12, 14, 38, 20, 768772, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
+14:38:20 | INFO | Calculated box from receptor: center=[-24.642    1.1135 -10.916 ], size=[174.05   97.387 128.286]
+--- Logging error in Loguru Handler #2 ---
+Record was: {'elapsed': datetime.timedelta(seconds=5, microseconds=198622), 'exception': None, 'extra': {'name': 'bio_analyze_docking.prep'}, 'file': (name='prep.py', path='/home/runner/work/bio-analyze/bio-analyze/packages/docking/src/bio_analyze_docking/prep.py'), 'function': 'get_box_from_receptor', 'level': (name='INFO', no=20, icon='ℹ️'), 'line': 522, 'message': 'Calculated box from receptor: center=[-24.642    1.1135 -10.916 ], size=[174.05   97.387 128.286]', 'module': 'prep', 'name': 'bio_analyze_docking.prep', 'process': (id=5084, name='MainProcess'), 'thread': (id=140542517208896, name='MainThread'), 'time': datetime(2026, 8, 12, 14, 38, 20, 786715, tzinfo=datetime.timezone(datetime.timedelta(0), 'UTC'))}
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_handler.py", line 206, in emit
+    self._sink.write(str_record)
+  File "/home/runner/micromamba/envs/bio-analyze-env/lib/python3.11/site-packages/loguru/_simple_sinks.py", line 16, in write
+    self._stream.write(message)
+ValueError: I/O operation on closed file.
+--- End of logging error ---
