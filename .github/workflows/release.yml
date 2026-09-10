@@ -96,7 +96,7 @@ jobs:
 
             - name: Set up uv
               if: ${{ env.SHOULD_RELEASE == 'true' }}
-              uses: astral-sh/setup-uv@v8
+              uses: astral-sh/setup-uv@v10.1.0
 
             - name: Bump Version
               if: ${{ env.SHOULD_RELEASE == 'true' }}
